@@ -1,8 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ToolDrop AI
+
+ToolDrop AI is a content-driven website for discovering, browsing, and comparing AI tools, prompts, and emerging model capabilities.
+
+The site is built to scale content-first, with clean URLs, strong SEO foundations, and fast static delivery. Everything is structured so new tools, prompts, and comparisons can be added without rewriting page logic like a caveman.
+
+---
+
+## Features
+
+- 🔍 Browse curated AI tools and prompts  
+- ⚖️ Side-by-side AI tool comparisons  
+- 🧠 SEO-optimized pages with dynamic metadata  
+- ⚡ Static generation for fast load times  
+- 🔗 Clean slugs and canonical URLs  
+- 🎨 Modern UI with reusable components  
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** shadcn/ui
+- **Animations:** Framer Motion
+- **Deployment:** Vercel
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and start the development server:
 
 ```bash
 npm run dev
@@ -12,25 +40,63 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Changes update automatically during development.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+app/            # Route-based pages (prompts, comparisons, collections)
+components/     # Reusable UI components
+lib/            # Data access, helpers, SEO utilities
+public/         # Static assets
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Content System
+
+All tools, prompts, and comparisons are driven by structured data files.
+
+This allows:
+
+Easy content expansion
+
+Consistent page generation
+
+SEO-friendly static rendering
+
+Minimal logic changes as the site grows
+
+
+
+---
+
+Deployment
+
+The recommended deployment platform is Vercel.
+
+Vercel provides:
+
+Automatic builds on push
+
+Optimized static and edge delivery
+
+Built-in font and image optimization
+
+
+Simply connect the repository and deploy using the standard Next.js setup.
+
+
+---
+
+License
+
+This project is private and intended for production use.
+Reuse or redistribution should follow the repository owner’s terms.
