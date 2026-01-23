@@ -50,11 +50,26 @@ export type Collection = {
   updatedAtISO: string;
 };
 
+export type Comparison = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  // contenders are the items being compared
+  contenders: { kind: "tool" | "prompt"; id: string }[];
+  // criteria explain what matters in the comparison
+  criteria: { name: string; notes: string }[];
+  verdict: string;
+  tags: string[];
+  updatedAtISO: string;
+};
+
 export type DataBundle = {
   tools: Tool[];
   prompts: Prompt[];
   updates: ModelUpdate[];
   collections: Collection[];
+  comparisons: Comparison[];
 };
 
 export const DATA: DataBundle = {
