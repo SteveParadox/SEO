@@ -1,0 +1,101 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { DATA, getCollectionBySlug, resolveCollectionItems } from "@/lib/data";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { absoluteUrl } from "@/lib/seo";
+
+
+export function generateStaticParams() {
+  return DATA.collections.map((c) => ({ slug: c.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const c = getCollectionBySlug(params.slug);
+  if (!c) return { title: "Collection not found" };
+
+  const title = `${c.title} — Collection`;
+  const description = c.description;
+  const url = absoluteUrl(`/collections/${c.slug}`);
+
+  return {
+    title: `${title} — ToolDrop AI`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${title} — ToolDrop AI`,
+      description,
+      url,
+      siteName: "ToolDrop AI",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} — ToolDrop AI`,
+      description,
+    },
+  };
+}
+
+function hrefFor(kind: "tool" | "prompt" | "update", slug: string) {
+  if (kind === "tool") return `/tools/${slug}`;
+  if (kind === "prompt") return `/prompts/${slug}`;
+  return `/updates/${slug}`;
+}
+
+export default function CollectionPage({ params }: { params: { slug: string } }) {
+  const c = getCollectionBySlug(params.slug);
+  if (!c) return notFound();
+
+  const items = resolveCollectionItems(c);
+
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-10">
+      <div className="flex flex-wrap gap-2">
+        {c.tags.map((t) => (
+          <Badge key={t} variant="secondary" className="rounded-full">
+            {t}
+          </Badge>
+        ))}
+      </div>
+
+      <h1 className="mt-4 text-3xl font-semibold">{c.title}</h1>
+      <p className="mt-2 text-muted-foreground">{c.description}</p>
+
+      <div className="mt-6 grid gap-3">
+        {items.map((x, i) => {
+          const item: any = x.item; // item shape depends on type
+          const slug =
+            x.kind === "tool" ? item.slug : x.kind === "prompt" ? item.slug : item.slug;
+
+          const title =
+            x.kind === "tool" ? item.name : x.kind === "prompt" ? item.title : item.headline;
+
+          const subtitle =
+            x.kind === "tool" ? item.oneLiner : x.kind === "prompt" ? item.purpose : item.tldr;
+
+          return (
+            <Link
+              key={`${x.kind}-${item.id}`}
+              href={hrefFor(x.kind, slug)}
+              className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
+            >
+              <Card className="rounded-2xl border-0 shadow-none">
+                <CardHeader className="p-0">
+                  <CardTitle className="text-base">
+                    {i + 1}. {title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 mt-2 text-sm text-muted-foreground">
+                  {subtitle}
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
