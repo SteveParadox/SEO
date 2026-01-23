@@ -28,20 +28,24 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { DATA } from "@/lib/data";
-
+import { Scale } from "lucide-react"; // add this icon import
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
-const { tools, prompts, updates, collections } = DATA;
+const { tools, prompts, updates, collections, comparisons } = DATA;
+
+
 
 const itemTypeMeta = {
   tool: { label: "Tool", icon: Wrench },
   prompt: { label: "Prompt", icon: Copy },
   update: { label: "Update", icon: TrendingUp },
   collection: { label: "Collection", icon: BadgeCheck },
+  comparison: { label: "Comparison", icon: Scale },
 } as const;
+
 
 type Kind = keyof typeof itemTypeMeta;
 
@@ -62,8 +66,10 @@ function hrefFor(kind: Kind, slug: string) {
   if (kind === "tool") return `/tools/${slug}`;
   if (kind === "prompt") return `/prompts/${slug}`;
   if (kind === "update") return `/updates/${slug}`;
-  return `/collections/${slug}`;
+  if (kind === "collection") return `/collections/${slug}`;
+  return `/comparisons/${slug}`;
 }
+
 
 function Pill({
   icon: Icon,
@@ -186,6 +192,19 @@ export default function ToolDropAI() {
         updatedAtISO: c.updatedAtISO,
       });
     });
+    comparisons.forEach((c) => {
+    idx.push({
+      kind: "comparison",
+      id: c.id,
+      slug: c.slug,
+      title: c.title,
+      subtitle: c.description,
+      typeTag: "VS",
+      minutes: 6,
+      updatedAtISO: c.updatedAtISO,
+    });
+  });
+
 
     idx.sort(
       (a, b) =>
@@ -214,7 +233,7 @@ const activeCategoryItems = useMemo(() => {
   if (activeCategory === "updates")
     return unifiedIndex.filter((x) => x.kind === "update").slice(0, 6);
   if (activeCategory === "compare")
-    return unifiedIndex.filter((x) => x.kind === "collection").slice(0, 6);
+    return unifiedIndex.filter((x) => x.kind === "comparison").slice(0, 6);
   return unifiedIndex.slice(0, 6);
 }, [activeCategory, unifiedIndex]);
 

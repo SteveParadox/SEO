@@ -12,12 +12,17 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export function generateStaticParams() {
   return DATA.prompts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const p = getPromptBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const p = getPromptBySlug(slug);
   if (!p) return { title: "Prompt not found" };
 
   const title = `${p.title} — Prompt`;
@@ -43,10 +48,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function PromptPage({ params }: { params: { slug: string } }) {
-  const p = getPromptBySlug(params.slug);
+export default async function PromptPage({ params }: PageProps) {
+  const { slug } = await params;
+  const p = getPromptBySlug(slug);
 
   if (!p) return notFound();
+
   const related = getRelatedPrompts(p.id, 6);
   const inCollections = findCollectionsContaining({ kind: "prompt", id: p.id });
 
@@ -68,7 +75,9 @@ export default function PromptPage({ params }: { params: { slug: string } }) {
           <CardTitle>Prompt</CardTitle>
         </CardHeader>
         <CardContent>
-          <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">{p.prompt}</pre>
+          <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">
+            {p.prompt}
+          </pre>
         </CardContent>
       </Card>
 
@@ -94,48 +103,52 @@ export default function PromptPage({ params }: { params: { slug: string } }) {
             ))}
           </CardContent>
         </Card>
-        <div className="mt-8 grid gap-4">
-  {inCollections.length > 0 ? (
-    <Card className="rounded-2xl">
-      <CardHeader>
-        <CardTitle>Appears in collections</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        {inCollections.map((c) => (
-          <Link
-            key={c.id}
-            href={`/collections/${c.slug}`}
-            className="block rounded-xl border p-3 hover:bg-muted/40 transition"
-          >
-            <div className="font-medium">{c.title}</div>
-            <div className="text-sm text-muted-foreground">{c.description}</div>
-          </Link>
-        ))}
-      </CardContent>
-    </Card>
-  ) : null}
+      </div>
 
-  {related.length > 0 ? (
-    <Card className="rounded-2xl">
-      <CardHeader>
-        <CardTitle>Related prompts</CardTitle>
-      </CardHeader>
-      <CardContent className="grid gap-3 md:grid-cols-2">
-        {related.map((rp) => (
-          <Link
-            key={rp.id}
-            href={`/prompts/${rp.slug}`}
-            className="block rounded-xl border p-3 hover:bg-muted/40 transition"
-          >
-            <div className="font-medium">{rp.title}</div>
-            <div className="text-sm text-muted-foreground">{rp.purpose}</div>
-          </Link>
-        ))}
-      </CardContent>
-    </Card>
-  ) : null}
-</div>
+      <div className="mt-8 grid gap-4">
+        {inCollections.length > 0 ? (
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Appears in collections</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {inCollections.map((c) => (
+                <Link
+                  key={c.id}
+                  href={`/collections/${c.slug}`}
+                  className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+                >
+                  <div className="font-medium">{c.title}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {c.description}
+                  </div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
 
+        {related.length > 0 ? (
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Related prompts</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3 md:grid-cols-2">
+              {related.map((rp) => (
+                <Link
+                  key={rp.id}
+                  href={`/prompts/${rp.slug}`}
+                  className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+                >
+                  <div className="font-medium">{rp.title}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {rp.purpose}
+                  </div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
       </div>
     </div>
   );
