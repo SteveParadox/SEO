@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { DATA, getCollectionBySlug, resolveCollectionItems } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getRelatedCollections } from "@/lib/data";
 
 import { absoluteUrl } from "@/lib/seo";
 
@@ -48,6 +49,7 @@ function hrefFor(kind: "tool" | "prompt" | "update", slug: string) {
 export default function CollectionPage({ params }: { params: { slug: string } }) {
   const c = getCollectionBySlug(params.slug);
   if (!c) return notFound();
+  const relatedCollections = getRelatedCollections(c.id, 6);
 
   const items = resolveCollectionItems(c);
 
@@ -95,6 +97,26 @@ export default function CollectionPage({ params }: { params: { slug: string } })
             </Link>
           );
         })}
+        {relatedCollections.length > 0 ? (
+        <Card className="mt-8 rounded-2xl">
+          <CardHeader>
+            <CardTitle>More collections like this</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-3 md:grid-cols-2">
+            {relatedCollections.map((rc) => (
+              <Link
+                key={rc.id}
+                href={`/collections/${rc.slug}`}
+                className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+              >
+                <div className="font-medium">{rc.title}</div>
+                <div className="text-sm text-muted-foreground">{rc.description}</div>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+      ) : null}
+
       </div>
     </div>
   );

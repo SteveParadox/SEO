@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { DATA, getToolBySlug } from "@/lib/data";
+import Link from "next/link";
+import {
+  DATA,
+  getToolBySlug,
+  getRelatedTools,
+  findCollectionsContaining,
+} from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
@@ -38,7 +44,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function ToolPage({ params }: { params: { slug: string } }) {
   const tool = getToolBySlug(params.slug);
+
   if (!tool) return notFound();
+  const related = getRelatedTools(tool.id, 6);
+  const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
@@ -109,6 +118,48 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
             ))}
           </CardContent>
         </Card>
+            <div className="mt-8 grid gap-4">
+  {inCollections.length > 0 ? (
+    <Card className="rounded-2xl">
+      <CardHeader>
+        <CardTitle>Appears in collections</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        {inCollections.map((c) => (
+          <Link
+            key={c.id}
+            href={`/collections/${c.slug}`}
+            className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+          >
+            <div className="font-medium">{c.title}</div>
+            <div className="text-sm text-muted-foreground">{c.description}</div>
+          </Link>
+        ))}
+      </CardContent>
+    </Card>
+  ) : null}
+
+  {related.length > 0 ? (
+    <Card className="rounded-2xl">
+      <CardHeader>
+        <CardTitle>Related tools</CardTitle>
+      </CardHeader>
+      <CardContent className="grid gap-3 md:grid-cols-2">
+        {related.map((t) => (
+          <Link
+            key={t.id}
+            href={`/tools/${t.slug}`}
+            className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+          >
+            <div className="font-medium">{t.name}</div>
+            <div className="text-sm text-muted-foreground">{t.oneLiner}</div>
+          </Link>
+        ))}
+      </CardContent>
+    </Card>
+  ) : null}
+</div>
+
       </div>
     </div>
   );
