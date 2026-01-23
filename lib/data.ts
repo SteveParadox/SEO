@@ -571,3 +571,73 @@ export function getRelatedComparisons(comparisonId: string, limit = 6) {
     .map((x) => x.c)
     .slice(0, limit);
 }
+
+// ---- Related helpers (simple tag overlap scoring) ----
+function relatedByTags<T extends { slug: string; tags: string[] }>(
+  all: T[],
+  current: T,
+  limit = 6
+) {
+  const cur = new Set((current.tags ?? []).map((t) => t.toLowerCase()));
+  if (!cur.size) return [];
+  return all
+    .filter((x) => x.slug !== current.slug)
+    .map((x) => ({
+      x,
+      score: (x.tags ?? []).reduce(
+        (acc, t) => acc + (cur.has(t.toLowerCase()) ? 1 : 0),
+        0
+      ),
+    }))
+    .filter((r) => r.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((r) => r.x);
+}
+
+export function getRelatedPrompts(slug: string, limit = 6) {
+  const p = getPromptBySlug(slug);
+  if (!p) return [];
+  return relatedByTags(DATA.prompts, p, limit);
+}
+
+export function getRelatedTools(slug: string, limit = 6) {
+  const t = getToolBySlug(slug);
+  if (!t) return [];
+  return relatedByTags(DATA.tools, t, limit);
+}
+
+export function getRelatedUpdates(slug: string, limit = 6) {
+  const u = getUpdateBySlug(slug);
+  if (!u) return [];
+  return relatedByTags(DATA.updates, u, limit);
+}
+
+export function getRelatedCollections(slug: string, limit = 6) {
+  const c = getCollectionBySlug(slug);
+  if (!c) return [];
+  return relatedByTags(DATA.collections as any, c as any, limit) as any;
+}
+
+export function findCollectionsContaining(slugOrKind: string, id?: string) {
+  let kind: "tool" | "prompt" | "update" | null = null;
+  let targetId: string | null = null;
+
+  if (id) {
+    kind = slugOrKind as any;
+    targetId = id;
+  } else {
+    const slug = slugOrKind;
+    const tool = DATA.tools.find((x) => x.slug === slug);
+    const prompt = DATA.prompts.find((x) => x.slug === slug);
+    const update = DATA.updates.find((x) => x.slug === slug);
+    if (tool) { kind = "tool"; targetId = tool.id; }
+    else if (prompt) { kind = "prompt"; targetId = prompt.id; }
+    else if (update) { kind = "update"; targetId = update.id; }
+  }
+
+  if (!kind || !targetId) return [];
+  return DATA.collections.filter((c) =>
+    c.items.some((it) => it.kind === kind && it.id === targetId)
+  );
+}
