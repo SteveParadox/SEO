@@ -613,10 +613,27 @@ export function getRelatedUpdates(slug: string, limit = 6) {
   return relatedByTags(DATA.updates, u, limit);
 }
 
-export function getRelatedCollections(slug: string, limit = 6) {
-  const c = getCollectionBySlug(slug);
-  if (!c) return [];
-  return relatedByTags(DATA.collections as any, c as any, limit) as any;
+export function getRelatedCollections(collectionId: string, limit = 6): Collection[] {
+  const current = DATA.collections.find((c) => c.id === collectionId);
+  if (!current) return [];
+
+  // simple tag-overlap related logic
+  const curTags = new Set((current.tags ?? []).map((t) => t.toLowerCase()));
+  if (!curTags.size) return [];
+
+  return DATA.collections
+    .filter((c) => c.id !== collectionId)
+    .map((c) => ({
+      c,
+      score: (c.tags ?? []).reduce(
+        (acc, t) => acc + (curTags.has(t.toLowerCase()) ? 1 : 0),
+        0
+      ),
+    }))
+    .filter((r) => r.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((r) => r.c);
 }
 
 export function findCollectionsContaining(slugOrKind: string, id?: string) {
