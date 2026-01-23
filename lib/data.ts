@@ -543,3 +543,31 @@ export function resolveCollectionItems(col: { items: { kind: "tool" | "prompt" |
     })
     .filter((x) => x.item);
 }
+export function getComparisonBySlug(slug: string) {
+  return DATA.comparisons.find((x) => x.slug === slug);
+}
+
+export function resolveComparisonContenders(cmp: Comparison) {
+  return cmp.contenders
+    .map((ref) => {
+      if (ref.kind === "tool") return { kind: "tool" as const, item: DATA.tools.find((t) => t.id === ref.id) };
+      return { kind: "prompt" as const, item: DATA.prompts.find((p) => p.id === ref.id) };
+    })
+    .filter((x) => x.item);
+}
+
+export function getRelatedComparisons(comparisonId: string, limit = 6) {
+  const base = DATA.comparisons.find((c) => c.id === comparisonId);
+  if (!base) return [];
+  const candidates = DATA.comparisons.filter((c) => c.id !== comparisonId);
+  // reuse your tag overlap sorter if you added it in step 5, otherwise simple overlap:
+  const overlap = (a: string[], b: string[]) => {
+    const sb = new Set(b.map((x) => x.toLowerCase()));
+    return a.reduce((acc, x) => acc + (sb.has(x.toLowerCase()) ? 1 : 0), 0);
+  };
+  return [...candidates]
+    .map((c) => ({ c, score: overlap(base.tags, c.tags) * 10 + new Date(c.updatedAtISO).getTime() / 1e12 }))
+    .sort((a, b) => b.score - a.score)
+    .map((x) => x.c)
+    .slice(0, limit);
+}
