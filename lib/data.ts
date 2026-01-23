@@ -636,15 +636,22 @@ export function getRelatedCollections(collectionId: string, limit = 6): Collecti
     .map((r) => r.c);
 }
 
-export function findCollectionsContaining(slugOrKind: string, id?: string) {
+export function findCollectionsContaining(
+  arg: string | { kind: "tool" | "prompt" | "update"; id: string },
+  id?: string
+) {
   let kind: "tool" | "prompt" | "update" | null = null;
   let targetId: string | null = null;
 
-  if (id) {
-    kind = slugOrKind as any;
+  if (typeof arg === "object" && arg) {
+    kind = arg.kind;
+    targetId = arg.id;
+  } else if (id) {
+    kind = arg as any;
     targetId = id;
   } else {
-    const slug = slugOrKind;
+    // treat arg as slug
+    const slug = arg;
     const tool = DATA.tools.find((x) => x.slug === slug);
     const prompt = DATA.prompts.find((x) => x.slug === slug);
     const update = DATA.updates.find((x) => x.slug === slug);
@@ -654,6 +661,7 @@ export function findCollectionsContaining(slugOrKind: string, id?: string) {
   }
 
   if (!kind || !targetId) return [];
+
   return DATA.collections.filter((c) =>
     c.items.some((it) => it.kind === kind && it.id === targetId)
   );
