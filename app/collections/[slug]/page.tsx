@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DATA, getCollectionBySlug, resolveCollectionItems } from "@/lib/data";
+import { DATA, getCollectionBySlug, resolveCollectionItems, getRelatedCollections } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getRelatedCollections } from "@/lib/data";
-
 import { absoluteUrl } from "@/lib/seo";
 
+type PageProps = {
+  params: Promise<{ slug: string }>; // 👈 params is async
+};
 
 export function generateStaticParams() {
   return DATA.collections.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const c = getCollectionBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params; // 👈 unwrap
+  const c = getCollectionBySlug(slug);
   if (!c) return { title: "Collection not found" };
 
   const title = `${c.title} — Collection`;
@@ -46,11 +48,12 @@ function hrefFor(kind: "tool" | "prompt" | "update", slug: string) {
   return `/updates/${slug}`;
 }
 
-export default function CollectionPage({ params }: { params: { slug: string } }) {
-  const c = getCollectionBySlug(params.slug);
+export default async function CollectionPage({ params }: PageProps) {
+  const { slug } = await params; // 👈 unwrap
+  const c = getCollectionBySlug(slug);
   if (!c) return notFound();
-  const relatedCollections = getRelatedCollections(c.id, 6);
 
+  const relatedCollections = getRelatedCollections(c.id, 6);
   const items = resolveCollectionItems(c);
 
   return (
@@ -68,7 +71,8 @@ export default function CollectionPage({ params }: { params: { slug: string } })
 
       <div className="mt-6 grid gap-3">
         {items.map((x, i) => {
-          const item: any = x.item; // item shape depends on type
+          const item: any = x.item;
+
           const slug =
             x.kind === "tool" ? item.slug : x.kind === "prompt" ? item.slug : item.slug;
 
@@ -97,26 +101,26 @@ export default function CollectionPage({ params }: { params: { slug: string } })
             </Link>
           );
         })}
-        {relatedCollections.length > 0 ? (
-        <Card className="mt-8 rounded-2xl">
-          <CardHeader>
-            <CardTitle>More collections like this</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-3 md:grid-cols-2">
-            {relatedCollections.map((rc) => (
-              <Link
-                key={rc.id}
-                href={`/collections/${rc.slug}`}
-                className="block rounded-xl border p-3 hover:bg-muted/40 transition"
-              >
-                <div className="font-medium">{rc.title}</div>
-                <div className="text-sm text-muted-foreground">{rc.description}</div>
-              </Link>
-            ))}
-          </CardContent>
-        </Card>
-      ) : null}
 
+        {relatedCollections.length > 0 ? (
+          <Card className="mt-8 rounded-2xl">
+            <CardHeader>
+              <CardTitle>More collections like this</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3 md:grid-cols-2">
+              {relatedCollections.map((rc) => (
+                <Link
+                  key={rc.id}
+                  href={`/collections/${rc.slug}`}
+                  className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+                >
+                  <div className="font-medium">{rc.title}</div>
+                  <div className="text-sm text-muted-foreground">{rc.description}</div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
       </div>
     </div>
   );
