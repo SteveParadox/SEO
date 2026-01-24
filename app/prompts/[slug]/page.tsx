@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
+import { CopyButton } from "@/components/copy-button";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -71,32 +72,35 @@ export default async function PromptPage({ params }: PageProps) {
       <p className="mt-2 text-muted-foreground">{p.purpose}</p>
 
       <Card className="mt-6 rounded-2xl">
-        <CardHeader>
-          <CardTitle>Prompt</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">
-            {p.prompt}
-          </pre>
-        </CardContent>
-      </Card>
+  <CardHeader className="flex flex-row items-center justify-between gap-3">
+    <CardTitle>Prompt</CardTitle>
+    <CopyButton text={p.prompt} label="Copy prompt" className="rounded-xl" />
+  </CardHeader>
+  <CardContent>
+    <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">
+      {p.prompt}
+    </pre>
+  </CardContent>
+</Card>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>Variations</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {p.variations.map((v) => (
-              <div key={v}>• {v}</div>
-            ))}
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>Works well with</CardTitle>
-          </CardHeader>
+       
+  <CardHeader>
+    <CardTitle>Variations</CardTitle>
+  </CardHeader>
+  <CardContent className="space-y-2">
+    {p.variations.map((v) => (
+      <div
+        key={v}
+        className="flex items-start justify-between gap-3 rounded-xl border p-3"
+      >
+        <div className="text-sm">• {v}</div>
+        <CopyButton text={v} label="Copy" className="rounded-xl" />
+      </div>
+    ))}
+  </CardContent>
+</Card>
           <CardContent className="space-y-2">
             {p.modelCompatibility.map((m) => (
               <div key={m}>• {m}</div>
