@@ -321,18 +321,13 @@ export default function ToolDropAI() {
           </div>
 
           <nav className="hidden md:flex items-center gap-4">
-            <a className="text-sm text-muted-foreground hover:text-foreground" href="#categories">
-              Categories
-            </a>
-            <a className="text-sm text-muted-foreground hover:text-foreground" href="#trending">
-              Trending Now
-            </a>
-            <a className="text-sm text-muted-foreground hover:text-foreground" href="#newsletter">
-              Newsletter
-            </a>
-            <a className="text-sm text-muted-foreground hover:text-foreground" href="#faq">
-              FAQ
-            </a>
+           <Link className="text-sm text-muted-foreground hover:text-foreground" href="/tools">Tools</Link>
+          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/prompts">Prompts</Link>
+          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/updates">Updates</Link>
+          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/collections">Collections</Link>
+          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/comparisons">Comparisons</Link>
+          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/tags">Tags</Link>
+
           </nav>
 
           <Button variant="outline" className="rounded-2xl" asChild>
@@ -352,7 +347,7 @@ export default function ToolDropAI() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-            Stay ahead of AI innovation
+            What changed in AI today?
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl">
             Discover vetted AI tools, effective prompts, and significant model updates. 
