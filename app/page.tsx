@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { RecentlyViewed } from "@/components/recently-viewed";
 
 import { DATA } from "@/lib/data";
 import { Scale } from "lucide-react";
@@ -633,7 +634,7 @@ export default function ToolDropAI() {
           })}
         </div>
       </section>
-
+<RecentlyViewed limit={6} />
       <section id="newsletter" className="mx-auto max-w-6xl px-4 py-10">
         <Card className="rounded-2xl shadow-sm">
           <CardContent className="p-8">
