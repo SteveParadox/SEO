@@ -12,7 +12,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 import { CopyButton } from "@/components/copy-button";
-
 import { SaveButton } from "@/components/save-button";
 
 type PageProps = {
@@ -23,7 +22,9 @@ export function generateStaticParams() {
   return DATA.prompts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const p = getPromptBySlug(slug);
   if (!p) return { title: "Prompt not found" };
@@ -72,39 +73,47 @@ export default async function PromptPage({ params }: PageProps) {
 
       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
       <p className="mt-2 text-muted-foreground">{p.purpose}</p>
-<div className="mt-4 flex items-center gap-2">
-  <SaveButton kind="prompt" id={p.id} className="rounded-xl" />
-</div>
+
+      <div className="mt-4 flex items-center gap-2">
+        <SaveButton kind="prompt" id={p.id} className="rounded-xl" />
+      </div>
+
       <Card className="mt-6 rounded-2xl">
-  <CardHeader className="flex flex-row items-center justify-between gap-3">
-    <CardTitle>Prompt</CardTitle>
-    <CopyButton text={p.prompt} label="Copy prompt" className="rounded-xl" />
-  </CardHeader>
-  <CardContent>
-    <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">
-      {p.prompt}
-    </pre>
-  </CardContent>
-</Card>
+        <CardHeader className="flex flex-row items-center justify-between gap-3">
+          <CardTitle>Prompt</CardTitle>
+          <CopyButton text={p.prompt} label="Copy prompt" className="rounded-xl" />
+        </CardHeader>
+        <CardContent>
+          <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">
+            {p.prompt}
+          </pre>
+        </CardContent>
+      </Card>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
+        {/* Variations */}
         <Card className="rounded-2xl">
-       
-  <CardHeader>
-    <CardTitle>Variations</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-2">
-    {p.variations.map((v) => (
-      <div
-        key={v}
-        className="flex items-start justify-between gap-3 rounded-xl border p-3"
-      >
-        <div className="text-sm">• {v}</div>
-        <CopyButton text={v} label="Copy" className="rounded-xl" />
-      </div>
-    ))}
-  </CardContent>
-</Card>
+          <CardHeader>
+            <CardTitle>Variations</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {p.variations.map((v) => (
+              <div
+                key={v}
+                className="flex items-start justify-between gap-3 rounded-xl border p-3"
+              >
+                <div className="text-sm">• {v}</div>
+                <CopyButton text={v} label="Copy" className="rounded-xl" />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Works well with */}
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Works well with</CardTitle>
+          </CardHeader>
           <CardContent className="space-y-2">
             {p.modelCompatibility.map((m) => (
               <div key={m}>• {m}</div>
