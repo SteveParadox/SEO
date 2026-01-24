@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
+import { SaveButton } from "@/components/save-button";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -71,6 +72,10 @@ export default async function UpdatePage({ params }: PageProps) {
 
       <h1 className="mt-4 text-3xl font-semibold">{u.headline}</h1>
       <p className="mt-2 text-muted-foreground">{u.tldr}</p>
+
+      <div className="mt-4 flex items-center gap-2">
+        <SaveButton kind="update" id={u.id} className="rounded-xl" />
+      </div>
 
       <div className="mt-6 grid gap-4">
         <Card className="rounded-2xl">
@@ -142,7 +147,9 @@ export default async function UpdatePage({ params }: PageProps) {
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{ru.headline}</div>
-                    <div className="text-sm text-muted-foreground">{ru.tldr}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {ru.tldr}
+                    </div>
                   </Link>
                 ))}
               </CardContent>
