@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Sparkles, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { SavedCountBadge } from "@/components/saved-count";
 
 type NavItem = { href: string; label: string };
 
@@ -41,16 +42,25 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+
+          {/* ✅ Saved link with count badge */}
+          <Link
+            href="/saved"
+            className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <span>Saved</span>
+            <SavedCountBadge />
+          </Link>
         </nav>
 
         <Button variant="outline" className="rounded-2xl" asChild>
-          {/* Keep this pointing to your newsletter section on homepage */}
           <Link href="/#newsletter" className="inline-flex items-center">
             <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
           </Link>
         </Button>
       </div>
-<Breadcrumbs />
+
+      <Breadcrumbs />
     </header>
   );
 }
