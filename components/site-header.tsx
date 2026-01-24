@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Sparkles, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 type NavItem = { href: string; label: string };
 
@@ -49,6 +50,7 @@ export function SiteHeader() {
           </Link>
         </Button>
       </div>
+<Breadcrumbs />
     </header>
   );
 }
