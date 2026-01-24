@@ -306,37 +306,7 @@ export default function ToolDropAI() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-2xl border flex items-center justify-center shadow-sm">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <div className="leading-tight">
-              <div className="font-semibold">ToolDrop AI</div>
-              <div className="text-xs text-muted-foreground">
-                Your curated source for AI tools, prompts, and updates
-              </div>
-            </div>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-4">
-           <Link className="text-sm text-muted-foreground hover:text-foreground" href="/tools">Tools</Link>
-          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/prompts">Prompts</Link>
-          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/updates">Updates</Link>
-          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/collections">Collections</Link>
-          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/comparisons">Comparisons</Link>
-          <Link className="text-sm text-muted-foreground hover:text-foreground" href="/tags">Tags</Link>
-
-          </nav>
-
-          <Button variant="outline" className="rounded-2xl" asChild>
-            <a href="#newsletter" className="inline-flex items-center">
-              <Newspaper className="h-4 w-4 mr-2" /> Subscribe to newsletter
-            </a>
-          </Button>
-        </div>
-      </header>
+  
 
       <section className="mx-auto max-w-6xl px-4 pt-12 pb-8">
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
