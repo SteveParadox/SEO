@@ -4,6 +4,7 @@ import { Sparkles, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count";
+import { SavedCountBadge } from "@/components/saved-count-badge";
 
 type NavItem = { href: string; label: string };
 
@@ -35,7 +36,7 @@ export function SiteHeader() {
 
         <nav className="hidden md:flex items-center gap-4">
           {NAV.map((item) => (
-            <Link
+      <Link
               key={item.href}
               href={item.href}
               className="text-sm text-muted-foreground hover:text-foreground"
@@ -43,6 +44,12 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+<Link
+  className="text-sm text-muted-foreground hover:text-foreground flex items-center"
+  href="/saved"
+>
+  Library <SavedCountBadge />
+</Link>
 
           {/* ✅ Saved link with count badge */}
           <Link
