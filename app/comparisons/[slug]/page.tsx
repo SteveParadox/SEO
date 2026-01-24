@@ -10,6 +10,7 @@ import {
 import { absoluteUrl } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SaveButton } from "@/components/save-button";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -73,6 +74,10 @@ export default async function ComparisonPage({ params }: PageProps) {
 
       <h1 className="mt-4 text-3xl font-semibold">{cmp.title}</h1>
       <p className="mt-2 text-muted-foreground">{cmp.description}</p>
+
+      <div className="mt-4 flex items-center gap-2">
+        <SaveButton kind="comparison" id={cmp.id} className="rounded-xl" />
+      </div>
 
       <Card className="mt-6 rounded-2xl">
         <CardHeader>
