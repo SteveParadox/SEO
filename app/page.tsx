@@ -717,21 +717,6 @@ export default function ToolDropAI() {
         </div>
       </section>
 
-      <footer className="border-t mt-16">
-        <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-2xl border flex items-center justify-center">
-                <Sparkles className="h-4 w-4" />
-              </div>
-              <div className="font-semibold">ToolDrop AI</div>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} ToolDrop AI. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
