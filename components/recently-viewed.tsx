@@ -5,7 +5,7 @@ import Link from "next/link";
 import { History } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { readRecent, type RecentItem } from "@/lib/recent";
+import { readRecent, type RecentItem, RECENT_EVENT } from "@/lib/recent";
 import { hrefFor, type UnifiedIndexItem } from "@/lib/data";
 
 function kindLabel(kind: RecentItem["kind"]) {
@@ -20,19 +20,24 @@ export function RecentlyViewed({ limit = 6 }: { limit?: number }) {
   const [items, setItems] = React.useState<RecentItem[]>([]);
 
   React.useEffect(() => {
-    setItems(readRecent());
+    const refresh = () => setItems(readRecent());
+
+    refresh();
 
     function onStorage(e: StorageEvent) {
-      if (e.key === "tooldrop_recent_v1") setItems(readRecent());
+      if (e.key === "tooldrop_recent_v1") refresh();
     }
-    window.addEventListener("storage", onStorage);
 
-    // same-tab updates
-    const t = window.setInterval(() => setItems(readRecent()), 800);
+    function onRecentChanged() {
+      refresh(); // ✅ same-tab updates
+    }
+
+    window.addEventListener("storage", onStorage);
+    window.addEventListener(RECENT_EVENT, onRecentChanged as EventListener);
 
     return () => {
       window.removeEventListener("storage", onStorage);
-      window.clearInterval(t);
+      window.removeEventListener(RECENT_EVENT, onRecentChanged as EventListener);
     };
   }, []);
 
@@ -51,10 +56,7 @@ export function RecentlyViewed({ limit = 6 }: { limit?: number }) {
             Your click history, but make it useful.
           </p>
         </div>
-        <Link
-          href="/recent"
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
+        <Link href="/recent" className="text-sm text-muted-foreground hover:text-foreground">
           View all →
         </Link>
       </div>
