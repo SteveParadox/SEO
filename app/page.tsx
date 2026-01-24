@@ -28,15 +28,14 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { DATA } from "@/lib/data";
-import { Scale } from "lucide-react"; // add this icon import
+import { Scale } from "lucide-react";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
 const { tools, prompts, updates, collections, comparisons } = DATA;
-
-
 
 const itemTypeMeta = {
   tool: { label: "Tool", icon: Wrench },
@@ -45,7 +44,6 @@ const itemTypeMeta = {
   collection: { label: "Collection", icon: BadgeCheck },
   comparison: { label: "Comparison", icon: Scale },
 } as const;
-
 
 type Kind = keyof typeof itemTypeMeta;
 
@@ -69,7 +67,6 @@ function hrefFor(kind: Kind, slug: string) {
   if (kind === "collection") return `/collections/${slug}`;
   return `/comparisons/${slug}`;
 }
-
 
 function Pill({
   icon: Icon,
@@ -192,19 +189,19 @@ export default function ToolDropAI() {
         updatedAtISO: c.updatedAtISO,
       });
     });
-    comparisons.forEach((c) => {
-    idx.push({
-      kind: "comparison",
-      id: c.id,
-      slug: c.slug,
-      title: c.title,
-      subtitle: c.description,
-      typeTag: "VS",
-      minutes: 6,
-      updatedAtISO: c.updatedAtISO,
-    });
-  });
 
+    comparisons.forEach((c) => {
+      idx.push({
+        kind: "comparison",
+        id: c.id,
+        slug: c.slug,
+        title: c.title,
+        subtitle: c.description,
+        typeTag: "VS",
+        minutes: 6,
+        updatedAtISO: c.updatedAtISO,
+      });
+    });
 
     idx.sort(
       (a, b) =>
@@ -225,17 +222,17 @@ export default function ToolDropAI() {
 
   const featuredCollections = useMemo(() => collections.slice(0, 4), []);
 
-const activeCategoryItems = useMemo(() => {
-  if (activeCategory === "tools")
-    return unifiedIndex.filter((x) => x.kind === "tool").slice(0, 6);
-  if (activeCategory === "prompts")
-    return unifiedIndex.filter((x) => x.kind === "prompt").slice(0, 6);
-  if (activeCategory === "updates")
-    return unifiedIndex.filter((x) => x.kind === "update").slice(0, 6);
-  if (activeCategory === "compare")
-    return unifiedIndex.filter((x) => x.kind === "comparison").slice(0, 6);
-  return unifiedIndex.slice(0, 6);
-}, [activeCategory, unifiedIndex]);
+  const activeCategoryItems = useMemo(() => {
+    if (activeCategory === "tools")
+      return unifiedIndex.filter((x) => x.kind === "tool").slice(0, 6);
+    if (activeCategory === "prompts")
+      return unifiedIndex.filter((x) => x.kind === "prompt").slice(0, 6);
+    if (activeCategory === "updates")
+      return unifiedIndex.filter((x) => x.kind === "update").slice(0, 6);
+    if (activeCategory === "compare")
+      return unifiedIndex.filter((x) => x.kind === "comparison").slice(0, 6);
+    return unifiedIndex.slice(0, 6);
+  }, [activeCategory, unifiedIndex]);
 
   const categories = useMemo(
     () => [
@@ -244,31 +241,31 @@ const activeCategoryItems = useMemo(() => {
         label: "AI Tools",
         icon: Cpu,
         blurb:
-          "New, trending, and quietly powerful tools. Filtered so you don’t waste time.",
-        bullets: ["Free tools", "New releases", "Underrated picks"],
+          "Discover new, trending, and powerful AI tools. Vetted and categorized for efficiency.",
+        bullets: ["Free resources", "Latest releases", "Hidden gems"],
       },
       {
         key: "prompts",
         label: "Prompts",
         icon: BookOpen,
         blurb:
-          "Copy-paste prompts that noticeably improve results. No roleplay theatre.",
-        bullets: ["Best prompts", "Prompt packs", "Prompt techniques"],
+          "Production-ready prompts engineered to improve AI output quality and consistency.",
+        bullets: ["Top-rated prompts", "Curated collections", "Advanced techniques"],
       },
       {
         key: "updates",
         label: "Model Updates",
         icon: TrendingUp,
         blurb:
-          "What changed in GPT, Claude, Gemini, and others. Translated into plain English.",
-        bullets: ["What changed", "Why it matters", "Who should care"],
+          "Track changes in GPT, Claude, Gemini, and other leading models with clear explanations.",
+        bullets: ["Change summaries", "Impact analysis", "Practical implications"],
       },
       {
         key: "compare",
         label: "Comparisons",
         icon: LineChart,
-        blurb: "X vs Y vs Z. Strengths, weaknesses, and who should care.",
-        bullets: ["Chatbots", "Image tools", "Writing tools"],
+        blurb: "Side-by-side comparisons highlighting strengths, limitations, and use cases.",
+        bullets: ["Chat models", "Image generators", "Writing assistants"],
       },
     ],
     []
@@ -277,11 +274,17 @@ const activeCategoryItems = useMemo(() => {
   const faqs = useMemo(
     () => [
       {
-        q: "Why should I check this regularly?",
-        a: "Because AI changes weekly and most updates are buried under noise. This filters the chaos into things worth your attention.",
+        q: "Why visit ToolDrop AI regularly?",
+        a: "The AI landscape evolves rapidly. ToolDrop AI filters industry noise to surface tools, updates, and resources that deserve your attention.",
       },
-      { q: "Do you review everything?", a: "No. Only things that are new, useful, or oddly popular." },
-      { q: "Is this for beginners or experts?", a: "Both. Beginners discover. Experts skim and steal." },
+      {
+        q: "What is your curation criteria?",
+        a: "We feature tools and resources that are newly released, demonstrate clear utility, or show significant traction in the community.",
+      },
+      {
+        q: "Who is ToolDrop AI designed for?",
+        a: "ToolDrop AI serves both newcomers discovering AI tools and experienced practitioners seeking the latest developments.",
+      },
     ],
     []
   );
@@ -291,10 +294,10 @@ const activeCategoryItems = useMemo(() => {
   function subscribe(e: React.FormEvent) {
     e.preventDefault();
     if (!/.+@.+\..+/.test(email)) {
-      setToast("That email looks imaginary.");
+      setToast("Please enter a valid email address.");
       return;
     }
-    setToast("Subscribed. You’ll get the next drop.");
+    setToast("Successfully subscribed! Check your inbox for confirmation.");
     setEmail("");
     window.setTimeout(() => setToast(null), 2500);
   }
@@ -312,7 +315,7 @@ const activeCategoryItems = useMemo(() => {
             <div className="leading-tight">
               <div className="font-semibold">ToolDrop AI</div>
               <div className="text-xs text-muted-foreground">
-                Daily AI tools, prompts, and model updates
+                Your curated source for AI tools, prompts, and updates
               </div>
             </div>
           </div>
@@ -325,7 +328,7 @@ const activeCategoryItems = useMemo(() => {
               Trending Now
             </a>
             <a className="text-sm text-muted-foreground hover:text-foreground" href="#newsletter">
-              Weekly ToolDrop
+              Newsletter
             </a>
             <a className="text-sm text-muted-foreground hover:text-foreground" href="#faq">
               FAQ
@@ -334,7 +337,7 @@ const activeCategoryItems = useMemo(() => {
 
           <Button variant="outline" className="rounded-2xl" asChild>
             <a href="#newsletter" className="inline-flex items-center">
-              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+              <Newspaper className="h-4 w-4 mr-2" /> Subscribe to newsletter
             </a>
           </Button>
         </div>
@@ -343,27 +346,27 @@ const activeCategoryItems = useMemo(() => {
       <section className="mx-auto max-w-6xl px-4 pt-12 pb-8">
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
           <div className="flex flex-wrap gap-2 mb-4">
-            <Pill icon={Flame}>Updated daily</Pill>
-            <Pill icon={ShieldCheck}>No hype, just usefulness</Pill>
-            <Pill icon={Globe}>Curated, not spammed</Pill>
+            <Pill icon={Flame}>Daily updates</Pill>
+            <Pill icon={ShieldCheck}>Curated for quality</Pill>
+            <Pill icon={Globe}>Signal over noise</Pill>
           </div>
 
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-            What changed in AI today?
+            Stay ahead of AI innovation
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-            New tools. Better prompts. Model updates that actually matter. Updated
-            constantly so you don’t have to chase links like it’s a second job.
+            Discover vetted AI tools, effective prompts, and significant model updates. 
+            We filter the noise so you can focus on what matters.
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Button className="rounded-2xl" asChild>
               <a href="#trending" className="inline-flex items-center">
-                See what’s trending <ArrowRight className="h-4 w-4 ml-2" />
+                Explore trending tools <ArrowRight className="h-4 w-4 ml-2" />
               </a>
             </Button>
             <Button variant="outline" className="rounded-2xl" asChild>
-              <a href="#categories">Browse categories</a>
+              <a href="#categories">Browse all categories</a>
             </Button>
           </div>
 
@@ -375,9 +378,9 @@ const activeCategoryItems = useMemo(() => {
                     <Search className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-2xl font-semibold leading-tight">Searchable</div>
+                    <div className="text-2xl font-semibold leading-tight">Comprehensive Search</div>
                     <div className="text-sm text-muted-foreground">
-                      Fast lookups for tools, prompts, and comparisons.
+                      Quickly find tools, prompts, and comparisons with intelligent search.
                     </div>
                   </div>
                 </div>
@@ -390,9 +393,9 @@ const activeCategoryItems = useMemo(() => {
                     <Rocket className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-2xl font-semibold leading-tight">Return-worthy</div>
+                    <div className="text-2xl font-semibold leading-tight">Stay Informed</div>
                     <div className="text-sm text-muted-foreground">
-                      Weekly digest + daily drops. Humans love routines.
+                      Weekly digest and daily updates delivered to keep you informed.
                     </div>
                   </div>
                 </div>
@@ -412,7 +415,7 @@ const activeCategoryItems = useMemo(() => {
           <CardContent className="p-5">
             <div className="flex gap-2">
               <Input
-                placeholder="Try: free AI tools, best prompts, ChatGPT alternatives"
+                placeholder="Search tools, prompts, updates, or comparisons..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="rounded-2xl"
@@ -429,7 +432,7 @@ const activeCategoryItems = useMemo(() => {
 
               {filteredIndex.length === 0 ? (
                 <div className="text-sm text-muted-foreground p-4 border rounded-2xl">
-                  No matches. Humans keep inventing new words.
+                  No results found. Try different keywords or browse our categories below.
                 </div>
               ) : null}
             </div>
@@ -442,70 +445,65 @@ const activeCategoryItems = useMemo(() => {
                   <BadgeCheck className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="font-medium">Why people keep coming back</div>
+                  <div className="font-medium">Why ToolDrop AI</div>
                   <div className="text-sm text-muted-foreground mt-1">
-                    Daily updates → new reasons to return. Prompts & collections → bookmarks and
-                    shares. Weekly digest → retention without begging.
+                    Daily updates keep content fresh. Curated collections provide immediate value. 
+                    Weekly digests ensure you never miss important developments.
                   </div>
                 </div>
               </div>
             </div>
+
             <Separator className="my-5" />
 
-<div className="flex items-end justify-between gap-3 flex-wrap">
-  <div>
-    <div className="font-medium">Featured collections</div>
-    <div className="text-sm text-muted-foreground">
-      Curated bundles people actually save. Convenient, unlike most things.
-    </div>
-  </div>
-  <Badge variant="secondary" className="rounded-full">Collections</Badge>
-</div>
+            <div className="flex items-end justify-between gap-3 flex-wrap">
+              <div>
+                <div className="font-medium">Featured collections</div>
+                <div className="text-sm text-muted-foreground">
+                  Hand-picked collections of tools and resources for specific use cases.
+                </div>
+              </div>
+              <Badge variant="secondary" className="rounded-full">Collections</Badge>
+            </div>
 
-<div className="mt-4 grid gap-3 md:grid-cols-2">
-  {featuredCollections.map((c) => (
-    <Link
-      key={c.id}
-      href={hrefFor("collection", c.slug)}
-      className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline" className="rounded-full">Collection</Badge>
-            <Badge variant="secondary" className="rounded-full">
-              {freshnessLabel(c.updatedAtISO)}
-            </Badge>
-          </div>
-          <div className="mt-2 font-medium leading-snug">{c.title}</div>
-          <div className="mt-2 text-sm text-muted-foreground">{c.description}</div>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {c.tags.slice(0, 3).map((t) => (
-              <Badge key={t} variant="outline" className="rounded-full">{t}</Badge>
-            ))}
-          </div>
-        </div>
-        <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
-      </div>
-    </Link>
-  ))}
-</div>
-
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {featuredCollections.map((c) => (
+                <Link
+                  key={c.id}
+                  href={hrefFor("collection", c.slug)}
+                  className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                        <Badge variant="outline" className="rounded-full">Collection</Badge>
+                        <Badge variant="secondary" className="rounded-full">
+                          {freshnessLabel(c.updatedAtISO)}
+                        </Badge>
+                      </div>
+                      <div className="mt-2 font-medium leading-snug">{c.title}</div>
+                      <div className="mt-2 text-sm text-muted-foreground">{c.description}</div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {c.tags.slice(0, 3).map((t) => (
+                          <Badge key={t} variant="outline" className="rounded-full">{t}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
+                  </div>
+                </Link>
+              ))}
+            </div>
           </CardContent>
         </Card>
       </section>
 
-      {/* The rest of your page stays the same. Trending cards now already link via ItemCard above.
-          If you want Trending section cards to link too, I can convert them to <Link> the same way. */}
-      {/* ...keep your Categories / Trending / Newsletter / FAQ / Footer as-is... */}
-      {/* (No behavioral changes needed beyond ItemCard + unified index.) */}
       <section id="categories" className="mx-auto max-w-6xl px-4 pb-10">
-        {/* unchanged from your version */}
         <div className="flex items-end justify-between gap-4 flex-wrap">
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Browse by intent</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Explore by Category</h2>
             <p className="mt-2 text-muted-foreground max-w-2xl">
-              Tools, prompts, updates. The internet’s favorite three things.
+              Browse AI tools, prompts, model updates, and comparison guides.
             </p>
           </div>
         </div>
@@ -540,18 +538,17 @@ const activeCategoryItems = useMemo(() => {
 
               <Separator className="my-5" />
               <div className="font-medium">Top picks</div>
-            <div className="mt-3 space-y-3">
-              {activeCategoryItems.map((it) => (
-                <ItemCard key={`${it.kind}-${it.id}`} item={it} />
-              ))}
-            </div>
+              <div className="mt-3 space-y-3">
+                {activeCategoryItems.map((it) => (
+                  <ItemCard key={`${it.kind}-${it.id}`} item={it} />
+                ))}
+              </div>
 
-            <Separator className="my-5" />
-
+              <Separator className="my-5" />
 
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="rounded-2xl border p-4">
-                  <div className="font-medium">Make it rank</div>
+                  <div className="font-medium">SEO Optimization</div>
                   <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
                     <li>One keyword per page (title + H1)</li>
                     <li>FAQ block for long-tail queries</li>
@@ -560,11 +557,11 @@ const activeCategoryItems = useMemo(() => {
                   </ul>
                 </div>
                 <div className="rounded-2xl border p-4">
-                  <div className="font-medium">Make it shareable</div>
+                  <div className="font-medium">Engagement Strategy</div>
                   <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
                     <li>Prompt packs users can copy</li>
                     <li>Saveable checklists</li>
-                    <li>Weekly “best of” roundups</li>
+                    <li>Weekly "best of" roundups</li>
                     <li>One-liner summaries for social</li>
                   </ul>
                 </div>
@@ -574,7 +571,7 @@ const activeCategoryItems = useMemo(() => {
 
           <Card className="rounded-2xl shadow-sm">
             <CardHeader className="border-b">
-              <CardTitle className="text-base">Content model (locked)</CardTitle>
+              <CardTitle className="text-base">Content Structure</CardTitle>
             </CardHeader>
             <CardContent className="p-5 space-y-3">
               <div className="rounded-2xl border p-4">
@@ -602,78 +599,144 @@ const activeCategoryItems = useMemo(() => {
                 </div>
               </div>
               <div className="text-xs text-muted-foreground">
-                This is the part that prevents your site from becoming a random blog.
+                Consistent structure ensures quality and discoverability.
               </div>
             </CardContent>
           </Card>
         </div>
       </section>
-<section id="trending" className="mx-auto max-w-6xl px-4 py-10">
-  <div className="flex items-end justify-between gap-4 flex-wrap">
-    <div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Trending now</h2>
-      <p className="mt-2 text-muted-foreground max-w-2xl">
-        These are getting saved, shared, and bookmarked. Which is how the internet quietly votes.
-      </p>
-    </div>
-    <div className="flex items-center gap-2">
-      <Badge variant="secondary" className="rounded-full">Tool lists</Badge>
-      <Badge variant="secondary" className="rounded-full">Prompts</Badge>
-      <Badge variant="secondary" className="rounded-full">Model updates</Badge>
-    </div>
-  </div>
 
-  <div className="mt-6 grid gap-4 md:grid-cols-2">
-    {trending.map((it) => {
-      const href = hrefFor(it.kind, it.slug);
+      <section id="trending" className="mx-auto max-w-6xl px-4 py-10">
+        <div className="flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Trending now</h2>
+            <p className="mt-2 text-muted-foreground max-w-2xl">
+              Most popular resources based on user engagement, shares, and bookmarks.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="rounded-full">Tool lists</Badge>
+            <Badge variant="secondary" className="rounded-full">Prompts</Badge>
+            <Badge variant="secondary" className="rounded-full">Model updates</Badge>
+          </div>
+        </div>
 
-      return (
-        <Link
-          key={`${it.kind}-${it.id}`}
-          href={href}
-          className="block focus:outline-none"
-          aria-label={`Open ${itemTypeMeta[it.kind].label}: ${it.title}`}
-        >
-          <Card className="rounded-2xl shadow-sm hover:bg-muted/40 transition">
-            <CardContent className="p-5">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="rounded-full">
-                      {itemTypeMeta[it.kind].label}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
-                      <Timer className="h-3.5 w-3.5" /> {it.minutes} min
-                    </span>
-                    <Badge variant="secondary" className="rounded-full">
-                      {freshnessLabel(it.updatedAtISO)}
-                    </Badge>
-                  </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {trending.map((it) => {
+            const href = hrefFor(it.kind, it.slug);
 
-                  <div className="mt-2 text-lg font-semibold leading-snug">{it.title}</div>
-                  <div className="mt-2 text-sm text-muted-foreground">{it.subtitle}</div>
-                </div>
+            return (
+              <Link
+                key={`${it.kind}-${it.id}`}
+                href={href}
+                className="block focus:outline-none"
+                aria-label={`Open ${itemTypeMeta[it.kind].label}: ${it.title}`}
+              >
+                <Card className="rounded-2xl shadow-sm hover:bg-muted/40 transition">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="rounded-full">
+                            {itemTypeMeta[it.kind].label}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
+                            <Timer className="h-3.5 w-3.5" /> {it.minutes} min
+                          </span>
+                          <Badge variant="secondary" className="rounded-full">
+                            {freshnessLabel(it.updatedAtISO)}
+                          </Badge>
+                        </div>
 
-                {/* Make the button navigate without doing weird nested-link stuff */}
-                <Button
-                  className="rounded-2xl"
-                  variant="outline"
-                  asChild
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span>Read</span>
+                        <div className="mt-2 text-lg font-semibold leading-snug">{it.title}</div>
+                        <div className="mt-2 text-sm text-muted-foreground">{it.subtitle}</div>
+                      </div>
+
+                      <Button
+                        className="rounded-2xl"
+                        variant="outline"
+                        asChild
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span>View details</span>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-10">
+        <Card className="rounded-2xl shadow-sm">
+          <CardContent className="p-8">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                Subscribe to weekly updates
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                Get the week's best AI tools, prompts, and updates delivered to your inbox.
+              </p>
+
+              <form onSubmit={subscribe} className="mt-6 flex flex-col sm:flex-row gap-3">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-2xl flex-1"
+                />
+                <Button type="submit" className="rounded-2xl">
+                  Subscribe
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-      );
-    })}
-  </div>
-</section>
+              </form>
 
-      {/* Keep your remaining sections (Trending/Newsletter/FAQ/Footer) unchanged */}
-      {/* You can also convert Trending section cards to Link if you want them clickable too. */}
+              {toast && (
+                <div className="mt-4 rounded-2xl border bg-muted/40 p-3 text-sm">
+                  {toast}
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="faq" className="mx-auto max-w-6xl px-4 py-10">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <Card key={faq.q} className="rounded-2xl shadow-sm">
+              <CardContent className="p-5">
+                <div className="font-medium">{faq.q}</div>
+                <div className="mt-2 text-sm text-muted-foreground">{faq.a}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <footer className="border-t mt-16">
+        <div className="mx-auto max-w-6xl px-4 py-8">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-2xl border flex items-center justify-center">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div className="font-semibold">ToolDrop AI</div>
+            </div>
+            <div className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} ToolDrop AI. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
