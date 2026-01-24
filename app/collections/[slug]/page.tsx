@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
+import { TrackRecent } from "@/components/track-recent";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -64,6 +65,13 @@ export default async function CollectionPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+<TrackRecent
+  kind="collection"
+  id={c.id}
+  slug={c.slug}
+  title={c.title}
+  subtitle={c.description}
+/>
       <div className="flex flex-wrap gap-2">
         {c.tags.map((t) => (
           <Badge key={t} variant="secondary" className="rounded-full">
