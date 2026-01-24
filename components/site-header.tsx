@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count";
 import { SavedCountBadge } from "@/components/saved-count-badge";
+import { RecentCountBadge } from "@/components/recent-count-badge";
 
 type NavItem = { href: string; label: string };
 
@@ -49,6 +50,12 @@ export function SiteHeader() {
   href="/saved"
 >
   Library <SavedCountBadge />
+</Link>
+<Link
+  className="text-sm text-muted-foreground hover:text-foreground flex items-center"
+  href="/recent"
+>
+  Recent <RecentCountBadge />
 </Link>
 
           {/* ✅ Saved link with count badge */}
