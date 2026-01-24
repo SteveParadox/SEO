@@ -10,9 +10,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
+import { SaveButton } from "@/components/save-button";
 
 type PageProps = {
-  params: Promise<{ slug: string }>; // ✅ params is async
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -20,7 +21,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params; // ✅ unwrap
+  const { slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) return { title: "Tool not found" };
 
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ToolPage({ params }: PageProps) {
-  const { slug } = await params; // ✅ unwrap
+  const { slug } = await params;
   const tool = getToolBySlug(slug);
 
   if (!tool) return notFound();
@@ -68,6 +69,10 @@ export default async function ToolPage({ params }: PageProps) {
 
       <h1 className="mt-4 text-3xl font-semibold">{tool.name}</h1>
       <p className="mt-2 text-muted-foreground">{tool.oneLiner}</p>
+
+      <div className="mt-4 flex items-center gap-2">
+        <SaveButton kind="tool" id={tool.id} className="rounded-xl" />
+      </div>
 
       <div className="mt-6 grid gap-4">
         <Card className="rounded-2xl">
@@ -93,17 +98,16 @@ export default async function ToolPage({ params }: PageProps) {
             </CardContent>
           </Card>
 
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>Cons</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {tool.cons.map((x) => (
-              <div key={x}>• {x}</div>
-            ))}
-          </CardContent>
-        </Card>
-
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Cons</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {tool.cons.map((x) => (
+                <div key={x}>• {x}</div>
+              ))}
+            </CardContent>
+          </Card>
         </div>
 
         <Card className="rounded-2xl">
@@ -167,9 +171,7 @@ export default async function ToolPage({ params }: PageProps) {
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.oneLiner}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{t.oneLiner}</div>
                   </Link>
                 ))}
               </CardContent>
