@@ -11,6 +11,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SaveButton } from "@/components/save-button";
+import { TrackRecent } from "@/components/track-recent";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -64,6 +65,13 @@ export default async function ComparisonPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+<TrackRecent
+  kind="comparison"
+  id={cmp.id}
+  slug={cmp.slug}
+  title={cmp.title}
+  subtitle={cmp.description}
+/>
       <div className="flex flex-wrap gap-2">
         {cmp.tags.map((t) => (
           <Badge key={t} variant="secondary" className="rounded-full">
