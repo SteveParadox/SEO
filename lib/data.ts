@@ -162,3 +162,112 @@ export function findCollectionsContaining(
   if (!kind || !targetId) return [];
   return DATA.collections.filter((c) => c.items.some((it) => it.kind === kind && it.id === targetId));
 }
+
+export type UnifiedKind = "tool" | "prompt" | "update" | "collection" | "comparison";
+
+export type UnifiedItem = {
+  kind: UnifiedKind;
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+  updatedAtISO: string;
+};
+
+export function hrefFor(kind: UnifiedKind, slug: string) {
+  if (kind === "tool") return `/tools/${slug}`;
+  if (kind === "prompt") return `/prompts/${slug}`;
+  if (kind === "update") return `/updates/${slug}`;
+  if (kind === "collection") return `/collections/${slug}`;
+  return `/comparisons/${slug}`;
+}
+
+export function getUnifiedIndex(): UnifiedItem[] {
+  const idx: UnifiedItem[] = [];
+
+  DATA.tools.forEach((t) =>
+    idx.push({
+      kind: "tool",
+      id: t.id,
+      slug: t.slug,
+      title: t.name,
+      subtitle: t.oneLiner,
+      tags: t.tags ?? [],
+      updatedAtISO: t.updatedAtISO,
+    })
+  );
+
+  DATA.prompts.forEach((p) =>
+    idx.push({
+      kind: "prompt",
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      subtitle: p.purpose,
+      tags: p.tags ?? [],
+      updatedAtISO: p.updatedAtISO,
+    })
+  );
+
+  DATA.updates.forEach((u) =>
+    idx.push({
+      kind: "update",
+      id: u.id,
+      slug: u.slug,
+      title: u.headline,
+      subtitle: u.tldr,
+      tags: u.tags ?? [],
+      updatedAtISO: u.updatedAtISO,
+    })
+  );
+
+  DATA.collections.forEach((c) =>
+    idx.push({
+      kind: "collection",
+      id: c.id,
+      slug: c.slug,
+      title: c.title,
+      subtitle: c.description,
+      tags: c.tags ?? [],
+      updatedAtISO: c.updatedAtISO,
+    })
+  );
+
+  DATA.comparisons.forEach((c) =>
+    idx.push({
+      kind: "comparison",
+      id: c.id,
+      slug: c.slug,
+      title: c.title,
+      subtitle: c.description,
+      tags: c.tags ?? [],
+      updatedAtISO: c.updatedAtISO,
+    })
+  );
+
+  idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
+  return idx;
+}
+
+export function getAllTagsWithCounts() {
+  const idx = getUnifiedIndex();
+  const map = new Map<string, number>();
+
+  for (const it of idx) {
+    for (const tag of it.tags ?? []) {
+      const key = tag.trim().toLowerCase();
+      if (!key) continue;
+      map.set(key, (map.get(key) ?? 0) + 1);
+    }
+  }
+
+  return [...map.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+}
+
+export function getItemsByTag(tag: string) {
+  const t = tag.trim().toLowerCase();
+  return getUnifiedIndex().filter((it) => (it.tags ?? []).some((x) => x.toLowerCase() === t));
+}
