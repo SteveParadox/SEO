@@ -2,35 +2,19 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Bookmark, Trash2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Bookmark, History, Search, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { getUnifiedIndex, hrefFor, type UnifiedIndexItem } from "@/lib/data";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
-type SavedKey = { kind: UnifiedIndexItem["kind"]; id: string };
+import { readSaved, clearSaved, type SavedItem } from "@/lib/saved";
+import { readRecent, clearRecent, type RecentItem } from "@/lib/recent";
+import { hrefFor, type UnifiedIndexItem } from "@/lib/data";
 
-const STORAGE_KEY = "tooldrop_saved_v1";
+type Kind = UnifiedIndexItem["kind"];
 
-function readSaved(): SavedKey[] {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed
-      .filter((x) => x?.kind && x?.id)
-      .map((x) => ({ kind: x.kind, id: x.id }));
-  } catch {
-    return [];
-  }
-}
-
-function clearSaved() {
-  window.localStorage.removeItem(STORAGE_KEY);
-}
-
-function kindLabel(kind: UnifiedIndexItem["kind"]) {
+function kindLabel(kind: Kind) {
   if (kind === "tool") return "Tool";
   if (kind === "prompt") return "Prompt";
   if (kind === "update") return "Update";
@@ -38,26 +22,126 @@ function kindLabel(kind: UnifiedIndexItem["kind"]) {
   return "Comparison";
 }
 
+function Tabs({
+  active,
+  onChange,
+}: {
+  active: "saved" | "recent";
+  onChange: (v: "saved" | "recent") => void;
+}) {
+  return (
+    <div className="inline-flex rounded-2xl border p-1">
+      <button
+        onClick={() => onChange("saved")}
+        className={[
+          "px-3 py-2 rounded-2xl text-sm flex items-center gap-2 transition",
+          active === "saved" ? "bg-muted" : "hover:bg-muted/40",
+        ].join(" ")}
+      >
+        <Bookmark className="h-4 w-4" /> Saved
+      </button>
+
+      <button
+        onClick={() => onChange("recent")}
+        className={[
+          "px-3 py-2 rounded-2xl text-sm flex items-center gap-2 transition",
+          active === "recent" ? "bg-muted" : "hover:bg-muted/40",
+        ].join(" ")}
+      >
+        <History className="h-4 w-4" /> Recent
+      </button>
+    </div>
+  );
+}
+
+function ItemCard({
+  href,
+  kind,
+  title,
+  subtitle,
+}: {
+  href: string;
+  kind: Kind;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <Link href={href} className="block">
+      <Card className="rounded-2xl hover:bg-muted/40 transition">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Badge variant="outline" className="rounded-full">
+              {kindLabel(kind)}
+            </Badge>
+            <span className="line-clamp-1">{title}</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="text-sm text-muted-foreground line-clamp-2">
+            {subtitle}
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
+
 export default function SavedPage() {
-  const [savedKeys, setSavedKeys] = React.useState<SavedKey[]>([]);
-  const all = React.useMemo(() => getUnifiedIndex(), []);
+  const [tab, setTab] = React.useState<"saved" | "recent">("saved");
+  const [q, setQ] = React.useState("");
+  const [kind, setKind] = React.useState<Kind | "all">("all");
+
+  const [saved, setSaved] = React.useState<SavedItem[]>([]);
+  const [recent, setRecent] = React.useState<RecentItem[]>([]);
 
   React.useEffect(() => {
-    setSavedKeys(readSaved());
+    // initial load
+    setSaved(readSaved());
+    setRecent(readRecent());
 
+    // same-tab refresh (because storage events don’t fire in the same tab)
+    const t = window.setInterval(() => {
+      setSaved(readSaved());
+      setRecent(readRecent());
+    }, 800);
+
+    // cross-tab sync
     function onStorage(e: StorageEvent) {
-      if (e.key === STORAGE_KEY) setSavedKeys(readSaved());
+      if (e.key === "tooldrop_saved_v1") setSaved(readSaved());
+      if (e.key === "tooldrop_recent_v1") setRecent(readRecent());
     }
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+
+    return () => {
+      window.clearInterval(t);
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
-  const savedItems = React.useMemo(() => {
-    const map = new Map(all.map((it) => [`${it.kind}:${it.id}`, it] as const));
-    return savedKeys
-      .map((k) => map.get(`${k.kind}:${k.id}`))
-      .filter(Boolean) as UnifiedIndexItem[];
-  }, [savedKeys, all]);
+  const list = tab === "saved" ? saved : recent;
+
+  const filtered = React.useMemo(() => {
+    const query = q.trim().toLowerCase();
+
+    return list
+      .filter((x) => (kind === "all" ? true : x.kind === kind))
+      .filter((x) => {
+        if (!query) return true;
+        const hay = (x.title + " " + x.subtitle).toLowerCase();
+        return hay.includes(query);
+      })
+      .slice(0, 50);
+  }, [list, q, kind]);
+
+  const clearActive = () => {
+    if (tab === "saved") {
+      clearSaved();
+      setSaved([]);
+    } else {
+      clearRecent();
+      setRecent([]);
+    }
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -67,56 +151,82 @@ export default function SavedPage() {
             <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
               <Bookmark className="h-5 w-5" />
             </div>
+
             <div>
-              <h1 className="text-3xl font-semibold">Saved</h1>
+              <h1 className="text-3xl font-semibold">Library</h1>
               <p className="mt-1 text-muted-foreground">
-                Your personal stash of tools, prompts, and updates.
+                Saved picks + recently viewed. Your attention span, organized.
               </p>
             </div>
+          </div>
+
+          <div className="mt-4">
+            <Tabs active={tab} onChange={setTab} />
           </div>
         </div>
 
         <Button
           variant="outline"
           className="rounded-2xl"
-          disabled={savedKeys.length === 0}
-          onClick={() => {
-            clearSaved();
-            setSavedKeys([]);
-          }}
+          disabled={list.length === 0}
+          onClick={clearActive}
         >
           <Trash2 className="h-4 w-4 mr-2" />
-          Clear all
+          Clear {tab === "saved" ? "saved" : "recent"}
         </Button>
       </div>
 
+      <div className="mt-6 rounded-2xl border p-4">
+        <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+          <div className="flex items-center gap-2 w-full md:max-w-md">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={`Search ${tab === "saved" ? "saved" : "recent"}...`}
+              className="rounded-2xl"
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">Type</span>
+            <select
+              className="rounded-2xl border bg-background px-3 py-2 text-sm"
+              value={kind}
+              onChange={(e) => setKind(e.target.value as any)}
+            >
+              <option value="all">All</option>
+              <option value="tool">Tools</option>
+              <option value="prompt">Prompts</option>
+              <option value="update">Updates</option>
+              <option value="collection">Collections</option>
+              <option value="comparison">Comparisons</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {savedItems.map((it) => (
-          <Link key={`${it.kind}-${it.id}`} href={hrefFor(it.kind, it.slug)}>
-            <Card className="rounded-2xl hover:bg-muted/40 transition">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Badge variant="outline" className="rounded-full">
-                    {kindLabel(it.kind)}
-                  </Badge>
-                  <span className="line-clamp-1">{it.title}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="text-sm text-muted-foreground line-clamp-2">
-                  {it.subtitle}
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+        {filtered.map((it) => (
+          <ItemCard
+            key={`${tab}-${it.kind}-${it.id}`}
+            href={hrefFor(it.kind as Kind, it.slug)}
+            kind={it.kind as Kind}
+            title={it.title}
+            subtitle={it.subtitle}
+          />
         ))}
 
-        {savedItems.length === 0 ? (
+        {filtered.length === 0 ? (
           <Card className="rounded-2xl md:col-span-2">
             <CardContent className="p-8 text-center">
-              <div className="text-lg font-medium">Nothing saved yet.</div>
+              <div className="text-lg font-medium">
+                {tab === "saved" ? "Nothing saved yet." : "No recent history yet."}
+              </div>
               <div className="mt-2 text-muted-foreground">
-                Go hit “Save” on anything useful. Collect them like digital Pokémon.
+                {tab === "saved"
+                  ? "Go hit “Save” on anything useful. Collect them like digital Pokémon."
+                  : "Click around the site and this will fill up."}
               </div>
               <div className="mt-5 flex items-center justify-center gap-2">
                 <Button asChild className="rounded-2xl">
