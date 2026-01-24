@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 import { CopyButton } from "@/components/copy-button";
 
+import { SaveButton } from "@/components/save-button";
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -70,7 +72,9 @@ export default async function PromptPage({ params }: PageProps) {
 
       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
       <p className="mt-2 text-muted-foreground">{p.purpose}</p>
-
+<div className="mt-4 flex items-center gap-2">
+  <SaveButton kind="prompt" id={p.id} className="rounded-xl" />
+</div>
       <Card className="mt-6 rounded-2xl">
   <CardHeader className="flex flex-row items-center justify-between gap-3">
     <CardTitle>Prompt</CardTitle>
