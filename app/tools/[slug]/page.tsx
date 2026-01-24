@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
+import { TrackRecent } from "@/components/track-recent";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -59,6 +60,13 @@ export default async function ToolPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+<TrackRecent
+  kind="tool"
+  id={tool.id}
+  slug={tool.slug}
+  title={tool.name}
+  subtitle={tool.oneLiner}
+/>
       <div className="flex flex-wrap gap-2">
         {tool.tags.map((t) => (
           <Badge key={t} variant="secondary" className="rounded-full">
