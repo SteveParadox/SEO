@@ -14,6 +14,7 @@ const NAV: NavItem[] = [
   { href: "/collections", label: "Collections" },
   { href: "/comparisons", label: "Comparisons" },
   { href: "/tags", label: "Tags" },
+  { href: "/recent", label: "Recent" },
 ];
 
 export function SiteHeader() {
@@ -51,6 +52,7 @@ export function SiteHeader() {
             <span>Saved</span>
             <SavedCountBadge />
           </Link>
+
         </nav>
 
         <Button variant="outline" className="rounded-2xl" asChild>
