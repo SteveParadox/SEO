@@ -10,9 +10,9 @@ import { Input } from "@/components/ui/input";
 
 import { readSaved, clearSaved, type SavedItem } from "@/lib/saved";
 import { readRecent, clearRecent, type RecentItem } from "@/lib/recent";
-import { hrefFor, type UnifiedIndexItem } from "@/lib/data";
+import { hrefFor, type UnifiedItem } from "@/lib/data";
 
-type Kind = UnifiedIndexItem["kind"];
+type Kind = UnifiedItem["kind"];
 
 function kindLabel(kind: Kind) {
   if (kind === "tool") return "Tool";
