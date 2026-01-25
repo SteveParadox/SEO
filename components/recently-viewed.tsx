@@ -65,7 +65,7 @@ export function RecentlyViewed({ limit = 6 }: { limit?: number }) {
         {shown.map((it) => (
           <Link
             key={`${it.kind}-${it.id}`}
-            href={hrefFor(it.kind as UnifiedIndexItem["kind"], it.slug)}
+            href={hrefFor(it.kind as UnifiedItem["kind"], it.slug)}
           >
             <Card className="rounded-2xl hover:bg-muted/40 transition">
               <CardHeader className="pb-2">
