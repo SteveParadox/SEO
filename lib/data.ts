@@ -15,6 +15,7 @@ import { prompts } from "@/lib/content/prompts";
 import { updates } from "@/lib/content/updates";
 import { collections } from "@/lib/content/collections";
 import { comparisons } from "@/lib/content/comparisons";
+import { BEST_PAGES, type BestPage } from "@/content/best-pages";
 
 export const DATA: DataBundle = { tools, prompts, updates, collections, comparisons };
 
@@ -270,4 +271,35 @@ export function getAllTagsWithCounts() {
 export function getItemsByTag(tag: string) {
   const t = tag.trim().toLowerCase();
   return getUnifiedIndex().filter((it) => (it.tags ?? []).some((x) => x.toLowerCase() === t));
+}
+export const DATA = {
+  // existing: tools, prompts, updates, collections, comparisons, ...
+  bestPages: BEST_PAGES,
+} as const;
+
+export function getBestPageBySlug(slug: string) {
+  return DATA.bestPages.find((p) => p.slug === slug);
+}
+
+export function getRelatedBestPages(id: string, limit = 6) {
+  const page = DATA.bestPages.find((p) => p.id === id);
+  if (!page) return [];
+  const tags = new Set(page.tags);
+  return DATA.bestPages
+    .filter((x) => x.id !== id)
+    .map((x) => ({ x, score: x.tags.reduce((s, t) => s + (tags.has(t) ? 1 : 0), 0) }))
+    .sort((a, b) => b.score - a.score)
+    .map((r) => r.x)
+    .slice(0, limit);
+}
+
+export function resolveBestPicks(page: BestPage) {
+  const toolsById = new Map(DATA.tools.map((t) => [t.id, t] as const));
+  return page.picks
+    .map((p) => ({ pick: p, tool: toolsById.get(p.toolId) }))
+    .filter((x): x is { pick: (typeof page.picks)[number]; tool: (typeof DATA.tools)[number] } => Boolean(x.tool));
+}
+
+export function findBestPagesContainingTool(toolId: string) {
+  return DATA.bestPages.filter((p) => p.picks.some((x) => x.toolId === toolId));
 }
