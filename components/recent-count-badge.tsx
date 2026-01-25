@@ -2,39 +2,29 @@
 
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
-import { readRecentKeys, RECENT_EVENT } from "@/lib/recent";
-
-function readCount() {
-  try {
-    return readRecentKeys().length;
-  } catch {
-    return 0;
-  }
-}
+import { readRecent, RECENT_EVENT } from "@/lib/recent";
 
 export function RecentCountBadge() {
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
-    const refresh = () => setCount(readCount());
-    refresh();
-
-    const t = window.setInterval(refresh, 800);
+    const update = () => setCount(readRecent().length);
+    update();
 
     function onStorage(e: StorageEvent) {
-      if (e.key === "tooldrop_recent_v1") refresh();
+      if (e.key === "tooldrop_recent_v1") update();
     }
-    function onRecentChanged() {
-      refresh();
+
+    function onLocal() {
+      update();
     }
 
     window.addEventListener("storage", onStorage);
-    window.addEventListener(RECENT_EVENT, onRecentChanged as EventListener);
+    window.addEventListener(RECENT_EVENT, onLocal as EventListener);
 
     return () => {
-      window.clearInterval(t);
       window.removeEventListener("storage", onStorage);
-      window.removeEventListener(RECENT_EVENT, onRecentChanged as EventListener);
+      window.removeEventListener(RECENT_EVENT, onLocal as EventListener);
     };
   }, []);
 
