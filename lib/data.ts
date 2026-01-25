@@ -17,7 +17,14 @@ import { collections } from "@/lib/content/collections";
 import { comparisons } from "@/lib/content/comparisons";
 import { BEST_PAGES, type BestPage } from "@/content/best-pages";
 
-export const DATA: DataBundle = { tools, prompts, updates, collections, comparisons };
+export const DATA: DataBundle & { bestPages: BestPage[] } = {
+  tools,
+  prompts,
+  updates,
+  collections,
+  comparisons,
+  bestPages: BEST_PAGES,
+} as const;
 
 // ---- Slug lookups ----
 export function getToolBySlug(slug: string) {
@@ -272,10 +279,6 @@ export function getItemsByTag(tag: string) {
   const t = tag.trim().toLowerCase();
   return getUnifiedIndex().filter((it) => (it.tags ?? []).some((x) => x.toLowerCase() === t));
 }
-export const DATA = {
-  // existing: tools, prompts, updates, collections, comparisons, ...
-  bestPages: BEST_PAGES,
-} as const;
 
 export function getBestPageBySlug(slug: string) {
   return DATA.bestPages.find((p) => p.slug === slug);
