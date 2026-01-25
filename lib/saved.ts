@@ -3,12 +3,20 @@ export type SavedKind = "tool" | "prompt" | "update" | "collection" | "compariso
 export type SavedItem = {
   kind: SavedKind;
   id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  savedAtISO: string;
 };
 
-export const STORAGE_KEY = "tooldrop_saved_v1";
+const STORAGE_KEY = "tooldrop_saved_v1";
 export const SAVED_EVENT = "tooldrop:saved-changed";
 
-function readRaw(): SavedItem[] {
+type SavedKey = { kind: SavedKind; id: string };
+
+import { getUnifiedIndex, type UnifiedItem } from "@/lib/data";
+
+function readRaw(): SavedKey[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -23,45 +31,62 @@ function readRaw(): SavedItem[] {
   }
 }
 
-function writeRaw(items: SavedItem[]) {
-  if (typeof window === "undefined") return;
+function writeRaw(keys: SavedKey[]) {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(keys));
     window.dispatchEvent(new CustomEvent(SAVED_EVENT));
   } catch {
     // ignore
   }
 }
 
-// ✅ what app/saved/page.tsx imports
 export function readSaved(): SavedItem[] {
-  return readRaw();
+  const keys = readRaw();
+  const all = getUnifiedIndex();
+  const map = new Map(all.map((it) => [`${it.kind}:${it.id}`, it] as const));
+
+  return keys
+    .map((k) => map.get(`${k.kind}:${k.id}`))
+    .filter(Boolean)
+    .map((it) => {
+      const x = it as UnifiedItem;
+      return {
+        kind: x.kind,
+        id: x.id,
+        slug: x.slug,
+        title: x.title,
+        subtitle: x.subtitle,
+        savedAtISO: new Date().toISOString(),
+      };
+    });
 }
 
-// ✅ what app/saved/page.tsx imports
 export function clearSaved() {
   if (typeof window === "undefined") return;
-  window.localStorage.removeItem(STORAGE_KEY);
-  window.dispatchEvent(new CustomEvent(SAVED_EVENT));
+  try {
+    window.localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new CustomEvent(SAVED_EVENT));
+  } catch {
+    // ignore
+  }
 }
 
-// helpers you’ll reuse elsewhere
 export function isSaved(kind: SavedKind, id: string) {
   return readRaw().some((x) => x.kind === kind && x.id === id);
 }
 
-export function toggleSaved(key: SavedItem, limit = 200) {
-  const items = readRaw();
-  const exists = items.some((x) => x.kind === key.kind && x.id === key.id);
+export function toggleSaved(key: SavedKey, limit = 200) {
+  const keys = readRaw();
+  const exists = keys.some((x) => x.kind === key.kind && x.id === key.id);
+
   const next = exists
-    ? items.filter((x) => !(x.kind === key.kind && x.id === key.id))
-    : [key, ...items];
+    ? keys.filter((x) => !(x.kind === key.kind && x.id === key.id))
+    : [{ kind: key.kind, id: key.id }, ...keys];
 
   writeRaw(next.slice(0, limit));
   return !exists;
 }
 
-// optional: used by badges
 export function readSavedCount() {
   return readRaw().length;
 }
