@@ -1,25 +1,54 @@
-// components/site-footer.tsx
-import Link from "next/link";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
-export function SiteFooter() {
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+/**
+ * Site-wide metadata
+ * Individual pages override this via generateMetadata()
+ */
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "ToolDrop AI",
+    template: "%s — ToolDrop AI",
+  },
+  description:
+    "Daily AI tools, prompts, and model updates that actually matter. Curated to reduce noise, not add to it.",
+  openGraph: {
+    siteName: "ToolDrop AI",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <footer className="border-t">
-      <div className="mx-auto max-w-6xl px-4 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} ToolDrop AI. Built with the ancient art of “filtering the noise.”
-        </div>
-        <div className="flex items-center gap-3 text-sm">
-          <Link className="text-muted-foreground hover:text-foreground" href="/privacy">
-            Privacy
-          </Link>
-          <Link className="text-muted-foreground hover:text-foreground" href="/terms">
-            Terms
-          </Link>
-          <Link className="text-muted-foreground hover:text-foreground" href="/contact">
-            Contact
-          </Link>
-        </div>
-      </div>
-    </footer>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SiteHeader />
+        <main className="min-h-screen">{children}</main>
+        <SiteFooter />
+      </body>
+    </html>
   );
 }
