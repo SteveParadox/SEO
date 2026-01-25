@@ -6,7 +6,7 @@ import { History } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { readRecent, type RecentItem, RECENT_EVENT } from "@/lib/recent";
-import { hrefFor, type UnifiedIndexItem } from "@/lib/data";
+import { hrefFor, type UnifiedItem } from "@/lib/data";
 
 function kindLabel(kind: RecentItem["kind"]) {
   if (kind === "tool") return "Tool";
