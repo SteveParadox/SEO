@@ -3,13 +3,8 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck } from "lucide-react";
-import {
-  isSaved,
-  toggleSaved,
-  SAVED_EVENT,
-  STORAGE_KEY,
-  type SavedKind,
-} from "@/lib/saved";
+
+import { isSaved, toggleSaved, SAVED_EVENT, type SavedKind } from "@/lib/saved";
 
 export function SaveButton({
   kind,
@@ -24,7 +19,6 @@ export function SaveButton({
   labelSaved?: string;
   labelUnsaved?: string;
 }) {
-  const key = React.useMemo(() => ({ kind, id }), [kind, id]);
   const [saved, setSaved] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,19 +28,18 @@ export function SaveButton({
   React.useEffect(() => {
     const sync = () => setSaved(isSaved(kind, id));
 
-    function onStorage(e: StorageEvent) {
-      if (e.key === STORAGE_KEY) sync();
-    }
-    function onLocal() {
-      sync();
-    }
+    // same-tab updates (our custom event)
+    window.addEventListener(SAVED_EVENT, sync as EventListener);
 
+    // cross-tab updates (localStorage event)
+    function onStorage(e: StorageEvent) {
+      if (e.key === "tooldrop_saved_v1") sync();
+    }
     window.addEventListener("storage", onStorage);
-    window.addEventListener(SAVED_EVENT, onLocal as EventListener);
 
     return () => {
+      window.removeEventListener(SAVED_EVENT, sync as EventListener);
       window.removeEventListener("storage", onStorage);
-      window.removeEventListener(SAVED_EVENT, onLocal as EventListener);
     };
   }, [kind, id]);
 
@@ -56,14 +49,13 @@ export function SaveButton({
       variant={saved ? "default" : "outline"}
       size="sm"
       className={className}
-      onClick={() => setSaved(toggleSaved(key))}
+      onClick={() => {
+        const next = toggleSaved({ kind, id });
+        setSaved(next);
+      }}
       aria-label={saved ? "Remove from saved" : "Save this item"}
     >
-      {saved ? (
-        <BookmarkCheck className="h-4 w-4 mr-2" />
-      ) : (
-        <Bookmark className="h-4 w-4 mr-2" />
-      )}
+      {saved ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
       {saved ? labelSaved : labelUnsaved}
     </Button>
   );
