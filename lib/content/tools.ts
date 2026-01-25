@@ -28,8 +28,7 @@ export const tools: Tool[] = [
     ],
     pricing: {
       tier: "freemium",
-      note: "Free Hobby tier + paid tiers (Pro and above)",
-      details: "Pro is commonly listed at $20/mo; higher tiers expand limits and context windows.",
+      note: "Free Hobby tier + paid tiers (Pro and above). Pro is commonly listed at $20/mo; higher tiers expand limits and context windows.",
     },
     alternatives: [
       { name: "VS Code + Copilot", slug: "vscode-copilot" },
