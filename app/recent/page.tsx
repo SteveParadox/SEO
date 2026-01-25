@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { readRecent, clearRecent, type RecentItem } from "@/lib/recent";
-import { hrefFor, type UnifiedIndexItem } from "@/lib/data";
+import { hrefFor, type UnifiedItem } from "@/lib/data";
 
 function kindLabel(kind: RecentItem["kind"]) {
   if (kind === "tool") return "Tool";
@@ -68,7 +68,10 @@ export default function RecentPage() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {items.map((it) => (
-          <Link key={`${it.kind}-${it.id}`} href={hrefFor(it.kind as UnifiedIndexItem["kind"], it.slug)}>
+          <Link
+            key={`${it.kind}-${it.id}`}
+            href={hrefFor(it.kind as UnifiedItem["kind"], it.slug)}
+          >
             <Card className="rounded-2xl hover:bg-muted/40 transition">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
@@ -108,4 +111,4 @@ export default function RecentPage() {
       </div>
     </div>
   );
-        }
+}
