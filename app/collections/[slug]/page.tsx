@@ -74,9 +74,10 @@ export default async function CollectionPage({ params }: PageProps) {
 />
       <div className="flex flex-wrap gap-2">
         {c.tags.map((t) => (
-          <Badge key={t} variant="secondary" className="rounded-full">
-            {t}
-          </Badge>
+          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  <Badge variant="secondary" className="rounded-full">{t}</Badge>
+</Link>
+
         ))}
       </div>
 

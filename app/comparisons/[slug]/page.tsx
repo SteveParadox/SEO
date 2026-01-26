@@ -74,9 +74,10 @@ export default async function ComparisonPage({ params }: PageProps) {
 />
       <div className="flex flex-wrap gap-2">
         {cmp.tags.map((t) => (
-          <Badge key={t} variant="secondary" className="rounded-full">
-            {t}
-          </Badge>
+         <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  <Badge variant="secondary" className="rounded-full">{t}</Badge>
+</Link>
+
         ))}
       </div>
 

@@ -74,9 +74,9 @@ export default async function ToolPage({ params }: PageProps) {
 
       <div className="flex flex-wrap gap-2">
         {tool.tags.map((t) => (
-          <Badge key={t} variant="secondary" className="rounded-full">
-            {t}
-          </Badge>
+          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  <Badge variant="secondary" className="rounded-full">{t}</Badge>
+      </Link>
         ))}
       </div>
 
