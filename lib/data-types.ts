@@ -11,7 +11,7 @@ export type Tool = {
   pros: string[];
   cons: string[];
   description: string;
-  pricing: { tier: PricingTier; note?: string };
+  pricing: { tier: PricingTier; note?: string; details?: string };
   alternatives: { name: string; slug: string }[];
   tags: string[];
   updatedAtISO: string;
