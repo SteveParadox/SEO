@@ -1,15 +1,29 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const page = getBestPageBySlug(params.slug);
   if (!page) return {};
+
   return {
     title: page.title,
-    description: page.intro,
+    description: page.description, // intro is string[], description is string
+    alternates: { canonical: `/best/${page.slug}` },
+    openGraph: {
+      title: page.title,
+      description: page.description,
+      url: `/best/${page.slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.title,
+      description: page.description,
+    },
   };
 }
 
@@ -23,22 +37,29 @@ export default function BestPage({ params }: { params: { slug: string } }) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex items-center gap-2">
-        <Badge variant="outline" className="rounded-full">Best</Badge>
+        <Badge variant="outline" className="rounded-full">
+          Best
+        </Badge>
         <h1 className="text-3xl font-semibold">{page.title}</h1>
       </div>
 
-      <p className="mt-3 text-muted-foreground max-w-3xl">{page.intro}</p>
+      <div className="mt-3 max-w-3xl space-y-3 text-muted-foreground">
+        {page.intro.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </div>
 
       <div className="mt-8 grid gap-4">
         {picks.map(({ pick, tool }) => (
           <Card key={tool.id} className="rounded-2xl">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                {pick.label ? (
+                {pick.badge ? (
                   <Badge variant="secondary" className="rounded-full">
-                    {pick.label}
+                    {pick.badge}
                   </Badge>
                 ) : null}
+
                 <Link className="hover:underline" href={`/tools/${tool.slug}`}>
                   {tool.name}
                 </Link>
@@ -52,15 +73,19 @@ export default function BestPage({ params }: { params: { slug: string } }) {
                 <div>
                   <div className="text-sm font-medium">Best for</div>
                   <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                    {pick.bestFor.map((x) => <li key={x}>{x}</li>)}
+                    {pick.bestFor.map((x) => (
+                      <li key={x}>{x}</li>
+                    ))}
                   </ul>
                 </div>
 
-                {pick.caveats?.length ? (
+                {pick.watchOutFor?.length ? (
                   <div>
-                    <div className="text-sm font-medium">Caveats</div>
+                    <div className="text-sm font-medium">Watch out for</div>
                     <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                      {pick.caveats.map((x) => <li key={x}>{x}</li>)}
+                      {pick.watchOutFor.map((x) => (
+                        <li key={x}>{x}</li>
+                      ))}
                     </ul>
                   </div>
                 ) : null}
@@ -82,7 +107,8 @@ export default function BestPage({ params }: { params: { slug: string } }) {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="text-sm text-muted-foreground line-clamp-2">
-                      {r.intro}
+                      {/* intro is string[] */}
+                      {r.intro[0] ?? r.description}
                     </div>
                   </CardContent>
                 </Card>
@@ -93,4 +119,4 @@ export default function BestPage({ params }: { params: { slug: string } }) {
       ) : null}
     </div>
   );
-                                              }
+}
