@@ -15,6 +15,7 @@ const NAV: NavItem[] = [
   { href: "/collections", label: "Collections" },
   { href: "/comparisons", label: "Comparisons" },
   { href: "/tags", label: "Tags" },
+{ href: "/best", label: "Best" },
 ];
 
 export function SiteHeader() {
