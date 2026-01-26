@@ -9,8 +9,8 @@ export const comparisons: Comparison[] = [
     description: "Which editor setup actually speeds up shipping without turning code review into a horror movie?",
     contenders: [
       { kind: "tool", id: "t1" }, // Cursor (assuming)
-      { kind: "tool", id: "t6" }, // VS Code + AI stack (Copilot/etc)
-      { kind: "tool", id: "t11" }, // JetBrains AI (swap to your real id)
+      { kind: "tool", id: "t15" }, // VS Code + AI stack (Copilot/etc)
+      { kind: "tool", id: "t16" }, // JetBrains AI (swap to your real id)
     ],
     criteria: [
       { name: "Codebase context", notes: "How well it understands your project structure, patterns, and intent." },
@@ -32,8 +32,8 @@ export const comparisons: Comparison[] = [
     description: "AI answers, real search, and the classic chaos engine: who wins for research?",
     contenders: [
       { kind: "tool", id: "t2" }, // Perplexity (assuming)
-      { kind: "tool", id: "t12" }, // Kagi (swap)
-      { kind: "tool", id: "t13" }, // Google (swap)
+      { kind: "tool", id: "t13" }, // Kagi (swap)
+      { kind: "tool", id: "t14" }, // Google (swap)
     ],
     criteria: [
       { name: "Source quality", notes: "Does it lead you to useful primary sources and show citations clearly?" },
@@ -54,7 +54,7 @@ export const comparisons: Comparison[] = [
     description: "Voice quality, pricing, and which one is easiest to use without drama.",
     contenders: [
       { kind: "tool", id: "t4" },  // ElevenLabs (assuming)
-      { kind: "tool", id: "t14" }, // PlayHT (swap)
+      { kind: "tool", id: "t21" }, // PlayHT (swap)
       { kind: "tool", id: "t15" }, // Azure TTS (swap)
     ],
     criteria: [
@@ -78,9 +78,9 @@ export const comparisons: Comparison[] = [
     title: "ChatGPT vs Claude vs Gemini",
     description: "Which general AI assistant is best for writing, coding, and daily problem-solving?",
     contenders: [
-      { kind: "tool", id: "t16" }, // ChatGPT (swap)
-      { kind: "tool", id: "t17" }, // Claude (swap)
-      { kind: "tool", id: "t18" }, // Gemini (swap)
+      { kind: "tool", id: "t18" }, // ChatGPT (swap)
+      { kind: "tool", id: "t19" }, // Claude (swap)
+      { kind: "tool", id: "t20" }, // Gemini (swap)
     ],
     criteria: [
       { name: "Writing quality", notes: "Clarity, tone control, and coherence over long outputs." },
@@ -101,8 +101,8 @@ export const comparisons: Comparison[] = [
     title: "Notion AI vs Obsidian vs Evernote",
     description: "Notes, knowledge bases, and whether AI actually helps or just adds buttons.",
     contenders: [
-      { kind: "tool", id: "t19" }, // Notion AI (swap)
-      { kind: "tool", id: "t20" }, // Obsidian (swap)
+      { kind: "tool", id: "t3" }, // Notion AI (swap)
+      { kind: "tool", id: "t9" }, // Obsidian (swap)
       { kind: "tool", id: "t21" }, // Evernote (swap)
     ],
     criteria: [
