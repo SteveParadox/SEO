@@ -50,18 +50,7 @@ function MemeBlob() {
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b bg-background/80 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-2">
-          <div className="h-9 w-9 rounded-2xl border flex items-center justify-center shadow-sm">
-            <Sparkles className="h-5 w-5" />
-          </div>
-          <div className="leading-tight">
-            <div className="font-semibold">ToolDrop AI</div>
-            <div className="text-xs text-muted-foreground">Daily tools, prompts, and model updates</div>
-          </div>
-        </div>
-      </header>
-
+      
       <main className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid gap-6 md:grid-cols-2 items-start">
           <div>
