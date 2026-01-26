@@ -1,0 +1,23 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/best/[slug]/page": "/best/[slug]",
+  "/best/page": "/best",
+  "/collections/[slug]/page": "/collections/[slug]",
+  "/collections/page": "/collections",
+  "/comparisons/[slug]/page": "/comparisons/[slug]",
+  "/comparisons/page": "/comparisons",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/prompts/[slug]/page": "/prompts/[slug]",
+  "/prompts/page": "/prompts",
+  "/recent/page": "/recent",
+  "/robots.txt/route": "/robots.txt",
+  "/saved/page": "/saved",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/tags/page": "/tags",
+  "/tools/[slug]/page": "/tools/[slug]",
+  "/tools/page": "/tools",
+  "/updates/[slug]/page": "/updates/[slug]",
+  "/updates/page": "/updates"
+}

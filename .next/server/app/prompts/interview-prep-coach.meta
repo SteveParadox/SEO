@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/prompts/layout,_N_T_/prompts/[slug]/layout,_N_T_/prompts/[slug]/page,_N_T_/prompts/interview-prep-coach"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/prompts/$d$slug/__PAGE__",
+    "/prompts/$d$slug",
+    "/prompts",
+    "/_index",
+    "/_head"
+  ]
+}

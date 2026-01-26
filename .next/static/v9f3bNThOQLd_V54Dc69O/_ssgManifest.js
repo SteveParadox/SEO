@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fcollections\u002F[slug]","\u002Fcomparisons\u002F[slug]","\u002Fprompts\u002F[slug]","\u002Ftools\u002F[slug]","\u002Fupdates\u002F[slug]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
