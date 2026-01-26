@@ -6,6 +6,7 @@ import {
   getToolBySlug,
   getRelatedTools,
   findCollectionsContaining,
+  findBestPagesContainingTool,
 } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -58,15 +59,19 @@ export default async function ToolPage({ params }: PageProps) {
   const related = getRelatedTools(tool.id, 6);
   const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
 
+  // ✅ NEW: best pages that include this tool
+  const featured = findBestPagesContainingTool(tool.id);
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-<TrackRecent
-  kind="tool"
-  id={tool.id}
-  slug={tool.slug}
-  title={tool.name}
-  subtitle={tool.oneLiner}
-/>
+      <TrackRecent
+        kind="tool"
+        id={tool.id}
+        slug={tool.slug}
+        title={tool.name}
+        subtitle={tool.oneLiner}
+      />
+
       <div className="flex flex-wrap gap-2">
         {tool.tags.map((t) => (
           <Badge key={t} variant="secondary" className="rounded-full">
@@ -143,6 +148,27 @@ export default async function ToolPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
+        {/* ✅ NEW: Featured in best lists */}
+        {featured.length > 0 ? (
+          <div className="mt-10">
+            <h2 className="text-xl font-semibold">Featured in best lists</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {featured.map((p) => (
+                <Link key={p.id} href={`/best/${p.slug}`}>
+                  <Card className="rounded-2xl hover:bg-muted/40 transition">
+                    <CardContent className="p-4">
+                      <div className="font-medium">{p.title}</div>
+                      <div className="text-sm text-muted-foreground line-clamp-2">
+                        {p.intro}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
         <div className="mt-8 grid gap-4">
           {inCollections.length > 0 ? (
             <Card className="rounded-2xl">
@@ -179,7 +205,9 @@ export default async function ToolPage({ params }: PageProps) {
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">{t.oneLiner}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {t.oneLiner}
+                    </div>
                   </Link>
                 ))}
               </CardContent>
