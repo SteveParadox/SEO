@@ -1,0 +1,96 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
+
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const page = getBestPageBySlug(params.slug);
+  if (!page) return {};
+  return {
+    title: page.title,
+    description: page.intro,
+  };
+}
+
+export default function BestPage({ params }: { params: { slug: string } }) {
+  const page = getBestPageBySlug(params.slug);
+  if (!page) return notFound();
+
+  const picks = resolveBestPicks(page);
+  const related = getRelatedBestPages(page.id, 6);
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <div className="flex items-center gap-2">
+        <Badge variant="outline" className="rounded-full">Best</Badge>
+        <h1 className="text-3xl font-semibold">{page.title}</h1>
+      </div>
+
+      <p className="mt-3 text-muted-foreground max-w-3xl">{page.intro}</p>
+
+      <div className="mt-8 grid gap-4">
+        {picks.map(({ pick, tool }) => (
+          <Card key={tool.id} className="rounded-2xl">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                {pick.label ? (
+                  <Badge variant="secondary" className="rounded-full">
+                    {pick.label}
+                  </Badge>
+                ) : null}
+                <Link className="hover:underline" href={`/tools/${tool.slug}`}>
+                  {tool.name}
+                </Link>
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent className="pt-0">
+              <div className="text-sm text-muted-foreground">{pick.why}</div>
+
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div>
+                  <div className="text-sm font-medium">Best for</div>
+                  <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
+                    {pick.bestFor.map((x) => <li key={x}>{x}</li>)}
+                  </ul>
+                </div>
+
+                {pick.caveats?.length ? (
+                  <div>
+                    <div className="text-sm font-medium">Caveats</div>
+                    <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
+                      {pick.caveats.map((x) => <li key={x}>{x}</li>)}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {related.length ? (
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold">Related best lists</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {related.map((r) => (
+              <Link key={r.id} href={`/best/${r.slug}`}>
+                <Card className="rounded-2xl hover:bg-muted/40 transition">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base">{r.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="text-sm text-muted-foreground line-clamp-2">
+                      {r.intro}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+                                              }
