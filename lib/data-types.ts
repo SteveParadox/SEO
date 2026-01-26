@@ -10,7 +10,7 @@ export type Tool = {
   useCases: string[];
   pros: string[];
   cons: string[];
-  description?: string;
+  description: string;
   pricing: { tier: PricingTier; note?: string };
   alternatives: { name: string; slug: string }[];
   tags: string[];
