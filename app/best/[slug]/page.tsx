@@ -3,20 +3,31 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
+import {
+  getBestPageBySlug,
+  resolveBestPicks,
+  getRelatedBestPages,
+} from "@/lib/data";
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const page = getBestPageBySlug(params.slug);
-  if (!page) return {};
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = getBestPageBySlug(slug);
+  if (!page) return { title: "Not found" };
+
+  const url = `/best/${page.slug}`;
 
   return {
     title: page.title,
-    description: page.description, // intro is string[], description is string
-    alternates: { canonical: `/best/${page.slug}` },
+    description: page.description,
+    alternates: { canonical: url },
     openGraph: {
       title: page.title,
       description: page.description,
-      url: `/best/${page.slug}`,
+      url,
       type: "article",
     },
     twitter: {
@@ -27,8 +38,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function BestPage({ params }: { params: { slug: string } }) {
-  const page = getBestPageBySlug(params.slug);
+export default async function BestPage({ params }: PageProps) {
+  const { slug } = await params;
+  const page = getBestPageBySlug(slug);
   if (!page) return notFound();
 
   const picks = resolveBestPicks(page);
@@ -107,7 +119,6 @@ export default function BestPage({ params }: { params: { slug: string } }) {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="text-sm text-muted-foreground line-clamp-2">
-                      {/* intro is string[] */}
                       {r.intro[0] ?? r.description}
                     </div>
                   </CardContent>
