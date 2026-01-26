@@ -36,7 +36,7 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
-const { tools, prompts, updates, collections, comparisons } = DATA;
+const { tools, prompts, updates, collections, comparisons, bestPages } = DATA;
 
 const itemTypeMeta = {
   tool: { label: "Tool", icon: Wrench },
@@ -44,6 +44,7 @@ const itemTypeMeta = {
   update: { label: "Update", icon: TrendingUp },
   collection: { label: "Collection", icon: BadgeCheck },
   comparison: { label: "Comparison", icon: Scale },
+  best: { label: "Best List", icon: Trophy },
 } as const;
 
 type Kind = keyof typeof itemTypeMeta;
@@ -66,6 +67,7 @@ function hrefFor(kind: Kind, slug: string) {
   if (kind === "prompt") return `/prompts/${slug}`;
   if (kind === "update") return `/updates/${slug}`;
   if (kind === "collection") return `/collections/${slug}`;
+  if (kind === "best") return `/best/${slug}`;
   return `/comparisons/${slug}`;
 }
 
