@@ -15,6 +15,8 @@ export type Tool = {
   alternatives: { name: string; slug: string }[];
   tags: string[];
   updatedAtISO: string;
+  rating?: number;      
+  users?: string;   
 };
 
 export type Prompt = {
