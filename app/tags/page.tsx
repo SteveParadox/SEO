@@ -25,19 +25,23 @@ export default async function TagsIndexPage() {
           <CardTitle className="text-base">All tags</CardTitle>
         </CardHeader>
 
-        <CardContent className="flex flex-wrap gap-2">
-          {tags.map(({ tag, count }) => (
-            <Link href={`/tags/${tag}`}>
-              <Badge
-                variant="secondary"
-                className="rounded-full cursor-pointer"
-              >
-                {tag}
-                <span className="ml-2 opacity-70">{count}</span>
-              </Badge>
-            </Link>
-          ))}
-        </CardContent>
+       <CardContent className="flex flex-wrap gap-2">
+  {tags.map(({ tag, count }) => {
+    const slug = encodeURIComponent(tag.toLowerCase());
+
+    return (
+      <Link key={slug} href={`/tags/${slug}`}>
+        <Badge
+          variant="secondary"
+          className="rounded-full cursor-pointer"
+        >
+          {tag}
+          <span className="ml-2 opacity-70">{count}</span>
+        </Badge>
+      </Link>
+    );
+  })}
+</CardContent>
       </Card>
     </div>
   );
