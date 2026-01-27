@@ -261,7 +261,11 @@ export function getUnifiedIndex(): UnifiedItem[] {
 
 
 export function normalizeTag(s: string) {
-  return decodeURIComponent(s).trim().toLowerCase();
+  try {
+    return decodeURIComponent(s).trim().toLowerCase();
+  } catch {
+    return String(s).trim().toLowerCase();
+  }
 }
 export function getItemsByTag(tagRaw: string) {
   const tag = normalizeTag(tagRaw);
@@ -307,14 +311,12 @@ export function getItemsByTag(tagRaw: string) {
   return out;
 }
 export function getAllTagsWithCounts() {
-  const map = new Map<string, { tag: string; count: number }>();
+  const map = new Map<string, number>();
 
   const add = (raw: string) => {
     const key = normalizeTag(raw);
     if (!key) return;
-    const existing = map.get(key);
-    if (existing) existing.count += 1;
-    else map.set(key, { tag: key, count: 1 }); // store normalized tag as display too (simple + consistent)
+    map.set(key, (map.get(key) ?? 0) + 1);
   };
 
   for (const t of DATA.tools) t.tags?.forEach(add);
@@ -323,7 +325,9 @@ export function getAllTagsWithCounts() {
   for (const c of DATA.collections) c.tags?.forEach(add);
   for (const cmp of DATA.comparisons) cmp.tags?.forEach(add);
 
-  return Array.from(map.values()).sort((a, b) => a.tag.localeCompare(b.tag));
+  return Array.from(map.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
 export function getBestPageBySlug(slug: string) {
