@@ -73,12 +73,13 @@ export default async function PromptPage({ params }: PageProps) {
 />
 <div className="flex flex-wrap gap-2">
   {p.tags.map((t) => {
-    const tag = encodeURIComponent(t.toLowerCase());
+    const label = t.trim();
+    const tagSlug = encodeURIComponent(label.toLowerCase());
 
     return (
-      <Link key={tag} href={`/tags/${tag}`}>
+      <Link key={tagSlug} href={`/tags/${tagSlug}`}>
         <Badge variant="secondary" className="rounded-full">
-          {t}
+          {label}
         </Badge>
       </Link>
     );
@@ -182,6 +183,33 @@ export default async function PromptPage({ params }: PageProps) {
           </Card>
         ) : null}
       </div>
+      <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Explore more</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            <Link href="/prompts" className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition">
+              Browse all prompts
+            </Link>
+            <Link href="/tags" className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition">
+              Browse tags
+            </Link>
+            {p.tags?.slice(0, 3).map((t) => {
+              const label = t.trim();
+              const tagSlug = encodeURIComponent(label.toLowerCase());
+              return (
+                <Link
+                  key={`more-${tagSlug}`}
+                  href={`/tags/${tagSlug}`}
+                  className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+                >
+                  More in {label}
+                </Link>
+              );
+            })}
+          </CardContent>
+        </Card>
+
     </div>
   );
 }

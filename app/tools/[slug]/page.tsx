@@ -73,12 +73,19 @@ export default async function ToolPage({ params }: PageProps) {
       />
 
       <div className="flex flex-wrap gap-2">
-        {tool.tags.map((t) => (
-          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  <Badge variant="secondary" className="rounded-full">{t}</Badge>
-      </Link>
-        ))}
+        {tool.tags.map((t) => {
+          const tag = t.trim();
+          const tagSlug = encodeURIComponent(tag.toLowerCase());
+          return (
+            <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+              <Badge variant="secondary" className="rounded-full">
+                {tag}
+              </Badge>
+            </Link>
+          );
+        })}
       </div>
+
 
       <h1 className="mt-4 text-3xl font-semibold">{tool.name}</h1>
       <p className="mt-2 text-muted-foreground">{tool.oneLiner}</p>
@@ -137,16 +144,22 @@ export default async function ToolPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>Alternatives</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {tool.alternatives.map((a) => (
-              <div key={a.slug}>• {a.name}</div>
-            ))}
-          </CardContent>
-        </Card>
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Alternatives</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {tool.alternatives.map((a) => (
+                <div key={a.slug}>
+                  •{" "}
+                  <Link className="hover:underline" href={`/tools/${a.slug}`}>
+                    {a.name}
+                  </Link>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
 
         {/* ✅ NEW: Featured in best lists */}
         {featured.length > 0 ? (
@@ -158,9 +171,10 @@ export default async function ToolPage({ params }: PageProps) {
                   <Card className="rounded-2xl hover:bg-muted/40 transition">
                     <CardContent className="p-4">
                       <div className="font-medium">{p.title}</div>
-                      <div className="text-sm text-muted-foreground line-clamp-2">
-                        {p.intro}
-                      </div>
+                   <div className="text-sm text-muted-foreground line-clamp-2">
+                    {p.intro?.[0] ?? p.description}
+                  </div>
+
                     </CardContent>
                   </Card>
                 </Link>

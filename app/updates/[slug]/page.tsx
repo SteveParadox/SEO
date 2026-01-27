@@ -67,16 +67,24 @@ export default async function UpdatePage({ params }: PageProps) {
   title={u.headline}
   subtitle={u.tldr}
 />
-      <div className="flex flex-wrap gap-2">
-        <Badge variant="secondary" className="rounded-full">
-          {u.model}
-        </Badge>
-        {u.tags.map((t) => (
-          <Badge key={t} variant="secondary" className="rounded-full">
-            {t}
-          </Badge>
-        ))}
-      </div>
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="secondary" className="rounded-full">
+        {u.model}
+      </Badge>
+
+      {u.tags.map((t) => {
+        const label = t.trim();
+        const tagSlug = encodeURIComponent(label.toLowerCase());
+
+        return (
+          <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+            <Badge variant="secondary" className="rounded-full">
+              {label}
+            </Badge>
+          </Link>
+        );
+      })}
+    </div>
 
       <h1 className="mt-4 text-3xl font-semibold">{u.headline}</h1>
       <p className="mt-2 text-muted-foreground">{u.tldr}</p>
@@ -164,6 +172,41 @@ export default async function UpdatePage({ params }: PageProps) {
             </Card>
           ) : null}
         </div>
+        <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Explore more</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-wrap gap-2">
+              <Link
+                href="/updates"
+                className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+              >
+                Browse all updates
+              </Link>
+              <Link
+                href="/tags"
+                className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+              >
+                Browse tags
+              </Link>
+
+              {u.tags.slice(0, 3).map((t) => {
+                const label = t.trim();
+                const tagSlug = encodeURIComponent(label.toLowerCase());
+
+                return (
+                  <Link
+                    key={`more-${tagSlug}`}
+                    href={`/tags/${tagSlug}`}
+                    className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+                  >
+                    More in {label}
+                  </Link>
+                );
+              })}
+            </CardContent>
+          </Card>
+
       </div>
     </div>
   );

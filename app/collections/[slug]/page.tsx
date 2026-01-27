@@ -6,7 +6,9 @@ import {
   getCollectionBySlug,
   resolveCollectionItems,
   getRelatedCollections,
+  hrefFor,
 } from "@/lib/data";
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
@@ -49,12 +51,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function hrefFor(kind: "tool" | "prompt" | "update", slug: string) {
-  if (kind === "tool") return `/tools/${slug}`;
-  if (kind === "prompt") return `/prompts/${slug}`;
-  return `/updates/${slug}`;
-}
-
 export default async function CollectionPage({ params }: PageProps) {
   const { slug } = await params;
   const c = getCollectionBySlug(slug);
@@ -65,21 +61,27 @@ export default async function CollectionPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-<TrackRecent
-  kind="collection"
-  id={c.id}
-  slug={c.slug}
-  title={c.title}
-  subtitle={c.description}
-/>
-      <div className="flex flex-wrap gap-2">
-        {c.tags.map((t) => (
-          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  <Badge variant="secondary" className="rounded-full">{t}</Badge>
-</Link>
-
-        ))}
+      <TrackRecent
+        kind="collection"
+        id={c.id}
+        slug={c.slug}
+        title={c.title}
+        subtitle={c.description}
+      />
+            <div className="flex flex-wrap gap-2">
+        {c.tags.map((t) => {
+          const tag = t.trim();
+          const tagSlug = encodeURIComponent(tag.toLowerCase());
+          return (
+            <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+              <Badge variant="secondary" className="rounded-full">
+                {tag}
+              </Badge>
+            </Link>
+          );
+        })}
       </div>
+
 
       <h1 className="mt-4 text-3xl font-semibold">{c.title}</h1>
       <p className="mt-2 text-muted-foreground">{c.description}</p>
@@ -92,12 +94,8 @@ export default async function CollectionPage({ params }: PageProps) {
         {items.map((x, i) => {
           const item: any = x.item;
 
-          const slug =
-            x.kind === "tool"
-              ? item.slug
-              : x.kind === "prompt"
-              ? item.slug
-              : item.slug;
+        const slug = item.slug;
+
 
           const title =
             x.kind === "tool"
@@ -114,18 +112,17 @@ export default async function CollectionPage({ params }: PageProps) {
               : item.tldr;
 
           return (
-            <Link
-              key={`${x.kind}-${item.id}`}
-              href={hrefFor(x.kind, slug)}
-              className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
-            >
-              <Card className="rounded-2xl border-0 shadow-none">
-                <CardHeader className="p-0">
-                  <CardTitle className="text-base">
-                    {i + 1}. {title}
+            <Link key={`${x.kind}-${item.id}`} href={hrefFor(x.kind, slug)} className="block">
+              <Card className="rounded-2xl hover:bg-muted/40 transition">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <Badge variant="outline" className="rounded-full capitalize">
+                      {x.kind}
+                    </Badge>
+                    <span className="line-clamp-1">{i + 1}. {title}</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-0 mt-2 text-sm text-muted-foreground">
+                <CardContent className="pt-0 text-sm text-muted-foreground">
                   {subtitle}
                 </CardContent>
               </Card>

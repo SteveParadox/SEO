@@ -1,6 +1,6 @@
 // app/sitemap.ts
 import type { MetadataRoute } from "next";
-import { DATA } from "@/lib/data";
+import { DATA, getAllTagsWithCounts } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,48 +10,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static / index pages
   // -------------------------
   const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: absoluteUrl("/"),
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: absoluteUrl("/tools"),
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: absoluteUrl("/prompts"),
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/updates"),
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.7,
-    },
-    {
-      url: absoluteUrl("/collections"),
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: absoluteUrl("/comparisons"),
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: absoluteUrl("/best"),
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
+    { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
+
+    { url: absoluteUrl("/tools"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/prompts"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/updates"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: absoluteUrl("/collections"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/comparisons"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+
+    // Money pages
+    { url: absoluteUrl("/best"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+
+    // Tags index
+    { url: absoluteUrl("/tags"), lastModified: now, changeFrequency: "weekly", priority: 0.6 },
   ];
 
   // -------------------------
@@ -99,6 +70,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.95,
   }));
 
+  // -------------------------
+  // Tag pages (critical)
+  // -------------------------
+  const tags = getAllTagsWithCounts().map(({ tag }) => ({
+    url: absoluteUrl(`/tags/${encodeURIComponent(tag)}`),
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
+
   return [
     ...staticPages,
     ...bestPages,
@@ -107,5 +88,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...tools,
     ...prompts,
     ...updates,
+    ...tags,
   ];
 }

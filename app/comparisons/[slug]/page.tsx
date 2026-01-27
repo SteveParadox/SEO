@@ -72,14 +72,21 @@ export default async function ComparisonPage({ params }: PageProps) {
   title={cmp.title}
   subtitle={cmp.description}
 />
-      <div className="flex flex-wrap gap-2">
-        {cmp.tags.map((t) => (
-         <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  <Badge variant="secondary" className="rounded-full">{t}</Badge>
-</Link>
+    <div className="flex flex-wrap gap-2">
+      {cmp.tags.map((t) => {
+        const label = t.trim();
+        const tagSlug = encodeURIComponent(label.toLowerCase());
 
-        ))}
-      </div>
+        return (
+          <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+            <Badge variant="secondary" className="rounded-full">
+              {label}
+            </Badge>
+          </Link>
+        );
+      })}
+    </div>
+
 
       <h1 className="mt-4 text-3xl font-semibold">{cmp.title}</h1>
       <p className="mt-2 text-muted-foreground">{cmp.description}</p>
@@ -162,6 +169,41 @@ export default async function ComparisonPage({ params }: PageProps) {
           </CardContent>
         </Card>
       ) : null}
+      <Card className="mt-8 rounded-2xl">
+      <CardHeader>
+        <CardTitle>Explore more</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-wrap gap-2">
+        <Link
+          href="/comparisons"
+          className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+        >
+          Browse all comparisons
+        </Link>
+        <Link
+          href="/tags"
+          className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+        >
+          Browse tags
+        </Link>
+
+        {cmp.tags.slice(0, 3).map((t) => {
+          const label = t.trim();
+          const tagSlug = encodeURIComponent(label.toLowerCase());
+
+          return (
+            <Link
+              key={`more-${tagSlug}`}
+              href={`/tags/${tagSlug}`}
+              className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+            >
+              More in {label}
+            </Link>
+          );
+        })}
+      </CardContent>
+</Card>
+
     </div>
   );
 }
