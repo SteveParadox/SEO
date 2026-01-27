@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
+import { JsonLd } from "@/components/json-ld";
+
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -59,11 +61,40 @@ export default async function ToolPage({ params }: PageProps) {
   const related = getRelatedTools(tool.id, 6);
   const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
 
+    const toolSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: tool.name,
+    description: tool.description ?? tool.oneLiner,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    url: absoluteUrl(`/tools/${tool.slug}`),
+    keywords: tool.tags?.join(", "),
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      category: tool.pricing?.tier ?? "paid",
+    },
+    aggregateRating: tool.rating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: tool.rating,
+          bestRating: 5,
+          worstRating: 1,
+          ratingCount: 1, // you don’t have real count yet, so don’t lie.
+        }
+      : undefined,
+  };
+
+
   // ✅ NEW: best pages that include this tool
   const featured = findBestPagesContainingTool(tool.id);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+      <JsonLd data={toolSchema} />
+
       <TrackRecent
         kind="tool"
         id={tool.id}

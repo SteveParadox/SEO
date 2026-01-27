@@ -9,6 +9,9 @@ import {
   getRelatedBestPages,
 } from "@/lib/data";
 
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl } from "@/lib/seo";
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -46,8 +49,47 @@ export default async function BestPage({ params }: PageProps) {
   const picks = resolveBestPicks(page);
   const related = getRelatedBestPages(page.id, 6);
 
+    const pageUrl = absoluteUrl(`/best/${page.slug}`);
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: page.title,
+    description: page.description,
+    url: pageUrl,
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: picks.length,
+    itemListElement: picks.map(({ pick, tool }, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.name,
+      url: absoluteUrl(`/tools/${tool.slug}`),
+      description: pick.why,
+    })),
+  };
+
+  const faqSchema =
+    page.faqs?.length
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: page.faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: f.a,
+            },
+          })),
+        }
+      : null;
+
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      <JsonLd data={itemListSchema} />
+      {faqSchema ? <JsonLd data={faqSchema} /> : null}
+
       <div className="flex items-center gap-2">
         <Badge variant="outline" className="rounded-full">
           Best
