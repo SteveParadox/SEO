@@ -4,7 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getItemsByTag, hrefFor } from "@/lib/data";
 
-type PageProps = { params: { tag: string } };
+type PageProps = {
+  params: Promise<{ tag: string }>;
+};
 
 function titleCase(s: string) {
   return s
@@ -13,12 +15,13 @@ function titleCase(s: string) {
     .join(" ");
 }
 
-export default function TagPage({ params }: PageProps) {
-  const tag = decodeURIComponent(params.tag).trim().toLowerCase();
+export default async function TagPage({ params }: PageProps) {
+  const { tag: rawTag } = await params;
+
+  const tag = decodeURIComponent(rawTag).trim().toLowerCase();
   if (!tag) return notFound();
 
   const items = getItemsByTag(tag);
-
   if (!items.length) return notFound();
 
   return (
@@ -36,7 +39,11 @@ export default function TagPage({ params }: PageProps) {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {items.map((it) => (
-          <Link key={`${it.kind}-${it.id}`} href={hrefFor(it.kind, it.slug)} className="block">
+          <Link
+            key={`${it.kind}-${it.id}`}
+            href={hrefFor(it.kind, it.slug)}
+            className="block"
+          >
             <Card className="rounded-2xl hover:bg-muted/40 transition">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
@@ -46,8 +53,11 @@ export default function TagPage({ params }: PageProps) {
                   <span className="line-clamp-1">{it.title}</span>
                 </CardTitle>
               </CardHeader>
+
               <CardContent className="pt-0">
-                <div className="text-sm text-muted-foreground line-clamp-2">{it.subtitle}</div>
+                <div className="text-sm text-muted-foreground line-clamp-2">
+                  {it.subtitle}
+                </div>
               </CardContent>
             </Card>
           </Link>
