@@ -19,16 +19,35 @@ export type Tool = {
   users?: string;   
 };
 
-// lib/data-types.ts
+export type ModelCompatibility = "GPT" | "Claude" | "Gemini";
 
 export type Prompt = {
   id: string;
   slug: string;
+
+  // Display
   title: string;
   purpose: string;
+
+  // Long-form guidance content
+  description: string;
+  whenToUse: string;
+  howItWorks: string;
+  bestPractices: string;
+  commonMistakes: string;
+  expectedOutput: string;
+  limitations: string;
+  technicalRequirements: string;
+  realWorldApplications: string;
+  successMetrics: string;
+  relatedPrompts: string;
+
+  // The actual prompt template
   prompt: string;
+
+  // Metadata
   variations: string[];
-  modelCompatibility: string[];
+  modelCompatibility: ModelCompatibility[];
   tags: string[];
   updatedAtISO: string; // ISO date string e.g. "2026-01-24"
 };
