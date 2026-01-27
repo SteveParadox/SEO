@@ -1,5 +1,8 @@
+"use client";
+
 import type { Metadata } from "next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DATA } from "@/lib/data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,8 +15,12 @@ export const metadata: Metadata = {
 };
 
 export default function ComparisonsIndexPage() {
+  const router = useRouter();
+
   const comparisons = [...DATA.comparisons].sort(
-    (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
+    (a, b) =>
+      new Date(b.updatedAtISO).getTime() -
+      new Date(a.updatedAtISO).getTime()
   );
 
   return (
@@ -26,40 +33,50 @@ export default function ComparisonsIndexPage() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {comparisons.map((c) => (
-          <Link key={c.id} href={`/comparisons/${c.slug}`} className="block">
-            <Card className="rounded-2xl hover:bg-muted/40 transition">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  {c.tags.slice(0, 3).map((t) => {
-                    const label = t.trim();
-                    const tagSlug = encodeURIComponent(label.toLowerCase());
-                    return (
-                      <Link
-                        key={`${c.id}-${tagSlug}`}
-                        href={`/tags/${tagSlug}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex"
-                      >
-                        <Badge variant="secondary" className="rounded-full">
-                          {label}
-                        </Badge>
-                      </Link>
-                    );
-                  })}
+          <Card
+            key={c.id}
+            role="link"
+            tabIndex={0}
+            className="rounded-2xl hover:bg-muted/40 transition cursor-pointer"
+            onClick={() => router.push(`/comparisons/${c.slug}`)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ")
+                router.push(`/comparisons/${c.slug}`);
+            }}
+          >
+            <CardContent className="p-5">
+              <div className="flex items-center gap-2 flex-wrap">
+                {c.tags.slice(0, 3).map((t) => {
+                  const label = t.trim();
+                  const tagSlug = encodeURIComponent(label.toLowerCase());
 
-                  <Badge variant="outline" className="rounded-full">
-                    {c.contenders.length} contender{c.contenders.length === 1 ? "" : "s"}
-                  </Badge>
-                </div>
+                  return (
+                    <Link
+                      key={`${c.id}-${tagSlug}`}
+                      href={`/tags/${tagSlug}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex"
+                    >
+                      <Badge variant="secondary" className="rounded-full">
+                        {label}
+                      </Badge>
+                    </Link>
+                  );
+                })}
 
-                <div className="mt-2 font-semibold">{c.title}</div>
+                <Badge variant="outline" className="rounded-full">
+                  {c.contenders.length} contender
+                  {c.contenders.length === 1 ? "" : "s"}
+                </Badge>
+              </div>
 
-                <div className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                  {c.description}
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+              <div className="mt-2 font-semibold">{c.title}</div>
+
+              <div className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                {c.description}
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
