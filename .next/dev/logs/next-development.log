@@ -1,0 +1,7 @@
+[00:00:10.511] Server  LOG     ✓ Ready in 8.5s
+[00:05:40.053] Server  LOG     ○ Compiling / ...
+[00:05:57.606] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:03.406] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
+[00:06:33.532] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+[00:07:32.504] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+[00:07:45.176] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.

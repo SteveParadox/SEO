@@ -1,0 +1,14 @@
+{
+  "/best/[slug]/page": "app/best/[slug]/page.js",
+  "/best/page": "app/best/page.js",
+  "/collections/[slug]/page": "app/collections/[slug]/page.js",
+  "/collections/page": "app/collections/page.js",
+  "/comparisons/page": "app/comparisons/page.js",
+  "/page": "app/page.js",
+  "/prompts/[slug]/page": "app/prompts/[slug]/page.js",
+  "/prompts/page": "app/prompts/page.js",
+  "/tags/[tag]/page": "app/tags/[tag]/page.js",
+  "/tags/page": "app/tags/page.js",
+  "/updates/[slug]/page": "app/updates/[slug]/page.js",
+  "/updates/page": "app/updates/page.js"
+}
