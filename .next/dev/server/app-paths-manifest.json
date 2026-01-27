@@ -9,6 +9,7 @@
   "/prompts/page": "app/prompts/page.js",
   "/tags/[tag]/page": "app/tags/[tag]/page.js",
   "/tags/page": "app/tags/page.js",
+  "/tools/page": "app/tools/page.js",
   "/updates/[slug]/page": "app/updates/[slug]/page.js",
   "/updates/page": "app/updates/page.js"
 }

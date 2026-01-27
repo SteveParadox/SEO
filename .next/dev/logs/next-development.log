@@ -5,3 +5,252 @@
 [00:06:33.532] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
 [00:07:32.504] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
 [00:07:45.176] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+[00:54:56.083] Server  LOG     ✓ Compiled in 39ms
+[00:55:05.318] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = 
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:10.137] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeU
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:13.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:17.148] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent()
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:21.125] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent(t.to)
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:28.122] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent(t.toLowerCase)
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:31.126] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent(t.toLowerCase())
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:34.132] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => (
+> 76 |           const tag = encodeURIComponent(t.toLowerCase());
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:43.098] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
+Parsing ecmascript source code failed
+  74 |       <div className="flex flex-wrap gap-2">
+  75 |         {p.tags.map((t) => {}
+> 76 |           const tag = encodeURIComponent(t.toLowerCase());
+     |           ^^^^^
+  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+
+Expected '</', got 'const'
+[00:55:53.097] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 | </Link>
+  80 |
+> 81 |         ))}
+     |         ^
+  82 |       </div>
+  83 |
+  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
+
+Expected '</', got ')'
+[00:56:44.132] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 | </Link>
+  80 |
+> 81 |         ))}
+     |         ^
+  82 |       </div>
+  83 |
+  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
+
+Expected '</', got ')'
+[00:56:49.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:77:21
+Parsing ecmascript source code failed
+  75 |         {p.tags.map((t) => {
+  76 |           const tag = encodeURIComponent(t.toLowerCase());
+> 77 |          <Link key= href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
+     |                     ^^^^
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+  80 |
+
+Expected '</', got 'href'
+[00:56:54.199] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 | </Link>
+  80 |
+> 81 |         ))}
+     |         ^
+  82 |       </div>
+  83 |
+  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
+
+Expected '</', got ')'
+[00:58:47.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:77:41
+Parsing ecmascript source code failed
+  75 |         {p.tags.map((t) => {
+  76 |           const tag = encodeURIComponent(t.toLowerCase());
+> 77 |          <Link key={tag} href={`/tags/${}`}>
+     |                                         ^
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+  80 |
+
+Expected '</', got '}'
+[00:58:52.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 | </Link>
+  80 |
+> 81 |         ))}
+     |         ^
+  82 |       </div>
+  83 |
+  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
+
+Expected '</', got ')'
+[01:06:04.110] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
+Parsing ecmascript source code failed
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+> 80 |         ))}
+     |         ^
+  81 |       </div>
+  82 |
+  83 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
+
+Expected '</', got ')'
+[01:06:16.106] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
+Parsing ecmascript source code failed
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+> 80 |         );
+     |         ^
+  81 |       )}
+  82 |       </div>
+  83 |
+
+Expected '</', got ')'
+[01:06:20.129] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
+Parsing ecmascript source code failed
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 | </Link>
+> 80 |         );
+     |         ^
+  81 | })}
+  82 |       </div>
+  83 |
+
+Expected '</', got ')'
+[01:06:28.125] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
+Parsing ecmascript source code failed
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 |   </Link>
+> 80 |         );
+     |         ^
+  81 | })}
+  82 |       </div>
+  83 |
+
+Expected '</', got ')'
+[01:06:30.114] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
+Parsing ecmascript source code failed
+  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
+  79 |   </Link>
+> 80 |         );
+     |         ^
+  81 |   })}
+  82 |       </div>
+  83 |
+
+Expected '</', got ')'
+[01:07:28.143] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 |     {t}</Badge>
+  80 |   </Link>
+> 81 |         );
+     |         ^
+  82 |   })}
+  83 |       </div>
+  84 |
+
+Expected '</', got ')'
+[01:20:11.368] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
+Parsing ecmascript source code failed
+  79 |     {t}</Badge>
+  80 |   </Link>
+> 81 |         );
+     |         ^
+  82 |   })}
+  83 |       </div>
+  84 |
+
+Expected '</', got ')'
+[01:25:00.051] Server  LOG     ✓ Compiled in 62ms
+[01:25:13.106] Server  LOG     ✓ Compiled in 64ms
+[01:27:03.267] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:27:07.297] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
+[01:30:22.777] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+[01:32:00.618] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.

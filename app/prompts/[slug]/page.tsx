@@ -71,14 +71,20 @@ export default async function PromptPage({ params }: PageProps) {
   title={p.title}
   subtitle={p.purpose}
 />
-      <div className="flex flex-wrap gap-2">
-        {p.tags.map((t) => (
-         <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  <Badge variant="secondary" className="rounded-full">{t}</Badge>
-</Link>
+<div className="flex flex-wrap gap-2">
+  {p.tags.map((t) => {
+    const tag = encodeURIComponent(t.toLowerCase());
 
-        ))}
-      </div>
+    return (
+      <Link key={tag} href={`/tags/${tag}`}>
+        <Badge variant="secondary" className="rounded-full">
+          {t}
+        </Badge>
+      </Link>
+    );
+  })}
+</div>
+
 
       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
       <p className="mt-2 text-muted-foreground">{p.purpose}</p>
