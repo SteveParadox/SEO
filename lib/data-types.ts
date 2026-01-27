@@ -56,6 +56,8 @@ export type GuidanceSections = Partial<{
   additionalResources: string;
   whenToIgnore: string;
 
+  technicalRequiratures: string;
+
   // Collection-specific extras you showed
   longDescription: string;
   whoItsFor: string;
