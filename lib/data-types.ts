@@ -19,6 +19,8 @@ export type Tool = {
   users?: string;   
 };
 
+// lib/data-types.ts
+
 export type Prompt = {
   id: string;
   slug: string;
@@ -28,7 +30,7 @@ export type Prompt = {
   variations: string[];
   modelCompatibility: string[];
   tags: string[];
-  updatedAtISO: string;
+  updatedAtISO: string; // ISO date string e.g. "2026-01-24"
 };
 
 export type ModelUpdate = {
