@@ -4,7 +4,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,9 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 /**
  * Site-wide metadata
@@ -38,6 +35,16 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+
+  // ✅ Favicon + app icons
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon-32.png"],
+  },
 };
 
 export default function RootLayout({
@@ -48,12 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-  <div className="min-h-screen flex flex-col">
-    <SiteHeader />
-    <main className="flex-1">{children}</main>
-    <SiteFooter />
-  </div>
-</body>
+        <div className="min-h-screen flex flex-col">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }
