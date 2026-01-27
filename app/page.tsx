@@ -491,9 +491,9 @@ export default function ToolDropAI() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card className="rounded-2xl shadow-sm md:col-span-2">
+          <Card className="rounded-2xl shadow-sm md:col-span-3">
             <CardHeader className="border-b">
-              <CardTitle className="text-base">{active?.label} playbook</CardTitle>
+              <CardTitle className="text-base">{active?.label}</CardTitle>
             </CardHeader>
             <CardContent className="p-5">
               <div className="text-sm text-muted-foreground">{active?.blurb}</div>
@@ -511,64 +511,6 @@ export default function ToolDropAI() {
                 {activeCategoryItems.map((it) => (
                   <ItemCard key={`${it.kind}-${it.id}`} item={it} />
                 ))}
-              </div>
-
-              <Separator className="my-5" />
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <div className="rounded-2xl border p-4">
-                  <div className="font-medium">SEO Optimization</div>
-                  <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                    <li>One keyword per page (title + H1)</li>
-                    <li>FAQ block for long-tail queries</li>
-                    <li>Internal links: tools → collections → tools</li>
-                    <li>Schema: Article, FAQ, Breadcrumb</li>
-                  </ul>
-                </div>
-                <div className="rounded-2xl border p-4">
-                  <div className="font-medium">Engagement Strategy</div>
-                  <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                    <li>Prompt packs users can copy</li>
-                    <li>Saveable checklists</li>
-                    <li>Weekly "best of" roundups</li>
-                    <li>One-liner summaries for social</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl shadow-sm">
-            <CardHeader className="border-b">
-              <CardTitle className="text-base">Content Structure</CardTitle>
-            </CardHeader>
-            <CardContent className="p-5 space-y-3">
-              <div className="rounded-2xl border p-4">
-                <div className="font-medium">1) Tool page</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  What it does, use-cases, pros/cons, pricing, alternatives, tags.
-                </div>
-              </div>
-              <div className="rounded-2xl border p-4">
-                <div className="font-medium">2) Prompt page</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Copy prompt, variations, compatibility, tags.
-                </div>
-              </div>
-              <div className="rounded-2xl border p-4">
-                <div className="font-medium">3) Model update page</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  What changed, who it affects, what to do now, TL;DR.
-                </div>
-              </div>
-              <div className="rounded-2xl border p-4">
-                <div className="font-medium">4) Collection page</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  A ranked list of tools/prompts/updates with a clear audience.
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Consistent structure ensures quality and discoverability.
               </div>
             </CardContent>
           </Card>
@@ -694,3 +636,4 @@ export default function ToolDropAI() {
     </div>
   );
 }
+// What changed in AI today?
