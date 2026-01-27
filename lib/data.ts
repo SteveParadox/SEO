@@ -258,26 +258,72 @@ export function getUnifiedIndex(): UnifiedItem[] {
   return idx;
 }
 
-export function getAllTagsWithCounts() {
-  const idx = getUnifiedIndex();
-  const map = new Map<string, number>();
 
-  for (const it of idx) {
-    for (const tag of it.tags ?? []) {
-      const key = tag.trim().toLowerCase();
-      if (!key) continue;
-      map.set(key, (map.get(key) ?? 0) + 1);
+
+export function normalizeTag(s: string) {
+  return decodeURIComponent(s).trim().toLowerCase();
+}
+export function getItemsByTag(tagRaw: string) {
+  const tag = normalizeTag(tagRaw);
+
+  const out: Array<{
+    kind: "tool" | "prompt" | "update" | "collection" | "comparison";
+    id: string;
+    slug: string;
+    title: string;
+    subtitle: string;
+  }> = [];
+
+  for (const t of DATA.tools) {
+    if (t.tags?.some((x) => normalizeTag(x) === tag)) {
+      out.push({ kind: "tool", id: t.id, slug: t.slug, title: t.name, subtitle: t.oneLiner });
     }
   }
 
-  return [...map.entries()]
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
-}
+  for (const p of DATA.prompts) {
+    if (p.tags?.some((x) => normalizeTag(x) === tag)) {
+      out.push({ kind: "prompt", id: p.id, slug: p.slug, title: p.title, subtitle: p.purpose });
+    }
+  }
 
-export function getItemsByTag(tag: string) {
-  const t = tag.trim().toLowerCase();
-  return getUnifiedIndex().filter((it) => (it.tags ?? []).some((x) => x.toLowerCase() === t));
+  for (const u of DATA.updates) {
+    if (u.tags?.some((x) => normalizeTag(x) === tag)) {
+      out.push({ kind: "update", id: u.id, slug: u.slug, title: u.headline, subtitle: u.tldr });
+    }
+  }
+
+  for (const c of DATA.collections) {
+    if (c.tags?.some((x) => normalizeTag(x) === tag)) {
+      out.push({ kind: "collection", id: c.id, slug: c.slug, title: c.title, subtitle: c.description });
+    }
+  }
+
+  for (const cmp of DATA.comparisons) {
+    if (cmp.tags?.some((x) => normalizeTag(x) === tag)) {
+      out.push({ kind: "comparison", id: cmp.id, slug: cmp.slug, title: cmp.title, subtitle: cmp.description });
+    }
+  }
+
+  return out;
+}
+export function getAllTagsWithCounts() {
+  const map = new Map<string, { tag: string; count: number }>();
+
+  const add = (raw: string) => {
+    const key = normalizeTag(raw);
+    if (!key) return;
+    const existing = map.get(key);
+    if (existing) existing.count += 1;
+    else map.set(key, { tag: key, count: 1 }); // store normalized tag as display too (simple + consistent)
+  };
+
+  for (const t of DATA.tools) t.tags?.forEach(add);
+  for (const p of DATA.prompts) p.tags?.forEach(add);
+  for (const u of DATA.updates) u.tags?.forEach(add);
+  for (const c of DATA.collections) c.tags?.forEach(add);
+  for (const cmp of DATA.comparisons) cmp.tags?.forEach(add);
+
+  return Array.from(map.values()).sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
 export function getBestPageBySlug(slug: string) {
