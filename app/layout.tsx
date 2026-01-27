@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s — ToolDrop AI",
   },
   description:
-    "Daily AI tools, prompts, and model updates that actually matter. Curated to reduce noise, not add to it.",
+    "Discover vetted AI tools, effective prompts, and significant model updates. Curated daily to help you stay informed.",
   openGraph: {
     siteName: "ToolDrop AI",
     type: "website",
