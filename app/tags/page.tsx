@@ -27,7 +27,7 @@ export default async function TagsIndexPage() {
 
         <CardContent className="flex flex-wrap gap-2">
           {tags.map(({ tag, count }) => (
-            <Link key={tag} href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}>
+            <Link href={`/tags/${tag}`}>
               <Badge
                 variant="secondary"
                 className="rounded-full cursor-pointer"
