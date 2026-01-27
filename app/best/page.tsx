@@ -18,7 +18,7 @@ export default function BestIndexPage() {
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">Best AI Tool Lists</h1>
       <p className="mt-2 text-muted-foreground">
-        Ranked “Best X Tools” pages designed for humans who are about to buy something.
+        Curated rankings to help you choose the right tools for your needs.
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">

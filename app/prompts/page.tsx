@@ -18,7 +18,7 @@ export default function PromptsIndexPage() {
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">Prompts</h1>
       <p className="mt-2 text-muted-foreground">
-        Copy-paste prompts with purpose. No theatre, no fluff.
+        Effective, ready-to-use prompts designed to improve your AI results.
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">

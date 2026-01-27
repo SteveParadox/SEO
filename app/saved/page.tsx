@@ -99,7 +99,7 @@ export default function SavedPage() {
     setSaved(readSaved());
     setRecent(readRecent());
 
-    // same-tab refresh (because storage events don’t fire in the same tab)
+    // same-tab refresh (because storage events don't fire in the same tab)
     const t = window.setInterval(() => {
       setSaved(readSaved());
       setRecent(readRecent());
@@ -155,7 +155,7 @@ export default function SavedPage() {
             <div>
               <h1 className="text-3xl font-semibold">Library</h1>
               <p className="mt-1 text-muted-foreground">
-                Saved picks + recently viewed. Your attention span, organized.
+                Access your saved items and browsing history in one place.
               </p>
             </div>
           </div>
@@ -225,8 +225,8 @@ export default function SavedPage() {
               </div>
               <div className="mt-2 text-muted-foreground">
                 {tab === "saved"
-                  ? "Go hit “Save” on anything useful. Collect them like digital Pokémon."
-                  : "Click around the site and this will fill up."}
+                  ? "Save items you find useful to access them later."
+                  : "Start browsing to see your recently viewed items here."}
               </div>
               <div className="mt-5 flex items-center justify-center gap-2">
                 <Button asChild className="rounded-2xl">

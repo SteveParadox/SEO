@@ -21,7 +21,7 @@ export default async function ComparisonsIndexPage() {
       <h1 className="text-3xl font-semibold">Comparisons</h1>
 
       <p className="mt-2 text-muted-foreground">
-        X vs Y vs Z. Strengths, weaknesses, and who should care.
+        Side-by-side comparisons highlighting strengths, limitations, and ideal use cases.
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">

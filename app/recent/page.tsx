@@ -47,7 +47,7 @@ export default function RecentPage() {
           <div>
             <h1 className="text-3xl font-semibold">Recently viewed</h1>
             <p className="mt-1 text-muted-foreground">
-              Stuff you opened. Because human memory is a rumor.
+              Quick access to content you've recently explored.
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function RecentPage() {
             <CardContent className="p-8 text-center">
               <div className="text-lg font-medium">No recent history yet.</div>
               <div className="mt-2 text-muted-foreground">
-                Click around a bit. This page is shy.
+                Start exploring to see your recently viewed items here.
               </div>
               <div className="mt-5 flex items-center justify-center gap-2">
                 <Button asChild className="rounded-2xl">
