@@ -41,6 +41,7 @@ export type GuidanceSections = Partial<{
   realWorldApplications: string;
   realWorldImpact: string;
   performanceProfile: string;
+  realWorldScenarios: string;
 
   costConsiderations: string;
   migrationPath: string;
