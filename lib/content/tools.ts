@@ -1092,4 +1092,2007 @@ export const tools: Tool[] = [
     users: "Popular",
     updatedAtISO: "2026-01-24",
   },
+{
+  id: "t51",
+  slug: "resemble-ai",
+  name: "Resemble AI",
+  oneLiner: "AI voice cloning and text-to-speech that sounds uncomfortably human.",
+  description:
+    "Resemble AI is a voice generation platform focused on realistic text-to-speech and voice cloning. It allows creators and developers to build custom AI voices, generate speech programmatically, and localize audio content at scale with emotional control.",
+  useCases: [
+    "Text-to-speech",
+    "Voice cloning",
+    "Game character voices",
+    "Audiobook narration",
+    "Conversational AI",
+    "Localization and dubbing"
+  ],
+  pros: [
+    "Highly realistic voice output",
+    "Custom voice cloning",
+    "Emotion and style control",
+    "Strong API for developers",
+    "Supports multiple languages"
+  ],
+  cons: [
+    "Pricing scales quickly with usage",
+    "Voice cloning requires approval",
+    "Not beginner-friendly for casual users"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Usage-based pricing with free trial credits"
+  },
+  alternatives: [
+    { name: "ElevenLabs", slug: "elevenlabs" },
+    { name: "PlayHT", slug: "playht" },
+    { name: "Murf", slug: "murf" }
+  ],
+  tags: ["audio", "voice", "tts", "ai", "developer"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t52",
+  slug: "riverside",
+  name: "Riverside",
+  oneLiner: "Record podcasts and videos remotely with studio-quality audio and video.",
+  description:
+    "Riverside is a remote recording platform built for podcasters, video creators, and interview-based content. It records lossless audio and high-resolution video locally on each participant’s device, then uploads it to the cloud for clean, reliable production.",
+  useCases: [
+    "Podcast recording",
+    "Remote interviews",
+    "Video podcasts",
+    "Content creation",
+    "Live streaming"
+  ],
+  pros: [
+    "Local recording for high quality",
+    "Separate audio and video tracks",
+    "Works directly in the browser",
+    "Built-in editor and clips",
+    "Reliable for remote guests"
+  ],
+  cons: [
+    "Editing tools are basic compared to DAWs",
+    "Requires stable internet for uploads",
+    "Free plan has limitations"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans starting around $15/user/mo"
+  },
+  alternatives: [
+    { name: "Descript", slug: "descript" },
+    { name: "Zencastr", slug: "zencastr" },
+    { name: "SquadCast", slug: "squadcast" }
+  ],
+  tags: ["audio", "video", "podcast", "recording", "creator"],
+  rating: 4.6,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t53",
+  slug: "leonardo-ai",
+  name: "Leonardo AI",
+  oneLiner: "Generate high-quality AI images with fine-grained style and asset control.",
+  description:
+    "Leonardo AI is an image generation platform built for designers, artists, and game creators who want more control than basic text-to-image tools. It supports custom models, consistent styles, asset generation, and fine-tuned outputs for production workflows.",
+  useCases: [
+    "AI image generation",
+    "Game assets",
+    "Concept art",
+    "Product visuals",
+    "Design ideation",
+    "Creative experimentation"
+  ],
+  pros: [
+    "High-quality image output",
+    "Custom model training",
+    "Style consistency tools",
+    "Strong UI for creatives",
+    "Good prompt control"
+  ],
+  cons: [
+    "Credit-based system can feel limiting",
+    "Advanced features require paid plans",
+    "Not optimized for non-visual use cases"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free credits available + paid plans starting around $12/month"
+  },
+  alternatives: [
+    { name: "Midjourney", slug: "midjourney" },
+    { name: "DALL·E", slug: "dalle" },
+    { name: "Stable Diffusion", slug: "stable-diffusion" }
+  ],
+  tags: ["image", "design", "art", "ai", "creative"],
+  rating: 4.7,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t54",
+  slug: "final-cut-pro",
+  name: "Final Cut Pro",
+  oneLiner: "Professional video editing optimized for speed on Apple hardware.",
+  description:
+    "Final Cut Pro is Apple’s professional non-linear video editor designed for fast, efficient workflows on macOS. It’s widely used by YouTubers, filmmakers, and studios that want high performance, powerful timelines, and deep integration with Apple’s ecosystem.",
+  useCases: [
+    "Video editing",
+    "YouTube content",
+    "Film production",
+    "Commercial editing",
+    "Motion graphics"
+  ],
+  pros: [
+    "Extremely fast on Apple Silicon",
+    "One-time purchase",
+    "Magnetic timeline workflow",
+    "Deep macOS integration",
+    "Professional-grade tools"
+  ],
+  cons: [
+    "macOS only",
+    "Unconventional timeline takes time to learn",
+    "Fewer third-party plugins than Adobe"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time purchase around $299"
+  },
+  alternatives: [
+    { name: "Adobe Premiere", slug: "premiere" },
+    { name: "DaVinci Resolve", slug: "davinci-resolve" },
+    { name: "Descript", slug: "descript" }
+  ],
+  tags: ["video", "editing", "production", "creator"],
+  rating: 4.6,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t55",
+  slug: "hostinger",
+  name: "Hostinger",
+  oneLiner: "Budget-friendly web hosting that actually works for small projects.",
+  description:
+    "Hostinger is a web hosting provider offering shared hosting, VPS, cloud hosting, and domain services at competitive prices. It’s popular with beginners and small businesses looking for affordable hosting with decent performance and a simple control panel.",
+  useCases: [
+    "Website hosting",
+    "Domain registration",
+    "Small business sites",
+    "WordPress hosting",
+    "Landing pages"
+  ],
+  pros: [
+    "Very affordable pricing",
+    "Beginner-friendly dashboard",
+    "Good performance for the price",
+    "Free SSL on most plans",
+    "Global data centers"
+  ],
+  cons: [
+    "Renewal prices are higher",
+    "Limited advanced configuration on shared plans",
+    "Support can be slow during peak times"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Shared hosting starts low with discounted intro pricing"
+  },
+  alternatives: [
+    { name: "Bluehost", slug: "bluehost" },
+    { name: "Namecheap", slug: "namecheap" },
+    { name: "SiteGround", slug: "siteground" }
+  ],
+  tags: ["hosting", "domains", "website", "infrastructure"],
+  rating: 4.3,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t56",
+  slug: "adobe-premiere",
+  name: "Adobe Premiere Pro",
+  oneLiner: "Industry-standard video editing with deep creative ecosystem integration.",
+  description:
+    "Adobe Premiere Pro is a professional video editing application used across film, TV, and online content creation. It integrates tightly with other Adobe Creative Cloud tools, making it a go-to choice for editors who work across video, audio, motion, and graphics.",
+  useCases: [
+    "Video editing",
+    "Film and TV production",
+    "YouTube content",
+    "Commercial editing",
+    "Motion graphics workflows"
+  ],
+  pros: [
+    "Industry standard adoption",
+    "Tight integration with After Effects and Photoshop",
+    "Powerful timeline and editing tools",
+    "Extensive plugin ecosystem",
+    "Cross-platform support"
+  ],
+  cons: [
+    "Subscription-only pricing",
+    "Can be resource-intensive",
+    "Performance varies on lower-end machines"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Subscription starting around $22.99/month"
+  },
+  alternatives: [
+    { name: "Final Cut Pro", slug: "final-cut-pro" },
+    { name: "DaVinci Resolve", slug: "davinci-resolve" },
+    { name: "Descript", slug: "descript" }
+  ],
+  tags: ["video", "editing", "production", "creator"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t57",
+  slug: "google-cloud-tts",
+  name: "Google Cloud Text-to-Speech",
+  oneLiner: "Enterprise-grade text-to-speech with natural voices and global language support.",
+  description:
+    "Google Cloud Text-to-Speech is a cloud-based speech synthesis service offering natural-sounding voices powered by WaveNet and neural models. It’s designed for developers and enterprises that need scalable, reliable, and multilingual voice generation through APIs.",
+  useCases: [
+    "Text-to-speech",
+    "Voice assistants",
+    "Accessibility tools",
+    "IVR and call centers",
+    "Multilingual applications"
+  ],
+  pros: [
+    "High-quality WaveNet voices",
+    "Wide language and voice support",
+    "Reliable and scalable infrastructure",
+    "Strong developer documentation",
+    "Easy integration with Google Cloud"
+  ],
+  cons: [
+    "Purely API-driven, no creator-focused UI",
+    "Pricing can add up at scale",
+    "Less expressive than some creative TTS tools"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Pay-as-you-go pricing with free tier credits"
+  },
+  alternatives: [
+    { name: "Amazon Polly", slug: "amazon-polly" },
+    { name: "Azure TTS", slug: "azure-tts" },
+    { name: "Resemble AI", slug: "resemble-ai" }
+  ],
+  tags: ["audio", "voice", "tts", "cloud", "developer"],
+  rating: 4.4,
+  users: "Enterprise",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t58",
+  slug: "mendeley",
+  name: "Mendeley",
+  oneLiner: "Reference manager and academic network rolled into one.",
+  description:
+    "Mendeley is a reference management tool that helps researchers organize papers, generate citations, and collaborate with others. It combines PDF management, citation tools, and an academic social network, making it popular among students and researchers.",
+  useCases: [
+    "Reference management",
+    "Citation generation",
+    "PDF annotation",
+    "Academic collaboration",
+    "Research organization"
+  ],
+  pros: [
+    "Free tier available",
+    "Good PDF annotation tools",
+    "Word and LaTeX integration",
+    "Cloud sync across devices",
+    "Large academic user base"
+  ],
+  cons: [
+    "Owned by Elsevier, which some researchers dislike",
+    "Limited storage on free plan",
+    "Desktop app can feel slow"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid storage upgrades"
+  },
+  alternatives: [
+    { name: "Zotero", slug: "zotero" },
+    { name: "EndNote", slug: "endnote" },
+    { name: "Paperpile", slug: "paperpile" }
+  ],
+  tags: ["research", "citations", "academia", "productivity"],
+  rating: 4.3,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t59",
+  slug: "paperpile",
+  name: "Paperpile",
+  oneLiner: "Modern reference management built for Google Docs users.",
+  description:
+    "Paperpile is a cloud-first reference manager designed to work seamlessly with Google Docs and web browsers. It focuses on fast paper collection, clean organization, and effortless citation insertion without heavy desktop software.",
+  useCases: [
+    "Reference management",
+    "Google Docs citations",
+    "Literature review",
+    "Research organization",
+    "Collaborative writing"
+  ],
+  pros: [
+    "Excellent Google Docs integration",
+    "Clean and modern interface",
+    "Browser-based workflow",
+    "Fast paper importing",
+    "Simple collaboration"
+  ],
+  cons: [
+    "No permanent free plan",
+    "Limited Word support compared to competitors",
+    "Not ideal for offline-heavy workflows"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Subscription-based pricing after free trial"
+  },
+  alternatives: [
+    { name: "Zotero", slug: "zotero" },
+    { name: "Mendeley", slug: "mendeley" },
+    { name: "EndNote", slug: "endnote" }
+  ],
+  tags: ["research", "citations", "writing", "academia"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t60",
+  slug: "endnote",
+  name: "EndNote",
+  oneLiner: "Enterprise-grade reference management for serious academic work.",
+  description:
+    "EndNote is a long-standing reference management software widely used in academia and research institutions. It offers powerful citation tools, extensive formatting options, and robust library management for complex research projects.",
+  useCases: [
+    "Reference management",
+    "Citation formatting",
+    "Large research libraries",
+    "Academic publishing",
+    "Systematic reviews"
+  ],
+  pros: [
+    "Very powerful citation engine",
+    "Handles large libraries well",
+    "Extensive journal styles",
+    "Strong Word integration",
+    "Trusted in academic institutions"
+  ],
+  cons: [
+    "Expensive upfront cost",
+    "Outdated interface",
+    "Steeper learning curve"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time license purchase, often discounted for students"
+  },
+  alternatives: [
+    { name: "Zotero", slug: "zotero" },
+    { name: "Mendeley", slug: "mendeley" },
+    { name: "Paperpile", slug: "paperpile" }
+  ],
+  tags: ["research", "citations", "academia", "enterprise"],
+  rating: 4.4,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t61",
+  slug: "figjam",
+  name: "FigJam",
+  oneLiner: "Collaborative whiteboarding built directly into the Figma ecosystem.",
+  description:
+    "FigJam is a collaborative online whiteboard designed for brainstorming, planning, and workshops. It integrates seamlessly with Figma, making it easy for product teams and designers to move from ideas to polished designs without switching tools.",
+  useCases: [
+    "Brainstorming",
+    "User journey mapping",
+    "Workshops",
+    "Team planning",
+    "Product ideation"
+  ],
+  pros: [
+    "Deep integration with Figma",
+    "Clean and intuitive interface",
+    "Great for real-time collaboration",
+    "Built-in templates and widgets",
+    "Easy onboarding for teams"
+  ],
+  cons: [
+    "Less flexible outside design workflows",
+    "Requires Figma account",
+    "Limited advanced diagramming features"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid Figma plans unlock more features"
+  },
+  alternatives: [
+    { name: "Miro", slug: "miro" },
+    { name: "tldraw", slug: "tldraw" },
+    { name: "Whimsical", slug: "whimsical" }
+  ],
+  tags: ["whiteboard", "collaboration", "design", "productivity"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t62",
+  slug: "miro",
+  name: "Miro",
+  oneLiner: "All-in-one collaborative whiteboard for teams that think out loud.",
+  description:
+    "Miro is a digital whiteboard platform used by product, engineering, and business teams for ideation, planning, and collaboration. It supports large canvases, rich templates, and structured workflows for distributed teams.",
+  useCases: [
+    "Brainstorming",
+    "Strategy planning",
+    "Flowcharts and diagrams",
+    "Agile ceremonies",
+    "Remote collaboration"
+  ],
+  pros: [
+    "Extremely flexible canvas",
+    "Huge template library",
+    "Scales well for large teams",
+    "Strong collaboration features",
+    "Integrates with many tools"
+  ],
+  cons: [
+    "Can feel overwhelming for small teams",
+    "Free plan is limited",
+    "Performance can drop on very large boards"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans starting around $10/user/mo"
+  },
+  alternatives: [
+    { name: "FigJam", slug: "figjam" },
+    { name: "Whimsical", slug: "whimsical" },
+    { name: "Lucid", slug: "lucid" }
+  ],
+  tags: ["whiteboard", "collaboration", "planning", "productivity"],
+  rating: 4.7,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t63",
+  slug: "tldraw",
+  name: "tldraw",
+  oneLiner: "Minimalist infinite canvas for sketching ideas at the speed of thought.",
+  description:
+    "tldraw is an open-source drawing and whiteboard tool focused on simplicity and speed. It’s popular with developers, designers, and thinkers who want a lightweight, distraction-free canvas for diagrams, sketches, and rough ideas.",
+  useCases: [
+    "Sketching ideas",
+    "Rough diagrams",
+    "System design",
+    "Teaching and explanations",
+    "Quick brainstorming"
+  ],
+  pros: [
+    "Open source",
+    "Very fast and lightweight",
+    "Simple, distraction-free UI",
+    "Great for quick diagrams",
+    "Free to use"
+  ],
+  cons: [
+    "Lacks advanced collaboration features",
+    "No built-in project management",
+    "Not suited for structured workshops"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Completely free and open source"
+  },
+  alternatives: [
+    { name: "Excalidraw", slug: "excalidraw" },
+    { name: "FigJam", slug: "figjam" },
+    { name: "Miro", slug: "miro" }
+  ],
+  tags: ["whiteboard", "open-source", "diagramming", "thinking"],
+  rating: 4.6,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t64",
+  slug: "logseq",
+  name: "Logseq",
+  oneLiner: "Local-first, open-source note-taking for people who think in graphs.",
+  description:
+    "Logseq is a knowledge management and note-taking tool built around outlines, backlinks, and daily notes. It stores data locally in plain text files, making it popular with privacy-conscious users who want Roam-style workflows without cloud lock-in.",
+  useCases: [
+    "Personal knowledge management",
+    "Daily notes",
+    "Research organization",
+    "Second brain systems",
+    "Learning and note-taking"
+  ],
+  pros: [
+    "Local-first and privacy-friendly",
+    "Open source",
+    "Strong backlinking and graph view",
+    "Markdown and Org-mode support",
+    "Offline-first workflow"
+  ],
+  cons: [
+    "Mobile experience is still rough",
+    "Sync requires setup or paid service",
+    "UI can feel unfinished"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free local use + optional paid sync service"
+  },
+  alternatives: [
+    { name: "Roam Research", slug: "roam-research" },
+    { name: "Obsidian", slug: "obsidian" },
+    { name: "Notion", slug: "notion" }
+  ],
+  tags: ["notes", "knowledge", "open-source", "productivity"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t65",
+  slug: "roam-research",
+  name: "Roam Research",
+  oneLiner: "The original cult favorite for networked thinking and backlinks.",
+  description:
+    "Roam Research is a note-taking tool centered on bidirectional linking and graph-based knowledge organization. It popularized the concept of networked thought, making it influential among researchers, writers, and thinkers who work with complex ideas.",
+  useCases: [
+    "Knowledge graphs",
+    "Research notes",
+    "Idea development",
+    "Writing and thinking",
+    "Long-term knowledge storage"
+  ],
+  pros: [
+    "Best-in-class backlinking",
+    "Fast idea capture with daily notes",
+    "Powerful query system",
+    "Strong community ecosystem",
+    "Pioneered networked note-taking"
+  ],
+  cons: [
+    "Expensive subscription",
+    "Cloud-only storage",
+    "Steep learning curve"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Subscription-based pricing starting around $15/month"
+  },
+  alternatives: [
+    { name: "Logseq", slug: "logseq" },
+    { name: "Obsidian", slug: "obsidian" },
+    { name: "Notion", slug: "notion" }
+  ],
+  tags: ["notes", "knowledge", "research", "productivity"],
+  rating: 4.4,
+  users: "Niche but Influential",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t66",
+  slug: "alfred",
+  name: "Alfred",
+  oneLiner: "Productivity launcher for macOS users who hate touching the mouse.",
+  description:
+    "Alfred is a macOS productivity app that lets users search files, launch apps, run workflows, and automate tasks using the keyboard. It’s favored by power users who want speed, extensibility, and deep system control beyond what Spotlight offers.",
+  useCases: [
+    "App launching",
+    "File search",
+    "Workflow automation",
+    "Clipboard management",
+    "Productivity shortcuts"
+  ],
+  pros: [
+    "Extremely fast and keyboard-driven",
+    "Powerful custom workflows",
+    "Clipboard history and snippets",
+    "Highly extensible",
+    "One-time license option"
+  ],
+  cons: [
+    "macOS only",
+    "Advanced features require paid license",
+    "Initial setup can feel complex"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free basic version + paid Powerpack (one-time purchase)"
+  },
+  alternatives: [
+    { name: "Spotlight", slug: "spotlight" },
+    { name: "Raycast", slug: "raycast" },
+    { name: "LaunchBar", slug: "launchbar" }
+  ],
+  tags: ["productivity", "launcher", "automation", "macos"],
+  rating: 4.7,
+  users: "Power Users",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t67",
+  slug: "spotlight",
+  name: "Spotlight",
+  oneLiner: "Built-in macOS search that quietly does its job.",
+  description:
+    "Spotlight is Apple’s default system-wide search tool for macOS. It allows users to quickly find apps, files, emails, and perform basic calculations or lookups without installing extra software.",
+  useCases: [
+    "App launching",
+    "File search",
+    "Quick calculations",
+    "System-wide lookup",
+    "Basic productivity"
+  ],
+  pros: [
+    "Built into macOS",
+    "Fast and lightweight",
+    "Zero setup required",
+    "Good system integration",
+    "Free"
+  ],
+  cons: [
+    "Limited customization",
+    "No advanced automation",
+    "Less powerful than third-party launchers"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Included with macOS"
+  },
+  alternatives: [
+    { name: "Alfred", slug: "alfred" },
+    { name: "Raycast", slug: "raycast" },
+    { name: "LaunchBar", slug: "launchbar" }
+  ],
+  tags: ["productivity", "launcher", "search", "macos"],
+  rating: 4.4,
+  users: "All macOS Users",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t68",
+  slug: "prowritingaid",
+  name: "ProWritingAid",
+  oneLiner: "Grammar, style, and clarity editing for writers who want detailed feedback.",
+  description:
+    "ProWritingAid is a writing assistant that analyzes grammar, style, readability, and structure. It’s popular with authors, students, and long-form writers who want deeper feedback than basic grammar checkers, especially for fiction and academic writing.",
+  useCases: [
+    "Grammar checking",
+    "Style improvement",
+    "Fiction writing",
+    "Academic writing",
+    "Long-form editing"
+  ],
+  pros: [
+    "Very detailed writing reports",
+    "Strong for long-form content",
+    "Integrates with Word and Google Docs",
+    "One-time license option available",
+    "Good value compared to competitors"
+  ],
+  cons: [
+    "Interface can feel overwhelming",
+    "Slower on very large documents",
+    "Suggestions can be overly strict"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free limited version + paid plans including one-time lifetime license"
+  },
+  alternatives: [
+    { name: "Grammarly", slug: "grammarly" },
+    { name: "Hemingway Editor", slug: "hemingway" },
+    { name: "QuillBot", slug: "quillbot" }
+  ],
+  tags: ["writing", "grammar", "editing", "productivity"],
+  rating: 4.5,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t69",
+  slug: "affinity-designer",
+  name: "Affinity Designer",
+  oneLiner: "Professional vector design without subscriptions or nonsense.",
+  description:
+    "Affinity Designer is a professional graphic design tool for vector illustration, UI design, and branding. It’s known for its performance, precision tools, and one-time purchase model, making it a popular alternative to Adobe Illustrator.",
+  useCases: [
+    "Vector illustration",
+    "Graphic design",
+    "UI and UX design",
+    "Branding",
+    "Icon design"
+  ],
+  pros: [
+    "One-time purchase pricing",
+    "Excellent performance",
+    "Professional-grade vector tools",
+    "Clean and modern interface",
+    "Available on macOS, Windows, and iPad"
+  ],
+  cons: [
+    "Smaller plugin ecosystem",
+    "No built-in collaboration tools",
+    "Industry adoption lower than Adobe"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time purchase, often under $70"
+  },
+  alternatives: [
+    { name: "Adobe Illustrator", slug: "illustrator" },
+    { name: "Figma", slug: "figma" },
+    { name: "Sketch", slug: "sketch" }
+  ],
+  tags: ["design", "vector", "graphics", "creative"],
+  rating: 4.7,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t70",
+  slug: "carrd",
+  name: "Carrd",
+  oneLiner: "Build simple, elegant one-page websites in minutes.",
+  description:
+    "Carrd is a lightweight website builder focused on single-page sites like landing pages, personal profiles, and small marketing pages. It’s popular for its speed, simplicity, and ability to launch clean pages without technical overhead.",
+  useCases: [
+    "Landing pages",
+    "Personal websites",
+    "Link-in-bio pages",
+    "Product launches",
+    "Simple marketing sites"
+  ],
+  pros: [
+    "Extremely easy to use",
+    "Very affordable pricing",
+    "Clean and fast-loading pages",
+    "Custom domains supported",
+    "No coding required"
+  ],
+  cons: [
+    "Limited to mostly one-page sites",
+    "Not suitable for complex projects",
+    "Advanced customization is minimal"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free basic sites + paid plans starting very low annually"
+  },
+  alternatives: [
+    { name: "Typedream", slug: "typedream" },
+    { name: "Framer", slug: "framer" },
+    { name: "Webflow", slug: "webflow" }
+  ],
+  tags: ["website", "landing-page", "no-code", "marketing"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t71",
+  slug: "typedream",
+  name: "Typedream",
+  oneLiner: "Notion-style website builder for fast content-driven sites.",
+  description:
+    "Typedream is a no-code website builder that lets users create websites using a block-based, Notion-like editor. It’s designed for startups, creators, and indie builders who want speed, SEO-friendly pages, and simple publishing workflows.",
+  useCases: [
+    "Startup websites",
+    "Content sites",
+    "Landing pages",
+    "Documentation pages",
+    "Personal brands"
+  ],
+  pros: [
+    "Very fast setup",
+    "Clean and modern designs",
+    "SEO-friendly by default",
+    "Easy publishing workflow",
+    "Good balance of simplicity and power"
+  ],
+  cons: [
+    "Less design freedom than Webflow",
+    "Advanced features require paid plans",
+    "Limited for highly custom layouts"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans for custom domains and features"
+  },
+  alternatives: [
+    { name: "Carrd", slug: "carrd" },
+    { name: "Framer", slug: "framer" },
+    { name: "Webflow", slug: "webflow" }
+  ],
+  tags: ["website", "no-code", "startup", "content"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t72",
+  slug: "monday",
+  name: "Monday.com",
+  oneLiner: "Visual project management for teams that like structure and clarity.",
+  description:
+    "Monday.com is a work operating system that helps teams plan, track, and manage projects through highly visual boards and automations. It’s widely used by business, marketing, and operations teams that want flexibility without chaos.",
+  useCases: [
+    "Project management",
+    "Team collaboration",
+    "Task tracking",
+    "Business workflows",
+    "Operations planning"
+  ],
+  pros: [
+    "Very intuitive visual boards",
+    "Highly customizable workflows",
+    "Strong automation features",
+    "Good reporting and dashboards",
+    "Scales well for teams"
+  ],
+  cons: [
+    "Can become expensive as team grows",
+    "Feature depth may overwhelm small teams",
+    "Less developer-focused than alternatives"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Paid plans with tiered pricing based on users and features"
+  },
+  alternatives: [
+    { name: "ClickUp", slug: "clickup" },
+    { name: "Asana", slug: "asana" },
+    { name: "Trello", slug: "trello" }
+  ],
+  tags: ["project-management", "collaboration", "productivity", "business"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t73",
+  slug: "clickup",
+  name: "ClickUp",
+  oneLiner: "All-in-one productivity platform that tries to replace everything.",
+  description:
+    "ClickUp is a project management and productivity tool offering tasks, docs, goals, dashboards, and automation in a single platform. It’s favored by teams that want maximum flexibility and features under one roof.",
+  useCases: [
+    "Project management",
+    "Task tracking",
+    "Documentation",
+    "Goal tracking",
+    "Team collaboration"
+  ],
+  pros: [
+    "Extremely feature-rich",
+    "Highly customizable views",
+    "Strong free plan",
+    "Docs and tasks in one place",
+    "Good value for growing teams"
+  ],
+  cons: [
+    "Can feel bloated",
+    "Learning curve is steep",
+    "Performance can lag with heavy use"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans for advanced features"
+  },
+  alternatives: [
+    { name: "Monday.com", slug: "monday" },
+    { name: "Asana", slug: "asana" },
+    { name: "Notion", slug: "notion" }
+  ],
+  tags: ["project-management", "productivity", "collaboration", "teams"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t74",
+  slug: "ghost",
+  name: "Ghost",
+  oneLiner: "Open-source publishing platform built for writers and creators.",
+  description:
+    "Ghost is a modern publishing platform focused on blogs, newsletters, and membership-based content. It’s designed for speed, SEO, and monetization, making it a strong choice for creators who want ownership, performance, and clean content workflows.",
+  useCases: [
+    "Blogging",
+    "Newsletters",
+    "Membership sites",
+    "Content publishing",
+    "Creator monetization"
+  ],
+  pros: [
+    "Excellent performance and SEO",
+    "Built-in memberships and subscriptions",
+    "Clean, distraction-free editor",
+    "Open source and self-hostable",
+    "No plugin bloat"
+  ],
+  cons: [
+    "Limited customization without development",
+    "Smaller theme ecosystem than WordPress",
+    "Not suited for complex sites beyond content"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free self-hosted + paid Ghost(Pro) hosting plans"
+  },
+  alternatives: [
+    { name: "WordPress", slug: "wordpress" },
+    { name: "Substack", slug: "substack" },
+    { name: "Medium", slug: "medium" }
+  ],
+  tags: ["publishing", "blogging", "newsletter", "open-source"],
+  rating: 4.6,
+  users: "Creators",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t75",
+  slug: "shopify",
+  name: "Shopify",
+  oneLiner: "All-in-one e-commerce platform for selling anything online.",
+  description:
+    "Shopify is a leading e-commerce platform that lets businesses create online stores, manage products, handle payments, and scale operations. It’s trusted by small businesses and large brands alike for its reliability and ecosystem.",
+  useCases: [
+    "Online stores",
+    "E-commerce",
+    "Product sales",
+    "Dropshipping",
+    "Digital products"
+  ],
+  pros: [
+    "Very easy to set up",
+    "Robust payment and checkout system",
+    "Huge app ecosystem",
+    "Scales from small to enterprise",
+    "Reliable hosting and security"
+  ],
+  cons: [
+    "Monthly subscription costs",
+    "Transaction fees without Shopify Payments",
+    "Customization often requires apps or developers"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Monthly plans starting around $39"
+  },
+  alternatives: [
+    { name: "WooCommerce", slug: "woocommerce" },
+    { name: "BigCommerce", slug: "bigcommerce" },
+    { name: "Squarespace", slug: "squarespace" }
+  ],
+  tags: ["ecommerce", "online-store", "business", "commerce"],
+  rating: 4.7,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t76",
+  slug: "paddle",
+  name: "Paddle",
+  oneLiner: "Payments, subscriptions, and taxes handled so SaaS teams can sleep.",
+  description:
+    "Paddle is a merchant-of-record platform that handles payments, subscriptions, invoicing, and global sales tax compliance for SaaS companies. It’s built for software businesses that want to sell globally without managing VAT, sales tax, or complex payment infrastructure.",
+  useCases: [
+    "SaaS payments",
+    "Subscription management",
+    "Global tax compliance",
+    "Billing and invoicing",
+    "Checkout optimization"
+  ],
+  pros: [
+    "Merchant of record model",
+    "Handles global taxes and VAT",
+    "Clean checkout experience",
+    "Subscription and billing tools built-in",
+    "Good developer APIs"
+  ],
+  cons: [
+    "Higher fees than basic payment processors",
+    "Not ideal for non-digital products",
+    "Less control than self-managed payment stacks"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Revenue-based fees per transaction"
+  },
+  alternatives: [
+    { name: "Stripe", slug: "stripe" },
+    { name: "Lemon Squeezy", slug: "lemon-squeezy" },
+    { name: "Chargebee", slug: "chargebee" }
+  ],
+  tags: ["payments", "saas", "subscriptions", "billing"],
+  rating: 4.5,
+  users: "SaaS Companies",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t77",
+  slug: "tango",
+  name: "Tango",
+  oneLiner: "Automatically turn workflows into step-by-step guides.",
+  description:
+    "Tango is a documentation tool that records your on-screen actions and instantly turns them into clear, step-by-step guides. It’s built for teams that want fast, visual documentation without writing manuals by hand.",
+  useCases: [
+    "Process documentation",
+    "Employee onboarding",
+    "How-to guides",
+    "Internal training",
+    "Knowledge sharing"
+  ],
+  pros: [
+    "Automatic step capture",
+    "Very fast documentation workflow",
+    "Clean visual guides",
+    "Great for non-technical teams",
+    "Browser-based"
+  ],
+  cons: [
+    "Limited customization",
+    "Focused on workflows, not freeform recording",
+    "Less useful for video-heavy content"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans for teams"
+  },
+  alternatives: [
+    { name: "Scribe", slug: "scribe" },
+    { name: "Loom", slug: "loom" },
+    { name: "Confluence", slug: "confluence" }
+  ],
+  tags: ["documentation", "training", "productivity", "teams"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t78",
+  slug: "screen-studio",
+  name: "Screen Studio",
+  oneLiner: "Beautiful screen recordings with zero editing effort.",
+  description:
+    "Screen Studio is a macOS screen recorder focused on creating polished product demos and tutorials automatically. It adds smooth zooms, cursor tracking, and motion effects without manual editing.",
+  useCases: [
+    "Product demos",
+    "Tutorial videos",
+    "Marketing videos",
+    "Feature walkthroughs",
+    "Creator content"
+  ],
+  pros: [
+    "Automatic zoom and motion effects",
+    "Very clean output",
+    "No timeline editing needed",
+    "Great for product marketing",
+    "One-time purchase"
+  ],
+  cons: [
+    "macOS only",
+    "Limited control for advanced editing",
+    "Not suited for live recording"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time purchase pricing"
+  },
+  alternatives: [
+    { name: "Loom", slug: "loom" },
+    { name: "Camtasia", slug: "camtasia" },
+    { name: "OBS", slug: "obs" }
+  ],
+  tags: ["screen-recording", "video", "marketing", "creator"],
+  rating: 4.7,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t79",
+  slug: "obs",
+  name: "OBS Studio",
+  oneLiner: "Free, open-source broadcasting and recording for absolute control.",
+  description:
+    "OBS Studio is an open-source tool for screen recording and live streaming. It’s widely used by streamers, educators, and professionals who need full control over scenes, sources, and output quality.",
+  useCases: [
+    "Live streaming",
+    "Screen recording",
+    "Webinars",
+    "Gaming streams",
+    "Professional broadcasts"
+  ],
+  pros: [
+    "Completely free and open source",
+    "Highly customizable",
+    "Supports streaming and recording",
+    "Large plugin ecosystem",
+    "Cross-platform support"
+  ],
+  cons: [
+    "Steep learning curve",
+    "Interface is not beginner-friendly",
+    "Requires setup and tuning"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Free and open source"
+  },
+  alternatives: [
+    { name: "Streamlabs", slug: "streamlabs" },
+    { name: "Camtasia", slug: "camtasia" },
+    { name: "Screen Studio", slug: "screen-studio" }
+  ],
+  tags: ["screen-recording", "streaming", "open-source", "broadcast"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t80",
+  slug: "netlify",
+  name: "Netlify",
+  oneLiner: "Deploy static and frontend apps with zero patience required.",
+  description:
+    "Netlify is a frontend-focused hosting platform designed for static sites and modern web apps. It offers continuous deployment, serverless functions, and preview builds, making it popular with developers who want fast deploys without infrastructure babysitting.",
+  useCases: [
+    "Static site hosting",
+    "Frontend deployments",
+    "Jamstack sites",
+    "Landing pages",
+    "Developer previews"
+  ],
+  pros: [
+    "Very fast deployments",
+    "Excellent Git integration",
+    "Preview builds for every commit",
+    "Built-in serverless functions",
+    "Great developer experience"
+  ],
+  cons: [
+    "Free tier limits can be restrictive",
+    "Can get expensive at scale",
+    "Less flexible for backend-heavy apps"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans based on usage"
+  },
+  alternatives: [
+    { name: "Vercel", slug: "vercel" },
+    { name: "Cloudflare Pages", slug: "cloudflare-pages" },
+    { name: "AWS Amplify", slug: "aws-amplify" }
+  ],
+  tags: ["hosting", "frontend", "jamstack", "deployment"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t81",
+  slug: "cloudflare-pages",
+  name: "Cloudflare Pages",
+  oneLiner: "Blazing-fast frontend hosting backed by Cloudflare’s global edge.",
+  description:
+    "Cloudflare Pages is a static site hosting platform that deploys sites directly to Cloudflare’s global edge network. It focuses on performance, security, and tight integration with Cloudflare Workers for edge logic.",
+  useCases: [
+    "Static site hosting",
+    "Edge-rendered apps",
+    "Frontend deployments",
+    "Performance-critical sites",
+    "Jamstack projects"
+  ],
+  pros: [
+    "Excellent global performance",
+    "Generous free tier",
+    "Tight integration with Cloudflare Workers",
+    "Built-in security and CDN",
+    "Simple Git-based deploys"
+  ],
+  cons: [
+    "Smaller ecosystem than Netlify",
+    "Edge model can confuse beginners",
+    "Less beginner-friendly UI"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Generous free tier + usage-based pricing for Workers"
+  },
+  alternatives: [
+    { name: "Netlify", slug: "netlify" },
+    { name: "Vercel", slug: "vercel" },
+    { name: "AWS Amplify", slug: "aws-amplify" }
+  ],
+  tags: ["hosting", "edge", "frontend", "performance"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t82",
+  slug: "aws-amplify",
+  name: "AWS Amplify",
+  oneLiner: "Frontend hosting tightly coupled with the AWS ecosystem.",
+  description:
+    "AWS Amplify is a development platform that provides hosting, authentication, APIs, and backend services for frontend apps. It’s built for teams already invested in AWS who want managed infrastructure without assembling everything manually.",
+  useCases: [
+    "Frontend hosting",
+    "Full-stack web apps",
+    "Mobile backends",
+    "Authentication and APIs",
+    "AWS-integrated projects"
+  ],
+  pros: [
+    "Deep AWS integration",
+    "Supports full-stack applications",
+    "Built-in auth and backend services",
+    "Scales well for enterprise",
+    "CI/CD included"
+  ],
+  cons: [
+    "Steeper learning curve",
+    "AWS complexity leaks through",
+    "Overkill for simple static sites"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + pay-as-you-go AWS pricing"
+  },
+  alternatives: [
+    { name: "Netlify", slug: "netlify" },
+    { name: "Vercel", slug: "vercel" },
+    { name: "Cloudflare Pages", slug: "cloudflare-pages" }
+  ],
+  tags: ["hosting", "aws", "frontend", "cloud"],
+  rating: 4.4,
+  users: "Enterprise",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t83",
+  slug: "firebase",
+  name: "Firebase",
+  oneLiner: "Backend services that let frontend developers pretend servers don’t exist.",
+  description:
+    "Firebase is Google’s backend-as-a-service platform offering databases, authentication, hosting, cloud functions, and analytics. It’s widely used for web and mobile apps that need to move fast without managing traditional backend infrastructure.",
+  useCases: [
+    "Web app backends",
+    "Mobile app backends",
+    "Authentication",
+    "Realtime databases",
+    "Prototyping and MVPs"
+  ],
+  pros: [
+    "Very fast to get started",
+    "Realtime and Firestore databases",
+    "Built-in authentication",
+    "Strong Google ecosystem integration",
+    "Good documentation"
+  ],
+  cons: [
+    "Vendor lock-in concerns",
+    "Costs can scale unexpectedly",
+    "Complex queries are limited"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Generous free tier + pay-as-you-go pricing"
+  },
+  alternatives: [
+    { name: "Supabase", slug: "supabase" },
+    { name: "AWS Amplify", slug: "aws-amplify" },
+    { name: "Appwrite", slug: "appwrite" }
+  ],
+  tags: ["backend", "database", "authentication", "cloud"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t84",
+  slug: "planetscale",
+  name: "PlanetScale",
+  oneLiner: "Serverless MySQL built for modern application workflows.",
+  description:
+    "PlanetScale is a serverless MySQL platform based on Vitess, designed for horizontal scaling and safe schema changes. It’s popular with teams that want relational databases without downtime or manual operations.",
+  useCases: [
+    "Relational databases",
+    "Production web apps",
+    "Schema migrations",
+    "Scalable MySQL workloads",
+    "SaaS backends"
+  ],
+  pros: [
+    "Non-blocking schema changes",
+    "Highly scalable MySQL",
+    "Strong Git-like workflow for databases",
+    "Great developer experience",
+    "Reliable production performance"
+  ],
+  cons: [
+    "No traditional foreign keys",
+    "Paid plans required for serious usage",
+    "Less beginner-friendly than basic databases"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans based on usage"
+  },
+  alternatives: [
+    { name: "Neon", slug: "neon" },
+    { name: "Supabase", slug: "supabase" },
+    { name: "AWS RDS", slug: "aws-rds" }
+  ],
+  tags: ["database", "mysql", "serverless", "backend"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t85",
+  slug: "railway",
+  name: "Railway",
+  oneLiner: "Deploy apps and databases without arguing with infrastructure.",
+  description:
+    "Railway is a cloud platform that lets developers deploy applications, databases, and services with minimal setup. It focuses on simplicity, fast iteration, and removing the friction usually associated with DevOps.",
+  useCases: [
+    "App deployment",
+    "Backend hosting",
+    "Databases",
+    "APIs and microservices",
+    "Side projects"
+  ],
+  pros: [
+    "Very simple deployment flow",
+    "Supports many languages and frameworks",
+    "Built-in database provisioning",
+    "Great for prototypes and small teams",
+    "Clean developer experience"
+  ],
+  cons: [
+    "Free tier is limited",
+    "Less control than raw cloud providers",
+    "Not ideal for complex enterprise setups"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free trial credits + usage-based pricing"
+  },
+  alternatives: [
+    { name: "Render", slug: "render" },
+    { name: "Fly.io", slug: "fly-io" },
+    { name: "Heroku", slug: "heroku" }
+  ],
+  tags: ["hosting", "backend", "deployment", "developer"],
+  rating: 4.6,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t86",
+  slug: "amplitude",
+  name: "Amplitude",
+  oneLiner: "Product analytics for understanding what users actually do.",
+  description:
+    "Amplitude is a product analytics platform focused on tracking user behavior, funnels, and retention. It’s widely used by product and growth teams to understand how users interact with features and where engagement drops off.",
+  useCases: [
+    "Product analytics",
+    "User behavior tracking",
+    "Funnel analysis",
+    "Retention analysis",
+    "Growth experimentation"
+  ],
+  pros: [
+    "Powerful funnel and cohort analysis",
+    "Great for product-led growth",
+    "Strong visualization tools",
+    "Scales well for large teams",
+    "Good documentation"
+  ],
+  cons: [
+    "Can be complex for beginners",
+    "Pricing increases quickly at scale",
+    "Setup requires planning"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans for advanced analytics"
+  },
+  alternatives: [
+    { name: "Mixpanel", slug: "mixpanel" },
+    { name: "Heap", slug: "heap" },
+    { name: "PostHog", slug: "posthog" }
+  ],
+  tags: ["analytics", "product", "growth", "data"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t87",
+  slug: "mixpanel",
+  name: "Mixpanel",
+  oneLiner: "Event-based analytics built for fast product insights.",
+  description:
+    "Mixpanel is an analytics platform centered on event tracking and real-time analysis. It helps teams understand user actions, conversion funnels, and feature usage without relying solely on page views.",
+  useCases: [
+    "Event tracking",
+    "Product analytics",
+    "User funnels",
+    "Retention tracking",
+    "Feature adoption analysis"
+  ],
+  pros: [
+    "Fast and real-time insights",
+    "Strong event-based model",
+    "Easy-to-use dashboards",
+    "Good free tier",
+    "Widely adopted"
+  ],
+  cons: [
+    "Advanced analysis requires paid plans",
+    "Can get expensive with high event volume",
+    "Less flexible for custom data modeling"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + usage-based paid plans"
+  },
+  alternatives: [
+    { name: "Amplitude", slug: "amplitude" },
+    { name: "Heap", slug: "heap" },
+    { name: "PostHog", slug: "posthog" }
+  ],
+  tags: ["analytics", "events", "product", "data"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t88",
+  slug: "heap",
+  name: "Heap",
+  oneLiner: "Automatic analytics that tracks everything by default.",
+  description:
+    "Heap is a digital insights platform that automatically captures user interactions without manual event setup. It’s designed for teams that want retroactive analysis and faster insights without heavy instrumentation.",
+  useCases: [
+    "Product analytics",
+    "User behavior tracking",
+    "Conversion analysis",
+    "UX optimization",
+    "Retroactive data analysis"
+  ],
+  pros: [
+    "Automatic event capture",
+    "Retroactive analysis",
+    "Reduces setup overhead",
+    "Good visualization tools",
+    "Strong for UX teams"
+  ],
+  cons: [
+    "Data volume can become overwhelming",
+    "Higher pricing tiers",
+    "Less control over raw events"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid enterprise-focused tiers"
+  },
+  alternatives: [
+    { name: "Amplitude", slug: "amplitude" },
+    { name: "Mixpanel", slug: "mixpanel" },
+    { name: "PostHog", slug: "posthog" }
+  ],
+  tags: ["analytics", "product", "ux", "data"],
+  rating: 4.4,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t89",
+  slug: "sendgrid",
+  name: "SendGrid",
+  oneLiner: "Scalable email delivery for apps that actually send a lot of email.",
+  description:
+    "SendGrid is a cloud-based email delivery platform used for transactional and marketing emails. It’s designed for reliability, analytics, and scale, making it a common choice for growing startups and large applications.",
+  useCases: [
+    "Transactional emails",
+    "Marketing campaigns",
+    "Password resets",
+    "Notification emails",
+    "Email analytics"
+  ],
+  pros: [
+    "Highly scalable infrastructure",
+    "Strong deliverability",
+    "Detailed email analytics",
+    "Flexible APIs and SMTP support",
+    "Widely adopted"
+  ],
+  cons: [
+    "UI can feel cluttered",
+    "Pricing jumps with volume",
+    "Support quality varies by plan"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans based on email volume"
+  },
+  alternatives: [
+    { name: "Postmark", slug: "postmark" },
+    { name: "AWS SES", slug: "aws-ses" },
+    { name: "Mailgun", slug: "mailgun" }
+  ],
+  tags: ["email", "transactional", "marketing", "infrastructure"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t90",
+  slug: "postmark",
+  name: "Postmark",
+  oneLiner: "Transactional email that prioritizes speed and deliverability.",
+  description:
+    "Postmark is an email delivery service focused exclusively on transactional emails. It’s known for fast delivery, excellent inbox placement, and a clean developer-friendly experience without marketing clutter.",
+  useCases: [
+    "Transactional emails",
+    "Password resets",
+    "System notifications",
+    "User confirmations",
+    "App-generated emails"
+  ],
+  pros: [
+    "Excellent deliverability",
+    "Very fast email delivery",
+    "Clean and simple dashboard",
+    "Great developer experience",
+    "Clear pricing model"
+  ],
+  cons: [
+    "No marketing email campaigns",
+    "Less flexible for bulk newsletters",
+    "Paid-only beyond trial"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Pricing based on monthly email volume"
+  },
+  alternatives: [
+    { name: "SendGrid", slug: "sendgrid" },
+    { name: "AWS SES", slug: "aws-ses" },
+    { name: "Mailgun", slug: "mailgun" }
+  ],
+  tags: ["email", "transactional", "delivery", "developer"],
+  rating: 4.7,
+  users: "Developers",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t91",
+  slug: "aws-ses",
+  name: "AWS Simple Email Service",
+  oneLiner: "Low-level email sending for teams already living inside AWS.",
+  description:
+    "AWS Simple Email Service (SES) is a cost-effective email sending service for transactional and bulk emails. It’s designed for developers who want full control, low costs, and deep integration with the AWS ecosystem.",
+  useCases: [
+    "Transactional emails",
+    "Bulk email sending",
+    "System notifications",
+    "AWS-integrated applications",
+    "Cost-sensitive email delivery"
+  ],
+  pros: [
+    "Very low cost at scale",
+    "High deliverability when configured correctly",
+    "Deep AWS integration",
+    "Highly customizable",
+    "Scales extremely well"
+  ],
+  cons: [
+    "Setup is complex",
+    "Barebones dashboard",
+    "Requires AWS knowledge"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Pay-as-you-go pricing, very low per-email cost"
+  },
+  alternatives: [
+    { name: "SendGrid", slug: "sendgrid" },
+    { name: "Postmark", slug: "postmark" },
+    { name: "Mailgun", slug: "mailgun" }
+  ],
+  tags: ["email", "aws", "infrastructure", "transactional"],
+  rating: 4.4,
+  users: "Enterprise",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t92",
+  slug: "langsmith",
+  name: "LangSmith",
+  oneLiner: "Debug, evaluate, and monitor LLM apps built with LangChain.",
+  description:
+    "LangSmith is an observability and evaluation platform designed for LLM-powered applications. Built by the LangChain team, it helps developers trace prompts, inspect model outputs, debug chains and agents, and evaluate LLM performance over time.",
+  useCases: [
+    "LLM observability",
+    "Prompt debugging",
+    "Chain and agent tracing",
+    "LLM evaluation",
+    "Production monitoring"
+  ],
+  pros: [
+    "Deep LangChain integration",
+    "Clear prompt and trace visualization",
+    "Built-in evaluation tools",
+    "Useful for agent-based systems",
+    "Actively developed"
+  ],
+  cons: [
+    "Best suited for LangChain users",
+    "Limited value outside LLM workflows",
+    "Paid plans required for production scale"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans for teams and production usage"
+  },
+  alternatives: [
+    { name: "Helicone", slug: "helicone" },
+    { name: "W&B Weave", slug: "wandb-weave" },
+    { name: "OpenTelemetry", slug: "opentelemetry" }
+  ],
+  tags: ["llm", "observability", "debugging", "ai"],
+  rating: 4.6,
+  users: "LLM Developers",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t93",
+  slug: "helicone",
+  name: "Helicone",
+  oneLiner: "Open-source observability layer for LLM API calls.",
+  description:
+    "Helicone is an open-source LLM observability platform that logs, analyzes, and monitors LLM requests across providers. It works as a proxy layer, giving teams visibility into latency, cost, errors, and prompt usage without locking them into a single framework.",
+  useCases: [
+    "LLM request monitoring",
+    "Cost tracking",
+    "Latency analysis",
+    "Prompt logging",
+    "Production debugging"
+  ],
+  pros: [
+    "Open source",
+    "Provider-agnostic",
+    "Easy API-level integration",
+    "Cost and usage tracking",
+    "Works well in production"
+  ],
+  cons: [
+    "Less opinionated guidance than LangSmith",
+    "UI is more utilitarian",
+    "Advanced features require hosted plan"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free open-source version + paid hosted plans"
+  },
+  alternatives: [
+    { name: "LangSmith", slug: "langsmith" },
+    { name: "W&B Weave", slug: "wandb-weave" },
+    { name: "PromptLayer", slug: "promptlayer" }
+  ],
+  tags: ["llm", "observability", "open-source", "monitoring"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t94",
+  slug: "wandb-weave",
+  name: "W&B Weave",
+  oneLiner: "Trace, evaluate, and iterate on LLM applications with rigor.",
+  description:
+    "W&B Weave is an LLM observability and evaluation framework from Weights & Biases. It focuses on structured tracing, dataset-backed evaluations, and reproducible experiments for teams building serious LLM systems.",
+  useCases: [
+    "LLM evaluation",
+    "Prompt experimentation",
+    "Tracing LLM apps",
+    "Model comparison",
+    "AI research workflows"
+  ],
+  pros: [
+    "Strong evaluation and experiment tracking",
+    "Fits research and production workflows",
+    "Backed by Weights & Biases ecosystem",
+    "Good for complex LLM systems",
+    "Reproducibility-first design"
+  ],
+  cons: [
+    "More complex than lightweight tools",
+    "Best suited for ML-heavy teams",
+    "Overkill for small apps"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans via W&B"
+  },
+  alternatives: [
+    { name: "LangSmith", slug: "langsmith" },
+    { name: "Helicone", slug: "helicone" },
+    { name: "PromptLayer", slug: "promptlayer" }
+  ],
+  tags: ["llm", "evaluation", "mlops", "ai"],
+  rating: 4.5,
+  users: "ML Teams",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t95",
+  slug: "calendly",
+  name: "Calendly",
+  oneLiner: "The default scheduling tool everyone already knows.",
+  description:
+    "Calendly is a scheduling platform that lets users share availability links to book meetings automatically. It’s widely adopted across sales, recruiting, and customer success teams for reducing back-and-forth emails.",
+  useCases: [
+    "Meeting scheduling",
+    "Sales calls",
+    "Recruiting interviews",
+    "Client bookings",
+    "Calendar coordination"
+  ],
+  pros: [
+    "Very easy to use",
+    "Widely recognized and trusted",
+    "Strong calendar integrations",
+    "Reliable booking experience",
+    "Works well for individuals and teams"
+  ],
+  cons: [
+    "Pricing increases quickly for teams",
+    "Limited customization on lower tiers",
+    "Per-seat pricing can get expensive"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free basic plan + paid plans starting around $12/user/mo"
+  },
+  alternatives: [
+    { name: "SavvyCal", slug: "savvycal" },
+    { name: "Cal.com", slug: "cal-com" },
+    { name: "YouCanBookMe", slug: "youcanbookme" }
+  ],
+  tags: ["scheduling", "meetings", "productivity", "business"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t96",
+  slug: "savvycal",
+  name: "SavvyCal",
+  oneLiner: "Scheduling with respect for everyone’s calendar.",
+  description:
+    "SavvyCal is a scheduling tool designed to make booking meetings more considerate by overlaying availability on both sides. It’s popular with consultants, founders, and teams who want a more human scheduling experience.",
+  useCases: [
+    "Meeting scheduling",
+    "Client calls",
+    "Founder meetings",
+    "Consulting sessions",
+    "Calendar coordination"
+  ],
+  pros: [
+    "Availability overlay for both parties",
+    "Cleaner, more thoughtful UX",
+    "Highly customizable booking pages",
+    "Good for professionals and consultants",
+    "Supports team scheduling"
+  ],
+  cons: [
+    "Smaller brand than Calendly",
+    "No free forever plan",
+    "Less enterprise-focused"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Paid plans starting around $12/user/mo"
+  },
+  alternatives: [
+    { name: "Calendly", slug: "calendly" },
+    { name: "Cal.com", slug: "cal-com" },
+    { name: "YouCanBookMe", slug: "youcanbookme" }
+  ],
+  tags: ["scheduling", "meetings", "productivity"],
+  rating: 4.7,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+
+{
+  id: "t97",
+  slug: "youcanbookme",
+  name: "YouCanBookMe",
+  oneLiner: "Highly flexible scheduling with serious customization options.",
+  description:
+    "YouCanBookMe is a scheduling platform offering deep customization, form logic, and booking rules. It’s often used by educators, service providers, and teams with complex scheduling requirements.",
+  useCases: [
+    "Meeting scheduling",
+    "Class bookings",
+    "Service appointments",
+    "Education scheduling",
+    "Custom booking workflows"
+  ],
+  pros: [
+    "Extremely customizable",
+    "Powerful form and rule logic",
+    "Supports complex scheduling needs",
+    "Works with multiple calendars",
+    "Reliable booking engine"
+  ],
+  cons: [
+    "Interface feels less modern",
+    "Setup can be complex",
+    "Not as beginner-friendly"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free limited plan + paid plans for advanced features"
+  },
+  alternatives: [
+    { name: "Calendly", slug: "calendly" },
+    { name: "SavvyCal", slug: "savvycal" },
+    { name: "Cal.com", slug: "cal-com" }
+  ],
+  tags: ["scheduling", "appointments", "productivity"],
+  rating: 4.4,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t98",
+  slug: "bootstrap",
+  name: "Bootstrap",
+  oneLiner: "Opinionated CSS framework for building responsive UIs fast.",
+  description:
+    "Bootstrap is a popular front-end framework that provides prebuilt components, responsive grid systems, and utility classes. It’s designed to help developers ship consistent, mobile-friendly interfaces quickly without starting from scratch.",
+  useCases: [
+    "Responsive layouts",
+    "Rapid prototyping",
+    "Admin dashboards",
+    "Marketing sites",
+    "Frontend foundations"
+  ],
+  pros: [
+    "Very fast to get started",
+    "Large component library",
+    "Strong documentation",
+    "Consistent cross-browser behavior",
+    "Huge community ecosystem"
+  ],
+  cons: [
+    "Sites can look generic",
+    "Customization can be tedious",
+    "Less flexible than modern CSS-in-JS approaches"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Open source and free to use"
+  },
+  alternatives: [
+    { name: "Tailwind CSS", slug: "tailwind-css" },
+    { name: "Bulma", slug: "bulma" },
+    { name: "Foundation", slug: "foundation" }
+  ],
+  tags: ["css", "frontend", "framework", "ui"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t99",
+  slug: "css-modules",
+  name: "CSS Modules",
+  oneLiner: "Scoped CSS that avoids naming fights and global chaos.",
+  description:
+    "CSS Modules is a styling approach where CSS class names are locally scoped by default. It’s commonly used with modern frontend frameworks to prevent style collisions while keeping CSS syntax familiar and predictable.",
+  useCases: [
+    "Component-level styling",
+    "Large frontend codebases",
+    "React and Next.js apps",
+    "Scoped CSS management",
+    "Maintainable UI styles"
+  ],
+  pros: [
+    "No global class collisions",
+    "Works with standard CSS",
+    "Easy to reason about",
+    "Framework-agnostic",
+    "Good for long-term maintainability"
+  ],
+  cons: [
+    "No dynamic styling by default",
+    "Still requires CSS organization discipline",
+    "Less expressive than CSS-in-JS"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Open standard, no cost"
+  },
+  alternatives: [
+    { name: "Styled Components", slug: "styled-components" },
+    { name: "Tailwind CSS", slug: "tailwind-css" },
+    { name: "Vanilla Extract", slug: "vanilla-extract" }
+  ],
+  tags: ["css", "frontend", "styling", "components"],
+  rating: 4.4,
+  users: "Developers",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t100",
+  slug: "styled-components",
+  name: "Styled Components",
+  oneLiner: "CSS-in-JS styling tied directly to your components.",
+  description:
+    "Styled Components is a CSS-in-JS library that allows developers to write CSS directly inside JavaScript components. It enables dynamic styling, theming, and tight coupling between styles and component logic.",
+  useCases: [
+    "Component-based styling",
+    "Dynamic theming",
+    "Design systems",
+    "React applications",
+    "UI libraries"
+  ],
+  pros: [
+    "Dynamic styling support",
+    "Scoped styles by default",
+    "Powerful theming capabilities",
+    "Good developer experience",
+    "Widely adopted"
+  ],
+  cons: [
+    "Runtime performance overhead",
+    "Requires JavaScript for styling",
+    "Not ideal for very large style sheets"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Open source and free to use"
+  },
+  alternatives: [
+    { name: "CSS Modules", slug: "css-modules" },
+    { name: "Emotion", slug: "emotion" },
+    { name: "Vanilla Extract", slug: "vanilla-extract" }
+  ],
+  tags: ["css", "frontend", "css-in-js", "react"],
+  rating: 4.4,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
 ];
