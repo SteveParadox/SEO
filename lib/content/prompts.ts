@@ -453,4 +453,579 @@ FOCUS: {FOCUS}`,
     tags: ["career", "interview", "practice"],
     updatedAtISO: "2026-01-24",
   },
+
+  {
+    id: "p11",
+    slug: "email-to-executive",
+    title: "Email to Executive (Clear Ask, No Rambling)",
+    purpose: "Write emails that busy executives actually read and respond to.",
+    description: "This prompt structures emails for executive audiences who value brevity and clarity. It enforces a clear ask upfront, provides just enough context without over-explaining, and respects time by making the email scannable. The output feels professional without being stiff or overly formal.",
+    whenToUse: "Use when emailing senior leadership, board members, investors, or any executive where your window of attention is measured in seconds. Essential when making requests, proposing initiatives, or escalating issues to decision-makers.",
+    howItWorks: "The prompt structures content around the executive mindset: lead with what you need, provide minimal context to support the ask, outline options or next steps, and close with a clear action item. It eliminates preamble, jargon, and unnecessary detail that dilutes the message.",
+    bestPractices: "State your ask in the first sentence. Limit emails to under 150 words. Use bullet points for anything with multiple parts. Attach supporting details as documents rather than embedding them. Follow up once if no response after 3-4 business days.",
+    commonMistakes: "Burying the ask in paragraphs of context. Writing novel-length explanations assuming they'll read it all. Using jargon or acronyms without definition. Not providing clear next steps or decision points.",
+    expectedOutput: "A concise email structured as: clear ask or purpose in opening line, 2-3 bullet points of essential context, decision options or next steps if applicable, specific call-to-action with timeline. Total length under 150 words unless complexity absolutely requires more.",
+    limitations: "Works best for business contexts, not personal or sensitive topics. Assumes the executive has baseline context about your role and projects. Can't replace relationship-building or informal communication. Not suitable for complex negotiations requiring nuance.",
+    technicalRequirements: "Compatible with all major models. Claude tends to maintain appropriate formality. GPT sometimes generates slightly more structured options. Gemini occasionally adds unnecessary creativity. No special tools needed.",
+    realWorldApplications: "Middle managers use this to communicate with C-suite. Individual contributors use it for executive updates. Consultants use it for client communications. Entrepreneurs use it for investor updates. Project managers use it for escalations.",
+    successMetrics: "Success means getting timely responses, clear decisions, or requested actions. If executives ask clarifying questions, you likely provided too little context. If they don't respond, you probably provided too much or the ask wasn't clear.",
+    relatedPrompts: "Use Rewrite for Clarity if your draft email is too long. Pair with Compare and Pick when presenting decision options. Follow up with Meeting Notes Action Items after the resulting conversation.",
+    prompt: `Write an email to an executive about {TOPIC}.
+
+Input:
+- What I need: {ASK}
+- Essential context (max 3 points): {CONTEXT}
+- Timeline: {WHEN}
+
+Rules:
+- Lead with the ask in sentence one
+- Keep under 150 words total
+- Use bullets for multiple points
+- End with clear next step
+
+Output format:
+Subject line
+Email body (ask first, context bullets, next step)
+
+Topic: {TOPIC}
+Ask: {ASK}
+Context: {CONTEXT}
+Timeline: {WHEN}`,
+    variations: [
+      "Make it more formal for board communications.",
+      "Add decision options when asking for approval.",
+      "Include a one-line impact statement for proposals.",
+      "Make it update-style (FYI, no action needed).",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["writing", "executive", "communication"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p12",
+    slug: "meeting-agenda-that-works",
+    title: "Meeting Agenda (Clear Outcomes, Not Generic Lists)",
+    purpose: "Create agendas that make meetings actually productive.",
+    description: "This prompt generates meeting agendas focused on outcomes rather than vague discussion topics. It allocates time realistically, specifies what success looks like for each item, assigns pre-work when needed, and ensures every topic has a clear owner and expected outcome.",
+    whenToUse: "Use before any meeting where you need alignment, decisions, or action items. Essential for recurring team meetings, project kickoffs, stakeholder reviews, or any gathering where vague agendas lead to wasted time.",
+    howItWorks: "The prompt structures agendas around decision-making and action. Each agenda item includes time allocation, expected outcome (decide, align, inform, create), owner, and any required pre-work. This prevents meetings from becoming unstructured discussions with no outputs.",
+    bestPractices: "Send agendas 24 hours before meetings. Keep meetings under 60 minutes when possible. Assign pre-work for complex topics. Include only stakeholders who need to decide or contribute. Skip topics that can be handled async.",
+    commonMistakes: "Creating agendas full of vague discussion topics. Not allocating time per item. Including too many topics for the time available. Not specifying what decisions need to be made. Forgetting to assign pre-work for complex items.",
+    expectedOutput: "A structured agenda containing: meeting purpose and success criteria, list of attendees and their roles, 3-5 agenda items each with time allocation, owner, outcome type (decide/align/inform/create), and any required pre-work, plus time reserved for questions and next steps.",
+    limitations: "Can't make poorly planned meetings productive—good agendas help but don't replace good meeting culture. Assumes attendees will actually read the agenda and complete pre-work. Won't fix fundamental meeting overload problems.",
+    technicalRequirements: "Compatible with all major models. GPT tends to create more structured formats. Claude often includes better outcome specifications. Gemini sometimes suggests creative formats. Works for any meeting type.",
+    realWorldApplications: "Project managers use this for sprint planning and retrospectives. Product managers use it for stakeholder reviews. Team leads use it for recurring team meetings. Executives use it for leadership team meetings.",
+    successMetrics: "Successful agendas mean meetings start on time, stay on topic, produce expected outcomes, end with clear action items, and don't require follow-up meetings for the same topics. If meetings consistently run over, your time allocations are unrealistic.",
+    relatedPrompts: "Follow with Meeting Notes Action Items to document outcomes. Use Email to Executive to send pre-reads. Pair with Decision Framework when agenda includes major decisions.",
+    prompt: `Create a meeting agenda for {MEETING_PURPOSE}.
+
+Input:
+- Purpose: {PURPOSE}
+- Duration: {DURATION} minutes
+- Key topics: {TOPICS}
+- Attendees: {ATTENDEES}
+
+Rules:
+- Specify outcome for each item (decide/align/inform/create)
+- Allocate realistic time per topic
+- Note any required pre-work
+- Reserve 10 minutes for questions/next steps
+
+Output format:
+Purpose & Success Criteria
+Attendees & Roles
+Agenda Items (each: Topic, Time, Owner, Outcome, Pre-work if needed)
+Q&A / Next Steps (10 min)
+
+Meeting: {MEETING_PURPOSE}
+Duration: {DURATION}
+Topics: {TOPICS}
+Attendees: {ATTENDEES}`,
+    variations: [
+      "Add a parking lot section for off-topic items.",
+      "Include decision-making framework for contentious items.",
+      "Make it workshop-style with activities and timers.",
+      "Add retrospective format (what worked, what didn't, actions).",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["meetings", "productivity", "planning"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p13",
+    slug: "technical-explainer",
+    title: "Technical Explainer (For Non-Technical Stakeholders)",
+    purpose: "Explain technical concepts without losing clarity or dumbing down.",
+    description: "This prompt translates technical topics into clear explanations for business stakeholders. It balances accuracy with accessibility, uses relevant analogies, focuses on impact rather than implementation details, and avoids both jargon and condescension.",
+    whenToUse: "Deploy this when presenting technical solutions to executives, explaining engineering decisions to product or business teams, writing documentation for cross-functional audiences, or any situation where technical accuracy meets non-technical readers.",
+    howItWorks: "The prompt structures explanations around business impact first, then provides just enough technical detail to support credibility. It uses analogies that connect to the stakeholder's domain knowledge, explains why something matters before how it works, and avoids unnecessary complexity.",
+    bestPractices: "Start with what it means for the business or user. Use analogies from the stakeholder's domain (finance, operations, sales). Provide diagrams or visuals when possible. Test explanations with non-technical colleagues before sharing broadly.",
+    commonMistakes: "Over-simplifying to the point of inaccuracy. Using technical jargon without definition. Explaining how before why. Not connecting technical choices to business outcomes. Being condescending by over-explaining obvious concepts.",
+    expectedOutput: "A structured explanation containing: what problem this solves (business impact), how it works at a high level (without jargon), why this approach over alternatives (tradeoffs), what stakeholders need to know or decide, and clear next steps if applicable.",
+    limitations: "Cannot make fundamentally complex systems simple without losing some nuance. Works best when you deeply understand both the technical topic and the audience's knowledge level. May require iteration based on stakeholder feedback.",
+    technicalRequirements: "Compatible with all major models. Claude excels at finding appropriate analogies. GPT tends to provide more structured explanations. Gemini sometimes surfaces creative comparisons. Works for any technical domain.",
+    realWorldApplications: "Engineers use this for architecture decision documents. Product managers use it to explain technical constraints. CTOs use it for board presentations. Consultants use it for client communications. Teachers use it for introductory technical courses.",
+    successMetrics: "Successful explanations mean stakeholders can explain the concept back to others, make informed decisions about tradeoffs, and ask relevant follow-up questions. If they look confused or ask basic questions, the explanation assumed too much knowledge.",
+    relatedPrompts: "Use Rewrite for Clarity to simplify draft explanations. Pair with Explain Like a Tutor if you need to learn the concept first. Combine with Email to Executive for stakeholder communications.",
+    prompt: `Explain {TECHNICAL_TOPIC} for non-technical stakeholders.
+
+Input:
+- Topic: {TOPIC}
+- Audience: {AUDIENCE} (e.g., executives, product team, customers)
+- Context: {CONTEXT}
+
+Rules:
+- Start with business impact / "why it matters"
+- Use analogies from the audience's domain
+- Avoid jargon; define necessary terms in one sentence
+- Explain tradeoffs in terms of outcomes, not implementation
+
+Output format:
+1) What it does & why it matters (2-3 sentences)
+2) How it works (high level, max 150 words)
+3) Key tradeoffs or constraints (bullets)
+4) What stakeholders need to know or decide
+5) Next steps (if applicable)
+
+Topic: {TECHNICAL_TOPIC}
+Audience: {AUDIENCE}
+Context: {CONTEXT}`,
+    variations: [
+      "Add a visual diagram description.",
+      "Include FAQ section for common concerns.",
+      "Make it decision-focused (what to approve/choose).",
+      "Add cost or timeline implications.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["technical", "communication", "stakeholders"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p14",
+    slug: "brainstorm-facilitator",
+    title: "Brainstorm Facilitator (Ideas → Prioritization)",
+    purpose: "Turn messy brainstorms into prioritized, actionable ideas.",
+    description: "This prompt facilitates structured brainstorming by first generating diverse ideas without judgment, then organizing and prioritizing them using clear criteria. It balances creativity with practicality, ensuring brainstorms produce usable outputs instead of just long lists.",
+    whenToUse: "Use when starting new projects, tackling open-ended problems, exploring product features, or whenever you need fresh ideas followed by realistic prioritization. Most effective when you're stuck or need to expand thinking beyond obvious solutions.",
+    howItWorks: "The prompt operates in two phases: divergent thinking to generate ideas without constraints, then convergent thinking to organize, evaluate, and prioritize using specified criteria (impact, effort, risk, alignment). This prevents premature judgment from killing good ideas while ensuring outputs are actionable.",
+    bestPractices: "Set a timer for idea generation to prevent overthinking. Defer judgment during the divergent phase. Be specific about evaluation criteria relevant to your situation. Include diverse perspectives if brainstorming with a team. Document everything, even ideas you don't pursue.",
+    commonMistakes: "Judging ideas during generation phase. Using generic criteria that don't match your context. Not generating enough ideas before evaluating. Picking the first decent idea without exploring alternatives. Forgetting to consider implementation feasibility.",
+    expectedOutput: "A two-part output: first, 15-20 diverse ideas organized by theme or category, then a prioritized short-list of 3-5 top ideas with evaluation scores, rationale, and recommended next steps for each. Includes criteria used for evaluation.",
+    limitations: "Quality depends on how well you define the problem and criteria. Can't replace domain expertise or market knowledge. Works best for ideation, not detailed implementation planning. Won't magically solve problems with no good solutions.",
+    technicalRequirements: "Compatible with all major models. GPT generates high volumes of ideas quickly. Claude tends to provide more nuanced evaluation. Gemini sometimes surfaces more creative angles. Works for any domain or problem type.",
+    realWorldApplications: "Product teams use this for feature brainstorming. Marketing teams use it for campaign ideation. Startups use it for business model exploration. Designers use it for concept generation. Writers use it to overcome creative blocks.",
+    successMetrics: "Successful brainstorms mean you identify ideas you wouldn't have thought of alone, can clearly articulate why top ideas are prioritized that way, and have actionable next steps for testing or implementing ideas. If every idea feels obvious, you haven't pushed far enough.",
+    relatedPrompts: "Follow with Compare and Pick to evaluate top ideas more deeply. Use Technical Explainer to communicate selected ideas to stakeholders. Pair with Meeting Agenda for brainstorm sessions.",
+    prompt: `Facilitate a brainstorm on {CHALLENGE}.
+
+Input:
+- Challenge: {CHALLENGE}
+- Constraints: {CONSTRAINTS}
+- Evaluation criteria: {CRITERIA} (e.g., impact, effort, risk, alignment)
+
+Rules:
+- Phase 1: Generate 15-20 diverse ideas without judgment
+- Phase 2: Organize, evaluate, and prioritize using criteria
+- Be specific and actionable
+
+Output format:
+PHASE 1 - Ideas (organized by theme)
+- 15-20 ideas with brief descriptions
+
+PHASE 2 - Evaluation & Prioritization
+- Top 5 ideas scored on criteria (1-10)
+- Rationale for each
+- Recommended next steps
+
+Challenge: {CHALLENGE}
+Constraints: {CONSTRAINTS}
+Criteria: {CRITERIA}`,
+    variations: [
+      "Add worst-idea brainstorm (then invert).",
+      "Include implementation complexity assessment.",
+      "Make it quick-win focused (high impact, low effort).",
+      "Add risk analysis for top ideas.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["ideation", "brainstorming", "prioritization"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p15",
+    slug: "postmortem-template",
+    title: "Postmortem Template (Learn, Don't Blame)",
+    purpose: "Document incidents and outages to prevent repeat failures.",
+    description: "This prompt creates blameless postmortem documents that focus on systemic issues rather than individual mistakes. It structures incident analysis around timeline, root cause, impact, and preventive measures. The goal is organizational learning, not finger-pointing.",
+    whenToUse: "Use after any significant incident, outage, missed deadline, or project failure where learning matters. Essential for engineering teams doing incident reviews, operations teams analyzing failures, or any situation where understanding what went wrong prevents future problems.",
+    howItWorks: "The prompt structures postmortems around facts and systems: what happened (timeline), why it happened (root cause analysis), what the impact was (quantified when possible), and what changes prevent recurrence. It explicitly avoids blame language and focuses on process improvements.",
+    bestPractices: "Conduct postmortems within 48 hours while details are fresh. Include all involved team members. Focus on systemic causes, not individual actions. Assign owners to action items with deadlines. Share postmortems broadly for organizational learning.",
+    commonMistakes: "Blaming individuals instead of examining systems. Rushing to solutions without understanding root causes. Writing vague action items without owners. Not following up on action items. Making postmortems feel like punishment.",
+    expectedOutput: "A structured document containing: incident summary with severity and impact, detailed timeline of events, root cause analysis with contributing factors, action items with owners and deadlines, and what went well (not just what went wrong).",
+    limitations: "Can't prevent incidents, only help learn from them. Requires honest participation from all involved. Action items need follow-through or nothing changes. Cultural resistance to blameless culture makes these less effective.",
+    technicalRequirements: "Compatible with all major models. Claude tends to maintain blameless framing well. GPT creates clear action items. Gemini sometimes surfaces less obvious contributing factors. Works for any incident type.",
+    realWorldApplications: "Engineering teams use this for production incidents. Operations teams use it for service outages. Project teams use it for delivery failures. Product teams use it for launch issues. Sales teams use it for deal losses.",
+    successMetrics: "Effective postmortems mean action items get completed, similar incidents don't recur, team members feel safe sharing mistakes, and the organization builds institutional knowledge. If people hide information, your culture needs work.",
+    relatedPrompts: "Use Bug Hunter for technical root cause analysis. Pair with Meeting Agenda for postmortem sessions. Follow with Email to Executive for incident summaries.",
+    prompt: `Create a postmortem for {INCIDENT}.
+
+Input:
+- What happened: {SUMMARY}
+- When: {DATE_TIME}
+- Duration: {DURATION}
+- Impact: {IMPACT}
+
+Rules:
+- Use blameless language (focus on systems, not people)
+- Include timeline with timestamps
+- Identify root cause and contributing factors
+- Create actionable prevention steps with owners
+
+Output format:
+SUMMARY (severity, impact, duration)
+TIMELINE (key events with timestamps)
+ROOT CAUSE ANALYSIS
+- Primary cause
+- Contributing factors
+IMPACT
+- Users affected
+- Revenue/business impact
+- Internal impact
+WHAT WENT WELL (yes, really)
+ACTION ITEMS (owner, deadline, priority)
+- Prevention
+- Detection
+- Response
+
+Incident: {INCIDENT}
+Summary: {SUMMARY}
+Date: {DATE_TIME}
+Impact: {IMPACT}`,
+    variations: [
+      "Add 5 Whys analysis for root cause.",
+      "Include communication timeline (who was notified when).",
+      "Add lessons learned section with key takeaways.",
+      "Make it short-form (one-pager for minor incidents).",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["incidents", "postmortem", "learning"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p16",
+    slug: "onboarding-checklist",
+    title: "Onboarding Checklist (Role-Specific, Week-by-Week)",
+    purpose: "Create onboarding plans that set new hires up for success.",
+    description: "This prompt generates structured onboarding checklists tailored to specific roles and companies. It organizes tasks by week, balances learning with doing, includes check-in points, and ensures new hires have clear success criteria. The output feels supportive, not overwhelming.",
+    whenToUse: "Use when hiring new team members, promoting internally, or whenever someone joins a new role. Essential for scaling teams, ensuring consistent onboarding experiences, or documenting tribal knowledge before it's lost.",
+    howItWorks: "The prompt structures onboarding across 4-8 weeks with increasing responsibility. Each week includes: tasks to complete, people to meet, resources to review, and checkpoints to verify progress. It balances orientation, training, and hands-on work while building relationships.",
+    bestPractices: "Customize for the specific role and company. Assign an onboarding buddy. Build in regular check-ins. Include both technical tasks and cultural integration. Get feedback from recent hires to improve the checklist.",
+    commonMistakes: "Making week one too information-dense. Not including hands-on work early enough. Forgetting to schedule regular check-ins. Creating generic checklists that don't match the role. Not assigning clear owners for each item.",
+    expectedOutput: "A week-by-week checklist spanning 30-60 days containing: orientation tasks, training modules, systems access, key relationships to build, projects to complete, checkpoints with manager, and success criteria for the first 90 days.",
+    limitations: "Can't replace good management and regular feedback. Assumes company has resources and documentation worth referencing. Works best with stable roles and processes. May need adjustment for very senior or unique positions.",
+    technicalRequirements: "Compatible with all major models. GPT creates well-structured checklists. Claude often includes better relationship-building elements. Gemini sometimes suggests creative onboarding activities. Works for any role type.",
+    realWorldApplications: "Hiring managers use this for new team members. HR teams use it to standardize onboarding. Startups use it to scale hiring beyond founders. Remote teams use it to structure virtual onboarding. Consultants use it for client team integration.",
+    successMetrics: "Successful onboarding means new hires contribute meaningfully by week 3-4, feel integrated by week 6-8, and report high satisfaction in feedback surveys. If people quit in the first 90 days, onboarding likely failed.",
+    relatedPrompts: "Use Meeting Agenda for regular check-ins. Pair with Technical Explainer for complex systems training. Follow with Interview Prep Coach for internal promotions.",
+    prompt: `Create an onboarding checklist for {ROLE}.
+
+Input:
+- Role: {ROLE}
+- Team/Department: {TEAM}
+- Duration: {WEEKS} weeks
+- Key systems/tools: {SYSTEMS}
+
+Rules:
+- Organize by week with clear tasks
+- Include people to meet and relationships to build
+- Balance learning (reading/training) with doing (hands-on tasks)
+- Add checkpoints every 1-2 weeks
+
+Output format:
+Overview & Success Criteria (30/60/90 day goals)
+
+WEEK 1: Orientation
+- Tasks (checkboxes)
+- People to meet
+- Resources to review
+- Checkpoint
+
+WEEK 2-{N}: [Continue pattern]
+- Tasks
+- People
+- Resources
+- Projects (hands-on work)
+- Checkpoint
+
+Role: {ROLE}
+Team: {TEAM}
+Duration: {WEEKS}
+Systems: {SYSTEMS}`,
+    variations: [
+      "Add remote-specific elements (virtual coffee chats, etc).",
+      "Include culture and values learning.",
+      "Make it project-based (deliver X by week 4).",
+      "Add manager guide (what to cover in check-ins).",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["onboarding", "hiring", "management"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p17",
+    slug: "feature-spec-template",
+    title: "Feature Spec Template (Problem → Solution → Success)",
+    purpose: "Write feature specs that engineers and designers can actually build from.",
+    description: "This prompt creates clear feature specifications that connect user problems to proposed solutions. It includes success metrics, edge cases, and dependencies without unnecessary detail. The output helps teams align on what to build and why before committing to implementation.",
+    whenToUse: "Use before starting significant features, when proposing new functionality, or whenever cross-functional alignment is needed. Essential for product managers, technical leads, or anyone translating user needs into technical requirements.",
+    howItWorks: "The prompt structures specs around: problem definition, proposed solution, user stories, acceptance criteria, technical considerations, success metrics, and open questions. This ensures teams understand context, scope, and constraints before building.",
+    bestPractices: "Write specs before designing or coding. Include designers and engineers in early review. Start with problem and impact, not solution. Define success metrics upfront. Document decisions and tradeoffs made during scoping.",
+    commonMistakes: "Writing implementation details without explaining the problem. Not defining success metrics. Leaving edge cases undocumented. Forgetting dependencies on other teams. Making specs too long or too vague.",
+    expectedOutput: "A structured spec containing: problem statement with user impact, proposed solution at high level, detailed user stories with acceptance criteria, technical considerations and constraints, success metrics, dependencies, and open questions for discussion.",
+    limitations: "Can't replace collaborative refinement with teams. Specs will evolve during implementation. Works best for features with clear scope. May need iteration based on technical feasibility discovery.",
+    technicalRequirements: "Compatible with all major models. GPT creates well-organized structures. Claude often includes better edge case coverage. Gemini sometimes surfaces creative solution angles. Works for any product type.",
+    realWorldApplications: "Product managers use this for feature planning. Tech leads use it for technical design docs. Designers use it for understanding requirements. Startups use it for MVP definition. Enterprise teams use it for stakeholder alignment.",
+    successMetrics: "Successful specs mean teams can start work without major questions, scope creep is minimal during implementation, and delivered features meet defined success criteria. If teams constantly ask clarifying questions, the spec was too vague.",
+    relatedPrompts: "Use Technical Explainer for complex technical sections. Pair with Compare and Pick when evaluating solution approaches. Follow with Postmortem Template if launch reveals issues.",
+    prompt: `Write a feature spec for {FEATURE}.
+
+Input:
+- Feature: {FEATURE}
+- Problem it solves: {PROBLEM}
+- Target users: {USERS}
+
+Rules:
+- Start with problem and user impact
+- Include user stories with acceptance criteria
+- Note technical constraints and dependencies
+- Define success metrics
+- List open questions
+
+Output format:
+OVERVIEW
+- Problem statement
+- Impact (why now, why us)
+
+SOLUTION
+- High-level approach
+- Key user stories (As a [user], I want to [action] so that [outcome])
+- Acceptance criteria per story
+
+TECHNICAL CONSIDERATIONS
+- Constraints
+- Dependencies
+- Edge cases
+
+SUCCESS METRICS
+- How we measure success
+- Target outcomes
+
+OPEN QUESTIONS
+- Decisions still needed
+
+Feature: {FEATURE}
+Problem: {PROBLEM}
+Users: {USERS}`,
+    variations: [
+      "Add mockups or wireframe descriptions.",
+      "Include technical design details for engineering.",
+      "Make it lean (one-pager for simple features).",
+      "Add competitive analysis section.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["product", "specs", "planning"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p18",
+    slug: "executive-summary",
+    title: "Executive Summary (Dense Information, Quick Read)",
+    purpose: "Distill complex documents into summaries executives will actually read.",
+    description: "This prompt creates executive summaries that extract key decisions, risks, and recommendations from longer documents. It front-loads critical information, uses visual hierarchy, and respects that executives need just enough context to make informed decisions quickly.",
+    whenToUse: "Use when presenting proposals, reports, or analyses to senior leadership. Essential before board meetings, investor presentations, or any situation where busy decision-makers need the essence without the details.",
+    howItWorks: "The prompt identifies the core message, extracts decision points, highlights risks and opportunities, and presents everything in scannable format. It assumes the reader may not have time for the full document and structures content for progressive disclosure.",
+    bestPractices: "Keep to one page maximum. Lead with recommendation or ask. Use bullets and visual hierarchy. Quantify impact when possible. Include one-sentence rationale for key points. Attach full document for those who want details.",
+    commonMistakes: "Writing mini-versions of the full document. Burying the recommendation. Using jargon without context. Not quantifying impact. Forgetting to include clear next steps. Making it too dense to scan.",
+    expectedOutput: "A one-page summary containing: situation in 2-3 sentences, key recommendation or ask, supporting rationale in bullets, risks and mitigations, financial or timeline impact if relevant, and explicit next steps with owners.",
+    limitations: "Can't capture all nuance from complex documents. Assumes executive has baseline context. Works best for business decisions, less effective for technical deep-dives. Requires good judgment about what to include.",
+    technicalRequirements: "Compatible with all major models. GPT creates clear hierarchical structure. Claude maintains appropriate brevity. Gemini sometimes over-simplifies. Works for any document type.",
+    realWorldApplications: "Consultants use this for client deliverables. Product managers use it for strategy documents. Finance teams use it for investment proposals. Operations teams use it for process change proposals. Analysts use it for research reports.",
+    successMetrics: "Successful summaries mean executives make informed decisions without reading full documents, meetings stay focused on decisions rather than rehashing details, and follow-up questions are about decisions rather than clarifications.",
+    relatedPrompts: "Use Email to Executive for the cover email. Pair with Technical Explainer for technical decisions. Follow with Meeting Agenda if presenting in person.",
+    prompt: `Create an executive summary for {DOCUMENT_TOPIC}.
+
+Input:
+- Topic: {TOPIC}
+- Key finding/recommendation: {FINDING}
+- Decision needed: {DECISION}
+
+Rules:
+- Maximum one page
+- Lead with recommendation/ask
+- Use bullets and hierarchy
+- Quantify impact
+- Include risks and next steps
+
+Output format:
+SITUATION (2-3 sentences)
+
+RECOMMENDATION / ASK
+- Primary recommendation
+- Key rationale (3-4 bullets)
+
+IMPACT
+- Financial/timeline/resource impact
+- Risks and mitigations
+
+NEXT STEPS
+- Action items with owners
+- Decision points
+
+Topic: {DOCUMENT_TOPIC}
+Finding: {FINDING}
+Decision: {DECISION}`,
+    variations: [
+      "Add visual layout suggestions (boxes, callouts).",
+      "Include options analysis (3 choices with pros/cons).",
+      "Make it investor-focused (TAM, traction, ask).",
+      "Add appendix section for supporting data.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["executive", "summary", "communication"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p19",
+    slug: "tutorial-writer",
+    title: "Tutorial Writer (Step-by-Step, No Assumptions)",
+    purpose: "Write tutorials that beginners can actually follow without getting stuck.",
+    description: "This prompt creates detailed, beginner-friendly tutorials that assume minimal prior knowledge. It breaks complex processes into discrete steps, explains why each step matters, includes troubleshooting for common issues, and validates understanding through checkpoints.",
+    whenToUse: "Use when creating how-to content, onboarding documentation, course materials, or any instructional content where readers need to successfully complete a task. Essential when teaching technical skills, software usage, or multi-step processes.",
+    howItWorks: "The prompt structures tutorials with clear prerequisites upfront, numbered steps with explanations, screenshots or visual descriptions where helpful, common error handling, and checkpoints to verify progress. It anticipates confusion and addresses it proactively.",
+    bestPractices: "Test tutorials with actual beginners. Include time estimates for completion. Show expected outputs after key steps. Provide troubleshooting for predictable issues. Link to prerequisite knowledge rather than assuming it.",
+    commonMistakes: "Skipping basic steps that seem obvious. Not showing what success looks like. Assuming too much prior knowledge. Writing for yourself rather than beginners. Not testing with actual target users.",
+    expectedOutput: "A complete tutorial containing: clear learning objective, prerequisites and setup requirements, numbered step-by-step instructions with explanations, expected outcomes at checkpoints, troubleshooting section for common issues, and next steps or related tutorials.",
+    limitations: "Can't replace hands-on practice or personalized instruction. Complex topics may need to be split into multiple tutorials. Written tutorials work best when supplemented with visuals. Can't cover every possible error or configuration.",
+    technicalRequirements: "Compatible with all major models. GPT creates clear step structures. Claude often includes better error handling. Gemini sometimes suggests helpful analogies. Works for any tutorial topic.",
+    realWorldApplications: "Educators use this for course materials. Product teams use it for user documentation. Developer advocates use it for API tutorials. Content creators use it for technical how-tos. Support teams use it for self-service resources.",
+    successMetrics: "Successful tutorials mean users complete tasks without external help, error rates are low, support tickets decrease for that topic, and users reference the tutorial later. If people frequently get stuck, the tutorial has gaps.",
+    relatedPrompts: "Use Explain Like a Tutor to understand the topic deeply first. Pair with Technical Explainer for complex concepts. Follow with FAQ sections using common issues discovered.",
+    prompt: `Write a tutorial for {TASK}.
+
+Input:
+- Task: {TASK}
+- Target audience: {AUDIENCE} (experience level)
+- Tools/platform: {TOOLS}
+
+Rules:
+- Assume minimal prior knowledge
+- Number all steps clearly
+- Explain why, not just how
+- Include expected outputs at key points
+- Add troubleshooting section
+
+Output format:
+WHAT YOU'LL LEARN
+
+PREREQUISITES
+- Required tools/knowledge
+- Time needed
+
+STEPS
+1. [Step with explanation]
+   Expected outcome: [what success looks like]
+2. [Continue...]
+
+TROUBLESHOOTING
+- Common issue 1: solution
+- Common issue 2: solution
+
+NEXT STEPS
+- Related tutorials or advanced topics
+
+Task: {TASK}
+Audience: {AUDIENCE}
+Tools: {TOOLS}`,
+    variations: [
+      "Add video script version with visual cues.",
+      "Include quiz questions to check understanding.",
+      "Make it quick-start (5 minutes to hello world).",
+      "Add advanced section for experienced users.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["tutorial", "documentation", "teaching"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "p20",
+    slug: "performance-review-prep",
+    title: "Performance Review Prep (Achievements + Growth)",
+    purpose: "Prepare performance reviews that are fair, specific, and actionable.",
+    description: "This prompt helps structure performance reviews for direct reports by organizing achievements, identifying growth areas, and setting clear goals. It maintains balance between recognition and development, uses specific examples, and avoids vague feedback that doesn't help people improve.",
+    whenToUse: "Use before annual or quarterly performance reviews, promotion discussions, or any formal feedback conversation. Essential for managers providing structured feedback, or individuals preparing self-reviews.",
+    howItWorks: "The prompt organizes feedback around: key accomplishments with impact, areas of strength, growth opportunities with specific examples, and future goals. It enforces specificity over generic comments and ensures feedback is actionable and tied to observable behavior.",
+    bestPractices: "Collect examples throughout the review period, not just at the end. Include feedback from peers and stakeholders. Focus on impact and outcomes, not just activities. Make growth areas specific and achievable. Set 2-3 clear goals, not ten vague ones.",
+    commonMistakes: "Using vague language like 'good communicator' without examples. Surprising people with feedback they haven't heard before. Making everything positive or everything negative. Setting unrealistic goals. Not tying feedback to business impact.",
+    expectedOutput: "A structured review containing: summary assessment, 3-5 key accomplishments with impact metrics, strengths with examples, 2-3 growth areas with specific behaviors and suggestions, and 2-3 goals for next period with success criteria.",
+    limitations: "Can't replace ongoing feedback throughout the year. Requires manager to have observed or gathered sufficient examples. Works best in supportive feedback cultures. May need customization for company-specific review formats.",
+    technicalRequirements: "Compatible with all major models. Claude maintains appropriate empathetic tone. GPT creates well-structured formats. Gemini sometimes over-focuses on positive. Works for any role level.",
+    realWorldApplications: "Managers use this for direct report reviews. HR teams use it to standardize review quality. Individuals use it to prepare self-assessments. Consultants use it for client team evaluations. Mentors use it for mentee feedback.",
+    successMetrics: "Successful reviews mean employees understand what they did well, have clear actionable feedback for improvement, feel the review was fair, and have specific goals they can work toward. If people are surprised or confused, the review failed.",
+    relatedPrompts: "Use Meeting Agenda for the review conversation. Pair with Onboarding Checklist for new manager training. Follow with Email to Executive for promotion recommendations.",
+    prompt: `Prepare a performance review for {ROLE}.
+
+Input:
+- Person: {NAME}
+- Role: {ROLE}
+- Review period: {PERIOD}
+- Key projects: {PROJECTS}
+
+Rules:
+- Use specific examples with impact
+- Balance achievements and growth areas
+- Make feedback actionable
+- Set 2-3 clear goals for next period
+
+Output format:
+OVERALL ASSESSMENT (2-3 sentences)
+
+KEY ACCOMPLISHMENTS
+- Achievement 1 (impact)
+- Achievement 2 (impact)
+- Achievement 3 (impact)
+
+STRENGTHS (with examples)
+- Strength 1: [example]
+- Strength 2: [example]
+
+GROWTH OPPORTUNITIES
+- Area 1: [specific behavior, suggestion]
+- Area 2: [specific behavior, suggestion]
+
+GOALS FOR NEXT PERIOD
+1. [Goal with success criteria]
+2. [Goal with success criteria]
+
+Name: {NAME}
+Role: {ROLE}
+Period: {PERIOD}
+Projects: {PROJECTS}`,
+    variations: [
+      "Add peer feedback section.",
+      "Include development plan with resources.",
+      "Make it promotion-focused (readiness assessment).",
+      "Add self-reflection questions for employee.",
+    ],
+    modelCompatibility: ["GPT", "Claude", "Gemini"],
+    tags: ["management", "performance", "feedback"],
+    updatedAtISO: "2026-01-24",
+  },
 ];
