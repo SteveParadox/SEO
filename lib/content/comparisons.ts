@@ -19,9 +19,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Measure velocity by pull request throughput, not just lines written. Track code review time—AI should reduce it, not increase it. Monitor bug rates in AI-assisted code. Survey developer satisfaction quarterly. Successful adoption means faster feature delivery without quality regression.",
     specificRecommendations: "Choose Cursor if you're a solo developer or small team prioritizing speed over flexibility. Choose VS Code + AI stack if you have diverse team preferences or want to avoid vendor lock-in. Choose JetBrains AI if you're already deep in their ecosystem and prioritize type-safe refactoring.",
     contenders: [
-      { kind: "tool", id: "t1" }, // Cursor (assuming)
-      { kind: "tool", id: "t15" }, // VS Code + AI stack (Copilot/etc)
-      { kind: "tool", id: "t16" }, // JetBrains AI (swap to your real id)
+      { kind: "tool", id: "t1" },
+      { kind: "tool", id: "t15" },
+      { kind: "tool", id: "t16" },
     ],
     criteria: [
       { name: "Codebase context", notes: "How well it understands your project structure, patterns, and intent." },
@@ -53,9 +53,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Effective search means finding reliable information faster than before, with fewer dead-end clicks. Track how often you need to try multiple engines. Monitor whether you're actually reading sources or just scanning summaries. Successful adoption reduces research time without sacrificing accuracy.",
     specificRecommendations: "Choose Perplexity if you want AI summaries and quick research starts with citations. Choose Kagi if you'll pay for quality, hate ads, and want customization. Choose Google if you need maximum breadth, work with regional content, or won't pay for search.",
     contenders: [
-      { kind: "tool", id: "t2" }, // Perplexity (assuming)
-      { kind: "tool", id: "t13" }, // Kagi (swap)
-      { kind: "tool", id: "t14" }, // Google (swap)
+      { kind: "tool", id: "t2" },
+      { kind: "tool", id: "t13" },
+      { kind: "tool", id: "t14" },
     ],
     criteria: [
       { name: "Source quality", notes: "Does it lead you to useful primary sources and show citations clearly?" },
@@ -86,9 +86,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Quality success means users don't notice it's synthetic, or notice but don't mind. Monitor completion rates for audio content—poor quality tanks engagement. Track support tickets about audio issues. Survey users on voice naturalness. Successful TTS implementation is invisible.",
     specificRecommendations: "Choose ElevenLabs for creator content, marketing assets, or anywhere quality is paramount. Choose PlayHT for balanced quality-cost scenarios with decent volume. Choose Azure TTS for enterprise apps, real-time needs, or existing Azure ecosystem integration.",
     contenders: [
-      { kind: "tool", id: "t4" },  // ElevenLabs (assuming)
-      { kind: "tool", id: "t21" }, // PlayHT (swap)
-      { kind: "tool", id: "t15" }, // Azure TTS (swap)
+      { kind: "tool", id: "t4" },
+      { kind: "tool", id: "t21" },
+      { kind: "tool", id: "t15" },
     ],
     criteria: [
       { name: "Voice quality", notes: "Naturalness, emotion control, clarity, and consistency." },
@@ -120,9 +120,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Successful adoption means using the assistant daily for real work, not just experimentation. Track time saved on routine tasks. Monitor output quality—fewer corrections needed indicates good fit. Survey satisfaction quarterly. Measure whether it replaces or augments existing workflows.",
     specificRecommendations: "Choose ChatGPT if you want maximum flexibility, extensive plugins, and strong community resources. Choose Claude if writing quality matters most and you value careful, measured responses. Choose Gemini if you live in Google Workspace and want tight integration.",
     contenders: [
-      { kind: "tool", id: "t18" }, // ChatGPT (swap)
-      { kind: "tool", id: "t19" }, // Claude (swap)
-      { kind: "tool", id: "t20" }, // Gemini (swap)
+      { kind: "tool", id: "t18" },
+      { kind: "tool", id: "t19" },
+      { kind: "tool", id: "t20" },
     ],
     criteria: [
       { name: "Writing quality", notes: "Clarity, tone control, and coherence over long outputs." },
@@ -154,9 +154,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Effective note systems mean you actually retrieve and use captured information, not just store it. Track how often you reference old notes. Monitor whether new information gets captured consistently. Survey team usage patterns. Success means knowledge compounds rather than accumulates.",
     specificRecommendations: "Choose Notion AI if you want structured databases, team collaboration, and AI writing assistance. Choose Obsidian if you prioritize data ownership, offline access, and linking ideas over structured storage. Choose Evernote if you need reliable capture with minimal learning curve.",
     contenders: [
-      { kind: "tool", id: "t3" }, // Notion AI (swap)
-      { kind: "tool", id: "t9" }, // Obsidian (swap)
-      { kind: "tool", id: "t21" }, // Evernote (swap)
+      { kind: "tool", id: "t3" },
+      { kind: "tool", id: "t9" },
+      { kind: "tool", id: "t21" },
     ],
     criteria: [
       { name: "Capture speed", notes: "How fast you can store ideas without friction." },
@@ -188,9 +188,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Successful adoption means generating usable images consistently, not just occasionally. Track prompt-to-success ratio—good fit means fewer iterations needed. Monitor whether images actually ship versus staying in concept phase. Measure time saved versus traditional methods.",
     specificRecommendations: "Choose Midjourney if you want beautiful results fast and don't mind Discord. Choose DALL·E for straightforward generation with clear licensing. Choose Stable Diffusion if you need control, customization, or plan to build image generation into products.",
     contenders: [
-      { kind: "tool", id: "t22" }, // Midjourney (swap)
-      { kind: "tool", id: "t23" }, // DALL·E (swap)
-      { kind: "tool", id: "t24" }, // Stable Diffusion (swap)
+      { kind: "tool", id: "t22" },
+      { kind: "tool", id: "t23" },
+      { kind: "tool", id: "t24" },
     ],
     criteria: [
       { name: "Aesthetic quality", notes: "How good results look with average prompting." },
@@ -222,9 +222,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Effective writing tools mean fewer revisions needed, faster writing confidence, and better reader comprehension. Track how often you accept versus reject suggestions. Monitor whether your writing improves over time without the tool. Success means the tool makes you better, not dependent.",
     specificRecommendations: "Choose Grammarly for comprehensive grammar and tone checking across contexts. Choose QuillBot for paraphrasing, research, and rewriting needs. Choose Hemingway for forcing clarity and simplifying complex writing.",
     contenders: [
-      { kind: "tool", id: "t25" }, // Grammarly (swap)
-      { kind: "tool", id: "t26" }, // QuillBot (swap)
-      { kind: "tool", id: "t27" }, // Hemingway (swap)
+      { kind: "tool", id: "t25" },
+      { kind: "tool", id: "t26" },
+      { kind: "tool", id: "t27" },
     ],
     criteria: [
       { name: "Clarity improvements", notes: "Does it actually make writing easier to understand?" },
@@ -256,9 +256,9 @@ export const comparisons: Comparison[] = [
     successMetrics: "Successful automation means tasks run reliably without constant monitoring, errors get handled gracefully, team members trust the workflows, and time saved significantly exceeds setup and maintenance costs. Monitor automation reliability and time-to-fix when issues occur.",
     specificRecommendations: "Choose Zapier for simple automations, fast setup, and when non-technical users will build workflows. Choose Make for complex workflows needing visual logic and when moderate technical skill exists. Choose n8n for full control, custom integrations, or when self-hosting aligns with infrastructure strategy.",
     contenders: [
-      { kind: "tool", id: "t28" }, // Zapier (swap)
-      { kind: "tool", id: "t29" }, // Make (swap)
-      { kind: "tool", id: "t30" }, // n8n (swap)
+      { kind: "tool", id: "t28" },
+      { kind: "tool", id: "t29" },
+      { kind: "tool", id: "t30" },
     ],
     criteria: [
       { name: "Ease of setup", notes: "How fast you can build a working automation." },
@@ -270,6 +270,414 @@ export const comparisons: Comparison[] = [
     verdict:
       "Zapier is the fastest for simple automations and popular integrations. Make gives more power and visual control for complex flows. n8n is for devs who want control and self-hosting, and don't mind getting their hands dirty.",
     tags: ["automation", "workflow", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp9",
+    slug: "figma-vs-sketch-vs-adobe-xd",
+    title: "Figma vs Sketch vs Adobe XD",
+    description: "Design tools: collaboration, features, and which one won't drive your team crazy.",
+    whenToUse: "Reference this when choosing design tools for product teams, evaluating whether to switch from legacy tools, building design systems, or deciding on collaboration approaches. Critical when design and development workflows need tight integration.",
+    decisionContext: "Your ideal design tool depends on team size, collaboration needs, operating system constraints, existing Adobe ecosystem investment, and whether real-time collaboration justifies browser-based performance tradeoffs. Solo designers have different needs than teams of twenty.",
+    keyTradeoffs: "Figma excels at collaboration and cross-platform access but requires internet and can feel slower. Sketch offers native performance and plugin ecosystem but lacks real-time collaboration and only runs on Mac. Adobe XD integrates with Creative Cloud but lags behind in features and adoption.",
+    costConsiderations: "Figma charges per editor with unlimited viewers. Sketch requires Mac purchase plus annual licensing. Adobe XD bundles with Creative Cloud subscriptions. Factor in platform costs—forcing designers to buy Macs adds expense. Consider team size multipliers for subscription costs.",
+    migrationPath: "Moving from Sketch to Figma is increasingly common—export/import works reasonably well. XD migration requires more manual work. Component libraries need recreation regardless of tool. Budget significant time for teams to adjust to new paradigms.",
+    teamImpact: "Figma enables remote design collaboration without file version chaos. Sketch suits small Mac-based teams who prioritize native performance. XD works for teams already deep in Adobe ecosystem. Consider onboarding time and learning curves when switching.",
+    realWorldScenarios: "Remote-first companies standardize on Figma for collaboration. Traditional agencies with Mac fleets continue using Sketch. Enterprise teams with Adobe licenses try XD but often migrate to Figma. Startups default to Figma for cost and flexibility.",
+    commonPitfalls: "Teams switching to Figma sometimes create too many files without organization. Sketch users struggle with collaboration workarounds. XD adopters get frustrated by missing features competitors have. All tools require design system discipline regardless of platform.",
+    performanceProfile: "Figma performance depends on internet and browser but improves continuously. Sketch is fastest for local work on modern Macs. XD performance is adequate but not exceptional. Large files stress all platforms—good organization matters more than tool choice.",
+    successMetrics: "Successful tool adoption means designers collaborate effectively, handoff to developers improves, version control problems decrease, and design system usage increases. Survey designer satisfaction and measure time spent on tool friction versus actual design.",
+    specificRecommendations: "Choose Figma for remote teams, cross-platform needs, or when collaboration matters most. Choose Sketch if you're Mac-only and prioritize native performance with established workflows. Choose Adobe XD only if already deep in Creative Cloud and other tools don't meet regulatory requirements.",
+    contenders: [
+      { kind: "tool", id: "t31" },
+      { kind: "tool", id: "t32" },
+      { kind: "tool", id: "t33" },
+    ],
+    criteria: [
+      { name: "Collaboration", notes: "Real-time editing, commenting, and version control." },
+      { name: "Performance", notes: "Speed with complex files and large design systems." },
+      { name: "Features", notes: "Prototyping, components, plugins, and developer handoff." },
+      { name: "Platform support", notes: "Mac, Windows, web, and mobile access." },
+      { name: "Ecosystem", notes: "Plugins, integrations, community resources, and talent availability." },
+    ],
+    verdict:
+      "Figma wins for most teams due to collaboration and platform flexibility. Sketch remains strong for Mac-centric teams prioritizing native performance. Adobe XD is the distant third unless you're locked into Adobe ecosystem for other reasons.",
+    tags: ["design", "tools", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp10",
+    slug: "linear-vs-jira-vs-asana",
+    title: "Linear vs Jira vs Asana",
+    description: "Project management: speed, flexibility, and which one your team will actually use.",
+    whenToUse: "Deploy this when choosing project management tools for engineering teams, migrating from legacy PM software, scaling from spreadsheets, or when current tools feel too heavyweight or too limited. Most relevant when team coordination overhead needs reduction.",
+    decisionContext: "Your ideal PM tool depends on team size, process maturity, engineering versus general project work, integration needs, and whether speed trumps customization. Developer teams have different needs than marketing teams.",
+    keyTradeoffs: "Linear optimizes for engineering velocity with keyboard shortcuts and minimal friction but lacks flexibility for non-engineering work. Jira offers maximum customization and power but requires significant setup and maintenance. Asana provides flexibility across team types but can feel cluttered for pure engineering work.",
+    costConsiderations: "Linear pricing is straightforward per-user. Jira costs escalate quickly with add-ons and scale. Asana sits between them on cost. Factor in admin time—Jira requires dedicated management. Consider whether flexibility justifies complexity and cost.",
+    migrationPath: "Moving from Jira to Linear requires simplifying processes—good and painful. Asana to Linear works for engineering teams. Moving to Jira from simpler tools means accepting complexity. Export data before migrating and plan for workflow adjustments.",
+    teamImpact: "Linear works best for engineering teams who value speed. Jira suits enterprise teams with complex workflows and compliance needs. Asana fits cross-functional teams doing diverse work. Consider whether tool matches team culture and working style.",
+    realWorldScenarios: "Startups use Linear for engineering velocity and clean design. Enterprises use Jira for compliance and process enforcement. Cross-functional teams use Asana for marketing, product, and operations. Remote teams benefit from any tool with strong collaboration features.",
+    commonPitfalls: "Teams migrate to Linear expecting Jira features and get frustrated. Jira implementations over-customize until nobody understands the workflow. Asana users create too many projects without structure. All tools require discipline regardless of feature set.",
+    performanceProfile: "Linear is fastest for keyboard-driven workflows. Jira performance varies with customization complexity. Asana is responsive but can feel busy. All scale adequately but perceived speed differs based on workflow design.",
+    successMetrics: "Successful PM tools mean teams actually update status, planning meetings get shorter, work visibility improves, and coordination overhead decreases. Survey team satisfaction and measure time spent in tool versus on actual work.",
+    specificRecommendations: "Choose Linear for engineering teams prioritizing velocity and minimal friction. Choose Jira for enterprise needs with complex workflows and compliance requirements. Choose Asana for cross-functional teams doing diverse work beyond pure engineering.",
+    contenders: [
+      { kind: "tool", id: "t34" },
+      { kind: "tool", id: "t35" },
+      { kind: "tool", id: "t36" },
+    ],
+    criteria: [
+      { name: "Speed", notes: "How fast you can create issues, update status, and navigate." },
+      { name: "Engineering fit", notes: "Git integration, keyboard shortcuts, developer workflow alignment." },
+      { name: "Flexibility", notes: "Custom workflows, fields, and adapting to team needs." },
+      { name: "Cross-team use", notes: "Works for engineering and non-engineering work." },
+      { name: "Admin burden", notes: "Setup complexity and ongoing maintenance required." },
+    ],
+    verdict:
+      "Linear is the modern choice for engineering teams who value speed over flexibility. Jira remains dominant in enterprise despite complexity. Asana is best for teams doing more than pure engineering work.",
+    tags: ["project-management", "productivity", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp11",
+    slug: "webflow-vs-framer-vs-wordpress",
+    title: "Webflow vs Framer vs WordPress",
+    description: "Website builders: design freedom, maintenance, and which one scales without breaking.",
+    whenToUse: "Reference this when building marketing sites, choosing CMS platforms, migrating from legacy systems, or deciding between no-code and traditional development. Critical when balancing design flexibility against technical maintenance.",
+    decisionContext: "Your ideal platform depends on design requirements, technical resources, content management needs, budget, and growth plans. Marketing sites need different tools than content-heavy blogs or complex web applications.",
+    keyTradeoffs: "Webflow provides design freedom without code but requires learning its paradigm and costs scale with traffic. Framer offers modern component-based design but is newer with evolving CMS. WordPress provides maximum flexibility and ecosystem but requires technical maintenance and security vigilance.",
+    costConsiderations: "Webflow charges for hosting with traffic-based pricing that can spike. Framer has flat-rate hosting included. WordPress is free software but hosting, themes, plugins, and maintenance add costs. Calculate total cost of ownership including time spent on maintenance.",
+    migrationPath: "Moving to Webflow from WordPress requires complete rebuild. Framer migrations are similar. Exporting from Webflow is limited—avoid lock-in concerns upfront. WordPress migrations are easier due to open formats. Plan for SEO impact during any migration.",
+    teamImpact: "Webflow empowers designers to ship without developer dependencies. Framer suits design-forward teams building component-based sites. WordPress requires developer support for customization and maintenance. Consider who'll actually maintain the site long-term.",
+    realWorldScenarios: "Marketing teams use Webflow for landing pages and campaign sites. Design agencies use Framer for portfolio and client sites. Publishers use WordPress for content-heavy sites with complex needs. Startups use Webflow to ship quickly without engineering.",
+    commonPitfalls: "Teams choosing Webflow sometimes hit traffic pricing surprises. Framer adopters encounter CMS limitations for complex content. WordPress users struggle with plugin conflicts and security maintenance. All platforms require good information architecture regardless of tool.",
+    performanceProfile: "Webflow sites are fast out of the box with managed hosting. Framer performance is excellent with modern architecture. WordPress speed varies dramatically with hosting and optimization. Consider CDN, caching, and image optimization for all platforms.",
+    successMetrics: "Successful website platforms mean you can ship changes quickly, maintain consistent design quality, handle traffic growth, and keep costs predictable. Monitor site speed, update frequency, and designer/marketer satisfaction.",
+    specificRecommendations: "Choose Webflow for design-heavy marketing sites when designers need independence. Choose Framer for modern, component-based sites with moderate content needs. Choose WordPress for content-heavy sites, blogs, or when maximum flexibility matters more than convenience.",
+    contenders: [
+      { kind: "tool", id: "t37" },
+      { kind: "tool", id: "t38" },
+      { kind: "tool", id: "t39" },
+    ],
+    criteria: [
+      { name: "Design freedom", notes: "How much control over visual design without code." },
+      { name: "CMS capabilities", notes: "Content management, collections, and editorial workflow." },
+      { name: "Developer needs", notes: "How much technical support and maintenance required." },
+      { name: "Cost scaling", notes: "What happens to cost as traffic and content grow." },
+      { name: "Lock-in risk", notes: "How easy it is to migrate away if needed." },
+    ],
+    verdict:
+      "Webflow is best for design-focused marketing sites with manageable content. Framer is the modern choice for component-based sites but with less mature CMS. WordPress wins for content-heavy sites and maximum flexibility despite maintenance overhead.",
+    tags: ["web", "no-code", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp12",
+    slug: "stripe-vs-paypal-vs-square",
+    title: "Stripe vs PayPal vs Square",
+    description: "Payment processing: fees, features, and which one won't make customers abandon checkout.",
+    whenToUse: "Consult this when building e-commerce, choosing payment processors, evaluating transaction costs, or optimizing checkout conversion. Critical when payment experience directly impacts revenue.",
+    decisionContext: "Your ideal payment processor depends on transaction volume, average order value, international needs, technical resources, and whether you're optimizing for checkout conversion or cost. Digital products have different needs than physical retail.",
+    keyTradeoffs: "Stripe offers developer-friendly APIs and flexibility but requires technical integration. PayPal provides instant brand trust and buyer protection but higher fees and customer experience issues. Square suits in-person retail with unified POS but limited for complex online needs.",
+    costConsiderations: "All charge percentage plus fixed fees per transaction. Stripe and Square are similar around 2.9% plus 30 cents. PayPal is often higher especially for international. Factor in chargeback fees, currency conversion, and payout timing. Volume discounts exist but require negotiation.",
+    migrationPath: "Switching processors requires payment integration work and customer re-entry of payment methods. Subscriptions need careful migration to avoid disruption. Test thoroughly in sandbox before switching production. Consider running both during transition.",
+    teamImpact: "Stripe requires developers for integration and customization. PayPal is mostly no-code but limits control. Square is easiest for retail staff. Consider who'll handle disputes, refunds, and payment issues when choosing.",
+    realWorldScenarios: "SaaS companies use Stripe for subscription billing and revenue optimization. E-commerce stores use Stripe or PayPal based on target audience trust. Retail businesses use Square for in-person and online unified experience. Marketplaces use Stripe Connect for split payments.",
+    commonPitfalls: "Teams underestimate PayPal checkout abandonment on unfamiliar brands. Stripe implementations sometimes over-complicate basic needs. Square users hit limitations scaling complex online business. All processors have disputes and chargeback processes requiring attention.",
+    performanceProfile: "Stripe API reliability is excellent with strong uptime. PayPal has occasional issues but generally reliable. Square performance is solid for retail focus. All handle high transaction volume adequately but check rate limits for burst scenarios.",
+    successMetrics: "Successful payment processing means high checkout conversion, low payment failures, manageable transaction costs, and minimal customer payment complaints. Monitor authorization rates, dispute rates, and checkout abandonment at payment step.",
+    specificRecommendations: "Choose Stripe for online businesses, SaaS, subscriptions, or when developer control matters. Choose PayPal when targeting budget-conscious buyers or need instant trust. Choose Square for retail businesses wanting unified in-person and online experience.",
+    contenders: [
+      { kind: "tool", id: "t40" },
+      { kind: "tool", id: "t41" },
+      { kind: "tool", id: "t42" },
+    ],
+    criteria: [
+      { name: "Fees", notes: "Transaction costs, monthly fees, and hidden charges." },
+      { name: "Checkout UX", notes: "Customer experience and conversion impact." },
+      { name: "Features", notes: "Subscriptions, invoicing, fraud prevention, reporting." },
+      { name: "Developer experience", notes: "API quality, documentation, and integration ease." },
+      { name: "Trust factor", notes: "Brand recognition and buyer confidence." },
+    ],
+    verdict:
+      "Stripe wins for most online businesses due to flexibility and developer experience. PayPal still valuable for buyer trust and alternative payment method. Square is best for retail businesses wanting unified commerce experience.",
+    tags: ["payments", "e-commerce", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp13",
+    slug: "aws-vs-gcp-vs-azure",
+    title: "AWS vs Google Cloud vs Azure",
+    description: "Cloud platforms: features, costs, and which one won't surprise you with the bill.",
+    whenToUse: "Deploy this when choosing cloud infrastructure, migrating from on-premise, evaluating multi-cloud strategies, or when current cloud costs feel out of control. Most relevant when infrastructure decisions have long-term implications.",
+    decisionContext: "Your ideal cloud platform depends on existing ecosystem, team expertise, specific service needs, cost sensitivity, and whether you're optimizing for breadth versus depth of services. Startups have different needs than enterprises with existing Microsoft contracts.",
+    keyTradeoffs: "AWS offers the broadest service catalog and market dominance but complex pricing and overwhelming options. GCP provides superior data and ML services with cleaner pricing but smaller market share. Azure excels at Microsoft ecosystem integration but service maturity varies.",
+    costConsiderations: "All three can get expensive without careful monitoring. AWS has most cost optimization tools but also most complexity. GCP offers sustained use discounts automatically. Azure provides benefits with existing Microsoft agreements. Factor in data egress costs that can surprise you.",
+    migrationPath: "Multi-cloud is strategically appealing but operationally expensive. Migrating between clouds requires significant replatforming work. Start with one cloud and add others only for specific capabilities. Use containerization to maintain some portability.",
+    teamImpact: "AWS skills are most available in hiring market. GCP has growing talent pool especially for data engineering. Azure natural fit for teams with Microsoft background. Consider training costs and talent availability when choosing.",
+    realWorldScenarios: "Startups default to AWS for ecosystem and tooling. Data-heavy companies choose GCP for BigQuery and ML services. Enterprises with Microsoft contracts use Azure for Active Directory integration. Multi-billion dollar companies use all three strategically.",
+    commonPitfalls: "Teams underestimate AWS complexity and cost monitoring needs. GCP adopters occasionally hit service maturity gaps. Azure users sometimes find inconsistent service quality across offerings. All clouds require active cost optimization or bills balloon.",
+    performanceProfile: "All three provide excellent global infrastructure with regional availability. Network performance is comparable at scale. Specific services vary in maturity and performance. Test your actual workloads rather than trusting benchmarks.",
+    successMetrics: "Successful cloud adoption means predictable costs, high uptime, team productivity, and ability to leverage platform services effectively. Monitor cost per customer, infrastructure efficiency, and developer satisfaction with tooling.",
+    specificRecommendations: "Choose AWS for broadest service catalog and ecosystem maturity. Choose GCP for data-heavy workloads, ML, and cleaner pricing model. Choose Azure for Microsoft ecosystem integration and enterprise agreements.",
+    contenders: [
+      { kind: "tool", id: "t43" },
+      { kind: "tool", id: "t44" },
+      { kind: "tool", id: "t45" },
+    ],
+    criteria: [
+      { name: "Service breadth", notes: "Range of services and maturity across categories." },
+      { name: "Pricing clarity", notes: "How easy it is to understand and predict costs." },
+      { name: "Data/ML services", notes: "Quality of database, analytics, and ML offerings." },
+      { name: "Ecosystem", notes: "Tools, integrations, marketplace, and community." },
+      { name: "Enterprise support", notes: "Compliance, contracts, and support quality." },
+    ],
+    verdict:
+      "AWS remains the safe default for most companies due to service breadth and ecosystem. GCP is strongest for data and ML workloads. Azure wins for Microsoft-centric enterprises and hybrid cloud scenarios.",
+    tags: ["cloud", "infrastructure", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp14",
+    slug: "postgres-vs-mysql-vs-mongodb",
+    title: "PostgreSQL vs MySQL vs MongoDB",
+    description: "Databases: relational vs document, and which one fits your actual data model.",
+    whenToUse: "Reference this when choosing databases for new projects, migrating from legacy systems, scaling beyond SQLite, or when current database feels like wrong fit. Critical when data model and query patterns are becoming clear.",
+    decisionContext: "Your ideal database depends on data model fit, query patterns, scale requirements, team expertise, and whether you're optimizing for flexibility or consistency. CRUD apps have different needs than analytics or real-time systems.",
+    keyTradeoffs: "PostgreSQL offers powerful features and reliability but requires careful schema design. MySQL provides simplicity and speed but fewer advanced features. MongoDB enables flexible schemas but sacrifices consistency guarantees and can surprise you at scale.",
+    costConsiderations: "All three are free open source. Costs come from hosting, management, and scaling. Managed services like RDS or Atlas add convenience at price premium. Factor in operational overhead—PostgreSQL's power requires expertise to leverage well.",
+    migrationPath: "Switching databases is major undertaking requiring data migration and query rewrites. Start with right choice if possible. Moving from SQL to NoSQL or vice versa is particularly painful. Test migration thoroughly before cutover.",
+    teamImpact: "PostgreSQL requires SQL expertise and schema design skills. MySQL is easier for beginners but limits power users. MongoDB appeals to developers avoiding schema design but creates operational challenges. Consider team capabilities and hiring needs.",
+    realWorldScenarios: "SaaS applications use PostgreSQL for powerful features and data integrity. High-traffic web apps use MySQL for read-heavy workloads. Startups use MongoDB for rapid iteration without schema constraints. Analytics platforms use PostgreSQL for complex queries.",
+    commonPitfalls: "Teams choose MongoDB to avoid schema design then regret it at scale. MySQL users hit feature limitations requiring PostgreSQL migration. PostgreSQL implementations sometimes over-engineer schemas. All databases require proper indexing regardless of type.",
+    performanceProfile: "PostgreSQL excels at complex queries and writes. MySQL is faster for simple read-heavy workloads. MongoDB performs well for document retrieval but struggles with complex joins. All scale adequately with proper architecture and indexing.",
+    successMetrics: "Successful database choice means queries perform well, schema accommodates growth, team can operate it effectively, and costs remain reasonable at scale. Monitor query performance, storage growth, and operational incidents.",
+    specificRecommendations: "Choose PostgreSQL for most applications requiring data integrity and powerful querying. Choose MySQL for read-heavy web applications with simple data models. Choose MongoDB only when truly document-oriented data and flexible schema justify consistency tradeoffs.",
+    contenders: [
+      { kind: "tool", id: "t46" },
+      { kind: "tool", id: "t47" },
+      { kind: "tool", id: "t48" },
+    ],
+    criteria: [
+      { name: "Features", notes: "Query capabilities, data types, and advanced functionality." },
+      { name: "Performance", notes: "Speed for your specific read/write patterns." },
+      { name: "Scalability", notes: "How well it handles growth in data and traffic." },
+      { name: "Data integrity", notes: "ACID guarantees and consistency model." },
+      { name: "Operational complexity", notes: "Setup, maintenance, backup, and monitoring burden." },
+    ],
+    verdict:
+      "PostgreSQL is the best default for most applications requiring data integrity. MySQL wins for simple read-heavy workloads. MongoDB is appropriate for document-oriented data but often chosen for wrong reasons.",
+    tags: ["database", "backend", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp15",
+    slug: "react-vs-vue-vs-svelte",
+    title: "React vs Vue vs Svelte",
+    description: "Frontend frameworks: ecosystem size, learning curve, and which one you'll still like in two years.",
+    whenToUse: "Consult this when starting frontend projects, choosing technology stacks, migrating from legacy frameworks, or when team needs to standardize on modern frontend approach. Most relevant when framework choice has multi-year implications.",
+    decisionContext: "Your ideal framework depends on team size, project complexity, performance requirements, hiring market, and whether you're optimizing for ecosystem size or developer experience. Enterprise teams have different constraints than startups.",
+    keyTradeoffs: "React offers largest ecosystem and hiring pool but more boilerplate and decision fatigue. Vue provides gentle learning curve and good balance but smaller ecosystem. Svelte delivers best developer experience and performance but smallest community and limited tooling.",
+    costConsiderations: "All are free open source. Costs come from training, hiring, and tooling differences. React developers command premium but are plentiful. Vue and Svelte developers are harder to find. Consider total cost of team productivity and hiring.",
+    migrationPath: "Framework migrations are expensive multi-month projects. Incremental migration is possible but complex. Choose carefully upfront since switching is painful. Component architecture can help future portability but doesn't eliminate migration work.",
+    teamImpact: "React teams benefit from huge ecosystem but need discipline to avoid choice paralysis. Vue teams appreciate official tooling and conventions. Svelte teams enjoy productivity but may struggle hiring. Consider learning curve for junior developers.",
+    realWorldScenarios: "Large companies use React for talent availability and ecosystem. Developer tools and productivity apps use Svelte for performance. Asian markets favor Vue for community and documentation. Agencies use React for client expectations.",
+    commonPitfalls: "React teams sometimes over-engineer with unnecessary complexity. Vue adopters occasionally hit ecosystem limitations for niche needs. Svelte users struggle finding experienced developers and production examples. All frameworks require good architecture regardless of choice.",
+    performanceProfile: "Svelte delivers smallest bundle sizes and fastest runtime. React performance is good with proper optimization but requires care. Vue sits between them on performance. All are fast enough for most applications with proper practices.",
+    successMetrics: "Successful framework choice means team ships features consistently, onboarding is smooth, performance meets requirements, and hiring pipeline stays healthy. Monitor development velocity, bug rates, and developer satisfaction.",
+    specificRecommendations: "Choose React for largest ecosystem, hiring pool, and when framework choice is strategic hiring advantage. Choose Vue for balanced developer experience and when Asian markets are important. Choose Svelte for greenfield projects where performance matters and team is small.",
+    contenders: [
+      { kind: "tool", id: "t49" },
+      { kind: "tool", id: "t50" },
+      { kind: "tool", id: "t51" },
+    ],
+    criteria: [
+      { name: "Ecosystem", notes: "Libraries, tools, components, and community resources." },
+      { name: "Learning curve", notes: "How fast developers become productive." },
+      { name: "Performance", notes: "Bundle size, runtime speed, and optimization ease." },
+      { name: "Hiring", notes: "Developer availability and market demand." },
+      { name: "Longevity", notes: "Community health and long-term viability." },
+    ],
+    verdict:
+      "React remains the safest choice for most teams due to ecosystem and hiring. Vue offers best balance of power and approachability. Svelte is the developer-favorite for greenfield projects but hiring is challenging.",
+    tags: ["frontend", "javascript", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp16",
+    slug: "mailchimp-vs-sendgrid-vs-postmark",
+    title: "Mailchimp vs SendGrid vs Postmark",
+    description: "Email tools: marketing campaigns vs transactional, and which one actually delivers to inbox.",
+    whenToUse: "Deploy this when choosing email infrastructure, separating marketing from transactional email, improving deliverability, or when current email solution feels limiting. Critical when email is core to customer communication.",
+    decisionContext: "Your ideal email tool depends on whether you're sending marketing campaigns or transactional emails, volume requirements, deliverability needs, technical resources, and integration requirements. Marketing newsletters need different tools than password resets.",
+    keyTradeoffs: "Mailchimp excels at marketing automation and design but expensive at scale and not for transactional. SendGrid handles both marketing and transactional but better at latter and can be complex. Postmark focuses exclusively on transactional with excellent deliverability but no marketing features.",
+    costConsiderations: "Mailchimp charges based on contact count which escalates quickly. SendGrid charges per email sent with volume discounts. Postmark has straightforward per-email pricing. Factor in deliverability value—cheap providers may harm sender reputation.",
+    migrationPath: "Switching marketing platforms loses contact data and campaign history unless exported. Transactional email migration is easier but requires DNS and integration work. Test deliverability thoroughly before fully switching. Consider overlap period for safety.",
+    teamImpact: "Mailchimp empowers marketers without developer help. SendGrid requires technical implementation for transactional use. Postmark is developer-friendly but marketing team can't use it. Consider who manages email and their technical capabilities.",
+    realWorldScenarios: "E-commerce brands use Mailchimp for newsletters and automated campaigns. SaaS applications use SendGrid or Postmark for transactional emails. Startups use SendGrid for both use cases to consolidate. Enterprises split marketing and transactional across specialized tools.",
+    commonPitfalls: "Teams use Mailchimp for transactional emails violating terms. SendGrid implementations sometimes end up in spam due to configuration errors. Postmark users hit limitations needing marketing features. All providers require proper authentication (SPF, DKIM, DMARC) for deliverability.",
+    performanceProfile: "Postmark has best deliverability and speed for transactional. SendGrid is reliable but configuration matters. Mailchimp is adequate for marketing timing. All handle volume well but check rate limits and burst capacity for your needs.",
+    successMetrics: "Successful email infrastructure means high delivery rates, low spam placement, predictable costs, and good sender reputation. Monitor delivery rates, open rates, spam complaints, and bounce rates continuously.",
+    specificRecommendations: "Choose Mailchimp for marketing-focused email with automation needs. Choose SendGrid for transactional email or when handling both marketing and transactional. Choose Postmark for mission-critical transactional email where deliverability is paramount.",
+    contenders: [
+      { kind: "tool", id: "t52" },
+      { kind: "tool", id: "t53" },
+      { kind: "tool", id: "t54" },
+    ],
+    criteria: [
+      { name: "Use case fit", notes: "Marketing vs transactional vs both." },
+      { name: "Deliverability", notes: "Inbox placement and sender reputation." },
+      { name: "Features", notes: "Automation, templates, analytics, and APIs." },
+      { name: "Cost scaling", notes: "How pricing changes with volume growth." },
+      { name: "Developer experience", notes: "API quality, documentation, and integration ease." },
+    ],
+    verdict:
+      "Mailchimp is best for marketing-focused email campaigns. SendGrid is versatile for both use cases but better at transactional. Postmark is the gold standard for transactional email deliverability.",
+    tags: ["email", "marketing", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp17",
+    slug: "docker-vs-kubernetes-vs-serverless",
+    title: "Docker vs Kubernetes vs Serverless",
+    description: "Deployment: containers, orchestration, and whether serverless actually saves money.",
+    whenToUse: "Reference this when modernizing deployment infrastructure, scaling applications, evaluating container strategies, or deciding between operational complexity and serverless convenience. Critical when current deployment approach hits scaling or cost limits.",
+    decisionContext: "Your ideal deployment approach depends on application architecture, team operations expertise, scale requirements, cost sensitivity, and whether you're optimizing for control or convenience. Different application types benefit from different deployment models.",
+    keyTradeoffs: "Docker provides containerization without orchestration—simple but manual at scale. Kubernetes offers powerful orchestration but significant operational complexity. Serverless eliminates infrastructure management but constrains architecture and can surprise on costs.",
+    costConsiderations: "Docker infrastructure costs depend on hosting but operations are expensive. Kubernetes adds orchestration cost and requires dedicated expertise. Serverless has no base cost but per-invocation charges scale unpredictably. Calculate total cost including engineering time.",
+    migrationPath: "Moving to containers from VMs is incremental. Adding Kubernetes requires significant investment and expertise. Going serverless often requires application rearchitecture. Start with Docker, add orchestration when scaling requires it, consider serverless for specific workloads.",
+    teamImpact: "Docker requires moderate operations knowledge. Kubernetes demands dedicated platform team or managed service. Serverless reduces operations burden but requires different development patterns. Consider team capabilities and hiring needs.",
+    realWorldScenarios: "Startups use Docker on simple hosting to start. Growing companies adopt Kubernetes for scale and flexibility. Event-driven workloads use serverless functions. Large enterprises run hybrid approaches using appropriate tool for each workload type.",
+    commonPitfalls: "Teams adopt Kubernetes too early before needing its complexity. Docker implementations lack proper orchestration at scale. Serverless architectures hit cost surprises or cold start issues. All approaches require monitoring, logging, and observability regardless of choice.",
+    performanceProfile: "Docker startup time is fast for properly sized containers. Kubernetes adds orchestration overhead but enables better resource utilization. Serverless has cold start latency but scales instantly. Performance depends heavily on application architecture.",
+    successMetrics: "Successful deployment infrastructure means reliable releases, predictable costs, fast debugging, and team can ship confidently. Monitor deployment frequency, rollback rates, incident response time, and infrastructure costs as percentage of revenue.",
+    specificRecommendations: "Choose Docker for early stage or simple deployments without orchestration needs. Choose Kubernetes when scale and operational requirements justify complexity. Choose serverless for event-driven workloads or when minimizing operations burden matters more than control.",
+    contenders: [
+      { kind: "tool", id: "t55" },
+      { kind: "tool", id: "t56" },
+      { kind: "tool", id: "t57" },
+    ],
+    criteria: [
+      { name: "Operational complexity", notes: "Setup, maintenance, and expertise required." },
+      { name: "Scalability", notes: "How well it handles traffic growth and variation." },
+      { name: "Cost model", notes: "Pricing structure and cost predictability." },
+      { name: "Developer experience", notes: "Local development, debugging, and deployment ease." },
+      { name: "Flexibility", notes: "Architectural constraints and customization options." },
+    ],
+    verdict:
+      "Docker is the right starting point for most applications. Kubernetes justifies complexity at scale or for platform engineering teams. Serverless is ideal for specific workloads but not complete replacement for containers.",
+    tags: ["devops", "deployment", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp18",
+    slug: "github-vs-gitlab-vs-bitbucket",
+    title: "GitHub vs GitLab vs Bitbucket",
+    description: "Code hosting: features, pipelines, and which one won't make code review painful.",
+    whenToUse: "Consult this when choosing code hosting platforms, migrating from on-premise, evaluating CI/CD integration, or when current platform feels limiting. Most relevant when code collaboration and automation needs are becoming clear.",
+    decisionContext: "Your ideal code platform depends on team size, CI/CD requirements, project visibility needs, existing tool ecosystem, and whether you're optimizing for features or simplicity. Open source projects have different needs than enterprise teams.",
+    keyTradeoffs: "GitHub offers largest community and ecosystem but limited free CI/CD minutes. GitLab provides complete DevOps platform including CI/CD but can feel complex. Bitbucket integrates tightly with Atlassian tools but limited ecosystem and features.",
+    costConsiderations: "GitHub pricing scales with private repos and team size. GitLab offers generous free tier with unlimited CI/CD minutes. Bitbucket bundles with Atlassian Cloud. Factor in CI/CD costs separately if using external services like CircleCI.",
+    migrationPath: "Git makes repository migration straightforward. Challenges are in CI/CD pipelines, issue tracking, and integrations. Export issues and documentation before migrating. Test CI/CD thoroughly in new platform before cutover.",
+    teamImpact: "GitHub has most familiar interface and largest talent pool. GitLab's complete platform reduces tool sprawl but increases learning curve. Bitbucket fits teams already on Jira and Confluence. Consider onboarding time and tool familiarity.",
+    realWorldScenarios: "Open source projects default to GitHub for visibility. Enterprise teams use GitLab for complete DevOps platform. Atlassian-heavy companies use Bitbucket for integration. Startups choose based on features needed and budget available.",
+    commonPitfalls: "GitHub users hit CI/CD minute limits and unexpected costs. GitLab implementations over-complicate simple workflows. Bitbucket users miss features available in competitors. All platforms require good branching strategy regardless of platform choice.",
+    performanceProfile: "All three provide reliable hosting and fast git operations. GitHub has most stable uptime record. GitLab performance depends on deployment model. Bitbucket is adequate but not exceptional. CI/CD performance varies significantly between platforms.",
+    successMetrics: "Successful code platform means fast code review cycles, reliable CI/CD, good documentation integration, and team satisfaction. Monitor pull request time-to-merge, CI/CD reliability, and developer productivity indicators.",
+    specificRecommendations: "Choose GitHub for largest ecosystem, community features, and open source hosting. Choose GitLab for complete DevOps platform with generous free tier. Choose Bitbucket only if heavily invested in Atlassian ecosystem.",
+    contenders: [
+      { kind: "tool", id: "t58" },
+      { kind: "tool", id: "t59" },
+      { kind: "tool", id: "t60" },
+    ],
+    criteria: [
+      { name: "Community", notes: "Ecosystem, discoverability, and open source fit." },
+      { name: "CI/CD", notes: "Pipeline features, minutes included, and build speed." },
+      { name: "Code review", notes: "PR experience, commenting, and review workflows." },
+      { name: "Integrations", notes: "Tools, bots, and external service connections." },
+      { name: "Value", notes: "What you get at each pricing tier." },
+    ],
+    verdict:
+      "GitHub remains the default choice for most teams due to ecosystem and familiarity. GitLab is strong for teams wanting complete DevOps platform. Bitbucket makes sense primarily for Atlassian-heavy organizations.",
+    tags: ["git", "devops", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp19",
+    slug: "contentful-vs-sanity-vs-strapi",
+    title: "Contentful vs Sanity vs Strapi",
+    description: "Headless CMS: editing experience, API flexibility, and which one scales without breaking.",
+    whenToUse: "Deploy this when choosing CMS for modern websites, building content infrastructure, migrating from traditional CMS, or when current content management feels limiting. Critical when content needs to power multiple channels.",
+    decisionContext: "Your ideal headless CMS depends on content model complexity, API requirements, team technical capabilities, budget, and whether you're optimizing for editor experience or developer flexibility. Marketing sites need different CMS than complex content platforms.",
+    keyTradeoffs: "Contentful provides mature platform with great editor experience but expensive at scale. Sanity offers powerful customization and real-time collaboration but requires more technical setup. Strapi is open source and self-hosted giving control but requiring infrastructure management.",
+    costConsiderations: "Contentful charges per entry and API calls which escalates quickly. Sanity has generous free tier then per-user pricing. Strapi is free but hosting and maintenance costs add up. Calculate total cost including engineering time for customization and operations.",
+    migrationPath: "Moving between headless CMS requires content migration and API integration work. Content models must be rebuilt in new system. Test migration with subset before full cutover. Budget significant engineering time for any CMS migration.",
+    teamImpact: "Contentful empowers content teams with intuitive interface. Sanity requires developers for customization but rewards with flexibility. Strapi assumes technical team for deployment and maintenance. Consider who manages content and their technical capabilities.",
+    realWorldScenarios: "Marketing teams use Contentful for ease of use across websites. Developer-heavy companies use Sanity for flexibility and real-time features. Startups use Strapi for cost control and customization. Enterprises evaluate all three based on specific requirements.",
+    commonPitfalls: "Contentful users hit surprising costs at scale. Sanity implementations over-engineer content models. Strapi users underestimate operational burden of self-hosting. All CMS choices require good content modeling regardless of platform.",
+    performanceProfile: "Contentful CDN is fast and globally distributed. Sanity provides real-time capabilities with good performance. Strapi performance depends on hosting and database optimization. All headless approaches enable better front-end performance than traditional CMS.",
+    successMetrics: "Successful CMS means content team is productive, developers can build features quickly, API performance meets requirements, and costs remain predictable. Monitor content publishing velocity, API latency, and team satisfaction.",
+    specificRecommendations: "Choose Contentful for best editor experience and when budget allows. Choose Sanity for flexibility, real-time features, and developer control. Choose Strapi for maximum control, customization, and when technical team can manage infrastructure.",
+    contenders: [
+      { kind: "tool", id: "t61" },
+      { kind: "tool", id: "t62" },
+      { kind: "tool", id: "t63" },
+    ],
+    criteria: [
+      { name: "Editor experience", notes: "Intuitive interface for content teams." },
+      { name: "Flexibility", notes: "Content modeling, API customization, and extensibility." },
+      { name: "Performance", notes: "API speed, CDN, and scaling capabilities." },
+      { name: "Cost scaling", notes: "How pricing changes with content and traffic growth." },
+      { name: "Developer experience", notes: "API quality, SDKs, and documentation." },
+    ],
+    verdict:
+      "Contentful is best for editor experience and mature features. Sanity wins for flexibility and real-time capabilities. Strapi is right for teams wanting control and avoiding vendor lock-in despite operational overhead.",
+    tags: ["cms", "content", "comparison"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "cmp20",
+    slug: "amplitude-vs-mixpanel-vs-google-analytics",
+    title: "Amplitude vs Mixpanel vs Google Analytics",
+    description: "Product analytics: event tracking, insights, and which one answers actual product questions.",
+    whenToUse: "Reference this when implementing product analytics, moving beyond pageviews, understanding user behavior deeply, or when current analytics feel inadequate. Critical when data-driven product decisions require better insights.",
+    decisionContext: "Your ideal analytics platform depends on product complexity, analysis depth needed, team analytics maturity, budget, and whether you're optimizing for comprehensiveness or ease of use. Marketing teams need different tools than product teams.",
+    keyTradeoffs: "Amplitude provides powerful analysis with cohort and retention focus but expensive at scale. Mixpanel offers event-based tracking with good UX but limited free tier. Google Analytics is free and comprehensive but complex and privacy-concerning for product analytics.",
+    costConsiderations: "Amplitude charges per event with rapid cost escalation. Mixpanel has generous free tier then per-event pricing. Google Analytics 4 is free but Google Analytics 360 is expensive. Factor in implementation time and data engineering costs.",
+    migrationPath: "Switching analytics requires re-implementing event tracking and rebuilding dashboards. Historical data doesn't transfer. Run platforms in parallel during transition to validate tracking. Budget significant engineering time for proper implementation.",
+    teamImpact: "Amplitude requires analytics sophistication to leverage fully. Mixpanel is more approachable for product teams. Google Analytics assumes marketing analytics mindset. Consider team capabilities and training needs when choosing.",
+    realWorldScenarios: "Product-focused companies use Amplitude for retention analysis. Growth teams use Mixpanel for experimentation and funnels. Marketing-driven companies use Google Analytics for traffic analysis. Data-mature companies build custom analytics infrastructure.",
+    commonPitfalls: "Teams implement Amplitude without analytics expertise and waste money. Mixpanel users hit free tier limits faster than expected. Google Analytics 4 implementations struggle with event modeling. All platforms require thoughtful event taxonomy regardless of tool.",
+    performanceProfile: "All three handle high event volumes adequately. Query speed varies—Amplitude and Mixpanel generally faster than Google Analytics 4. Real-time capabilities differ. Consider how fast you need insights when choosing.",
+    successMetrics: "Successful analytics means product team makes data-driven decisions, user behavior is understood, experimentation is reliable, and insights lead to action. Monitor how often team references analytics in product decisions.",
+    specificRecommendations: "Choose Amplitude for product-focused companies needing deep retention and cohort analysis. Choose Mixpanel for balanced features with approachable interface. Choose Google Analytics 4 for marketing-focused analytics or when free is mandatory.",
+    contenders: [
+      { kind: "tool", id: "t64" },
+      { kind: "tool", id: "t65" },
+      { kind: "tool", id: "t66" },
+    ],
+    criteria: [
+      { name: "Analysis depth", notes: "Cohorts, retention, funnels, and behavioral analysis." },
+      { name: "Ease of use", notes: "How fast non-analysts can get insights." },
+      { name: "Implementation", notes: "SDK quality and event tracking setup." },
+      { name: "Cost scaling", notes: "How pricing changes with usage growth." },
+      { name: "Privacy", notes: "GDPR compliance and data control." },
+    ],
+    verdict:
+      "Amplitude is best for product-focused companies with analytics sophistication. Mixpanel offers good balance of power and usability. Google Analytics 4 works for marketing analytics but struggles as product analytics tool.",
+    tags: ["analytics", "product", "comparison"],
     updatedAtISO: "2026-01-24",
   },
 ];
