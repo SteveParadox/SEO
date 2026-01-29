@@ -28,15 +28,20 @@ export default function ToolsIndexPage() {
           const href = `/tools/${t.slug}`;
 
           return (
-            <Card key={t.id} className="rounded-2xl hover:bg-muted/40 transition relative">
-              {/* whole card is clickable */}
+            <Card
+              key={t.id}
+              className="rounded-2xl hover:bg-muted/40 transition relative"
+            >
+              {/* Whole card clickable (works on mobile too) */}
               <Link
                 href={href}
-                className="absolute inset-0 rounded-2xl"
                 aria-label={t.name}
-              />
+                className="absolute inset-0 rounded-2xl z-0"
+              >
+                <span className="sr-only">{t.name}</span>
+              </Link>
 
-              <CardContent className="p-5 relative">
+              <CardContent className="p-5 relative z-10">
                 <div className="flex items-center gap-2 flex-wrap">
                   {t.tags.slice(0, 3).map((rawTag) => {
                     const tag = rawTag.trim();
@@ -46,10 +51,13 @@ export default function ToolsIndexPage() {
                       <Link
                         key={`${t.id}-${tagSlug}`}
                         href={`/tags/${tagSlug}`}
-                        className="relative z-10 inline-flex"
+                        className="inline-flex"
                         aria-label={`Tag: ${tag}`}
                       >
-                        <Badge variant="secondary" className="rounded-full">
+                        <Badge
+                          variant="secondary"
+                          className="rounded-full relative z-20"
+                        >
                           {tag}
                         </Badge>
                       </Link>
