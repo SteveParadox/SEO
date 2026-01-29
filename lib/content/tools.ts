@@ -3415,5 +3415,325 @@ export const tools: Tool[] = [
   users: "Very Popular",
   updatedAtISO: "2026-01-28",
 },
+{
+  id: "t109",
+  slug: "opentelemetry",
+  name: "OpenTelemetry",
+  oneLiner: "Open standard for tracing, metrics, and logs across modern systems.",
+  description:
+    "OpenTelemetry is an open-source observability framework that provides standardized APIs and SDKs for collecting traces, metrics, and logs. It’s widely used as the foundation for monitoring distributed systems, including backend services and increasingly LLM-powered applications.",
+  useCases: [
+    "Distributed tracing",
+    "Metrics collection",
+    "Log correlation",
+    "Backend observability",
+    "LLM and AI system monitoring"
+  ],
+  pros: [
+    "Vendor-neutral open standard",
+    "Widely adopted across the industry",
+    "Strong ecosystem and tooling",
+    "Works with most languages and platforms",
+    "Plays well with enterprise stacks"
+  ],
+  cons: [
+    "Complex to set up",
+    "Requires observability knowledge",
+    "Not beginner-friendly out of the box"
+  ],
+  pricing: {
+    tier: "free",
+    note: "Open source and free to use"
+  },
+  alternatives: [
+    { name: "Datadog", slug: "datadog" },
+    { name: "New Relic", slug: "new-relic" },
+    { name: "LangSmith", slug: "langsmith" }
+  ],
+  tags: ["observability", "tracing", "metrics", "open-source"],
+  rating: 4.5,
+  users: "Industry Standard",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t110",
+  slug: "promptlayer",
+  name: "PromptLayer",
+  oneLiner: "Track, version, and debug prompts across LLM applications.",
+  description:
+    "PromptLayer is a prompt management and observability tool designed for teams building LLM-powered applications. It helps log prompts, compare outputs, track versions, and analyze usage across environments and models.",
+  useCases: [
+    "Prompt logging",
+    "Prompt versioning",
+    "LLM debugging",
+    "Model output comparison",
+    "AI development workflows"
+  ],
+  pros: [
+    "Easy prompt tracking and history",
+    "Works across multiple LLM providers",
+    "Simple integration",
+    "Good visibility into prompt changes",
+    "Focused and lightweight"
+  ],
+  cons: [
+    "Limited beyond prompt-level observability",
+    "Not a full tracing solution",
+    "Advanced features require paid plans"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free tier available + paid plans for teams"
+  },
+  alternatives: [
+    { name: "LangSmith", slug: "langsmith" },
+    { name: "Helicone", slug: "helicone" },
+    { name: "W&B Weave", slug: "wandb-weave" }
+  ],
+  tags: ["llm", "prompts", "observability", "ai"],
+  rating: 4.4,
+  users: "LLM Developers",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t111",
+  slug: "zencastr",
+  name: "Zencastr",
+  oneLiner: "Remote podcast recording with studio-quality audio.",
+  description:
+    "Zencastr is a remote recording platform built specifically for podcasters. It records high-quality audio locally for each participant and uploads tracks separately, reducing common issues like lag, compression, and internet artifacts.",
+  useCases: [
+    "Podcast recording",
+    "Remote interviews",
+    "Audio production",
+    "Video podcasts",
+    "Content creation"
+  ],
+  pros: [
+    "Local audio recording",
+    "Separate tracks per speaker",
+    "Browser-based recording",
+    "Video recording supported",
+    "Easy guest onboarding"
+  ],
+  cons: [
+    "Free plan is limited",
+    "Editing tools are basic",
+    "Pricing can feel high for casual use"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans for advanced features"
+  },
+  alternatives: [
+    { name: "Riverside", slug: "riverside" },
+    { name: "SquadCast", slug: "squadcast" },
+    { name: "Zoom", slug: "zoom" }
+  ],
+  tags: ["audio", "podcast", "recording", "creator"],
+  rating: 4.5,
+  users: "Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t112",
+  slug: "launchbar",
+  name: "LaunchBar",
+  oneLiner: "Keyboard-based launcher for macOS power users.",
+  description:
+    "LaunchBar is a productivity launcher for macOS that allows users to open apps, search files, run actions, and automate tasks using the keyboard. It’s a long-standing alternative to Spotlight aimed at experienced users.",
+  useCases: [
+    "App launching",
+    "File search",
+    "Automation",
+    "Clipboard access",
+    "Productivity shortcuts"
+  ],
+  pros: [
+    "Fast and keyboard-centric",
+    "Powerful actions and indexing",
+    "Stable and mature product",
+    "Deep macOS integration",
+    "Highly configurable"
+  ],
+  cons: [
+    "macOS only",
+    "Paid license required",
+    "Less modern UI"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time purchase license"
+  },
+  alternatives: [
+    { name: "Alfred", slug: "alfred" },
+    { name: "Spotlight", slug: "spotlight" },
+    { name: "Raycast", slug: "raycast" }
+  ],
+  tags: ["productivity", "launcher", "macos", "automation"],
+  rating: 4.5,
+  users: "Power Users",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t113",
+  slug: "plane",
+  name: "Plane",
+  oneLiner: "Open-source project management built for modern teams.",
+  description:
+    "Plane is an open-source project management tool designed as a modern alternative to Jira and Linear. It focuses on issues, cycles, and roadmaps with a clean interface and self-hosting flexibility.",
+  useCases: [
+    "Project management",
+    "Issue tracking",
+    "Sprint planning",
+    "Roadmaps",
+    "Engineering teams"
+  ],
+  pros: [
+    "Open source",
+    "Clean and modern UI",
+    "Self-hosting supported",
+    "Actively developed",
+    "Good Jira alternative"
+  ],
+  cons: [
+    "Younger product",
+    "Smaller ecosystem",
+    "Some features still evolving"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free self-hosted + paid cloud plans"
+  },
+  alternatives: [
+    { name: "Linear", slug: "linear" },
+    { name: "Jira", slug: "jira" },
+    { name: "Trello", slug: "trello" }
+  ],
+  tags: ["project-management", "open-source", "issues", "teams"],
+  rating: 4.4,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t114",
+  slug: "height",
+  name: "Height",
+  oneLiner: "Autonomous project management powered by AI.",
+  description:
+    "Height is a project management tool that uses AI to automatically handle task updates, priorities, and workflows. It’s designed to reduce manual project maintenance and keep teams focused on actual work.",
+  useCases: [
+    "Project management",
+    "Task tracking",
+    "Team collaboration",
+    "Automated workflows",
+    "Product teams"
+  ],
+  pros: [
+    "AI-assisted task management",
+    "Clean and modern UI",
+    "Reduces manual updates",
+    "Good for fast-moving teams",
+    "Strong automation focus"
+  ],
+  cons: [
+    "Newer and less proven",
+    "AI behavior may feel opaque",
+    "Smaller ecosystem"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Subscription-based pricing"
+  },
+  alternatives: [
+    { name: "ClickUp", slug: "clickup" },
+    { name: "Linear", slug: "linear" },
+    { name: "Monday.com", slug: "monday" }
+  ],
+  tags: ["project-management", "ai", "productivity", "teams"],
+  rating: 4.3,
+  users: "Early Adopters",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t115",
+  slug: "trello",
+  name: "Trello",
+  oneLiner: "Kanban-style task management that stays simple.",
+  description:
+    "Trello is a visual task management tool based on boards, lists, and cards. It’s popular for its simplicity and flexibility, making it suitable for personal projects and small teams.",
+  useCases: [
+    "Task tracking",
+    "Kanban boards",
+    "Personal productivity",
+    "Small team projects",
+    "Workflow visualization"
+  ],
+  pros: [
+    "Very easy to use",
+    "Visual and intuitive",
+    "Good free plan",
+    "Flexible for many use cases",
+    "Large user base"
+  ],
+  cons: [
+    "Limited for complex projects",
+    "Advanced features require paid plans",
+    "Not ideal for large teams"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available + paid plans"
+  },
+  alternatives: [
+    { name: "Asana", slug: "asana" },
+    { name: "ClickUp", slug: "clickup" },
+    { name: "Notion", slug: "notion" }
+  ],
+  tags: ["project-management", "kanban", "productivity"],
+  rating: 4.5,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t116",
+  slug: "squadcast",
+  name: "SquadCast",
+  oneLiner: "Remote recording built for podcasters who care about quality.",
+  description:
+    "SquadCast is a remote audio and video recording platform focused on reliability and studio-quality output. It records locally for each participant and is commonly used for professional podcasts and interviews.",
+  useCases: [
+    "Podcast recording",
+    "Remote interviews",
+    "Audio production",
+    "Video podcasts",
+    "Professional content"
+  ],
+  pros: [
+    "Local lossless recording",
+    "Separate tracks per speaker",
+    "Reliable sync technology",
+    "Clean and simple interface",
+    "Professional-grade output"
+  ],
+  cons: [
+    "No free plan",
+    "Limited editing features",
+    "Focused mainly on podcasters"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Subscription-based pricing"
+  },
+  alternatives: [
+    { name: "Riverside", slug: "riverside" },
+    { name: "Zencastr", slug: "zencastr" },
+    { name: "OBS Studio", slug: "obs" }
+  ],
+  tags: ["audio", "podcast", "recording", "professional"],
+  rating: 4.6,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
 
 ];
