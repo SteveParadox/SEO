@@ -13,14 +13,18 @@ export const metadata: Metadata = {
 };
 
 function formatUpdated(iso: string) {
-  // Lightweight, no date-fns dependency
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+  return d.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  });
 }
 
 export default function BestIndexPage() {
   const pages = [...DATA.bestPages].sort(
-    (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
+    (a, b) =>
+      new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
   );
 
   return (
@@ -36,13 +40,21 @@ export default function BestIndexPage() {
           const snippet = p.intro?.[0] ?? p.description;
 
           return (
-            <Card key={p.id} className="rounded-2xl hover:bg-muted/40 transition relative">
-              {/* “Stretched link” makes whole card clickable without nesting Link components */}
-              <Link href={href} className="absolute inset-0 rounded-2xl" aria-label={p.title} />
+            <Card
+              key={p.id}
+              className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+            >
+              {/* Stretched link BEHIND content */}
+              <Link
+                href={href}
+                aria-label={p.title}
+                className="absolute inset-0 z-0"
+              />
 
-              <CardContent className="p-5 relative">
+              {/* Content ABOVE stretched link */}
+              <CardContent className="p-5 relative z-10 pointer-events-none">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 pointer-events-auto">
                     {p.tags.slice(0, 4).map((t) => {
                       const label = t.trim();
                       const tagSlug = encodeURIComponent(label.toLowerCase());
@@ -50,9 +62,12 @@ export default function BestIndexPage() {
                         <Link
                           key={`${p.id}-${tagSlug}`}
                           href={`/tags/${tagSlug}`}
-                          className="relative z-10"
+                          className="relative"
                         >
-                          <Badge variant="secondary" className="rounded-full">
+                          <Badge
+                            variant="secondary"
+                            className="rounded-full"
+                          >
                             {label}
                           </Badge>
                         </Link>
