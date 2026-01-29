@@ -3,11 +3,20 @@ import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Best AI Tool Lists — ToolDrop AI",
-  description: "High-intent tool lists: ranked picks, tradeoffs, and quick recommendations.",
+  description:
+    "High-intent tool lists: ranked picks, tradeoffs, and quick recommendations.",
+  alternates: { canonical: absoluteUrl("/best") },
 };
+
+function formatUpdated(iso: string) {
+  // Lightweight, no date-fns dependency
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+}
 
 export default function BestIndexPage() {
   const pages = [...DATA.bestPages].sort(
@@ -22,23 +31,48 @@ export default function BestIndexPage() {
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {pages.map((p) => (
-          <Link key={p.id} href={`/best/${p.slug}`}>
-            <Card className="rounded-2xl hover:bg-muted/40 transition">
-              <CardContent className="p-5">
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.slice(0, 4).map((t) => (
-                    <Badge key={t} variant="secondary" className="rounded-full">
-                      {t}
-                    </Badge>
-                  ))}
+        {pages.map((p) => {
+          const href = `/best/${p.slug}`;
+          const snippet = p.intro?.[0] ?? p.description;
+
+          return (
+            <Card key={p.id} className="rounded-2xl hover:bg-muted/40 transition relative">
+              {/* “Stretched link” makes whole card clickable without nesting Link components */}
+              <Link href={href} className="absolute inset-0 rounded-2xl" aria-label={p.title} />
+
+              <CardContent className="p-5 relative">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap gap-2">
+                    {p.tags.slice(0, 4).map((t) => {
+                      const label = t.trim();
+                      const tagSlug = encodeURIComponent(label.toLowerCase());
+                      return (
+                        <Link
+                          key={`${p.id}-${tagSlug}`}
+                          href={`/tags/${tagSlug}`}
+                          className="relative z-10"
+                        >
+                          <Badge variant="secondary" className="rounded-full">
+                            {label}
+                          </Badge>
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  <div className="text-xs text-muted-foreground shrink-0">
+                    Updated {formatUpdated(p.updatedAtISO)}
+                  </div>
                 </div>
-                <div className="mt-2 font-semibold">{p.title}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{p.description}</div>
+
+                <div className="mt-3 font-semibold">{p.title}</div>
+                <div className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                  {snippet}
+                </div>
               </CardContent>
             </Card>
-          </Link>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
