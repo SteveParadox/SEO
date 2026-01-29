@@ -3175,4 +3175,125 @@ export const tools: Tool[] = [
   users: "Established",
   updatedAtISO: "2026-01-28",
 },
+  {
+  id: "t103",
+  slug: "bluehost",
+  name: "Bluehost",
+  oneLiner: "Beginner-friendly hosting heavily marketed to WordPress users.",
+  description:
+    "Bluehost is a long-running web hosting provider best known for its tight association with WordPress. It offers shared hosting, VPS, and managed WordPress plans aimed primarily at beginners and small businesses.",
+  useCases: [
+    "WordPress hosting",
+    "Small business websites",
+    "Blogs",
+    "Personal websites",
+    "Beginner hosting"
+  ],
+  pros: [
+    "Easy WordPress setup",
+    "Beginner-friendly dashboard",
+    "Free domain on signup",
+    "Large support knowledge base",
+    "Widely recognized brand"
+  ],
+  cons: [
+    "Renewal prices increase significantly",
+    "Performance is average",
+    "Upselling during setup"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Low intro pricing with higher renewal rates"
+  },
+  alternatives: [
+    { name: "SiteGround", slug: "siteground" },
+    { name: "Hostinger", slug: "hostinger" },
+    { name: "DreamHost", slug: "dreamhost" }
+  ],
+  tags: ["hosting", "wordpress", "website", "beginner"],
+  rating: 4.1,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t104",
+  slug: "namecheap",
+  name: "Namecheap",
+  oneLiner: "Domains first, hosting second, pricing that doesn’t feel hostile.",
+  description:
+    "Namecheap is best known as a domain registrar but also offers shared hosting, VPS, and email services. It’s popular for transparent pricing, simple management, and solid value for small projects.",
+  useCases: [
+    "Domain registration",
+    "Website hosting",
+    "Email hosting",
+    "Small projects",
+    "Personal sites"
+  ],
+  pros: [
+    "Affordable domain pricing",
+    "Free WHOIS privacy",
+    "Simple control panel",
+    "Decent support",
+    "Good value for money"
+  ],
+  cons: [
+    "Hosting performance is average",
+    "Not ideal for high-traffic sites",
+    "Advanced features are limited"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Low-cost domains and affordable hosting plans"
+  },
+  alternatives: [
+    { name: "Google Domains", slug: "google-domains" },
+    { name: "Hostinger", slug: "hostinger" },
+    { name: "Bluehost", slug: "bluehost" }
+  ],
+  tags: ["domains", "hosting", "website", "infrastructure"],
+  rating: 4.4,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t105",
+  slug: "siteground",
+  name: "SiteGround",
+  oneLiner: "Premium hosting focused on performance and support.",
+  description:
+    "SiteGround is a web hosting provider known for strong performance, security, and customer support. It’s commonly recommended for WordPress and business websites that need reliability more than the cheapest possible price.",
+  useCases: [
+    "WordPress hosting",
+    "Business websites",
+    "High-performance sites",
+    "Managed hosting",
+    "Professional blogs"
+  ],
+  pros: [
+    "Excellent customer support",
+    "Strong performance and uptime",
+    "Managed WordPress features",
+    "Built-in security tools",
+    "Google Cloud infrastructure"
+  ],
+  cons: [
+    "Higher pricing than competitors",
+    "No free domain",
+    "Storage limits on lower plans"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Premium pricing with strong performance and support"
+  },
+  alternatives: [
+    { name: "Bluehost", slug: "bluehost" },
+    { name: "WP Engine", slug: "wp-engine" },
+    { name: "Kinsta", slug: "kinsta" }
+  ],
+  tags: ["hosting", "wordpress", "performance", "business"],
+  rating: 4.6,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
+
 ];
