@@ -356,3 +356,8 @@ export function resolveBestPicks(page: BestPage) {
 export function findBestPagesContainingTool(toolId: string) {
   return DATA.bestPages.filter((p) => p.picks.some((x) => x.toolId === toolId));
 }
+export function findComparisonsContainingTool(toolId: string) {
+  return DATA.comparisons.filter((cmp) =>
+    cmp.contenders.some((x) => x.kind === "tool" && x.id === toolId)
+  );
+}
