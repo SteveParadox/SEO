@@ -422,4 +422,319 @@ export const collections: Collection[] = [
     tags: ["support", "customer-service", "efficiency"],
     updatedAtISO: "2026-01-24",
   },
+
+  {
+    id: "c21",
+    slug: "freelancer-client-management",
+    title: "Freelancer Client Management (Professional, Not Pushy)",
+    description:
+      "Proposals, contracts, updates, and invoicing that get you hired and paid on time.",
+    longDescription: "Successful freelancing requires clear communication, professional documentation, and systematic follow-up. This collection provides templates and workflows for the business side of freelancing—proposals that win work, contracts that protect you, updates that build trust, and invoicing that gets paid promptly.",
+    whoItsFor: "Freelancers, consultants, or contractors managing multiple clients. Anyone transitioning from employee to independent work. Service providers who need better client communication systems.",
+    howToUse: "Use proposal templates to respond to opportunities quickly. Adapt contract language for your services. Send regular progress updates without being prompted. Invoice immediately after milestones with clear payment terms.",
+    commonMistakes: "Underselling in proposals. Working without contracts. Going silent between milestones. Delayed invoicing that delays payment. Not tracking client communication systematically.",
+    successMetrics: "You win proposals at reasonable rates. Clients pay on time without chasing. Scope creep is minimal. Clients refer you to others. You maintain healthy work-life boundaries.",
+    items: [
+      { kind: "prompt", id: "p11" }, // Email to executive for proposals
+      { kind: "prompt", id: "p3" }, // Clear communication
+      { kind: "tool", id: "t42" }, // Notion for client tracking
+      { kind: "tool", id: "t39" }, // Stripe for invoicing
+    ],
+    tags: ["freelance", "business", "clients"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c22",
+    slug: "startup-mvp-builder",
+    title: "Startup MVP Builder (Ship Fast, Learn Faster)",
+    description:
+      "Build and launch your first version in weeks, not months. Validate before perfecting.",
+    longDescription: "MVPs succeed when they test core assumptions quickly with minimal investment. This collection focuses on rapid prototyping, no-code solutions where possible, and learning from real users. The goal is validation, not perfection—ship something people can actually use and judge.",
+    whoItsFor: "Founders building their first product. Technical cofounders who need to move fast. Non-technical founders who need to ship without a dev team. Anyone validating a product idea.",
+    howToUse: "Start with feature specs to define must-haves only. Use no-code tools where possible. Build rough but functional. Launch to small audience. Iterate based on actual usage data.",
+    commonMistakes: "Building features users didn't ask for. Perfecting design before validating concept. Waiting for everything to be ready. Not talking to users during build. Over-engineering the first version.",
+    successMetrics: "You launch within target timeframe. Users actually use the product. You learn what to build next from real usage. Technical debt is manageable. You avoid rebuilding from scratch.",
+    items: [
+      { kind: "prompt", id: "p17" }, // Feature spec template
+      { kind: "tool", id: "t44" }, // Vercel for deployment
+      { kind: "tool", id: "t45" }, // Supabase for backend
+      { kind: "tool", id: "t10" }, // Framer for landing page
+    ],
+    tags: ["startup", "mvp", "product"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c23",
+    slug: "technical-writing-system",
+    title: "Technical Writing System (Clear, Complete, Maintainable)",
+    description:
+      "Write docs, specs, and guides that engineers and users both understand.",
+    longDescription: "Technical writing requires balancing accuracy with accessibility. This collection helps you document systems, write specifications, create guides, and maintain documentation that serves both technical and non-technical audiences. Focus on clarity without sacrificing precision.",
+    whoItsFor: "Technical writers, developers documenting features, DevRel creating guides, or anyone responsible for technical documentation. Product managers writing specs for engineering teams.",
+    howToUse: "Start with clear structure and audience definition. Use diagrams where helpful. Write in layers—overview first, details second. Test documentation with actual users. Update docs when product changes.",
+    commonMistakes: "Writing only for experts. Assuming too much context. Not providing examples. Letting documentation drift from reality. Using jargon without definition.",
+    successMetrics: "Support tickets decrease. Users successfully complete tasks using docs. Engineers can onboard using documentation. Docs stay current with product. Search finds relevant information.",
+    items: [
+      { kind: "prompt", id: "p13" }, // Technical explainer
+      { kind: "prompt", id: "p19" }, // Tutorial writer
+      { kind: "prompt", id: "p3" }, // Clarity rewrite
+      { kind: "tool", id: "t42" }, // Documentation platform
+    ],
+    tags: ["documentation", "technical-writing", "dev"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c24",
+    slug: "remote-team-coordination",
+    title: "Remote Team Coordination (Async-First, Meeting-Light)",
+    description:
+      "Keep remote teams aligned without drowning in Zoom calls and Slack noise.",
+    longDescription: "Remote work succeeds with clear communication rhythms, good documentation, and intentional synchronous time. This collection provides systems for async updates, focused meetings, and team alignment that respects time zones and deep work.",
+    whoItsFor: "Remote team managers, distributed teams, async-first companies, or anyone coordinating across time zones. Teams tired of meeting overload.",
+    howToUse: "Establish async update rhythms. Document decisions in written form. Use meetings only for collaboration and discussion. Record important meetings for absent members. Create clear communication channels.",
+    commonMistakes: "Defaulting to meetings for everything. Not documenting decisions. Expecting instant responses. Scheduling across too many time zones. Unclear communication ownership.",
+    successMetrics: "Meeting time decreases. Team reports feeling less interrupted. Decisions get made without everyone present. Documentation stays current. Team velocity improves.",
+    items: [
+      { kind: "prompt", id: "p12" }, // Meeting agendas
+      { kind: "prompt", id: "p11" }, // Clear async updates
+      { kind: "tool", id: "t42" }, // Notion for documentation
+      { kind: "tool", id: "t43" }, // Loom for async video
+    ],
+    tags: ["remote", "management", "async"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c25",
+    slug: "personal-brand-building",
+    title: "Personal Brand Building (Authentic, Not Cringe)",
+    description:
+      "Build authority and audience without turning into a LinkedIn influencer parody.",
+    longDescription: "Personal branding works when it's genuine expertise shared consistently, not motivational quotes and humble brags. This collection focuses on demonstrating knowledge through teaching, building in public, and creating valuable content that serves your audience.",
+    whoItsFor: "Professionals building thought leadership. Job seekers standing out. Founders establishing credibility. Anyone wanting to be known for their expertise.",
+    howToUse: "Pick one platform to focus on. Share what you're learning publicly. Create content that helps others solve problems. Engage authentically with your field. Stay consistent for months, not weeks.",
+    commonMistakes: "Posting only wins without process. Writing for algorithms instead of people. Not being consistent. Copying other creators' voice. Expecting immediate results.",
+    successMetrics: "People reach out about your expertise. Job opportunities find you. Your content gets referenced by others. You build genuine professional relationships. Audience engagement grows steadily.",
+    items: [
+      { kind: "prompt", id: "p4" }, // Content structure
+      { kind: "tool", id: "t43" }, // Loom for video
+      { kind: "tool", id: "t42" }, // Notion for content planning
+      { kind: "prompt", id: "p3" }, // Clarity rewrite
+    ],
+    tags: ["personal-brand", "content", "career"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c26",
+    slug: "api-documentation-complete",
+    title: "API Documentation Complete (Devs Can Actually Use It)",
+    description:
+      "Document APIs so developers succeed on first try, not third support ticket.",
+    longDescription: "Good API documentation means developers can integrate successfully without contacting support. This collection covers reference docs, integration guides, example code, and error handling—everything needed for smooth developer experience.",
+    whoItsFor: "Developer experience teams, API product managers, backend engineers documenting endpoints, or anyone building developer-facing products.",
+    howToUse: "Start with quick start guide for common use case. Provide complete reference documentation. Include real example code. Document errors and edge cases. Keep documentation current with API changes.",
+    commonMistakes: "Reference docs without examples. Examples that don't run. Outdated documentation. Missing error codes and meanings. No migration guides for breaking changes.",
+    successMetrics: "Integration time decreases. Support tickets about usage decrease. Developers successfully integrate without contacting support. API adoption increases. Positive developer sentiment.",
+    items: [
+      { kind: "prompt", id: "p19" }, // Tutorial writer
+      { kind: "prompt", id: "p13" }, // Technical explainer
+      { kind: "tool", id: "t42" }, // Documentation platform
+      { kind: "prompt", id: "p2" }, // Debug examples
+    ],
+    tags: ["api", "documentation", "developer-experience"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c27",
+    slug: "lead-generation-system",
+    title: "Lead Generation System (Inbound, Not Annoying)",
+    description:
+      "Attract and qualify leads through content and tools, not cold outreach spam.",
+    longDescription: "Inbound lead generation builds trust through valuable content, clear positioning, and helpful tools. This collection focuses on creating content that attracts your ideal customers, lead magnets that qualify interest, and nurture sequences that build relationships.",
+    whoItsFor: "B2B marketers, SaaS founders, consultants, or anyone selling complex products where trust and education matter. Teams moving from outbound to inbound.",
+    howToUse: "Create content addressing customer pain points. Build calculators or tools that provide value. Capture leads with genuine value exchange. Nurture with educational content. Track engagement to identify hot leads.",
+    commonMistakes: "Creating content about yourself not customers. Gating everything behind forms. Not nurturing captured leads. Ignoring lead scoring. Following up too aggressively.",
+    successMetrics: "Qualified lead volume increases. Lead quality improves. Conversion rate from lead to customer increases. Sales team spends less time qualifying. Customer acquisition cost decreases.",
+    items: [
+      { kind: "prompt", id: "p9" }, // Landing page copy
+      { kind: "prompt", id: "p4" }, // Content creation
+      { kind: "tool", id: "t37" }, // Webflow for landing pages
+      { kind: "tool", id: "t28" }, // Zapier for automation
+    ],
+    tags: ["marketing", "leads", "growth"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c28",
+    slug: "data-dashboard-builder",
+    title: "Data Dashboard Builder (Insights, Not Just Charts)",
+    description:
+      "Build dashboards that answer questions and drive decisions, not just look pretty.",
+    longDescription: "Effective dashboards surface insights and enable action, not just display data. This collection focuses on understanding stakeholder questions, choosing right metrics, designing for clarity, and building dashboards people actually use.",
+    whoItsFor: "Data analysts, product managers, business intelligence teams, or anyone building dashboards for stakeholders. Teams moving from static reports to self-service analytics.",
+    howToUse: "Start by understanding what decisions the dashboard should inform. Choose metrics that matter. Design for scanability. Add context to numbers. Make dashboards interactive where helpful. Iterate based on usage.",
+    commonMistakes: "Showing too many metrics. Not providing context for numbers. Building dashboards nobody asked for. Making dashboards too complex. Not maintaining data quality.",
+    successMetrics: "Stakeholders use dashboards regularly. Questions get answered without manual analysis. Decisions reference dashboard data. Ad-hoc analysis requests decrease. Dashboard loading time stays fast.",
+    items: [
+      { kind: "prompt", id: "p8" }, // SQL for data
+      { kind: "prompt", id: "p13" }, // Technical explainer
+      { kind: "tool", id: "t47" }, // PostHog for analytics
+      { kind: "tool", id: "t42" }, // Notion for documentation
+    ],
+    tags: ["data", "analytics", "dashboards"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c29",
+    slug: "code-review-system",
+    title: "Code Review System (Helpful Feedback, Not Nitpicks)",
+    description:
+      "Review code that improves quality, teaches developers, and ships faster.",
+    longDescription: "Good code review balances quality standards with velocity and learning. This collection provides frameworks for constructive feedback, automated checks for style issues, and review processes that teach rather than block.",
+    whoItsFor: "Engineering leads, senior developers, tech leads, or anyone responsible for code quality. Teams wanting to improve review culture and velocity.",
+    howToUse: "Automate style and formatting checks. Focus reviews on logic, architecture, and edge cases. Ask questions instead of demanding changes. Explain reasoning behind feedback. Prioritize blocking versus non-blocking feedback.",
+    commonMistakes: "Nitpicking style issues humans shouldn't review. Not explaining the why behind feedback. Blocking PRs for non-critical issues. Not reviewing promptly. Inconsistent standards across reviewers.",
+    successMetrics: "PR cycle time decreases. Code quality remains high. Junior developers improve faster. Review feedback is constructive. Team doesn't dread code review.",
+    items: [
+      { kind: "prompt", id: "p2" }, // Bug hunter for review
+      { kind: "prompt", id: "p3" }, // Clear communication
+      { kind: "tool", id: "t1" }, // AI coding for review assistance
+      { kind: "prompt", id: "p15" }, // Postmortem for major issues
+    ],
+    tags: ["dev", "code-review", "quality"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c30",
+    slug: "workshop-facilitation-kit",
+    title: "Workshop Facilitation Kit (Productive Sessions, Real Outcomes)",
+    description:
+      "Run workshops that generate ideas, make decisions, and align teams.",
+    longDescription: "Effective workshops require clear goals, structured activities, good facilitation, and concrete outputs. This collection provides frameworks for ideation, decision-making, and alignment sessions that produce usable results.",
+    whoItsFor: "Product managers running feature prioritization. Design leads facilitating brainstorms. Managers running team planning. Anyone facilitating collaborative work sessions.",
+    howToUse: "Define clear workshop goals and outputs upfront. Design activities that serve the goal. Facilitate actively to keep momentum. Document decisions in real-time. Follow up with action items.",
+    commonMistakes: "Vague workshop goals. Too many activities in too little time. Not managing dominant voices. Failing to capture decisions. No follow-up after workshop.",
+    successMetrics: "Workshops produce concrete decisions or outputs. Participants feel time was well spent. Decided actions actually happen. Teams align on direction. Future meetings reference workshop decisions.",
+    items: [
+      { kind: "prompt", id: "p14" }, // Brainstorm facilitator
+      { kind: "prompt", id: "p12" }, // Meeting agendas
+      { kind: "tool", id: "t8" }, // Excalidraw for collaboration
+      { kind: "tool", id: "t31" }, // Figma for design workshops
+    ],
+    tags: ["facilitation", "workshop", "collaboration"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c31",
+    slug: "sales-demo-preparation",
+    title: "Sales Demo Preparation (Show Value, Not Features)",
+    description:
+      "Prepare demos that connect product capabilities to customer problems.",
+    longDescription: "Winning demos demonstrate how your product solves the prospect's specific problems, not just showcasing features. This collection focuses on discovery, demo customization, handling objections, and following up effectively.",
+    whoItsFor: "Sales engineers, account executives, founders doing sales, or anyone demoing products to prospects. Teams wanting to improve demo conversion rates.",
+    howToUse: "Research prospect before demo. Customize demo to their use case. Start with their problem, not your features. Show specific value for their situation. Leave time for questions. Follow up with clear next steps.",
+    commonMistakes: "Generic feature tours. Not researching prospect. Talking too much. Not handling objections. Weak follow-up. Demoing everything instead of relevant features.",
+    successMetrics: "Demo-to-opportunity conversion increases. Prospects engage actively during demo. Technical objections decrease. Sales cycle length decreases. Win rate from demo stage improves.",
+    items: [
+      { kind: "prompt", id: "p13" }, // Technical explainer
+      { kind: "prompt", id: "p11" }, // Clear communication
+      { kind: "tool", id: "t43" }, // Loom for demo recordings
+      { kind: "prompt", id: "p10" }, // Anticipate objections
+    ],
+    tags: ["sales", "demo", "conversion"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c32",
+    slug: "learning-new-programming-language",
+    title: "Learning New Programming Language (Practical, Not Academic)",
+    description:
+      "Master a new language by building, not reading. Projects over textbooks.",
+    longDescription: "Language learning accelerates through building real projects that expose you to common patterns. This collection provides a project-based learning path, focuses on practical patterns over theory, and builds muscle memory through repetition.",
+    whoItsFor: "Developers learning new languages for work. Engineers exploring new technology stacks. Students moving beyond introductory courses. Anyone wanting practical proficiency fast.",
+    howToUse: "Start with small working project. Learn syntax as needed. Build increasingly complex projects. Read others' code. Solve practical problems, not puzzles. Focus on language idioms and patterns.",
+    commonMistakes: "Reading documentation without coding. Building toy projects forever. Not reading production code. Learning theory before practice. Trying to learn everything before building.",
+    successMetrics: "You build working projects in the new language. Code feels idiomatic not translated. You debug effectively. You read others' code without struggling. You choose appropriate language features.",
+    items: [
+      { kind: "prompt", id: "p1" }, // Explain like tutor
+      { kind: "prompt", id: "p2" }, // Debug new language code
+      { kind: "tool", id: "t1" }, // Cursor for learning
+      { kind: "prompt", id: "p19" }, // Tutorial writer
+    ],
+    tags: ["learning", "programming", "dev"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c33",
+    slug: "user-research-synthesis",
+    title: "User Research Synthesis (Insights to Action)",
+    description:
+      "Turn user interviews and feedback into clear insights and product decisions.",
+    longDescription: "Research synthesis transforms raw data into actionable insights. This collection helps you analyze interview transcripts, identify patterns, extract insights, and communicate findings that drive product decisions.",
+    whoItsFor: "Product managers, UX researchers, designers, or anyone conducting user research. Teams wanting to make research more actionable.",
+    howToUse: "Review all research data systematically. Tag common themes and patterns. Extract specific quotes supporting insights. Prioritize insights by impact and confidence. Present findings with recommendations.",
+    commonMistakes: "Cherry-picking quotes supporting preconceptions. Not distinguishing between what users say and do. Overwhelming stakeholders with too many findings. Not connecting insights to actions.",
+    successMetrics: "Research directly influences product decisions. Team references research in prioritization. User problems are understood deeply. Research findings are actionable. Stakeholders trust research quality.",
+    items: [
+      { kind: "prompt", id: "p3" }, // Synthesize clearly
+      { kind: "prompt", id: "p18" }, // Executive summary
+      { kind: "tool", id: "t42" }, // Notion for organization
+      { kind: "prompt", id: "p7" }, // Compare patterns
+    ],
+    tags: ["research", "product", "ux"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c34",
+    slug: "crisis-communication-plan",
+    title: "Crisis Communication Plan (Transparent, Not Defensive)",
+    description:
+      "Communicate during incidents, outages, or mistakes with honesty and speed.",
+    longDescription: "Crisis communication requires acknowledging problems quickly, communicating transparently, and following through on commitments. This collection provides templates for incident updates, customer communications, and internal coordination.",
+    whoItsFor: "Product managers handling outages. Support teams during incidents. Communications teams managing crises. Anyone responsible for customer communication during problems.",
+    howToUse: "Acknowledge issue immediately. Provide regular updates on progress. Be honest about impact and timeline. Follow up after resolution. Document what happened and what changed.",
+    commonMistakes: "Going silent during crisis. Being overly defensive. Over-promising on timeline. Not communicating to all affected parties. Forgetting follow-up after resolution.",
+    successMetrics: "Customers feel informed during incidents. Churn doesn't spike after problems. Team coordinates effectively during crisis. Updates are timely and accurate. Post-crisis trust recovers quickly.",
+    items: [
+      { kind: "prompt", id: "p15" }, // Postmortem
+      { kind: "prompt", id: "p11" }, // Clear communication
+      { kind: "prompt", id: "p3" }, // Clarity under pressure
+      { kind: "tool", id: "t42" }, // Notion for coordination
+    ],
+    tags: ["crisis", "communication", "incident"],
+    updatedAtISO: "2026-01-24",
+  },
+
+  {
+    id: "c35",
+    slug: "performance-optimization-workflow",
+    title: "Performance Optimization Workflow (Measure, Fix, Verify)",
+    description:
+      "Make things faster through data, not guessing. Profile, optimize, benchmark.",
+    longDescription: "Performance optimization requires measuring before and after, identifying real bottlenecks, and verifying improvements. This collection provides systematic approach to finding and fixing performance issues.",
+    whoItsFor: "Backend engineers optimizing services. Frontend developers improving page speed. Database engineers tuning queries. Anyone responsible for system performance.",
+    howToUse: "Profile to identify real bottlenecks. Focus on highest impact optimizations first. Implement changes incrementally. Benchmark before and after. Monitor production impact. Document optimizations for team.",
+    commonMistakes: "Optimizing without profiling. Premature optimization. Not measuring impact. Making changes that hurt readability for minimal gain. Not considering real-world usage patterns.",
+    successMetrics: "Performance metrics improve measurably. User experience improves noticeably. Infrastructure costs decrease. Team maintains performance gains over time. Optimization decisions are data-driven.",
+    items: [
+      { kind: "prompt", id: "p2" }, // Debug performance issues
+      { kind: "prompt", id: "p8" }, // SQL query optimization
+      { kind: "tool", id: "t6" }, // Langfuse for LLM performance
+      { kind: "prompt", id: "p15" }, // Document learnings
+    ],
+    tags: ["performance", "optimization", "dev"],
+    updatedAtISO: "2026-01-24",
+  },
 ];
