@@ -3295,5 +3295,125 @@ export const tools: Tool[] = [
   users: "Established",
   updatedAtISO: "2026-01-28",
 },
+{
+  id: "t106",
+  slug: "wp-engine",
+  name: "WP Engine",
+  oneLiner: "Managed WordPress hosting for sites that cannot afford downtime.",
+  description:
+    "WP Engine is a managed WordPress hosting provider focused on performance, security, and reliability. It’s widely used by businesses and enterprises that want WordPress handled professionally without worrying about servers, updates, or scaling.",
+  useCases: [
+    "Managed WordPress hosting",
+    "Business websites",
+    "High-traffic blogs",
+    "Enterprise WordPress",
+    "Agency client sites"
+  ],
+  pros: [
+    "Excellent performance",
+    "Strong security and backups",
+    "Managed updates and caching",
+    "Great developer tools",
+    "Reliable support"
+  ],
+  cons: [
+    "Expensive compared to shared hosting",
+    "WordPress-only",
+    "No domain registration included"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Premium monthly pricing based on traffic and features"
+  },
+  alternatives: [
+    { name: "Kinsta", slug: "kinsta" },
+    { name: "SiteGround", slug: "siteground" },
+    { name: "Flywheel", slug: "flywheel" }
+  ],
+  tags: ["hosting", "wordpress", "managed", "performance"],
+  rating: 4.6,
+  users: "Enterprise",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t107",
+  slug: "kinsta",
+  name: "Kinsta",
+  oneLiner: "High-performance managed WordPress hosting on Google Cloud.",
+  description:
+    "Kinsta is a premium managed WordPress hosting provider built on Google Cloud Platform. It’s known for excellent speed, strong security, and a polished dashboard aimed at businesses and professional developers.",
+  useCases: [
+    "Managed WordPress hosting",
+    "High-traffic websites",
+    "E-commerce sites",
+    "Business and agency projects",
+    "Performance-critical sites"
+  ],
+  pros: [
+    "Outstanding performance",
+    "Google Cloud infrastructure",
+    "Clean and modern dashboard",
+    "Daily backups and security",
+    "Excellent support"
+  ],
+  cons: [
+    "High pricing",
+    "WordPress-only",
+    "Overkill for small sites"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Premium monthly pricing based on usage"
+  },
+  alternatives: [
+    { name: "WP Engine", slug: "wp-engine" },
+    { name: "SiteGround", slug: "siteground" },
+    { name: "Flywheel", slug: "flywheel" }
+  ],
+  tags: ["hosting", "wordpress", "performance", "managed"],
+  rating: 4.7,
+  users: "Businesses",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t108",
+  slug: "google-domains",
+  name: "Google Domains",
+  oneLiner: "Simple domain registration with Google-level reliability.",
+  description:
+    "Google Domains is a domain registrar focused on simplicity, security, and transparent pricing. It integrates cleanly with Google services and is popular with users who want no surprises, no upsells, and straightforward domain management.",
+  useCases: [
+    "Domain registration",
+    "Domain management",
+    "Small business sites",
+    "Personal projects",
+    "Google ecosystem setups"
+  ],
+  pros: [
+    "Clean and simple UI",
+    "Free WHOIS privacy",
+    "Transparent pricing",
+    "Easy DNS management",
+    "Strong reliability"
+  ],
+  cons: [
+    "Limited advanced features",
+    "No hosting beyond domains",
+    "Smaller feature set than some registrars"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Flat-rate domain pricing with free privacy"
+  },
+  alternatives: [
+    { name: "Namecheap", slug: "namecheap" },
+    { name: "Cloudflare Registrar", slug: "cloudflare-registrar" },
+    { name: "GoDaddy", slug: "godaddy" }
+  ],
+  tags: ["domains", "dns", "infrastructure", "website"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
 
 ];
