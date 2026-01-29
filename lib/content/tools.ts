@@ -3735,5 +3735,45 @@ export const tools: Tool[] = [
   users: "Established",
   updatedAtISO: "2026-01-28",
 },
+{
+  id: "t117",
+  slug: "kimi",
+  name: "Kimi",
+  oneLiner: "Long-context AI assistant built for reading and reasoning over huge documents.",
+  description:
+    "Kimi is an AI assistant developed by Moonshot AI, best known for its extremely long context window and strong document understanding. It’s widely used for reading, summarizing, and reasoning over long PDFs, research papers, legal documents, and technical files.",
+  useCases: [
+    "Long document analysis",
+    "PDF summarization",
+    "Research assistance",
+    "Technical reading",
+    "Knowledge extraction"
+  ],
+  pros: [
+    "Very large context window",
+    "Strong document comprehension",
+    "Handles long PDFs well",
+    "Good reasoning on dense text",
+    "Fast iteration and improvement"
+  ],
+  cons: [
+    "Less ecosystem integration than Western tools",
+    "Limited customization options",
+    "UI and language support still evolving"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free access with usage limits + paid plans"
+  },
+  alternatives: [
+    { name: "ChatGPT", slug: "chatgpt" },
+    { name: "Claude", slug: "claude" },
+    { name: "Perplexity", slug: "perplexity" }
+  ],
+  tags: ["ai", "llm", "documents", "research"],
+  rating: 4.5,
+  users: "Growing",
+  updatedAtISO: "2026-01-28",
+},
 
 ];
