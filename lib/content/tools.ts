@@ -3095,4 +3095,84 @@ export const tools: Tool[] = [
   users: "Popular",
   updatedAtISO: "2026-01-28",
 },
+{
+  id: "t101",
+  slug: "streamlabs",
+  name: "Streamlabs",
+  oneLiner: "All-in-one live streaming with overlays, alerts, and monetization baked in.",
+  description:
+    "Streamlabs is a live streaming platform built on top of OBS that simplifies streaming with built-in overlays, alerts, chat tools, and monetization features. It’s popular with streamers who want quick setup and fewer knobs to tweak.",
+  useCases: [
+    "Live streaming",
+    "Gaming streams",
+    "YouTube and Twitch broadcasts",
+    "Audience engagement",
+    "Streamer monetization"
+  ],
+  pros: [
+    "Very easy to set up",
+    "Built-in alerts and overlays",
+    "Integrated chat and widgets",
+    "Good for beginners",
+    "Monetization features included"
+  ],
+  cons: [
+    "Less control than OBS Studio",
+    "Heavier on system resources",
+    "Some features locked behind subscription"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free basic version + optional Streamlabs Ultra subscription"
+  },
+  alternatives: [
+    { name: "OBS Studio", slug: "obs" },
+    { name: "XSplit", slug: "xsplit" },
+    { name: "Restream", slug: "restream" }
+  ],
+  tags: ["streaming", "live", "creator", "broadcast"],
+  rating: 4.4,
+  users: "Very Popular",
+  updatedAtISO: "2026-01-28",
+},
+{
+  id: "t102",
+  slug: "camtasia",
+  name: "Camtasia",
+  oneLiner: "Screen recording and editing for tutorials that need polish.",
+  description:
+    "Camtasia is a screen recording and video editing tool designed for creating tutorials, demos, and training videos. It combines recording, timeline editing, annotations, and effects into a single package aimed at educators and professionals.",
+  useCases: [
+    "Screen recording",
+    "Tutorial videos",
+    "Training content",
+    "Product demos",
+    "Educational videos"
+  ],
+  pros: [
+    "Very beginner-friendly",
+    "Built-in editor and effects",
+    "Good annotation and callout tools",
+    "Cross-platform support",
+    "Strong for instructional content"
+  ],
+  cons: [
+    "Expensive upfront cost",
+    "Not ideal for advanced video editing",
+    "Exports can be slower on large projects"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "One-time license purchase with optional upgrades"
+  },
+  alternatives: [
+    { name: "Screen Studio", slug: "screen-studio" },
+    { name: "OBS Studio", slug: "obs" },
+    { name: "Loom", slug: "loom" }
+  ],
+  tags: ["screen-recording", "video", "education", "editing"],
+  rating: 4.5,
+  users: "Established",
+  updatedAtISO: "2026-01-28",
+},
 ];
