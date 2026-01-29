@@ -7,6 +7,7 @@ import {
   getRelatedTools,
   findCollectionsContaining,
   findBestPagesContainingTool,
+  findComparisonsContainingTool
 } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -60,6 +61,7 @@ export default async function ToolPage({ params }: PageProps) {
 
   const related = getRelatedTools(tool.id, 6);
   const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
+const inComparisons = findComparisonsContainingTool(tool.id);
 
     const toolSchema = {
     "@context": "https://schema.org",
