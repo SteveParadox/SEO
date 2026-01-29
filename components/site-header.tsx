@@ -1,6 +1,9 @@
 // components/site-header.tsx
+"use client";
+
 import Link from "next/link";
-import { Sparkles, Newspaper } from "lucide-react";
+import { useState } from "react";
+import { Sparkles, Newspaper, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count-badge";
@@ -15,15 +18,17 @@ const NAV: NavItem[] = [
   { href: "/collections", label: "Collections" },
   { href: "/comparisons", label: "Comparisons" },
   { href: "/tags", label: "Tags" },
-{ href: "/best", label: "Best" },
+  { href: "/best", label: "Best" },
 ];
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <div className="h-9 w-9 rounded-2xl border flex items-center justify-center shadow-sm">
             <Sparkles className="h-5 w-5" />
           </div>
@@ -35,7 +40,7 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        {/* Main nav */}
+        {/* Main nav (desktop) */}
         <nav className="hidden md:flex items-center gap-4">
           {NAV.map((item) => (
             <Link
@@ -66,13 +71,71 @@ export function SiteHeader() {
           </Link>
         </nav>
 
-        {/* CTA */}
-        <Button variant="outline" className="rounded-2xl" asChild>
-          <Link href="/#newsletter" className="inline-flex items-center">
-            <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
-          </Link>
-        </Button>
+        {/* Right side controls */}
+        <div className="flex items-center gap-2">
+          {/* CTA: desktop */}
+          <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
+            <Link href="/#newsletter" className="inline-flex items-center">
+              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+            </Link>
+          </Button>
+
+          {/* Mobile menu toggle */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden rounded-2xl"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle navigation"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {open ? (
+        <div className="md:hidden border-t bg-background">
+          <div className="mx-auto max-w-6xl px-4 py-3 grid gap-2">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <Link
+              href="/saved"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <span>Library</span>
+              <SavedCountBadge />
+            </Link>
+
+            <Link
+              href="/recent"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <span>Recent</span>
+              <RecentCountBadge />
+            </Link>
+
+            <Link
+              href="/#newsletter"
+              onClick={() => setOpen(false)}
+              className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+            </Link>
+          </div>
+        </div>
+      ) : null}
 
       <Breadcrumbs />
     </header>
