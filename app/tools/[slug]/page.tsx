@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tool = getToolBySlug(slug);
   if (!tool) return { title: "Tool not found" };
 
-  const title = `${tool.name} — ToolDrop AI`;
+  const title = tool.name;
   const description = tool.oneLiner;
   const url = absoluteUrl(`/tools/${tool.slug}`);
 
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: { canonical: url },
     openGraph: {
-      title,
+      title: `${tool.name} — ToolDrop AI`,
       description,
       url,
       siteName: "ToolDrop AI",
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${tool.name} — ToolDrop AI`,
       description,
     },
   };
@@ -73,11 +73,11 @@ const inComparisons = findComparisonsContainingTool(tool.id);
     url: absoluteUrl(`/tools/${tool.slug}`),
     keywords: tool.tags?.join(", "),
     offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      category: tool.pricing?.tier ?? "paid",
-    },
+  "@type": "Offer",
+  price: tool.pricing?.tier === "free" ? "0" : undefined,
+  priceCurrency: tool.pricing?.tier === "free" ? "USD" : undefined,
+  category: tool.pricing?.tier ?? "paid",
+},
     aggregateRating: tool.rating
       ? {
           "@type": "AggregateRating",
