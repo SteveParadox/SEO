@@ -28,16 +28,19 @@ export default function UpdatesIndexPage() {
         {updates.map((u) => (
           <Card
             key={u.id}
-            className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+            className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
           >
-            {/* Stretched link for whole card */}
+            {/* Overlay link: captures clicks/taps anywhere */}
             <Link
               href={`/updates/${u.slug}`}
               aria-label={u.headline}
-              className="absolute inset-0 z-10"
-            />
+              className="absolute inset-0 z-10 rounded-2xl"
+            >
+              <span className="sr-only">{u.headline}</span>
+            </Link>
 
-            <CardContent className="p-5 relative z-20">
+            {/* Content: disable pointer events so overlay link works everywhere */}
+            <CardContent className="relative z-20 pointer-events-none p-5">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge variant="outline" className="rounded-full">
                   {u.model}

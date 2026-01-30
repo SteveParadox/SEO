@@ -72,12 +72,19 @@ export default function RecentClient() {
           return (
             <Card
               key={`${it.kind}-${it.id}`}
-              className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+              className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
             >
-              {/* Stretched link for the whole card */}
-              <Link href={href} aria-label={it.title} className="absolute inset-0 z-10" />
+              {/* Overlay link: captures clicks/taps anywhere */}
+              <Link
+                href={href}
+                aria-label={it.title}
+                className="absolute inset-0 z-10 rounded-2xl"
+              >
+                <span className="sr-only">{it.title}</span>
+              </Link>
 
-              <div className="relative z-20">
+              {/* Content: disable pointer events so overlay link works everywhere */}
+              <div className="relative z-20 pointer-events-none">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base flex items-center gap-2">
                     <Badge variant="outline" className="rounded-full">
@@ -86,6 +93,7 @@ export default function RecentClient() {
                     <span className="line-clamp-1">{it.title}</span>
                   </CardTitle>
                 </CardHeader>
+
                 <CardContent className="pt-0">
                   <div className="text-sm text-muted-foreground line-clamp-2">
                     {it.subtitle}

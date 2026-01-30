@@ -28,16 +28,20 @@ export default function PromptsIndexPage() {
         {prompts.map((p) => (
           <Card
             key={p.id}
-            className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+            className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
           >
-            {/* Stretched link for the whole card */}
+            {/* Overlay link: captures clicks/taps anywhere on the card */}
             <Link
               href={`/prompts/${p.slug}`}
               aria-label={p.title}
-              className="absolute inset-0 z-10"
-            />
+              className="absolute inset-0 z-10 rounded-2xl"
+            >
+              <span className="sr-only">{p.title}</span>
+            </Link>
 
-            <CardContent className="p-5 relative z-20">
+            {/* Content: disable pointer events so overlay link works everywhere */}
+            <CardContent className="relative z-20 pointer-events-none p-5">
+              {/* Tags are not links here, so no need to re-enable pointer-events */}
               <div className="flex items-center gap-2 flex-wrap">
                 {p.tags.slice(0, 3).map((tag) => (
                   <Badge key={tag} variant="secondary" className="rounded-full">

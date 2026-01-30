@@ -22,38 +22,44 @@ export default function ComparisonsIndexClient() {
         {comparisons.map((c) => (
           <Card
             key={c.id}
-            className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+            className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
           >
-            {/* Stretched link for the whole card */}
+            {/* Overlay link: captures clicks anywhere */}
             <Link
               href={`/comparisons/${c.slug}`}
               aria-label={c.title}
-              className="absolute inset-0 z-10"
-            />
+              className="absolute inset-0 z-10 rounded-2xl"
+            >
+              <span className="sr-only">{c.title}</span>
+            </Link>
 
-            <CardContent className="p-5 relative z-20">
+            {/* Content blocks clicks unless disabled */}
+            <CardContent className="relative z-20 pointer-events-none p-5">
               <div className="flex items-center gap-2 flex-wrap">
-                {c.tags.slice(0, 3).map((t) => {
-                  const label = t.trim();
-                  const tagSlug = encodeURIComponent(label.toLowerCase());
+                {/* Tags need to be clickable, so re-enable pointer events here */}
+                <div className="flex gap-2 flex-wrap pointer-events-auto">
+                  {c.tags.slice(0, 3).map((t) => {
+                    const label = t.trim();
+                    const tagSlug = encodeURIComponent(label.toLowerCase());
 
-                  return (
-                    <Link
-                      key={`${c.id}-${tagSlug}`}
-                      href={`/tags/${tagSlug}`}
-                      className="relative z-30 inline-flex"
-                      aria-label={`Tag: ${label}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Badge variant="secondary" className="rounded-full">
-                        {label}
-                      </Badge>
-                    </Link>
-                  );
-                })}
+                    return (
+                      <Link
+                        key={`${c.id}-${tagSlug}`}
+                        href={`/tags/${tagSlug}`}
+                        aria-label={`Tag: ${label}`}
+                        className="inline-flex"
+                      >
+                        <Badge variant="secondary" className="rounded-full">
+                          {label}
+                        </Badge>
+                      </Link>
+                    );
+                  })}
+                </div>
 
                 <Badge variant="outline" className="rounded-full">
-                  {c.contenders.length} contender{c.contenders.length === 1 ? "" : "s"}
+                  {c.contenders.length} contender
+                  {c.contenders.length === 1 ? "" : "s"}
                 </Badge>
               </div>
 
