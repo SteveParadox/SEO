@@ -1,14 +1,10 @@
-// app/sitemap.ts
 import type { MetadataRoute } from "next";
 import { DATA, getAllTagsWithCounts } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
-  // -------------------------
-  // Static / index pages
-  // -------------------------
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
 
@@ -18,16 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/collections"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/comparisons"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
 
-    // Money pages
     { url: absoluteUrl("/best"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-
-    // Tags index
     { url: absoluteUrl("/tags"), lastModified: now, changeFrequency: "weekly", priority: 0.6 },
   ];
 
-  // -------------------------
-  // Dynamic content pages
-  // -------------------------
   const tools = DATA.tools.map((t) => ({
     url: absoluteUrl(`/tools/${t.slug}`),
     lastModified: new Date(t.updatedAtISO),
@@ -70,15 +60,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.95,
   }));
 
-  // -------------------------
-  // Tag pages (critical)
-  // -------------------------
-  const tags = getAllTagsWithCounts().map(({ tag }) => ({
-    url: absoluteUrl(`/tags/${encodeURIComponent(tag)}`),
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
+  // Tags: await + normalize to lowercase for consistency
+  const tagRows = await getAllTagsWithCounts();
+  const tags = tagRows.map(({ tag }) => {
+    const slug = encodeURIComponent(tag.trim().toLowerCase());
+    return {
+      url: absoluteUrl(`/tags/${slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    };
+  });
 
   return [
     ...staticPages,
