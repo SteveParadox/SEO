@@ -27,20 +27,35 @@ export const DATA: DataBundle & { bestPages: BestPage[] } = {
 } as const;
 
 // ---- Slug lookups ----
+function normalizeSlug(slug: string) {
+  // decode URL encoding, trim junk, and normalize casing
+  return decodeURIComponent(slug).trim().toLowerCase();
+}
+
+// ---- Slug lookups ----
 export function getToolBySlug(slug: string) {
-  return DATA.tools.find((x) => x.slug === slug);
+  const s = normalizeSlug(slug);
+  return DATA.tools.find((x) => normalizeSlug(x.slug) === s);
 }
+
 export function getPromptBySlug(slug: string) {
-  return DATA.prompts.find((x) => x.slug === slug);
+  const s = normalizeSlug(slug);
+  return DATA.prompts.find((x) => normalizeSlug(x.slug) === s);
 }
+
 export function getUpdateBySlug(slug: string) {
-  return DATA.updates.find((x) => x.slug === slug);
+  const s = normalizeSlug(slug);
+  return DATA.updates.find((x) => normalizeSlug(x.slug) === s);
 }
+
 export function getCollectionBySlug(slug: string) {
-  return DATA.collections.find((x) => x.slug === slug);
+  const s = normalizeSlug(slug);
+  return DATA.collections.find((x) => normalizeSlug(x.slug) === s);
 }
+
 export function getComparisonBySlug(slug: string) {
-  return DATA.comparisons.find((x) => x.slug === slug);
+  const s = normalizeSlug(slug);
+  return DATA.comparisons.find((x) => normalizeSlug(x.slug) === s);
 }
 
 // ---- Resolvers ----

@@ -7,7 +7,7 @@ import {
   getRelatedTools,
   findCollectionsContaining,
   findBestPagesContainingTool,
-  findComparisonsContainingTool
+  findComparisonsContainingTool,
 } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,9 +16,8 @@ import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
 
-
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 export function generateStaticParams() {
@@ -26,11 +25,16 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const tool = getToolBySlug(slug);
-  if (!tool) return { title: "Tool not found" };
+  const tool = getToolBySlug(params.slug);
 
-  const title = tool.name;
+  if (!tool) {
+    return {
+      title: "Tool not found — ToolDrop AI",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${tool.name} — ToolDrop AI`;
   const description = tool.oneLiner;
   const url = absoluteUrl(`/tools/${tool.slug}`);
 
@@ -38,8 +42,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
-      title: `${tool.name} — ToolDrop AI`,
+      title,
       description,
       url,
       siteName: "ToolDrop AI",
@@ -47,23 +52,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${tool.name} — ToolDrop AI`,
+      title,
       description,
     },
   };
 }
 
-export default async function ToolPage({ params }: PageProps) {
-  const { slug } = await params;
-  const tool = getToolBySlug(slug);
-
+export default function ToolPage({ params }: PageProps) {
+  const tool = getToolBySlug(params.slug);
   if (!tool) return notFound();
 
   const related = getRelatedTools(tool.id, 6);
   const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
-const inComparisons = findComparisonsContainingTool(tool.id);
+  const inComparisons = findComparisonsContainingTool(tool.id);
+  const featured = findBestPagesContainingTool(tool.id);
 
-    const toolSchema = {
+  const toolSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: tool.name,
@@ -73,25 +77,21 @@ const inComparisons = findComparisonsContainingTool(tool.id);
     url: absoluteUrl(`/tools/${tool.slug}`),
     keywords: tool.tags?.join(", "),
     offers: {
-  "@type": "Offer",
-  price: tool.pricing?.tier === "free" ? "0" : undefined,
-  priceCurrency: tool.pricing?.tier === "free" ? "USD" : undefined,
-  category: tool.pricing?.tier ?? "paid",
-},
+      "@type": "Offer",
+      price: tool.pricing?.tier === "free" ? "0" : undefined,
+      priceCurrency: tool.pricing?.tier === "free" ? "USD" : undefined,
+      category: tool.pricing?.tier ?? "paid",
+    },
     aggregateRating: tool.rating
       ? {
           "@type": "AggregateRating",
           ratingValue: tool.rating,
           bestRating: 5,
           worstRating: 1,
-          ratingCount: 1, // you don’t have real count yet, so don’t lie.
+          ratingCount: 1, // keep it honest until you have real counts
         }
       : undefined,
   };
-
-
-  // ✅ NEW: best pages that include this tool
-  const featured = findBestPagesContainingTool(tool.id);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
@@ -118,7 +118,6 @@ const inComparisons = findComparisonsContainingTool(tool.id);
           );
         })}
       </div>
-
 
       <h1 className="mt-4 text-3xl font-semibold">{tool.name}</h1>
       <p className="mt-2 text-muted-foreground">{tool.oneLiner}</p>
@@ -176,52 +175,58 @@ const inComparisons = findComparisonsContainingTool(tool.id);
             ) : null}
           </CardContent>
         </Card>
-<Card className="rounded-2xl">
-  <CardHeader>
-    <CardTitle>Quick next steps</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-3 text-sm text-muted-foreground">
-    <div className="rounded-xl border p-3">
-      <div className="font-medium text-foreground">Save this tool for later</div>
-      <div className="mt-1">Build a shortlist, then compare properly. Impulse decisions are for NFTs.</div>
-      <div className="mt-3">
-        <SaveButton kind="tool" id={tool.id} className="rounded-xl" />
-      </div>
-    </div>
 
-    {featured.length > 0 ? (
-      <div className="rounded-xl border p-3">
-        <div className="font-medium text-foreground">See where it ranks</div>
-        <div className="mt-1">Jump into the best list that includes this tool.</div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {featured.slice(0, 2).map((p) => (
-            <Link key={p.id} href={`/best/${p.slug}`} className="underline underline-offset-4">
-              {p.title}
-            </Link>
-          ))}
-        </div>
-      </div>
-    ) : null}
-  </CardContent>
-</Card>
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle>Alternatives</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {tool.alternatives.map((a) => (
-                <div key={a.slug}>
-                  •{" "}
-                  <Link className="hover:underline" href={`/tools/${a.slug}`}>
-                    {a.name}
-                  </Link>
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Quick next steps</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-muted-foreground">
+            <div className="rounded-xl border p-3">
+              <div className="font-medium text-foreground">Save this tool for later</div>
+              <div className="mt-1">
+                Build a shortlist, then compare properly. Impulse decisions are for NFTs.
+              </div>
+              <div className="mt-3">
+                <SaveButton kind="tool" id={tool.id} className="rounded-xl" />
+              </div>
+            </div>
+
+            {featured.length > 0 ? (
+              <div className="rounded-xl border p-3">
+                <div className="font-medium text-foreground">See where it ranks</div>
+                <div className="mt-1">Jump into the best list that includes this tool.</div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {featured.slice(0, 2).map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/best/${p.slug}`}
+                      className="underline underline-offset-4"
+                    >
+                      {p.title}
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              </div>
+            ) : null}
+          </CardContent>
+        </Card>
 
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Alternatives</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {tool.alternatives.map((a) => (
+              <div key={a.slug}>
+                •{" "}
+                <Link className="hover:underline" href={`/tools/${a.slug}`}>
+                  {a.name}
+                </Link>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
 
-        {/* ✅ NEW: Featured in best lists */}
         {featured.length > 0 ? (
           <div className="mt-10">
             <h2 className="text-xl font-semibold">Featured in best lists</h2>
@@ -231,10 +236,9 @@ const inComparisons = findComparisonsContainingTool(tool.id);
                   <Card className="rounded-2xl hover:bg-muted/40 transition">
                     <CardContent className="p-4">
                       <div className="font-medium">{p.title}</div>
-                   <div className="text-sm text-muted-foreground line-clamp-2">
-                    {p.intro?.[0] ?? p.description}
-                  </div>
-
+                      <div className="text-sm text-muted-foreground line-clamp-2">
+                        {p.intro?.[0] ?? p.description}
+                      </div>
                     </CardContent>
                   </Card>
                 </Link>
@@ -243,36 +247,40 @@ const inComparisons = findComparisonsContainingTool(tool.id);
           </div>
         ) : null}
 
-{inComparisons.length > 0 ? (
-  <div className="mt-10">
-    <h2 className="text-xl font-semibold">Compared in</h2>
-    <div className="mt-4 grid gap-3 md:grid-cols-2">
-      {inComparisons.slice(0, 6).map((cmp) => (
-        <Link key={cmp.id} href={`/comparisons/${cmp.slug}`} className="block">
-          <Card className="rounded-2xl hover:bg-muted/40 transition">
-            <CardContent className="p-4">
-              <div className="font-medium">{cmp.title}</div>
-              <div className="text-sm text-muted-foreground line-clamp-2">
-                {cmp.description}
-              </div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {cmp.tags.slice(0, 3).map((t) => {
-                  const label = t.trim();
-                  const tagSlug = encodeURIComponent(label.toLowerCase());
-                  return (
-                    <Badge key={`${cmp.id}-${tagSlug}`} variant="secondary" className="rounded-full">
-                      {label}
-                    </Badge>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
-    </div>
-  </div>
-) : null}
+        {inComparisons.length > 0 ? (
+          <div className="mt-10">
+            <h2 className="text-xl font-semibold">Compared in</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {inComparisons.slice(0, 6).map((cmp) => (
+                <Link key={cmp.id} href={`/comparisons/${cmp.slug}`} className="block">
+                  <Card className="rounded-2xl hover:bg-muted/40 transition">
+                    <CardContent className="p-4">
+                      <div className="font-medium">{cmp.title}</div>
+                      <div className="text-sm text-muted-foreground line-clamp-2">
+                        {cmp.description}
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {cmp.tags.slice(0, 3).map((t) => {
+                          const label = t.trim();
+                          const tagSlug = encodeURIComponent(label.toLowerCase());
+                          return (
+                            <Badge
+                              key={`${cmp.id}-${tagSlug}`}
+                              variant="secondary"
+                              className="rounded-full"
+                            >
+                              {label}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <div className="mt-8 grid gap-4">
           {inCollections.length > 0 ? (
@@ -288,9 +296,7 @@ const inComparisons = findComparisonsContainingTool(tool.id);
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{c.title}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {c.description}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{c.description}</div>
                   </Link>
                 ))}
               </CardContent>
@@ -310,9 +316,7 @@ const inComparisons = findComparisonsContainingTool(tool.id);
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.oneLiner}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{t.oneLiner}</div>
                   </Link>
                 ))}
               </CardContent>
