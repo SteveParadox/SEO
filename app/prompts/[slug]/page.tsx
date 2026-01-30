@@ -23,23 +23,28 @@ export function generateStaticParams() {
   return DATA.prompts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const p = getPromptBySlug(slug);
-  if (!p) return { title: "Prompt not found" };
 
-  const title = `${p.title} — Prompt`;
+  if (!p) {
+    return {
+      title: "Prompt not found — ToolDrop AI",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${p.title} — ToolDrop AI`;
   const description = p.purpose;
   const url = absoluteUrl(`/prompts/${p.slug}`);
 
   return {
-    title: `${title} — ToolDrop AI`,
+    title,
     description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
       url,
       siteName: "ToolDrop AI",
@@ -47,7 +52,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
     },
   };
@@ -64,28 +69,28 @@ export default async function PromptPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-<TrackRecent
-  kind="prompt"
-  id={p.id}
-  slug={p.slug}
-  title={p.title}
-  subtitle={p.purpose}
-/>
-<div className="flex flex-wrap gap-2">
-  {p.tags.map((t) => {
-    const label = t.trim();
-    const tagSlug = encodeURIComponent(label.toLowerCase());
+      <TrackRecent
+        kind="prompt"
+        id={p.id}
+        slug={p.slug}
+        title={p.title}
+        subtitle={p.purpose}
+      />
 
-    return (
-      <Link key={tagSlug} href={`/tags/${tagSlug}`}>
-        <Badge variant="secondary" className="rounded-full">
-          {label}
-        </Badge>
-      </Link>
-    );
-  })}
-</div>
+      <div className="flex flex-wrap gap-2">
+        {p.tags.map((t) => {
+          const label = t.trim();
+          const tagSlug = encodeURIComponent(label.toLowerCase());
 
+          return (
+            <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+              <Badge variant="secondary" className="rounded-full">
+                {label}
+              </Badge>
+            </Link>
+          );
+        })}
+      </div>
 
       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
       <p className="mt-2 text-muted-foreground">{p.purpose}</p>
@@ -107,7 +112,6 @@ export default async function PromptPage({ params }: PageProps) {
       </Card>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {/* Variations */}
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Variations</CardTitle>
@@ -125,7 +129,6 @@ export default async function PromptPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        {/* Works well with */}
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Works well with</CardTitle>
@@ -152,9 +155,7 @@ export default async function PromptPage({ params }: PageProps) {
                   className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                 >
                   <div className="font-medium">{c.title}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {c.description}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{c.description}</div>
                 </Link>
               ))}
             </CardContent>
@@ -174,42 +175,48 @@ export default async function PromptPage({ params }: PageProps) {
                   className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                 >
                   <div className="font-medium">{rp.title}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {rp.purpose}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{rp.purpose}</div>
                 </Link>
               ))}
             </CardContent>
           </Card>
         ) : null}
       </div>
-      <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>Explore more</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            <Link href="/prompts" className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition">
-              Browse all prompts
-            </Link>
-            <Link href="/tags" className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition">
-              Browse tags
-            </Link>
-            {p.tags?.slice(0, 3).map((t) => {
-              const label = t.trim();
-              const tagSlug = encodeURIComponent(label.toLowerCase());
-              return (
-                <Link
-                  key={`more-${tagSlug}`}
-                  href={`/tags/${tagSlug}`}
-                  className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
-                >
-                  More in {label}
-                </Link>
-              );
-            })}
-          </CardContent>
-        </Card>
 
+      <Card className="rounded-2xl mt-6">
+        <CardHeader>
+          <CardTitle>Explore more</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          <Link
+            href="/prompts"
+            className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+          >
+            Browse all prompts
+          </Link>
+
+          <Link
+            href="/tags"
+            className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+          >
+            Browse tags
+          </Link>
+
+          {p.tags?.slice(0, 3).map((t) => {
+            const label = t.trim();
+            const tagSlug = encodeURIComponent(label.toLowerCase());
+            return (
+              <Link
+                key={`more-${tagSlug}`}
+                href={`/tags/${tagSlug}`}
+                className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+              >
+                More in {label}
+              </Link>
+            );
+          })}
+        </CardContent>
+      </Card>
     </div>
   );
 }

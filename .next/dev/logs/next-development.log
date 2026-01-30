@@ -1,256 +1,46 @@
-[00:00:10.511] Server  LOG     ✓ Ready in 8.5s
-[00:05:40.053] Server  LOG     ○ Compiling / ...
-[00:05:57.606] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:03.406] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[00:06:33.532] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
-[00:07:32.504] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
-[00:07:45.176] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
-[00:54:56.083] Server  LOG     ✓ Compiled in 39ms
-[00:55:05.318] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = 
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:10.137] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeU
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:13.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:17.148] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent()
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:21.125] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent(t.to)
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:28.122] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent(t.toLowerCase)
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:31.126] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent(t.toLowerCase())
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:34.132] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => (
-> 76 |           const tag = encodeURIComponent(t.toLowerCase());
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:43.098] Browser ERROR   ./app/prompts/[slug]/page.tsx:76:11
-Parsing ecmascript source code failed
-  74 |       <div className="flex flex-wrap gap-2">
-  75 |         {p.tags.map((t) => {}
-> 76 |           const tag = encodeURIComponent(t.toLowerCase());
-     |           ^^^^^
-  77 |          <Link href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-
-Expected '</', got 'const'
-[00:55:53.097] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 | </Link>
-  80 |
-> 81 |         ))}
-     |         ^
-  82 |       </div>
-  83 |
-  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
-
-Expected '</', got ')'
-[00:56:44.132] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 | </Link>
-  80 |
-> 81 |         ))}
-     |         ^
-  82 |       </div>
-  83 |
-  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
-
-Expected '</', got ')'
-[00:56:49.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:77:21
-Parsing ecmascript source code failed
-  75 |         {p.tags.map((t) => {
-  76 |           const tag = encodeURIComponent(t.toLowerCase());
-> 77 |          <Link key= href={`/tags/${encodeURIComponent(t.toLowerCase())}`}>
-     |                     ^^^^
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-  80 |
-
-Expected '</', got 'href'
-[00:56:54.199] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 | </Link>
-  80 |
-> 81 |         ))}
-     |         ^
-  82 |       </div>
-  83 |
-  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
-
-Expected '</', got ')'
-[00:58:47.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:77:41
-Parsing ecmascript source code failed
-  75 |         {p.tags.map((t) => {
-  76 |           const tag = encodeURIComponent(t.toLowerCase());
-> 77 |          <Link key={tag} href={`/tags/${}`}>
-     |                                         ^
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-  80 |
-
-Expected '</', got '}'
-[00:58:52.107] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 | </Link>
-  80 |
-> 81 |         ))}
-     |         ^
-  82 |       </div>
-  83 |
-  84 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
-
-Expected '</', got ')'
-[01:06:04.110] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
-Parsing ecmascript source code failed
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-> 80 |         ))}
-     |         ^
-  81 |       </div>
-  82 |
-  83 |       <h1 className="mt-4 text-3xl font-semibold">{p.title}</h1>
-
-Expected '</', got ')'
-[01:06:16.106] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
-Parsing ecmascript source code failed
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-> 80 |         );
-     |         ^
-  81 |       )}
-  82 |       </div>
-  83 |
-
-Expected '</', got ')'
-[01:06:20.129] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
-Parsing ecmascript source code failed
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 | </Link>
-> 80 |         );
-     |         ^
-  81 | })}
-  82 |       </div>
-  83 |
-
-Expected '</', got ')'
-[01:06:28.125] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
-Parsing ecmascript source code failed
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 |   </Link>
-> 80 |         );
-     |         ^
-  81 | })}
-  82 |       </div>
-  83 |
-
-Expected '</', got ')'
-[01:06:30.114] Browser ERROR   ./app/prompts/[slug]/page.tsx:80:9
-Parsing ecmascript source code failed
-  78 |   <Badge variant="secondary" className="rounded-full">{t}</Badge>
-  79 |   </Link>
-> 80 |         );
-     |         ^
-  81 |   })}
-  82 |       </div>
-  83 |
-
-Expected '</', got ')'
-[01:07:28.143] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 |     {t}</Badge>
-  80 |   </Link>
-> 81 |         );
-     |         ^
-  82 |   })}
-  83 |       </div>
-  84 |
-
-Expected '</', got ')'
-[01:20:11.368] Browser ERROR   ./app/prompts/[slug]/page.tsx:81:9
-Parsing ecmascript source code failed
-  79 |     {t}</Badge>
-  80 |   </Link>
-> 81 |         );
-     |         ^
-  82 |   })}
-  83 |       </div>
-  84 |
-
-Expected '</', got ')'
-[01:25:00.051] Server  LOG     ✓ Compiled in 62ms
-[01:25:13.106] Server  LOG     ✓ Compiled in 64ms
-[01:27:03.267] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:27:07.297] Browser ERROR   unhandledRejection: i: Failed to connect to MetaMask
-[01:30:22.777] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
-[01:32:00.618] Server  ERROR   Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+[00:00:17.771] Server  LOG     ✓ Ready in 16.1s
+[00:10:36.460] Server  LOG     ○ Compiling / ...
+[00:10:49.592] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:56.974] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:08.122] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:11:08.123] Server  LOG     RAW SLUG: undefined
+[00:11:08.140] Server  ERROR   ⨯ ReferenceError: normalizeSlug is not defined
+[00:11:09.182] Browser ERROR   uncaughtError: ReferenceError: normalizeSlug is not defined
+[00:12:13.588] Server  LOG     ✓ Compiled in 69ms
+[00:12:14.344] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:12:14.345] Server  LOG     RAW SLUG: undefined
+[00:12:14.345] Server  LOG     NORMALIZED SLUG: "undefined"
+[00:12:14.345] Server  LOG     FOUND: false
+[00:12:17.921] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:57.862] Server  LOG     ✓ Compiled in 95ms
+[00:12:58.594] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:13:42.820] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:13:52.433] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:13:54.654] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:15:03.283] Server  LOG     ✓ Compiled in 54ms
+[00:15:03.638] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:15:03.694] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:16:09.672] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:10.405] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:16:10.440] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:16:27.716] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:16:27.752] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:17:53.955] Server  LOG     ✓ Compiled in 69ms
+[00:17:55.016] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:18:11.707] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:18:13.750] Server  WARN    Error: Route "/tools/[slug]" used `params.slug`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:19:21.231] Server  LOG     ✓ Compiled in 45ms
+[00:19:31.405] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:18.025] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:37.258] Server  LOG     ✓ Compiled in 36ms
+[00:35:14.831] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:39:14.102] Server  LOG     ✓ Compiled in 129ms
+[00:39:15.646] Server  ERROR   ⨯ ReferenceError: app is not defined
+[00:39:16.102] Server  ERROR   ⨯ ReferenceError: app is not defined
+[00:39:19.570] Server  ERROR   ⨯ ReferenceError: app is not defined
+[00:39:19.821] Server  ERROR   ⨯ ReferenceError: app is not defined
+[00:40:00.524] Server  LOG     ✓ Compiled in 66ms
+[00:40:27.788] Browser ERROR   uncaughtError: ReferenceError: app is not defined
+[00:41:39.590] Server  LOG     ✓ Compiled in 242ms
+[00:43:06.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:44.713] Server  LOG     ✓ Compiled in 242ms

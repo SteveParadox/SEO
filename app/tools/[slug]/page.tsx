@@ -17,7 +17,7 @@ import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -25,7 +25,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const tool = getToolBySlug(params.slug);
+  const { slug } = await params;
+  const tool = getToolBySlug(slug);
 
   if (!tool) {
     return {
@@ -58,8 +59,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function ToolPage({ params }: PageProps) {
-  const tool = getToolBySlug(params.slug);
+export default async function ToolPage({ params }: PageProps) {
+  const { slug } = await params;
+  const tool = getToolBySlug(slug);
   if (!tool) return notFound();
 
   const related = getRelatedTools(tool.id, 6);
@@ -88,7 +90,7 @@ export default function ToolPage({ params }: PageProps) {
           ratingValue: tool.rating,
           bestRating: 5,
           worstRating: 1,
-          ratingCount: 1, // keep it honest until you have real counts
+          ratingCount: 1,
         }
       : undefined,
   };
@@ -178,41 +180,6 @@ export default function ToolPage({ params }: PageProps) {
 
         <Card className="rounded-2xl">
           <CardHeader>
-            <CardTitle>Quick next steps</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <div className="rounded-xl border p-3">
-              <div className="font-medium text-foreground">Save this tool for later</div>
-              <div className="mt-1">
-                Build a shortlist, then compare properly. Impulse decisions are for NFTs.
-              </div>
-              <div className="mt-3">
-                <SaveButton kind="tool" id={tool.id} className="rounded-xl" />
-              </div>
-            </div>
-
-            {featured.length > 0 ? (
-              <div className="rounded-xl border p-3">
-                <div className="font-medium text-foreground">See where it ranks</div>
-                <div className="mt-1">Jump into the best list that includes this tool.</div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {featured.slice(0, 2).map((p) => (
-                    <Link
-                      key={p.id}
-                      href={`/best/${p.slug}`}
-                      className="underline underline-offset-4"
-                    >
-                      {p.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl">
-          <CardHeader>
             <CardTitle>Alternatives</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -258,21 +225,6 @@ export default function ToolPage({ params }: PageProps) {
                       <div className="font-medium">{cmp.title}</div>
                       <div className="text-sm text-muted-foreground line-clamp-2">
                         {cmp.description}
-                      </div>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {cmp.tags.slice(0, 3).map((t) => {
-                          const label = t.trim();
-                          const tagSlug = encodeURIComponent(label.toLowerCase());
-                          return (
-                            <Badge
-                              key={`${cmp.id}-${tagSlug}`}
-                              variant="secondary"
-                              className="rounded-full"
-                            >
-                              {label}
-                            </Badge>
-                          );
-                        })}
                       </div>
                     </CardContent>
                   </Card>

@@ -238,7 +238,7 @@ const tools = [
         slug: "runpod",
         name: "RunPod",
         oneLiner: "Rent GPUs without selling a kidney. Useful for ML experiments.",
-        description: "RunPod is a cloud GPU platform for ML training and inference. Good for bursty workloads and experiments when you don’t want long-term commitments.",
+        description: "RunPod is a cloud GPU platform for ML training and inference. Good for bursty workloads and experiments when you don't want long-term commitments.",
         useCases: [
             "GPU notebooks",
             "Model inference",
@@ -500,7 +500,7 @@ const tools = [
         id: "t10",
         slug: "framer",
         name: "Framer",
-        oneLiner: "Ship landing pages fast with animations that don’t look tragic.",
+        oneLiner: "Ship landing pages fast with animations that don't look tragic.",
         description: "Framer is a design-to-site builder with strong interactions, templates, and CMS. Great for marketing pages and quick launches without writing code.",
         useCases: [
             "Landing pages",
@@ -553,8 +553,8 @@ const tools = [
         id: "t11",
         slug: "midjourney",
         name: "Midjourney",
-        oneLiner: "Generate images that make people ask ‘wait, that’s AI?’",
-        description: "Midjourney is a top-tier image generator known for strong aesthetics and style. It’s popular for concept art and marketing visuals.",
+        oneLiner: "Generate images that make people ask 'wait, that's AI?'",
+        description: "Midjourney is a top-tier image generator known for strong aesthetics and style. It's popular for concept art and marketing visuals.",
         useCases: [
             "Concept art",
             "Marketing visuals",
@@ -648,9 +648,6 @@ const tools = [
         users: "Popular",
         updatedAtISO: "2026-01-24"
     },
-    // ----------------------------
-    // Added tools (to support collections + comparisons + SEO breadth)
-    // ----------------------------
     {
         id: "t13",
         slug: "kagi",
@@ -701,7 +698,7 @@ const tools = [
         slug: "google",
         name: "Google Search",
         oneLiner: "The necessary mess. Best for breadth, worst for peace.",
-        description: "Still the widest index for the open web. Great when you need coverage, but you’ll do more filtering yourself.",
+        description: "Still the widest index for the open web. Great when you need coverage, but you'll do more filtering yourself.",
         useCases: [
             "Broad research",
             "Finding official sources",
@@ -744,7 +741,7 @@ const tools = [
         id: "t15",
         slug: "vscode-copilot",
         name: "VS Code + GitHub Copilot",
-        oneLiner: "Most flexible dev setup, if you don’t install 47 extensions you’ll regret.",
+        oneLiner: "Most flexible dev setup, if you don't install 47 extensions you'll regret.",
         description: "VS Code with Copilot gives strong inline suggestions and chat assistance while keeping you in the most popular editor ecosystem.",
         useCases: [
             "Autocomplete",
@@ -833,7 +830,7 @@ const tools = [
         slug: "windsurf",
         name: "Windsurf",
         oneLiner: "Another AI-native coding environment competing for your attention span.",
-        description: "Windsurf is part of the new wave of AI-first coding tools. It’s aimed at faster multi-file edits and agent-style workflows.",
+        description: "Windsurf is part of the new wave of AI-first coding tools. It's aimed at faster multi-file edits and agent-style workflows.",
         useCases: [
             "Agentic coding",
             "Multi-file changes",
@@ -965,8 +962,8 @@ const tools = [
         id: "t20",
         slug: "gemini",
         name: "Gemini",
-        oneLiner: "Best fit when you live in Google’s ecosystem and want tight integration.",
-        description: "Gemini is Google’s AI assistant, strong in Google ecosystem workflows and multimodal tasks depending on the product surface.",
+        oneLiner: "Best fit when you live in Google's ecosystem and want tight integration.",
+        description: "Gemini is Google's AI assistant, strong in Google ecosystem workflows and multimodal tasks depending on the product surface.",
         useCases: [
             "Research",
             "Drafting",
@@ -1010,7 +1007,7 @@ const tools = [
         slug: "playht",
         name: "PlayHT",
         oneLiner: "Text-to-speech with solid voice options for creators and devs.",
-        description: "PlayHT is a text-to-speech platform for voiceovers and product TTS, with a range of voices and dev-friendly integrations. It’s a practical alternative when you want good quality without over-optimizing for ‘perfect acting’.",
+        description: "PlayHT is a text-to-speech platform for voiceovers and product TTS, with a range of voices and dev-friendly integrations. It's a practical alternative when you want good quality without over-optimizing for 'perfect acting'.",
         useCases: [
             "Voiceovers",
             "Narration",
@@ -1062,7 +1059,7 @@ const tools = [
         id: "t22",
         slug: "azure-tts",
         name: "Azure Text to Speech",
-        oneLiner: "Enterprise-friendly TTS with predictable billing if you’re already in Azure land.",
+        oneLiner: "Enterprise-friendly TTS with predictable billing if you're already in Azure land.",
         description: "Azure Text to Speech (part of Azure AI Speech) is designed for production and enterprise use: stable APIs, predictable ops, and easy integration if your stack already uses Microsoft services.",
         useCases: [
             "Product TTS",
@@ -1080,7 +1077,7 @@ const tools = [
         cons: [
             "Less creator-friendly UX",
             "Can feel heavyweight for small projects",
-            "Voice ‘personality’ may be less fun than creator-first tools"
+            "Voice 'personality' may be less fun than creator-first tools"
         ],
         pricing: {
             tier: "paid",
@@ -1110,6 +1107,5014 @@ const tools = [
         rating: 4.1,
         users: "Enterprise",
         updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t23",
+        slug: "dalle",
+        name: "DALL·E",
+        oneLiner: "OpenAI's image generator for straightforward generation and editing.",
+        description: "DALL·E creates images from text descriptions with a clean interface and clear licensing. Good for product images, illustrations, and quick visual concepts when you need reliability over cutting-edge aesthetics.",
+        useCases: [
+            "Product images",
+            "Quick illustrations",
+            "Concept visualization",
+            "Image editing",
+            "Marketing graphics"
+        ],
+        pros: [
+            "Straightforward interface",
+            "Good editing features",
+            "Clear licensing",
+            "Reliable results"
+        ],
+        cons: [
+            "Less aesthetic consistency than Midjourney",
+            "Credit costs add up",
+            "Style options more limited"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Credit-based pricing through OpenAI"
+        },
+        alternatives: [
+            {
+                name: "Midjourney",
+                slug: "midjourney"
+            },
+            {
+                name: "Stable Diffusion",
+                slug: "stable-diffusion"
+            },
+            {
+                name: "Leonardo",
+                slug: "leonardo"
+            }
+        ],
+        tags: [
+            "image",
+            "ai",
+            "design"
+        ],
+        rating: 4.3,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t24",
+        slug: "stable-diffusion",
+        name: "Stable Diffusion",
+        oneLiner: "Open-source image generation for people who want total control and don't mind complexity.",
+        description: "Stable Diffusion is an open-source image model you can run locally or via cloud services. Maximum customization and control, but requires technical comfort and prompt engineering skills.",
+        useCases: [
+            "Custom model training",
+            "Local generation",
+            "API integration",
+            "Style customization",
+            "High-volume generation"
+        ],
+        pros: [
+            "Full control",
+            "Can run locally",
+            "No per-image costs if self-hosted",
+            "Extensive customization"
+        ],
+        cons: [
+            "Technical setup required",
+            "Steep learning curve",
+            "Quality depends heavily on prompts and settings"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Free open-source software (hosting/compute costs vary)"
+        },
+        alternatives: [
+            {
+                name: "Midjourney",
+                slug: "midjourney"
+            },
+            {
+                name: "DALL·E",
+                slug: "dalle"
+            },
+            {
+                name: "Leonardo",
+                slug: "leonardo"
+            }
+        ],
+        tags: [
+            "image",
+            "ai",
+            "open-source"
+        ],
+        rating: 4.4,
+        users: "Technical",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t25",
+        slug: "grammarly",
+        name: "Grammarly",
+        oneLiner: "Grammar and writing assistant that lives everywhere you write.",
+        description: "Grammarly checks grammar, clarity, tone, and style across browsers, apps, and platforms. The all-rounder for professional writing quality without thinking about it.",
+        useCases: [
+            "Email writing",
+            "Document editing",
+            "Social media posts",
+            "Professional communication",
+            "Academic writing"
+        ],
+        pros: [
+            "Works everywhere",
+            "Real-time checking",
+            "Tone suggestions",
+            "Consistent quality",
+            "Team features available"
+        ],
+        cons: [
+            "Can be intrusive",
+            "Premium cost for best features",
+            "Sometimes overly prescriptive"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + Premium around $12/mo + Business plans"
+        },
+        alternatives: [
+            {
+                name: "QuillBot",
+                slug: "quillbot"
+            },
+            {
+                name: "Hemingway",
+                slug: "hemingway"
+            },
+            {
+                name: "ProWritingAid",
+                slug: "prowritingaid"
+            }
+        ],
+        tags: [
+            "writing",
+            "grammar",
+            "productivity"
+        ],
+        rating: 4.5,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t26",
+        slug: "quillbot",
+        name: "QuillBot",
+        oneLiner: "Paraphrasing and rewriting tool for when you need to say it differently.",
+        description: "QuillBot specializes in paraphrasing, summarizing, and rewriting text. Popular with students and content creators who need to rework existing content.",
+        useCases: [
+            "Paraphrasing",
+            "Summarization",
+            "Research writing",
+            "Content rewriting",
+            "Grammar checking"
+        ],
+        pros: [
+            "Strong paraphrasing",
+            "Multiple rewrite modes",
+            "Good for academic work",
+            "Plagiarism checker included"
+        ],
+        cons: [
+            "Can flatten voice and tone",
+            "Premium required for full features",
+            "Rewrites sometimes reduce quality"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + Premium around $20/mo"
+        },
+        alternatives: [
+            {
+                name: "Grammarly",
+                slug: "grammarly"
+            },
+            {
+                name: "Wordtune",
+                slug: "wordtune"
+            },
+            {
+                name: "Hemingway",
+                slug: "hemingway"
+            }
+        ],
+        tags: [
+            "writing",
+            "paraphrasing",
+            "students"
+        ],
+        rating: 4.1,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t27",
+        slug: "hemingway",
+        name: "Hemingway Editor",
+        oneLiner: "Makes your writing bold and clear by highlighting everything that's not.",
+        description: "Hemingway Editor focuses on readability by highlighting complex sentences, passive voice, and adverbs. Great for forcing clarity in technical docs or blog posts.",
+        useCases: [
+            "Simplifying text",
+            "Technical writing",
+            "Blog posts",
+            "Clear communication",
+            "Readability improvement"
+        ],
+        pros: [
+            "Forces clarity",
+            "One-time purchase option",
+            "Simple interface",
+            "Instant readability score"
+        ],
+        cons: [
+            "No grammar checking",
+            "Can be overly aggressive",
+            "Doesn't understand when complexity is needed"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free web version + $20 desktop one-time purchase"
+        },
+        alternatives: [
+            {
+                name: "Grammarly",
+                slug: "grammarly"
+            },
+            {
+                name: "ProWritingAid",
+                slug: "prowritingaid"
+            }
+        ],
+        tags: [
+            "writing",
+            "clarity",
+            "editing"
+        ],
+        rating: 4.3,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t28",
+        slug: "zapier",
+        name: "Zapier",
+        oneLiner: "Connect apps and automate workflows without code (until the bill arrives).",
+        description: "Zapier automates workflows between thousands of apps with a visual interface. Best for simple automations and when non-technical teams need to connect tools quickly.",
+        useCases: [
+            "Connect SaaS apps",
+            "Automate data entry",
+            "Trigger notifications",
+            "Sync between tools",
+            "Simple workflows"
+        ],
+        pros: [
+            "Huge integration library",
+            "No-code interface",
+            "Quick to set up",
+            "Good for simple automations"
+        ],
+        cons: [
+            "Costs scale quickly",
+            "Complex workflows get messy",
+            "Can be less reliable than code",
+            "Rate limits on cheaper plans"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier + paid plans starting around $20/mo, scaling with tasks"
+        },
+        alternatives: [
+            {
+                name: "Make",
+                slug: "make"
+            },
+            {
+                name: "n8n",
+                slug: "n8n"
+            },
+            {
+                name: "Integromat",
+                slug: "integromat"
+            }
+        ],
+        tags: [
+            "automation",
+            "no-code",
+            "productivity"
+        ],
+        rating: 4.4,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t29",
+        slug: "make",
+        name: "Make (formerly Integromat)",
+        oneLiner: "Visual automation with more power than Zapier, slightly more brain-work required.",
+        description: "Make provides visual workflow automation with more advanced features like branching, error handling, and iterations. Better for complex workflows when Zapier feels limiting.",
+        useCases: [
+            "Complex workflows",
+            "Data transformation",
+            "Multi-step automations",
+            "Conditional logic",
+            "API integrations"
+        ],
+        pros: [
+            "More powerful than Zapier",
+            "Visual workflow builder",
+            "Better for complex logic",
+            "Generous free tier"
+        ],
+        cons: [
+            "Steeper learning curve",
+            "Can over-complicate simple tasks",
+            "Less popular than Zapier"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier + paid plans with competitive pricing"
+        },
+        alternatives: [
+            {
+                name: "Zapier",
+                slug: "zapier"
+            },
+            {
+                name: "n8n",
+                slug: "n8n"
+            },
+            {
+                name: "Pipedream",
+                slug: "pipedream"
+            }
+        ],
+        tags: [
+            "automation",
+            "no-code",
+            "workflow"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t30",
+        slug: "n8n",
+        name: "n8n",
+        oneLiner: "Open-source automation for developers who want control and self-hosting.",
+        description: "n8n is an open-source automation platform you can self-host or use in the cloud. Maximum control and customization but requires technical expertise to set up and maintain.",
+        useCases: [
+            "Self-hosted automation",
+            "Custom integrations",
+            "API workflows",
+            "Complex business logic",
+            "Data pipelines"
+        ],
+        pros: [
+            "Full control",
+            "Self-hostable",
+            "No task limits when self-hosted",
+            "Extensible with code"
+        ],
+        cons: [
+            "Requires technical setup",
+            "Infrastructure management needed",
+            "Smaller community than competitors"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free self-hosted + paid cloud plans"
+        },
+        alternatives: [
+            {
+                name: "Zapier",
+                slug: "zapier"
+            },
+            {
+                name: "Make",
+                slug: "make"
+            },
+            {
+                name: "Pipedream",
+                slug: "pipedream"
+            }
+        ],
+        tags: [
+            "automation",
+            "open-source",
+            "dev"
+        ],
+        rating: 4.6,
+        users: "Technical",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t31",
+        slug: "figma",
+        name: "Figma",
+        oneLiner: "Design tool that made everyone realize collaboration doesn't have to suck.",
+        description: "Figma is a browser-based design tool with real-time collaboration, prototyping, and developer handoff. Industry standard for product design teams who value collaboration.",
+        useCases: [
+            "UI/UX design",
+            "Prototyping",
+            "Design systems",
+            "Collaboration",
+            "Developer handoff"
+        ],
+        pros: [
+            "Real-time collaboration",
+            "Cross-platform",
+            "Strong community",
+            "Good developer handoff",
+            "Plugin ecosystem"
+        ],
+        cons: [
+            "Can feel slower than native apps",
+            "Requires internet",
+            "Complex files can lag",
+            "Adobe acquisition concerns"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free for individuals + paid team plans starting around $15/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Sketch",
+                slug: "sketch"
+            },
+            {
+                name: "Adobe XD",
+                slug: "adobe-xd"
+            },
+            {
+                name: "Penpot",
+                slug: "penpot"
+            }
+        ],
+        tags: [
+            "design",
+            "ui",
+            "collaboration"
+        ],
+        rating: 4.7,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t32",
+        slug: "sketch",
+        name: "Sketch",
+        oneLiner: "Mac-native design tool for teams who prioritize speed over cloud collaboration.",
+        description: "Sketch is a Mac-only vector design tool with strong plugin ecosystem. Faster than browser-based tools but collaboration requires workarounds. Still popular with established design teams.",
+        useCases: [
+            "UI design",
+            "Icon design",
+            "Design systems",
+            "Desktop app design",
+            "Mac-centric workflows"
+        ],
+        pros: [
+            "Native Mac performance",
+            "Mature plugin ecosystem",
+            "Fast local work",
+            "One-time license option"
+        ],
+        cons: [
+            "Mac only",
+            "Collaboration less seamless than Figma",
+            "Losing market share",
+            "Cloud features cost extra"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription or one-time license, typically around $10/mo or $99 one-time"
+        },
+        alternatives: [
+            {
+                name: "Figma",
+                slug: "figma"
+            },
+            {
+                name: "Adobe XD",
+                slug: "adobe-xd"
+            },
+            {
+                name: "Affinity Designer",
+                slug: "affinity-designer"
+            }
+        ],
+        tags: [
+            "design",
+            "mac",
+            "ui"
+        ],
+        rating: 4.4,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t33",
+        slug: "adobe-xd",
+        name: "Adobe XD",
+        oneLiner: "Adobe's design tool that's fine if you're already paying for Creative Cloud.",
+        description: "Adobe XD is a design and prototyping tool bundled with Creative Cloud. Decent features but lags behind competitors in adoption and innovation. Main value is ecosystem integration.",
+        useCases: [
+            "UI design",
+            "Prototyping",
+            "Adobe ecosystem workflows",
+            "Simple design projects"
+        ],
+        pros: [
+            "Included with Creative Cloud",
+            "Good Adobe integration",
+            "Clean interface",
+            "Decent prototyping"
+        ],
+        cons: [
+            "Losing features and focus",
+            "Smaller community",
+            "Behind competitors",
+            "Future unclear"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + included in Creative Cloud (~$55/mo)"
+        },
+        alternatives: [
+            {
+                name: "Figma",
+                slug: "figma"
+            },
+            {
+                name: "Sketch",
+                slug: "sketch"
+            },
+            {
+                name: "Framer",
+                slug: "framer"
+            }
+        ],
+        tags: [
+            "design",
+            "adobe",
+            "ui"
+        ],
+        rating: 3.9,
+        users: "Declining",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t34",
+        slug: "linear",
+        name: "Linear",
+        oneLiner: "Project management built for engineering velocity, not process bureaucracy.",
+        description: "Linear is an issue tracker and project management tool designed for speed with keyboard shortcuts, clean design, and Git integration. Loved by engineering teams who hate Jira.",
+        useCases: [
+            "Issue tracking",
+            "Sprint planning",
+            "Roadmaps",
+            "Bug tracking",
+            "Engineering workflows"
+        ],
+        pros: [
+            "Very fast",
+            "Keyboard-driven",
+            "Clean interface",
+            "Great Git integration",
+            "Modern UX"
+        ],
+        cons: [
+            "Limited customization",
+            "Best for pure engineering",
+            "Expensive for large teams",
+            "Less flexible than Jira"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free for small teams + paid plans around $8/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Jira",
+                slug: "jira"
+            },
+            {
+                name: "Height",
+                slug: "height"
+            },
+            {
+                name: "Plane",
+                slug: "plane"
+            }
+        ],
+        tags: [
+            "project-management",
+            "dev",
+            "productivity"
+        ],
+        rating: 4.8,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t35",
+        slug: "jira",
+        name: "Jira",
+        oneLiner: "Enterprise project management that your company bought and your team tolerates.",
+        description: "Jira is Atlassian's project management platform with maximum flexibility and enterprise features. Powerful but complex, requiring dedicated admins and often becoming bloated.",
+        useCases: [
+            "Enterprise project management",
+            "Complex workflows",
+            "Compliance tracking",
+            "Cross-team coordination"
+        ],
+        pros: [
+            "Extremely flexible",
+            "Enterprise features",
+            "Huge ecosystem",
+            "Good for complex organizations"
+        ],
+        cons: [
+            "Complex and slow",
+            "Requires admin expertise",
+            "Expensive at scale",
+            "Often over-customized"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free for small teams + paid plans starting around $8/user/mo, scaling up"
+        },
+        alternatives: [
+            {
+                name: "Linear",
+                slug: "linear"
+            },
+            {
+                name: "Asana",
+                slug: "asana"
+            },
+            {
+                name: "Monday",
+                slug: "monday"
+            }
+        ],
+        tags: [
+            "project-management",
+            "enterprise"
+        ],
+        rating: 4.0,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t36",
+        slug: "asana",
+        name: "Asana",
+        oneLiner: "Project management that works for mixed teams doing more than just engineering.",
+        description: "Asana is a flexible project management tool that bridges engineering and non-engineering work. Good for cross-functional teams who need coordination without Jira's complexity.",
+        useCases: [
+            "Cross-team projects",
+            "Marketing campaigns",
+            "Mixed workflows",
+            "Task management",
+            "Team coordination"
+        ],
+        pros: [
+            "Flexible for different work types",
+            "Good collaboration features",
+            "Multiple view options",
+            "Integrations"
+        ],
+        cons: [
+            "Can feel cluttered",
+            "Not optimized for pure engineering",
+            "Gets expensive",
+            "Learning curve for advanced features"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + paid plans starting around $11/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Monday",
+                slug: "monday"
+            },
+            {
+                name: "Click Up",
+                slug: "clickup"
+            },
+            {
+                name: "Jira",
+                slug: "jira"
+            }
+        ],
+        tags: [
+            "project-management",
+            "collaboration"
+        ],
+        rating: 4.3,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t37",
+        slug: "webflow",
+        name: "Webflow",
+        oneLiner: "Build production websites with design freedom, no code required (mostly).",
+        description: "Webflow is a visual website builder that generates clean code. Powerful for designers who want control without coding, though CMS and interactions require learning the Webflow way.",
+        useCases: [
+            "Marketing sites",
+            "Portfolio sites",
+            "Landing pages",
+            "Content sites",
+            "Client projects"
+        ],
+        pros: [
+            "Full design control",
+            "Clean code output",
+            "Powerful CMS",
+            "No code required",
+            "Good SEO"
+        ],
+        cons: [
+            "Learning curve",
+            "Traffic-based pricing can surprise",
+            "Lock-in concerns",
+            "Complex for simple sites"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + site plans starting $14/mo + CMS plans higher"
+        },
+        alternatives: [
+            {
+                name: "Framer",
+                slug: "framer"
+            },
+            {
+                name: "WordPress",
+                slug: "wordpress"
+            },
+            {
+                name: "Squarespace",
+                slug: "squarespace"
+            }
+        ],
+        tags: [
+            "website",
+            "no-code",
+            "design"
+        ],
+        rating: 4.5,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t38",
+        slug: "wordpress",
+        name: "WordPress",
+        oneLiner: "The old reliable that powers more of the web than you'd expect.",
+        description: "WordPress is an open-source CMS powering over 40% of websites. Maximum flexibility and ecosystem but requires hosting management and plugin maintenance. Still relevant despite newer alternatives.",
+        useCases: [
+            "Blogs",
+            "Content sites",
+            "E-commerce",
+            "Business sites",
+            "Custom web applications"
+        ],
+        pros: [
+            "Huge ecosystem",
+            "Maximum flexibility",
+            "Open source",
+            "Mature platform",
+            "Endless plugins"
+        ],
+        cons: [
+            "Security maintenance required",
+            "Plugin conflicts",
+            "Performance varies",
+            "Can feel dated",
+            "Hosting complexity"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Free software + hosting/theme/plugin costs vary widely"
+        },
+        alternatives: [
+            {
+                name: "Webflow",
+                slug: "webflow"
+            },
+            {
+                name: "Ghost",
+                slug: "ghost"
+            },
+            {
+                name: "Shopify",
+                slug: "shopify"
+            }
+        ],
+        tags: [
+            "cms",
+            "website",
+            "blogging"
+        ],
+        rating: 4.2,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t39",
+        slug: "stripe",
+        name: "Stripe",
+        oneLiner: "Payment processing for developers who want control and clean APIs.",
+        description: "Stripe provides payment APIs and infrastructure for online businesses. Developer-friendly with extensive features for subscriptions, fraud prevention, and global payments.",
+        useCases: [
+            "Online payments",
+            "Subscription billing",
+            "Marketplace payments",
+            "Invoicing",
+            "Revenue optimization"
+        ],
+        pros: [
+            "Excellent APIs",
+            "Strong documentation",
+            "Flexible features",
+            "Global support",
+            "Good developer experience"
+        ],
+        cons: [
+            "Requires technical integration",
+            "Fees add up at scale",
+            "Complexity for simple needs",
+            "Support can be slow"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "2.9% + $0.30 per transaction + subscription fees"
+        },
+        alternatives: [
+            {
+                name: "PayPal",
+                slug: "paypal"
+            },
+            {
+                name: "Square",
+                slug: "square"
+            },
+            {
+                name: "Paddle",
+                slug: "paddle"
+            }
+        ],
+        tags: [
+            "payments",
+            "e-commerce",
+            "dev"
+        ],
+        rating: 4.6,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t40",
+        slug: "paypal",
+        name: "PayPal",
+        oneLiner: "Payment processing with instant buyer trust but merchant headaches.",
+        description: "PayPal is a payment platform with strong brand recognition and buyer protection. Easy to integrate but fees are higher and customer experience can hurt conversion.",
+        useCases: [
+            "E-commerce checkout",
+            "Invoicing",
+            "International payments",
+            "Peer-to-peer transfers"
+        ],
+        pros: [
+            "Brand trust",
+            "Easy integration",
+            "Buyer protection",
+            "Multiple payment methods",
+            "Global reach"
+        ],
+        cons: [
+            "Higher fees",
+            "Account holds common",
+            "Customer support issues",
+            "Checkout UX can hurt conversion"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "2.9% + $0.30 domestic, higher for international"
+        },
+        alternatives: [
+            {
+                name: "Stripe",
+                slug: "stripe"
+            },
+            {
+                name: "Square",
+                slug: "square"
+            },
+            {
+                name: "Braintree",
+                slug: "braintree"
+            }
+        ],
+        tags: [
+            "payments",
+            "e-commerce"
+        ],
+        rating: 4.0,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t41",
+        slug: "square",
+        name: "Square",
+        oneLiner: "Payment processing that actually works for retail and online together.",
+        description: "Square provides unified payment processing for in-person and online sales with POS hardware and software. Best for retail businesses wanting consistent experience across channels.",
+        useCases: [
+            "Retail payments",
+            "Restaurant POS",
+            "Online store",
+            "Invoicing",
+            "Appointments"
+        ],
+        pros: [
+            "Unified in-person and online",
+            "Easy hardware",
+            "Good for retail",
+            "Simple pricing",
+            "Quick setup"
+        ],
+        cons: [
+            "Less flexible for complex online needs",
+            "Account stability issues reported",
+            "Limited customization"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "2.9% + $0.30 online, 2.6% + $0.10 in-person"
+        },
+        alternatives: [
+            {
+                name: "Stripe",
+                slug: "stripe"
+            },
+            {
+                name: "Clover",
+                slug: "clover"
+            },
+            {
+                name: "PayPal",
+                slug: "paypal"
+            }
+        ],
+        tags: [
+            "payments",
+            "pos",
+            "retail"
+        ],
+        rating: 4.4,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t42",
+        slug: "notion",
+        name: "Notion",
+        oneLiner: "All-in-one workspace that's either perfect or completely overwhelming.",
+        description: "Notion combines notes, databases, wikis, and project management in one flexible workspace. Powerful but can become over-engineered if you're not careful.",
+        useCases: [
+            "Team wikis",
+            "Project management",
+            "Note-taking",
+            "Documentation",
+            "Knowledge base"
+        ],
+        pros: [
+            "Very flexible",
+            "Good collaboration",
+            "Databases are powerful",
+            "Template ecosystem",
+            "Clean interface"
+        ],
+        cons: [
+            "Can get complex",
+            "Offline support limited",
+            "Performance issues with large workspaces",
+            "Lock-in concerns"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free personal + paid team plans starting $8/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Obsidian",
+                slug: "obsidian"
+            },
+            {
+                name: "Coda",
+                slug: "coda"
+            },
+            {
+                name: "Confluence",
+                slug: "confluence"
+            }
+        ],
+        tags: [
+            "notes",
+            "productivity",
+            "collaboration"
+        ],
+        rating: 4.5,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t43",
+        slug: "loom",
+        name: "Loom",
+        oneLiner: "Screen recording that actually feels lighter than writing an email.",
+        description: "Loom records quick screen and camera videos for async communication. Popular for bug reports, demos, feedback, and team updates when video is faster than writing.",
+        useCases: [
+            "Bug reports",
+            "Product demos",
+            "Team updates",
+            "Code reviews",
+            "Customer support"
+        ],
+        pros: [
+            "Very quick recording",
+            "Good sharing",
+            "Transcription included",
+            "Comment threading",
+            "Integrations"
+        ],
+        cons: [
+            "Free tier limits",
+            "Video quality not cinema-grade",
+            "Editing features basic",
+            "Costs add up for teams"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic (25 videos) + paid plans starting $12.50/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Tango",
+                slug: "tango"
+            },
+            {
+                name: "Screen Studio",
+                slug: "screen-studio"
+            },
+            {
+                name: "OBS",
+                slug: "obs"
+            }
+        ],
+        tags: [
+            "video",
+            "communication",
+            "productivity"
+        ],
+        rating: 4.6,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t44",
+        slug: "vercel",
+        name: "Vercel",
+        oneLiner: "Deploy frontend projects with zero config and actually good DX.",
+        description: "Vercel is a deployment platform optimized for frontend frameworks, especially Next.js. Git-based deployment, preview environments, and edge functions with excellent developer experience.",
+        useCases: [
+            "Frontend deployment",
+            "Next.js hosting",
+            "Preview environments",
+            "Edge functions",
+            "Static sites"
+        ],
+        pros: [
+            "Excellent DX",
+            "Fast deployments",
+            "Preview deployments",
+            "Edge network",
+            "Zero config for Next.js"
+        ],
+        cons: [
+            "Can get expensive",
+            "Vendor lock-in concerns",
+            "Less flexible than raw cloud",
+            "Bandwidth costs"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free hobby + paid pro/team plans with usage pricing"
+        },
+        alternatives: [
+            {
+                name: "Netlify",
+                slug: "netlify"
+            },
+            {
+                name: "Cloudflare Pages",
+                slug: "cloudflare-pages"
+            },
+            {
+                name: "AWS Amplify",
+                slug: "aws-amplify"
+            }
+        ],
+        tags: [
+            "deployment",
+            "frontend",
+            "dev"
+        ],
+        rating: 4.7,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t45",
+        slug: "supabase",
+        name: "Supabase",
+        oneLiner: "Open-source Firebase alternative that doesn't try to own your entire backend.",
+        description: "Supabase provides PostgreSQL database, authentication, storage, and realtime subscriptions with open-source foundation. Firebase alternative without the lock-in.",
+        useCases: [
+            "App backend",
+            "Authentication",
+            "Real-time apps",
+            "File storage",
+            "PostgreSQL hosting"
+        ],
+        pros: [
+            "Open source",
+            "Real PostgreSQL",
+            "Good DX",
+            "Generous free tier",
+            "Less lock-in than Firebase"
+        ],
+        cons: [
+            "Newer platform",
+            "Smaller ecosystem",
+            "Some features still maturing",
+            "Self-hosting complexity"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier + paid plans starting $25/project/mo"
+        },
+        alternatives: [
+            {
+                name: "Firebase",
+                slug: "firebase"
+            },
+            {
+                name: "PlanetScale",
+                slug: "planetscale"
+            },
+            {
+                name: "Railway",
+                slug: "railway"
+            }
+        ],
+        tags: [
+            "backend",
+            "database",
+            "dev"
+        ],
+        rating: 4.6,
+        users: "Growing",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t46",
+        slug: "tailwind",
+        name: "Tailwind CSS",
+        oneLiner: "Utility-first CSS that makes styling fast once you accept it's not actual CSS.",
+        description: "Tailwind CSS is a utility-first CSS framework where you compose styles with classes. Controversial but popular for fast styling without leaving HTML.",
+        useCases: [
+            "Rapid prototyping",
+            "Component styling",
+            "Responsive design",
+            "Design systems",
+            "Production sites"
+        ],
+        pros: [
+            "Very fast styling",
+            "Consistent design tokens",
+            "Good for components",
+            "Great documentation",
+            "Active community"
+        ],
+        cons: [
+            "HTML gets verbose",
+            "Learning curve",
+            "Build step required",
+            "Purging needed for production"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Free open-source + paid Tailwind UI components"
+        },
+        alternatives: [
+            {
+                name: "Bootstrap",
+                slug: "bootstrap"
+            },
+            {
+                name: "CSS Modules",
+                slug: "css-modules"
+            },
+            {
+                name: "Styled Components",
+                slug: "styled-components"
+            }
+        ],
+        tags: [
+            "css",
+            "frontend",
+            "dev"
+        ],
+        rating: 4.7,
+        users: "Massive",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t47",
+        slug: "posthog",
+        name: "PostHog",
+        oneLiner: "Product analytics, feature flags, and experiments without stitching five tools.",
+        description: "PostHog combines analytics, feature flags, session replay, and experiments in one platform. Open-source alternative to Amplitude + LaunchDarkly + FullStory combined.",
+        useCases: [
+            "Product analytics",
+            "Feature flags",
+            "A/B testing",
+            "Session replay",
+            "User behavior tracking"
+        ],
+        pros: [
+            "All-in-one platform",
+            "Open source",
+            "Self-hosting option",
+            "Good for startups",
+            "Transparent pricing"
+        ],
+        cons: [
+            "Less mature than specialized tools",
+            "Can be expensive at scale",
+            "Some features still developing"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier + usage-based pricing starting free"
+        },
+        alternatives: [
+            {
+                name: "Amplitude",
+                slug: "amplitude"
+            },
+            {
+                name: "Mixpanel",
+                slug: "mixpanel"
+            },
+            {
+                name: "Heap",
+                slug: "heap"
+            }
+        ],
+        tags: [
+            "analytics",
+            "product",
+            "dev"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t48",
+        slug: "resend",
+        name: "Resend",
+        oneLiner: "Transactional email for developers who are tired of SendGrid's complexity.",
+        description: "Resend is a modern transactional email API focused on developer experience. Clean API, React email templates, and good deliverability without enterprise complexity.",
+        useCases: [
+            "Transactional emails",
+            "Product notifications",
+            "Welcome emails",
+            "Password resets",
+            "Receipts"
+        ],
+        pros: [
+            "Great DX",
+            "React email templates",
+            "Clean API",
+            "Good deliverability",
+            "Reasonable pricing"
+        ],
+        cons: [
+            "Newer platform",
+            "Limited marketing features",
+            "Smaller ecosystem",
+            "Less proven at massive scale"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier (100 emails/day) + paid plans starting $20/mo"
+        },
+        alternatives: [
+            {
+                name: "SendGrid",
+                slug: "sendgrid"
+            },
+            {
+                name: "Postmark",
+                slug: "postmark"
+            },
+            {
+                name: "AWS SES",
+                slug: "aws-ses"
+            }
+        ],
+        tags: [
+            "email",
+            "dev",
+            "transactional"
+        ],
+        rating: 4.6,
+        users: "Growing",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t49",
+        slug: "cal-com",
+        name: "Cal.com",
+        oneLiner: "Open-source Calendly that you can self-host and actually customize.",
+        description: "Cal.com is an open-source scheduling platform with branded booking pages, team features, and integrations. Calendly alternative without the pricing surprises.",
+        useCases: [
+            "Meeting scheduling",
+            "Team scheduling",
+            "Booking pages",
+            "Calendar management",
+            "Availability"
+        ],
+        pros: [
+            "Open source",
+            "Self-hosting option",
+            "No per-seat pricing",
+            "Good customization",
+            "Active development"
+        ],
+        cons: [
+            "Newer than Calendly",
+            "Some features less polished",
+            "Self-hosting requires setup"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free self-hosted + paid cloud starting $12/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Calendly",
+                slug: "calendly"
+            },
+            {
+                name: "SavvyCal",
+                slug: "savvycal"
+            },
+            {
+                name: "YouCanBookMe",
+                slug: "youbookme"
+            }
+        ],
+        tags: [
+            "scheduling",
+            "productivity",
+            "open-source"
+        ],
+        rating: 4.4,
+        users: "Growing",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t50",
+        slug: "descript",
+        name: "Descript",
+        oneLiner: "Edit podcasts and videos by editing text, like magic but real.",
+        description: "Descript lets you edit audio and video by editing transcription text. Game-changing for podcasters and video creators who want editing to feel less tedious.",
+        useCases: [
+            "Podcast editing",
+            "Video editing",
+            "Transcription",
+            "Screen recording",
+            "Content repurposing"
+        ],
+        pros: [
+            "Text-based editing",
+            "Filler word removal",
+            "Studio-quality voices",
+            "Screen recording built-in",
+            "Fast workflow"
+        ],
+        cons: [
+            "Export quality has limits",
+            "Learning curve for traditional editors",
+            "Subscription required for best features"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic + paid plans starting $12/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Adobe Premiere",
+                slug: "premiere"
+            },
+            {
+                name: "Final Cut Pro",
+                slug: "final-cut"
+            },
+            {
+                name: "Riverside",
+                slug: "riverside"
+            }
+        ],
+        tags: [
+            "video",
+            "audio",
+            "editing",
+            "creator"
+        ],
+        rating: 4.6,
+        users: "Popular",
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "t51",
+        slug: "resemble-ai",
+        name: "Resemble AI",
+        oneLiner: "AI voice cloning and text-to-speech that sounds uncomfortably human.",
+        description: "Resemble AI is a voice generation platform focused on realistic text-to-speech and voice cloning. It allows creators and developers to build custom AI voices, generate speech programmatically, and localize audio content at scale with emotional control.",
+        useCases: [
+            "Text-to-speech",
+            "Voice cloning",
+            "Game character voices",
+            "Audiobook narration",
+            "Conversational AI",
+            "Localization and dubbing"
+        ],
+        pros: [
+            "Highly realistic voice output",
+            "Custom voice cloning",
+            "Emotion and style control",
+            "Strong API for developers",
+            "Supports multiple languages"
+        ],
+        cons: [
+            "Pricing scales quickly with usage",
+            "Voice cloning requires approval",
+            "Not beginner-friendly for casual users"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Usage-based pricing with free trial credits"
+        },
+        alternatives: [
+            {
+                name: "ElevenLabs",
+                slug: "elevenlabs"
+            },
+            {
+                name: "PlayHT",
+                slug: "playht"
+            },
+            {
+                name: "Murf",
+                slug: "murf"
+            }
+        ],
+        tags: [
+            "audio",
+            "voice",
+            "tts",
+            "ai",
+            "developer"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t52",
+        slug: "riverside",
+        name: "Riverside",
+        oneLiner: "Record podcasts and videos remotely with studio-quality audio and video.",
+        description: "Riverside is a remote recording platform built for podcasters, video creators, and interview-based content. It records lossless audio and high-resolution video locally on each participant’s device, then uploads it to the cloud for clean, reliable production.",
+        useCases: [
+            "Podcast recording",
+            "Remote interviews",
+            "Video podcasts",
+            "Content creation",
+            "Live streaming"
+        ],
+        pros: [
+            "Local recording for high quality",
+            "Separate audio and video tracks",
+            "Works directly in the browser",
+            "Built-in editor and clips",
+            "Reliable for remote guests"
+        ],
+        cons: [
+            "Editing tools are basic compared to DAWs",
+            "Requires stable internet for uploads",
+            "Free plan has limitations"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans starting around $15/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Descript",
+                slug: "descript"
+            },
+            {
+                name: "Zencastr",
+                slug: "zencastr"
+            },
+            {
+                name: "SquadCast",
+                slug: "squadcast"
+            }
+        ],
+        tags: [
+            "audio",
+            "video",
+            "podcast",
+            "recording",
+            "creator"
+        ],
+        rating: 4.6,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t53",
+        slug: "leonardo-ai",
+        name: "Leonardo AI",
+        oneLiner: "Generate high-quality AI images with fine-grained style and asset control.",
+        description: "Leonardo AI is an image generation platform built for designers, artists, and game creators who want more control than basic text-to-image tools. It supports custom models, consistent styles, asset generation, and fine-tuned outputs for production workflows.",
+        useCases: [
+            "AI image generation",
+            "Game assets",
+            "Concept art",
+            "Product visuals",
+            "Design ideation",
+            "Creative experimentation"
+        ],
+        pros: [
+            "High-quality image output",
+            "Custom model training",
+            "Style consistency tools",
+            "Strong UI for creatives",
+            "Good prompt control"
+        ],
+        cons: [
+            "Credit-based system can feel limiting",
+            "Advanced features require paid plans",
+            "Not optimized for non-visual use cases"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free credits available + paid plans starting around $12/month"
+        },
+        alternatives: [
+            {
+                name: "Midjourney",
+                slug: "midjourney"
+            },
+            {
+                name: "DALL·E",
+                slug: "dalle"
+            },
+            {
+                name: "Stable Diffusion",
+                slug: "stable-diffusion"
+            }
+        ],
+        tags: [
+            "image",
+            "design",
+            "art",
+            "ai",
+            "creative"
+        ],
+        rating: 4.7,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t54",
+        slug: "final-cut-pro",
+        name: "Final Cut Pro",
+        oneLiner: "Professional video editing optimized for speed on Apple hardware.",
+        description: "Final Cut Pro is Apple’s professional non-linear video editor designed for fast, efficient workflows on macOS. It’s widely used by YouTubers, filmmakers, and studios that want high performance, powerful timelines, and deep integration with Apple’s ecosystem.",
+        useCases: [
+            "Video editing",
+            "YouTube content",
+            "Film production",
+            "Commercial editing",
+            "Motion graphics"
+        ],
+        pros: [
+            "Extremely fast on Apple Silicon",
+            "One-time purchase",
+            "Magnetic timeline workflow",
+            "Deep macOS integration",
+            "Professional-grade tools"
+        ],
+        cons: [
+            "macOS only",
+            "Unconventional timeline takes time to learn",
+            "Fewer third-party plugins than Adobe"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time purchase around $299"
+        },
+        alternatives: [
+            {
+                name: "Adobe Premiere",
+                slug: "premiere"
+            },
+            {
+                name: "DaVinci Resolve",
+                slug: "davinci-resolve"
+            },
+            {
+                name: "Descript",
+                slug: "descript"
+            }
+        ],
+        tags: [
+            "video",
+            "editing",
+            "production",
+            "creator"
+        ],
+        rating: 4.6,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t55",
+        slug: "hostinger",
+        name: "Hostinger",
+        oneLiner: "Budget-friendly web hosting that actually works for small projects.",
+        description: "Hostinger is a web hosting provider offering shared hosting, VPS, cloud hosting, and domain services at competitive prices. It’s popular with beginners and small businesses looking for affordable hosting with decent performance and a simple control panel.",
+        useCases: [
+            "Website hosting",
+            "Domain registration",
+            "Small business sites",
+            "WordPress hosting",
+            "Landing pages"
+        ],
+        pros: [
+            "Very affordable pricing",
+            "Beginner-friendly dashboard",
+            "Good performance for the price",
+            "Free SSL on most plans",
+            "Global data centers"
+        ],
+        cons: [
+            "Renewal prices are higher",
+            "Limited advanced configuration on shared plans",
+            "Support can be slow during peak times"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Shared hosting starts low with discounted intro pricing"
+        },
+        alternatives: [
+            {
+                name: "Bluehost",
+                slug: "bluehost"
+            },
+            {
+                name: "Namecheap",
+                slug: "namecheap"
+            },
+            {
+                name: "SiteGround",
+                slug: "siteground"
+            }
+        ],
+        tags: [
+            "hosting",
+            "domains",
+            "website",
+            "infrastructure"
+        ],
+        rating: 4.3,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t56",
+        slug: "adobe-premiere",
+        name: "Adobe Premiere Pro",
+        oneLiner: "Industry-standard video editing with deep creative ecosystem integration.",
+        description: "Adobe Premiere Pro is a professional video editing application used across film, TV, and online content creation. It integrates tightly with other Adobe Creative Cloud tools, making it a go-to choice for editors who work across video, audio, motion, and graphics.",
+        useCases: [
+            "Video editing",
+            "Film and TV production",
+            "YouTube content",
+            "Commercial editing",
+            "Motion graphics workflows"
+        ],
+        pros: [
+            "Industry standard adoption",
+            "Tight integration with After Effects and Photoshop",
+            "Powerful timeline and editing tools",
+            "Extensive plugin ecosystem",
+            "Cross-platform support"
+        ],
+        cons: [
+            "Subscription-only pricing",
+            "Can be resource-intensive",
+            "Performance varies on lower-end machines"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription starting around $22.99/month"
+        },
+        alternatives: [
+            {
+                name: "Final Cut Pro",
+                slug: "final-cut-pro"
+            },
+            {
+                name: "DaVinci Resolve",
+                slug: "davinci-resolve"
+            },
+            {
+                name: "Descript",
+                slug: "descript"
+            }
+        ],
+        tags: [
+            "video",
+            "editing",
+            "production",
+            "creator"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t57",
+        slug: "google-cloud-tts",
+        name: "Google Cloud Text-to-Speech",
+        oneLiner: "Enterprise-grade text-to-speech with natural voices and global language support.",
+        description: "Google Cloud Text-to-Speech is a cloud-based speech synthesis service offering natural-sounding voices powered by WaveNet and neural models. It’s designed for developers and enterprises that need scalable, reliable, and multilingual voice generation through APIs.",
+        useCases: [
+            "Text-to-speech",
+            "Voice assistants",
+            "Accessibility tools",
+            "IVR and call centers",
+            "Multilingual applications"
+        ],
+        pros: [
+            "High-quality WaveNet voices",
+            "Wide language and voice support",
+            "Reliable and scalable infrastructure",
+            "Strong developer documentation",
+            "Easy integration with Google Cloud"
+        ],
+        cons: [
+            "Purely API-driven, no creator-focused UI",
+            "Pricing can add up at scale",
+            "Less expressive than some creative TTS tools"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Pay-as-you-go pricing with free tier credits"
+        },
+        alternatives: [
+            {
+                name: "Amazon Polly",
+                slug: "amazon-polly"
+            },
+            {
+                name: "Azure TTS",
+                slug: "azure-tts"
+            },
+            {
+                name: "Resemble AI",
+                slug: "resemble-ai"
+            }
+        ],
+        tags: [
+            "audio",
+            "voice",
+            "tts",
+            "cloud",
+            "developer"
+        ],
+        rating: 4.4,
+        users: "Enterprise",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t58",
+        slug: "mendeley",
+        name: "Mendeley",
+        oneLiner: "Reference manager and academic network rolled into one.",
+        description: "Mendeley is a reference management tool that helps researchers organize papers, generate citations, and collaborate with others. It combines PDF management, citation tools, and an academic social network, making it popular among students and researchers.",
+        useCases: [
+            "Reference management",
+            "Citation generation",
+            "PDF annotation",
+            "Academic collaboration",
+            "Research organization"
+        ],
+        pros: [
+            "Free tier available",
+            "Good PDF annotation tools",
+            "Word and LaTeX integration",
+            "Cloud sync across devices",
+            "Large academic user base"
+        ],
+        cons: [
+            "Owned by Elsevier, which some researchers dislike",
+            "Limited storage on free plan",
+            "Desktop app can feel slow"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid storage upgrades"
+        },
+        alternatives: [
+            {
+                name: "Zotero",
+                slug: "zotero"
+            },
+            {
+                name: "EndNote",
+                slug: "endnote"
+            },
+            {
+                name: "Paperpile",
+                slug: "paperpile"
+            }
+        ],
+        tags: [
+            "research",
+            "citations",
+            "academia",
+            "productivity"
+        ],
+        rating: 4.3,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t59",
+        slug: "paperpile",
+        name: "Paperpile",
+        oneLiner: "Modern reference management built for Google Docs users.",
+        description: "Paperpile is a cloud-first reference manager designed to work seamlessly with Google Docs and web browsers. It focuses on fast paper collection, clean organization, and effortless citation insertion without heavy desktop software.",
+        useCases: [
+            "Reference management",
+            "Google Docs citations",
+            "Literature review",
+            "Research organization",
+            "Collaborative writing"
+        ],
+        pros: [
+            "Excellent Google Docs integration",
+            "Clean and modern interface",
+            "Browser-based workflow",
+            "Fast paper importing",
+            "Simple collaboration"
+        ],
+        cons: [
+            "No permanent free plan",
+            "Limited Word support compared to competitors",
+            "Not ideal for offline-heavy workflows"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription-based pricing after free trial"
+        },
+        alternatives: [
+            {
+                name: "Zotero",
+                slug: "zotero"
+            },
+            {
+                name: "Mendeley",
+                slug: "mendeley"
+            },
+            {
+                name: "EndNote",
+                slug: "endnote"
+            }
+        ],
+        tags: [
+            "research",
+            "citations",
+            "writing",
+            "academia"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t60",
+        slug: "endnote",
+        name: "EndNote",
+        oneLiner: "Enterprise-grade reference management for serious academic work.",
+        description: "EndNote is a long-standing reference management software widely used in academia and research institutions. It offers powerful citation tools, extensive formatting options, and robust library management for complex research projects.",
+        useCases: [
+            "Reference management",
+            "Citation formatting",
+            "Large research libraries",
+            "Academic publishing",
+            "Systematic reviews"
+        ],
+        pros: [
+            "Very powerful citation engine",
+            "Handles large libraries well",
+            "Extensive journal styles",
+            "Strong Word integration",
+            "Trusted in academic institutions"
+        ],
+        cons: [
+            "Expensive upfront cost",
+            "Outdated interface",
+            "Steeper learning curve"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time license purchase, often discounted for students"
+        },
+        alternatives: [
+            {
+                name: "Zotero",
+                slug: "zotero"
+            },
+            {
+                name: "Mendeley",
+                slug: "mendeley"
+            },
+            {
+                name: "Paperpile",
+                slug: "paperpile"
+            }
+        ],
+        tags: [
+            "research",
+            "citations",
+            "academia",
+            "enterprise"
+        ],
+        rating: 4.4,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t61",
+        slug: "figjam",
+        name: "FigJam",
+        oneLiner: "Collaborative whiteboarding built directly into the Figma ecosystem.",
+        description: "FigJam is a collaborative online whiteboard designed for brainstorming, planning, and workshops. It integrates seamlessly with Figma, making it easy for product teams and designers to move from ideas to polished designs without switching tools.",
+        useCases: [
+            "Brainstorming",
+            "User journey mapping",
+            "Workshops",
+            "Team planning",
+            "Product ideation"
+        ],
+        pros: [
+            "Deep integration with Figma",
+            "Clean and intuitive interface",
+            "Great for real-time collaboration",
+            "Built-in templates and widgets",
+            "Easy onboarding for teams"
+        ],
+        cons: [
+            "Less flexible outside design workflows",
+            "Requires Figma account",
+            "Limited advanced diagramming features"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid Figma plans unlock more features"
+        },
+        alternatives: [
+            {
+                name: "Miro",
+                slug: "miro"
+            },
+            {
+                name: "tldraw",
+                slug: "tldraw"
+            },
+            {
+                name: "Whimsical",
+                slug: "whimsical"
+            }
+        ],
+        tags: [
+            "whiteboard",
+            "collaboration",
+            "design",
+            "productivity"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t62",
+        slug: "miro",
+        name: "Miro",
+        oneLiner: "All-in-one collaborative whiteboard for teams that think out loud.",
+        description: "Miro is a digital whiteboard platform used by product, engineering, and business teams for ideation, planning, and collaboration. It supports large canvases, rich templates, and structured workflows for distributed teams.",
+        useCases: [
+            "Brainstorming",
+            "Strategy planning",
+            "Flowcharts and diagrams",
+            "Agile ceremonies",
+            "Remote collaboration"
+        ],
+        pros: [
+            "Extremely flexible canvas",
+            "Huge template library",
+            "Scales well for large teams",
+            "Strong collaboration features",
+            "Integrates with many tools"
+        ],
+        cons: [
+            "Can feel overwhelming for small teams",
+            "Free plan is limited",
+            "Performance can drop on very large boards"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans starting around $10/user/mo"
+        },
+        alternatives: [
+            {
+                name: "FigJam",
+                slug: "figjam"
+            },
+            {
+                name: "Whimsical",
+                slug: "whimsical"
+            },
+            {
+                name: "Lucid",
+                slug: "lucid"
+            }
+        ],
+        tags: [
+            "whiteboard",
+            "collaboration",
+            "planning",
+            "productivity"
+        ],
+        rating: 4.7,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t63",
+        slug: "tldraw",
+        name: "tldraw",
+        oneLiner: "Minimalist infinite canvas for sketching ideas at the speed of thought.",
+        description: "tldraw is an open-source drawing and whiteboard tool focused on simplicity and speed. It’s popular with developers, designers, and thinkers who want a lightweight, distraction-free canvas for diagrams, sketches, and rough ideas.",
+        useCases: [
+            "Sketching ideas",
+            "Rough diagrams",
+            "System design",
+            "Teaching and explanations",
+            "Quick brainstorming"
+        ],
+        pros: [
+            "Open source",
+            "Very fast and lightweight",
+            "Simple, distraction-free UI",
+            "Great for quick diagrams",
+            "Free to use"
+        ],
+        cons: [
+            "Lacks advanced collaboration features",
+            "No built-in project management",
+            "Not suited for structured workshops"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Completely free and open source"
+        },
+        alternatives: [
+            {
+                name: "Excalidraw",
+                slug: "excalidraw"
+            },
+            {
+                name: "FigJam",
+                slug: "figjam"
+            },
+            {
+                name: "Miro",
+                slug: "miro"
+            }
+        ],
+        tags: [
+            "whiteboard",
+            "open-source",
+            "diagramming",
+            "thinking"
+        ],
+        rating: 4.6,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t64",
+        slug: "logseq",
+        name: "Logseq",
+        oneLiner: "Local-first, open-source note-taking for people who think in graphs.",
+        description: "Logseq is a knowledge management and note-taking tool built around outlines, backlinks, and daily notes. It stores data locally in plain text files, making it popular with privacy-conscious users who want Roam-style workflows without cloud lock-in.",
+        useCases: [
+            "Personal knowledge management",
+            "Daily notes",
+            "Research organization",
+            "Second brain systems",
+            "Learning and note-taking"
+        ],
+        pros: [
+            "Local-first and privacy-friendly",
+            "Open source",
+            "Strong backlinking and graph view",
+            "Markdown and Org-mode support",
+            "Offline-first workflow"
+        ],
+        cons: [
+            "Mobile experience is still rough",
+            "Sync requires setup or paid service",
+            "UI can feel unfinished"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free local use + optional paid sync service"
+        },
+        alternatives: [
+            {
+                name: "Roam Research",
+                slug: "roam-research"
+            },
+            {
+                name: "Obsidian",
+                slug: "obsidian"
+            },
+            {
+                name: "Notion",
+                slug: "notion"
+            }
+        ],
+        tags: [
+            "notes",
+            "knowledge",
+            "open-source",
+            "productivity"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t65",
+        slug: "roam-research",
+        name: "Roam Research",
+        oneLiner: "The original cult favorite for networked thinking and backlinks.",
+        description: "Roam Research is a note-taking tool centered on bidirectional linking and graph-based knowledge organization. It popularized the concept of networked thought, making it influential among researchers, writers, and thinkers who work with complex ideas.",
+        useCases: [
+            "Knowledge graphs",
+            "Research notes",
+            "Idea development",
+            "Writing and thinking",
+            "Long-term knowledge storage"
+        ],
+        pros: [
+            "Best-in-class backlinking",
+            "Fast idea capture with daily notes",
+            "Powerful query system",
+            "Strong community ecosystem",
+            "Pioneered networked note-taking"
+        ],
+        cons: [
+            "Expensive subscription",
+            "Cloud-only storage",
+            "Steep learning curve"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription-based pricing starting around $15/month"
+        },
+        alternatives: [
+            {
+                name: "Logseq",
+                slug: "logseq"
+            },
+            {
+                name: "Obsidian",
+                slug: "obsidian"
+            },
+            {
+                name: "Notion",
+                slug: "notion"
+            }
+        ],
+        tags: [
+            "notes",
+            "knowledge",
+            "research",
+            "productivity"
+        ],
+        rating: 4.4,
+        users: "Niche but Influential",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t66",
+        slug: "alfred",
+        name: "Alfred",
+        oneLiner: "Productivity launcher for macOS users who hate touching the mouse.",
+        description: "Alfred is a macOS productivity app that lets users search files, launch apps, run workflows, and automate tasks using the keyboard. It’s favored by power users who want speed, extensibility, and deep system control beyond what Spotlight offers.",
+        useCases: [
+            "App launching",
+            "File search",
+            "Workflow automation",
+            "Clipboard management",
+            "Productivity shortcuts"
+        ],
+        pros: [
+            "Extremely fast and keyboard-driven",
+            "Powerful custom workflows",
+            "Clipboard history and snippets",
+            "Highly extensible",
+            "One-time license option"
+        ],
+        cons: [
+            "macOS only",
+            "Advanced features require paid license",
+            "Initial setup can feel complex"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic version + paid Powerpack (one-time purchase)"
+        },
+        alternatives: [
+            {
+                name: "Spotlight",
+                slug: "spotlight"
+            },
+            {
+                name: "Raycast",
+                slug: "raycast"
+            },
+            {
+                name: "LaunchBar",
+                slug: "launchbar"
+            }
+        ],
+        tags: [
+            "productivity",
+            "launcher",
+            "automation",
+            "macos"
+        ],
+        rating: 4.7,
+        users: "Power Users",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t67",
+        slug: "spotlight",
+        name: "Spotlight",
+        oneLiner: "Built-in macOS search that quietly does its job.",
+        description: "Spotlight is Apple’s default system-wide search tool for macOS. It allows users to quickly find apps, files, emails, and perform basic calculations or lookups without installing extra software.",
+        useCases: [
+            "App launching",
+            "File search",
+            "Quick calculations",
+            "System-wide lookup",
+            "Basic productivity"
+        ],
+        pros: [
+            "Built into macOS",
+            "Fast and lightweight",
+            "Zero setup required",
+            "Good system integration",
+            "Free"
+        ],
+        cons: [
+            "Limited customization",
+            "No advanced automation",
+            "Less powerful than third-party launchers"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Included with macOS"
+        },
+        alternatives: [
+            {
+                name: "Alfred",
+                slug: "alfred"
+            },
+            {
+                name: "Raycast",
+                slug: "raycast"
+            },
+            {
+                name: "LaunchBar",
+                slug: "launchbar"
+            }
+        ],
+        tags: [
+            "productivity",
+            "launcher",
+            "search",
+            "macos"
+        ],
+        rating: 4.4,
+        users: "All macOS Users",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t68",
+        slug: "prowritingaid",
+        name: "ProWritingAid",
+        oneLiner: "Grammar, style, and clarity editing for writers who want detailed feedback.",
+        description: "ProWritingAid is a writing assistant that analyzes grammar, style, readability, and structure. It’s popular with authors, students, and long-form writers who want deeper feedback than basic grammar checkers, especially for fiction and academic writing.",
+        useCases: [
+            "Grammar checking",
+            "Style improvement",
+            "Fiction writing",
+            "Academic writing",
+            "Long-form editing"
+        ],
+        pros: [
+            "Very detailed writing reports",
+            "Strong for long-form content",
+            "Integrates with Word and Google Docs",
+            "One-time license option available",
+            "Good value compared to competitors"
+        ],
+        cons: [
+            "Interface can feel overwhelming",
+            "Slower on very large documents",
+            "Suggestions can be overly strict"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free limited version + paid plans including one-time lifetime license"
+        },
+        alternatives: [
+            {
+                name: "Grammarly",
+                slug: "grammarly"
+            },
+            {
+                name: "Hemingway Editor",
+                slug: "hemingway"
+            },
+            {
+                name: "QuillBot",
+                slug: "quillbot"
+            }
+        ],
+        tags: [
+            "writing",
+            "grammar",
+            "editing",
+            "productivity"
+        ],
+        rating: 4.5,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t69",
+        slug: "affinity-designer",
+        name: "Affinity Designer",
+        oneLiner: "Professional vector design without subscriptions or nonsense.",
+        description: "Affinity Designer is a professional graphic design tool for vector illustration, UI design, and branding. It’s known for its performance, precision tools, and one-time purchase model, making it a popular alternative to Adobe Illustrator.",
+        useCases: [
+            "Vector illustration",
+            "Graphic design",
+            "UI and UX design",
+            "Branding",
+            "Icon design"
+        ],
+        pros: [
+            "One-time purchase pricing",
+            "Excellent performance",
+            "Professional-grade vector tools",
+            "Clean and modern interface",
+            "Available on macOS, Windows, and iPad"
+        ],
+        cons: [
+            "Smaller plugin ecosystem",
+            "No built-in collaboration tools",
+            "Industry adoption lower than Adobe"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time purchase, often under $70"
+        },
+        alternatives: [
+            {
+                name: "Adobe Illustrator",
+                slug: "illustrator"
+            },
+            {
+                name: "Figma",
+                slug: "figma"
+            },
+            {
+                name: "Sketch",
+                slug: "sketch"
+            }
+        ],
+        tags: [
+            "design",
+            "vector",
+            "graphics",
+            "creative"
+        ],
+        rating: 4.7,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t70",
+        slug: "carrd",
+        name: "Carrd",
+        oneLiner: "Build simple, elegant one-page websites in minutes.",
+        description: "Carrd is a lightweight website builder focused on single-page sites like landing pages, personal profiles, and small marketing pages. It’s popular for its speed, simplicity, and ability to launch clean pages without technical overhead.",
+        useCases: [
+            "Landing pages",
+            "Personal websites",
+            "Link-in-bio pages",
+            "Product launches",
+            "Simple marketing sites"
+        ],
+        pros: [
+            "Extremely easy to use",
+            "Very affordable pricing",
+            "Clean and fast-loading pages",
+            "Custom domains supported",
+            "No coding required"
+        ],
+        cons: [
+            "Limited to mostly one-page sites",
+            "Not suitable for complex projects",
+            "Advanced customization is minimal"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic sites + paid plans starting very low annually"
+        },
+        alternatives: [
+            {
+                name: "Typedream",
+                slug: "typedream"
+            },
+            {
+                name: "Framer",
+                slug: "framer"
+            },
+            {
+                name: "Webflow",
+                slug: "webflow"
+            }
+        ],
+        tags: [
+            "website",
+            "landing-page",
+            "no-code",
+            "marketing"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t71",
+        slug: "typedream",
+        name: "Typedream",
+        oneLiner: "Notion-style website builder for fast content-driven sites.",
+        description: "Typedream is a no-code website builder that lets users create websites using a block-based, Notion-like editor. It’s designed for startups, creators, and indie builders who want speed, SEO-friendly pages, and simple publishing workflows.",
+        useCases: [
+            "Startup websites",
+            "Content sites",
+            "Landing pages",
+            "Documentation pages",
+            "Personal brands"
+        ],
+        pros: [
+            "Very fast setup",
+            "Clean and modern designs",
+            "SEO-friendly by default",
+            "Easy publishing workflow",
+            "Good balance of simplicity and power"
+        ],
+        cons: [
+            "Less design freedom than Webflow",
+            "Advanced features require paid plans",
+            "Limited for highly custom layouts"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans for custom domains and features"
+        },
+        alternatives: [
+            {
+                name: "Carrd",
+                slug: "carrd"
+            },
+            {
+                name: "Framer",
+                slug: "framer"
+            },
+            {
+                name: "Webflow",
+                slug: "webflow"
+            }
+        ],
+        tags: [
+            "website",
+            "no-code",
+            "startup",
+            "content"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t72",
+        slug: "monday",
+        name: "Monday.com",
+        oneLiner: "Visual project management for teams that like structure and clarity.",
+        description: "Monday.com is a work operating system that helps teams plan, track, and manage projects through highly visual boards and automations. It’s widely used by business, marketing, and operations teams that want flexibility without chaos.",
+        useCases: [
+            "Project management",
+            "Team collaboration",
+            "Task tracking",
+            "Business workflows",
+            "Operations planning"
+        ],
+        pros: [
+            "Very intuitive visual boards",
+            "Highly customizable workflows",
+            "Strong automation features",
+            "Good reporting and dashboards",
+            "Scales well for teams"
+        ],
+        cons: [
+            "Can become expensive as team grows",
+            "Feature depth may overwhelm small teams",
+            "Less developer-focused than alternatives"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Paid plans with tiered pricing based on users and features"
+        },
+        alternatives: [
+            {
+                name: "ClickUp",
+                slug: "clickup"
+            },
+            {
+                name: "Asana",
+                slug: "asana"
+            },
+            {
+                name: "Trello",
+                slug: "trello"
+            }
+        ],
+        tags: [
+            "project-management",
+            "collaboration",
+            "productivity",
+            "business"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t73",
+        slug: "clickup",
+        name: "ClickUp",
+        oneLiner: "All-in-one productivity platform that tries to replace everything.",
+        description: "ClickUp is a project management and productivity tool offering tasks, docs, goals, dashboards, and automation in a single platform. It’s favored by teams that want maximum flexibility and features under one roof.",
+        useCases: [
+            "Project management",
+            "Task tracking",
+            "Documentation",
+            "Goal tracking",
+            "Team collaboration"
+        ],
+        pros: [
+            "Extremely feature-rich",
+            "Highly customizable views",
+            "Strong free plan",
+            "Docs and tasks in one place",
+            "Good value for growing teams"
+        ],
+        cons: [
+            "Can feel bloated",
+            "Learning curve is steep",
+            "Performance can lag with heavy use"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans for advanced features"
+        },
+        alternatives: [
+            {
+                name: "Monday.com",
+                slug: "monday"
+            },
+            {
+                name: "Asana",
+                slug: "asana"
+            },
+            {
+                name: "Notion",
+                slug: "notion"
+            }
+        ],
+        tags: [
+            "project-management",
+            "productivity",
+            "collaboration",
+            "teams"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t74",
+        slug: "ghost",
+        name: "Ghost",
+        oneLiner: "Open-source publishing platform built for writers and creators.",
+        description: "Ghost is a modern publishing platform focused on blogs, newsletters, and membership-based content. It’s designed for speed, SEO, and monetization, making it a strong choice for creators who want ownership, performance, and clean content workflows.",
+        useCases: [
+            "Blogging",
+            "Newsletters",
+            "Membership sites",
+            "Content publishing",
+            "Creator monetization"
+        ],
+        pros: [
+            "Excellent performance and SEO",
+            "Built-in memberships and subscriptions",
+            "Clean, distraction-free editor",
+            "Open source and self-hostable",
+            "No plugin bloat"
+        ],
+        cons: [
+            "Limited customization without development",
+            "Smaller theme ecosystem than WordPress",
+            "Not suited for complex sites beyond content"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free self-hosted + paid Ghost(Pro) hosting plans"
+        },
+        alternatives: [
+            {
+                name: "WordPress",
+                slug: "wordpress"
+            },
+            {
+                name: "Substack",
+                slug: "substack"
+            },
+            {
+                name: "Medium",
+                slug: "medium"
+            }
+        ],
+        tags: [
+            "publishing",
+            "blogging",
+            "newsletter",
+            "open-source"
+        ],
+        rating: 4.6,
+        users: "Creators",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t75",
+        slug: "shopify",
+        name: "Shopify",
+        oneLiner: "All-in-one e-commerce platform for selling anything online.",
+        description: "Shopify is a leading e-commerce platform that lets businesses create online stores, manage products, handle payments, and scale operations. It’s trusted by small businesses and large brands alike for its reliability and ecosystem.",
+        useCases: [
+            "Online stores",
+            "E-commerce",
+            "Product sales",
+            "Dropshipping",
+            "Digital products"
+        ],
+        pros: [
+            "Very easy to set up",
+            "Robust payment and checkout system",
+            "Huge app ecosystem",
+            "Scales from small to enterprise",
+            "Reliable hosting and security"
+        ],
+        cons: [
+            "Monthly subscription costs",
+            "Transaction fees without Shopify Payments",
+            "Customization often requires apps or developers"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Monthly plans starting around $39"
+        },
+        alternatives: [
+            {
+                name: "WooCommerce",
+                slug: "woocommerce"
+            },
+            {
+                name: "BigCommerce",
+                slug: "bigcommerce"
+            },
+            {
+                name: "Squarespace",
+                slug: "squarespace"
+            }
+        ],
+        tags: [
+            "ecommerce",
+            "online-store",
+            "business",
+            "commerce"
+        ],
+        rating: 4.7,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t76",
+        slug: "paddle",
+        name: "Paddle",
+        oneLiner: "Payments, subscriptions, and taxes handled so SaaS teams can sleep.",
+        description: "Paddle is a merchant-of-record platform that handles payments, subscriptions, invoicing, and global sales tax compliance for SaaS companies. It’s built for software businesses that want to sell globally without managing VAT, sales tax, or complex payment infrastructure.",
+        useCases: [
+            "SaaS payments",
+            "Subscription management",
+            "Global tax compliance",
+            "Billing and invoicing",
+            "Checkout optimization"
+        ],
+        pros: [
+            "Merchant of record model",
+            "Handles global taxes and VAT",
+            "Clean checkout experience",
+            "Subscription and billing tools built-in",
+            "Good developer APIs"
+        ],
+        cons: [
+            "Higher fees than basic payment processors",
+            "Not ideal for non-digital products",
+            "Less control than self-managed payment stacks"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Revenue-based fees per transaction"
+        },
+        alternatives: [
+            {
+                name: "Stripe",
+                slug: "stripe"
+            },
+            {
+                name: "Lemon Squeezy",
+                slug: "lemon-squeezy"
+            },
+            {
+                name: "Chargebee",
+                slug: "chargebee"
+            }
+        ],
+        tags: [
+            "payments",
+            "saas",
+            "subscriptions",
+            "billing"
+        ],
+        rating: 4.5,
+        users: "SaaS Companies",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t77",
+        slug: "tango",
+        name: "Tango",
+        oneLiner: "Automatically turn workflows into step-by-step guides.",
+        description: "Tango is a documentation tool that records your on-screen actions and instantly turns them into clear, step-by-step guides. It’s built for teams that want fast, visual documentation without writing manuals by hand.",
+        useCases: [
+            "Process documentation",
+            "Employee onboarding",
+            "How-to guides",
+            "Internal training",
+            "Knowledge sharing"
+        ],
+        pros: [
+            "Automatic step capture",
+            "Very fast documentation workflow",
+            "Clean visual guides",
+            "Great for non-technical teams",
+            "Browser-based"
+        ],
+        cons: [
+            "Limited customization",
+            "Focused on workflows, not freeform recording",
+            "Less useful for video-heavy content"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans for teams"
+        },
+        alternatives: [
+            {
+                name: "Scribe",
+                slug: "scribe"
+            },
+            {
+                name: "Loom",
+                slug: "loom"
+            },
+            {
+                name: "Confluence",
+                slug: "confluence"
+            }
+        ],
+        tags: [
+            "documentation",
+            "training",
+            "productivity",
+            "teams"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t78",
+        slug: "screen-studio",
+        name: "Screen Studio",
+        oneLiner: "Beautiful screen recordings with zero editing effort.",
+        description: "Screen Studio is a macOS screen recorder focused on creating polished product demos and tutorials automatically. It adds smooth zooms, cursor tracking, and motion effects without manual editing.",
+        useCases: [
+            "Product demos",
+            "Tutorial videos",
+            "Marketing videos",
+            "Feature walkthroughs",
+            "Creator content"
+        ],
+        pros: [
+            "Automatic zoom and motion effects",
+            "Very clean output",
+            "No timeline editing needed",
+            "Great for product marketing",
+            "One-time purchase"
+        ],
+        cons: [
+            "macOS only",
+            "Limited control for advanced editing",
+            "Not suited for live recording"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time purchase pricing"
+        },
+        alternatives: [
+            {
+                name: "Loom",
+                slug: "loom"
+            },
+            {
+                name: "Camtasia",
+                slug: "camtasia"
+            },
+            {
+                name: "OBS",
+                slug: "obs"
+            }
+        ],
+        tags: [
+            "screen-recording",
+            "video",
+            "marketing",
+            "creator"
+        ],
+        rating: 4.7,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t79",
+        slug: "obs",
+        name: "OBS Studio",
+        oneLiner: "Free, open-source broadcasting and recording for absolute control.",
+        description: "OBS Studio is an open-source tool for screen recording and live streaming. It’s widely used by streamers, educators, and professionals who need full control over scenes, sources, and output quality.",
+        useCases: [
+            "Live streaming",
+            "Screen recording",
+            "Webinars",
+            "Gaming streams",
+            "Professional broadcasts"
+        ],
+        pros: [
+            "Completely free and open source",
+            "Highly customizable",
+            "Supports streaming and recording",
+            "Large plugin ecosystem",
+            "Cross-platform support"
+        ],
+        cons: [
+            "Steep learning curve",
+            "Interface is not beginner-friendly",
+            "Requires setup and tuning"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Free and open source"
+        },
+        alternatives: [
+            {
+                name: "Streamlabs",
+                slug: "streamlabs"
+            },
+            {
+                name: "Camtasia",
+                slug: "camtasia"
+            },
+            {
+                name: "Screen Studio",
+                slug: "screen-studio"
+            }
+        ],
+        tags: [
+            "screen-recording",
+            "streaming",
+            "open-source",
+            "broadcast"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t80",
+        slug: "netlify",
+        name: "Netlify",
+        oneLiner: "Deploy static and frontend apps with zero patience required.",
+        description: "Netlify is a frontend-focused hosting platform designed for static sites and modern web apps. It offers continuous deployment, serverless functions, and preview builds, making it popular with developers who want fast deploys without infrastructure babysitting.",
+        useCases: [
+            "Static site hosting",
+            "Frontend deployments",
+            "Jamstack sites",
+            "Landing pages",
+            "Developer previews"
+        ],
+        pros: [
+            "Very fast deployments",
+            "Excellent Git integration",
+            "Preview builds for every commit",
+            "Built-in serverless functions",
+            "Great developer experience"
+        ],
+        cons: [
+            "Free tier limits can be restrictive",
+            "Can get expensive at scale",
+            "Less flexible for backend-heavy apps"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans based on usage"
+        },
+        alternatives: [
+            {
+                name: "Vercel",
+                slug: "vercel"
+            },
+            {
+                name: "Cloudflare Pages",
+                slug: "cloudflare-pages"
+            },
+            {
+                name: "AWS Amplify",
+                slug: "aws-amplify"
+            }
+        ],
+        tags: [
+            "hosting",
+            "frontend",
+            "jamstack",
+            "deployment"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t81",
+        slug: "cloudflare-pages",
+        name: "Cloudflare Pages",
+        oneLiner: "Blazing-fast frontend hosting backed by Cloudflare’s global edge.",
+        description: "Cloudflare Pages is a static site hosting platform that deploys sites directly to Cloudflare’s global edge network. It focuses on performance, security, and tight integration with Cloudflare Workers for edge logic.",
+        useCases: [
+            "Static site hosting",
+            "Edge-rendered apps",
+            "Frontend deployments",
+            "Performance-critical sites",
+            "Jamstack projects"
+        ],
+        pros: [
+            "Excellent global performance",
+            "Generous free tier",
+            "Tight integration with Cloudflare Workers",
+            "Built-in security and CDN",
+            "Simple Git-based deploys"
+        ],
+        cons: [
+            "Smaller ecosystem than Netlify",
+            "Edge model can confuse beginners",
+            "Less beginner-friendly UI"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Generous free tier + usage-based pricing for Workers"
+        },
+        alternatives: [
+            {
+                name: "Netlify",
+                slug: "netlify"
+            },
+            {
+                name: "Vercel",
+                slug: "vercel"
+            },
+            {
+                name: "AWS Amplify",
+                slug: "aws-amplify"
+            }
+        ],
+        tags: [
+            "hosting",
+            "edge",
+            "frontend",
+            "performance"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t82",
+        slug: "aws-amplify",
+        name: "AWS Amplify",
+        oneLiner: "Frontend hosting tightly coupled with the AWS ecosystem.",
+        description: "AWS Amplify is a development platform that provides hosting, authentication, APIs, and backend services for frontend apps. It’s built for teams already invested in AWS who want managed infrastructure without assembling everything manually.",
+        useCases: [
+            "Frontend hosting",
+            "Full-stack web apps",
+            "Mobile backends",
+            "Authentication and APIs",
+            "AWS-integrated projects"
+        ],
+        pros: [
+            "Deep AWS integration",
+            "Supports full-stack applications",
+            "Built-in auth and backend services",
+            "Scales well for enterprise",
+            "CI/CD included"
+        ],
+        cons: [
+            "Steeper learning curve",
+            "AWS complexity leaks through",
+            "Overkill for simple static sites"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + pay-as-you-go AWS pricing"
+        },
+        alternatives: [
+            {
+                name: "Netlify",
+                slug: "netlify"
+            },
+            {
+                name: "Vercel",
+                slug: "vercel"
+            },
+            {
+                name: "Cloudflare Pages",
+                slug: "cloudflare-pages"
+            }
+        ],
+        tags: [
+            "hosting",
+            "aws",
+            "frontend",
+            "cloud"
+        ],
+        rating: 4.4,
+        users: "Enterprise",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t83",
+        slug: "firebase",
+        name: "Firebase",
+        oneLiner: "Backend services that let frontend developers pretend servers don’t exist.",
+        description: "Firebase is Google’s backend-as-a-service platform offering databases, authentication, hosting, cloud functions, and analytics. It’s widely used for web and mobile apps that need to move fast without managing traditional backend infrastructure.",
+        useCases: [
+            "Web app backends",
+            "Mobile app backends",
+            "Authentication",
+            "Realtime databases",
+            "Prototyping and MVPs"
+        ],
+        pros: [
+            "Very fast to get started",
+            "Realtime and Firestore databases",
+            "Built-in authentication",
+            "Strong Google ecosystem integration",
+            "Good documentation"
+        ],
+        cons: [
+            "Vendor lock-in concerns",
+            "Costs can scale unexpectedly",
+            "Complex queries are limited"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Generous free tier + pay-as-you-go pricing"
+        },
+        alternatives: [
+            {
+                name: "Supabase",
+                slug: "supabase"
+            },
+            {
+                name: "AWS Amplify",
+                slug: "aws-amplify"
+            },
+            {
+                name: "Appwrite",
+                slug: "appwrite"
+            }
+        ],
+        tags: [
+            "backend",
+            "database",
+            "authentication",
+            "cloud"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t84",
+        slug: "planetscale",
+        name: "PlanetScale",
+        oneLiner: "Serverless MySQL built for modern application workflows.",
+        description: "PlanetScale is a serverless MySQL platform based on Vitess, designed for horizontal scaling and safe schema changes. It’s popular with teams that want relational databases without downtime or manual operations.",
+        useCases: [
+            "Relational databases",
+            "Production web apps",
+            "Schema migrations",
+            "Scalable MySQL workloads",
+            "SaaS backends"
+        ],
+        pros: [
+            "Non-blocking schema changes",
+            "Highly scalable MySQL",
+            "Strong Git-like workflow for databases",
+            "Great developer experience",
+            "Reliable production performance"
+        ],
+        cons: [
+            "No traditional foreign keys",
+            "Paid plans required for serious usage",
+            "Less beginner-friendly than basic databases"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans based on usage"
+        },
+        alternatives: [
+            {
+                name: "Neon",
+                slug: "neon"
+            },
+            {
+                name: "Supabase",
+                slug: "supabase"
+            },
+            {
+                name: "AWS RDS",
+                slug: "aws-rds"
+            }
+        ],
+        tags: [
+            "database",
+            "mysql",
+            "serverless",
+            "backend"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t85",
+        slug: "railway",
+        name: "Railway",
+        oneLiner: "Deploy apps and databases without arguing with infrastructure.",
+        description: "Railway is a cloud platform that lets developers deploy applications, databases, and services with minimal setup. It focuses on simplicity, fast iteration, and removing the friction usually associated with DevOps.",
+        useCases: [
+            "App deployment",
+            "Backend hosting",
+            "Databases",
+            "APIs and microservices",
+            "Side projects"
+        ],
+        pros: [
+            "Very simple deployment flow",
+            "Supports many languages and frameworks",
+            "Built-in database provisioning",
+            "Great for prototypes and small teams",
+            "Clean developer experience"
+        ],
+        cons: [
+            "Free tier is limited",
+            "Less control than raw cloud providers",
+            "Not ideal for complex enterprise setups"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free trial credits + usage-based pricing"
+        },
+        alternatives: [
+            {
+                name: "Render",
+                slug: "render"
+            },
+            {
+                name: "Fly.io",
+                slug: "fly-io"
+            },
+            {
+                name: "Heroku",
+                slug: "heroku"
+            }
+        ],
+        tags: [
+            "hosting",
+            "backend",
+            "deployment",
+            "developer"
+        ],
+        rating: 4.6,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t86",
+        slug: "amplitude",
+        name: "Amplitude",
+        oneLiner: "Product analytics for understanding what users actually do.",
+        description: "Amplitude is a product analytics platform focused on tracking user behavior, funnels, and retention. It’s widely used by product and growth teams to understand how users interact with features and where engagement drops off.",
+        useCases: [
+            "Product analytics",
+            "User behavior tracking",
+            "Funnel analysis",
+            "Retention analysis",
+            "Growth experimentation"
+        ],
+        pros: [
+            "Powerful funnel and cohort analysis",
+            "Great for product-led growth",
+            "Strong visualization tools",
+            "Scales well for large teams",
+            "Good documentation"
+        ],
+        cons: [
+            "Can be complex for beginners",
+            "Pricing increases quickly at scale",
+            "Setup requires planning"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans for advanced analytics"
+        },
+        alternatives: [
+            {
+                name: "Mixpanel",
+                slug: "mixpanel"
+            },
+            {
+                name: "Heap",
+                slug: "heap"
+            },
+            {
+                name: "PostHog",
+                slug: "posthog"
+            }
+        ],
+        tags: [
+            "analytics",
+            "product",
+            "growth",
+            "data"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t87",
+        slug: "mixpanel",
+        name: "Mixpanel",
+        oneLiner: "Event-based analytics built for fast product insights.",
+        description: "Mixpanel is an analytics platform centered on event tracking and real-time analysis. It helps teams understand user actions, conversion funnels, and feature usage without relying solely on page views.",
+        useCases: [
+            "Event tracking",
+            "Product analytics",
+            "User funnels",
+            "Retention tracking",
+            "Feature adoption analysis"
+        ],
+        pros: [
+            "Fast and real-time insights",
+            "Strong event-based model",
+            "Easy-to-use dashboards",
+            "Good free tier",
+            "Widely adopted"
+        ],
+        cons: [
+            "Advanced analysis requires paid plans",
+            "Can get expensive with high event volume",
+            "Less flexible for custom data modeling"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + usage-based paid plans"
+        },
+        alternatives: [
+            {
+                name: "Amplitude",
+                slug: "amplitude"
+            },
+            {
+                name: "Heap",
+                slug: "heap"
+            },
+            {
+                name: "PostHog",
+                slug: "posthog"
+            }
+        ],
+        tags: [
+            "analytics",
+            "events",
+            "product",
+            "data"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t88",
+        slug: "heap",
+        name: "Heap",
+        oneLiner: "Automatic analytics that tracks everything by default.",
+        description: "Heap is a digital insights platform that automatically captures user interactions without manual event setup. It’s designed for teams that want retroactive analysis and faster insights without heavy instrumentation.",
+        useCases: [
+            "Product analytics",
+            "User behavior tracking",
+            "Conversion analysis",
+            "UX optimization",
+            "Retroactive data analysis"
+        ],
+        pros: [
+            "Automatic event capture",
+            "Retroactive analysis",
+            "Reduces setup overhead",
+            "Good visualization tools",
+            "Strong for UX teams"
+        ],
+        cons: [
+            "Data volume can become overwhelming",
+            "Higher pricing tiers",
+            "Less control over raw events"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid enterprise-focused tiers"
+        },
+        alternatives: [
+            {
+                name: "Amplitude",
+                slug: "amplitude"
+            },
+            {
+                name: "Mixpanel",
+                slug: "mixpanel"
+            },
+            {
+                name: "PostHog",
+                slug: "posthog"
+            }
+        ],
+        tags: [
+            "analytics",
+            "product",
+            "ux",
+            "data"
+        ],
+        rating: 4.4,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t89",
+        slug: "sendgrid",
+        name: "SendGrid",
+        oneLiner: "Scalable email delivery for apps that actually send a lot of email.",
+        description: "SendGrid is a cloud-based email delivery platform used for transactional and marketing emails. It’s designed for reliability, analytics, and scale, making it a common choice for growing startups and large applications.",
+        useCases: [
+            "Transactional emails",
+            "Marketing campaigns",
+            "Password resets",
+            "Notification emails",
+            "Email analytics"
+        ],
+        pros: [
+            "Highly scalable infrastructure",
+            "Strong deliverability",
+            "Detailed email analytics",
+            "Flexible APIs and SMTP support",
+            "Widely adopted"
+        ],
+        cons: [
+            "UI can feel cluttered",
+            "Pricing jumps with volume",
+            "Support quality varies by plan"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans based on email volume"
+        },
+        alternatives: [
+            {
+                name: "Postmark",
+                slug: "postmark"
+            },
+            {
+                name: "AWS SES",
+                slug: "aws-ses"
+            },
+            {
+                name: "Mailgun",
+                slug: "mailgun"
+            }
+        ],
+        tags: [
+            "email",
+            "transactional",
+            "marketing",
+            "infrastructure"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t90",
+        slug: "postmark",
+        name: "Postmark",
+        oneLiner: "Transactional email that prioritizes speed and deliverability.",
+        description: "Postmark is an email delivery service focused exclusively on transactional emails. It’s known for fast delivery, excellent inbox placement, and a clean developer-friendly experience without marketing clutter.",
+        useCases: [
+            "Transactional emails",
+            "Password resets",
+            "System notifications",
+            "User confirmations",
+            "App-generated emails"
+        ],
+        pros: [
+            "Excellent deliverability",
+            "Very fast email delivery",
+            "Clean and simple dashboard",
+            "Great developer experience",
+            "Clear pricing model"
+        ],
+        cons: [
+            "No marketing email campaigns",
+            "Less flexible for bulk newsletters",
+            "Paid-only beyond trial"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Pricing based on monthly email volume"
+        },
+        alternatives: [
+            {
+                name: "SendGrid",
+                slug: "sendgrid"
+            },
+            {
+                name: "AWS SES",
+                slug: "aws-ses"
+            },
+            {
+                name: "Mailgun",
+                slug: "mailgun"
+            }
+        ],
+        tags: [
+            "email",
+            "transactional",
+            "delivery",
+            "developer"
+        ],
+        rating: 4.7,
+        users: "Developers",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t91",
+        slug: "aws-ses",
+        name: "AWS Simple Email Service",
+        oneLiner: "Low-level email sending for teams already living inside AWS.",
+        description: "AWS Simple Email Service (SES) is a cost-effective email sending service for transactional and bulk emails. It’s designed for developers who want full control, low costs, and deep integration with the AWS ecosystem.",
+        useCases: [
+            "Transactional emails",
+            "Bulk email sending",
+            "System notifications",
+            "AWS-integrated applications",
+            "Cost-sensitive email delivery"
+        ],
+        pros: [
+            "Very low cost at scale",
+            "High deliverability when configured correctly",
+            "Deep AWS integration",
+            "Highly customizable",
+            "Scales extremely well"
+        ],
+        cons: [
+            "Setup is complex",
+            "Barebones dashboard",
+            "Requires AWS knowledge"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Pay-as-you-go pricing, very low per-email cost"
+        },
+        alternatives: [
+            {
+                name: "SendGrid",
+                slug: "sendgrid"
+            },
+            {
+                name: "Postmark",
+                slug: "postmark"
+            },
+            {
+                name: "Mailgun",
+                slug: "mailgun"
+            }
+        ],
+        tags: [
+            "email",
+            "aws",
+            "infrastructure",
+            "transactional"
+        ],
+        rating: 4.4,
+        users: "Enterprise",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t92",
+        slug: "langsmith",
+        name: "LangSmith",
+        oneLiner: "Debug, evaluate, and monitor LLM apps built with LangChain.",
+        description: "LangSmith is an observability and evaluation platform designed for LLM-powered applications. Built by the LangChain team, it helps developers trace prompts, inspect model outputs, debug chains and agents, and evaluate LLM performance over time.",
+        useCases: [
+            "LLM observability",
+            "Prompt debugging",
+            "Chain and agent tracing",
+            "LLM evaluation",
+            "Production monitoring"
+        ],
+        pros: [
+            "Deep LangChain integration",
+            "Clear prompt and trace visualization",
+            "Built-in evaluation tools",
+            "Useful for agent-based systems",
+            "Actively developed"
+        ],
+        cons: [
+            "Best suited for LangChain users",
+            "Limited value outside LLM workflows",
+            "Paid plans required for production scale"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans for teams and production usage"
+        },
+        alternatives: [
+            {
+                name: "Helicone",
+                slug: "helicone"
+            },
+            {
+                name: "W&B Weave",
+                slug: "wandb-weave"
+            },
+            {
+                name: "OpenTelemetry",
+                slug: "opentelemetry"
+            }
+        ],
+        tags: [
+            "llm",
+            "observability",
+            "debugging",
+            "ai"
+        ],
+        rating: 4.6,
+        users: "LLM Developers",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t93",
+        slug: "helicone",
+        name: "Helicone",
+        oneLiner: "Open-source observability layer for LLM API calls.",
+        description: "Helicone is an open-source LLM observability platform that logs, analyzes, and monitors LLM requests across providers. It works as a proxy layer, giving teams visibility into latency, cost, errors, and prompt usage without locking them into a single framework.",
+        useCases: [
+            "LLM request monitoring",
+            "Cost tracking",
+            "Latency analysis",
+            "Prompt logging",
+            "Production debugging"
+        ],
+        pros: [
+            "Open source",
+            "Provider-agnostic",
+            "Easy API-level integration",
+            "Cost and usage tracking",
+            "Works well in production"
+        ],
+        cons: [
+            "Less opinionated guidance than LangSmith",
+            "UI is more utilitarian",
+            "Advanced features require hosted plan"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free open-source version + paid hosted plans"
+        },
+        alternatives: [
+            {
+                name: "LangSmith",
+                slug: "langsmith"
+            },
+            {
+                name: "W&B Weave",
+                slug: "wandb-weave"
+            },
+            {
+                name: "PromptLayer",
+                slug: "promptlayer"
+            }
+        ],
+        tags: [
+            "llm",
+            "observability",
+            "open-source",
+            "monitoring"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t94",
+        slug: "wandb-weave",
+        name: "W&B Weave",
+        oneLiner: "Trace, evaluate, and iterate on LLM applications with rigor.",
+        description: "W&B Weave is an LLM observability and evaluation framework from Weights & Biases. It focuses on structured tracing, dataset-backed evaluations, and reproducible experiments for teams building serious LLM systems.",
+        useCases: [
+            "LLM evaluation",
+            "Prompt experimentation",
+            "Tracing LLM apps",
+            "Model comparison",
+            "AI research workflows"
+        ],
+        pros: [
+            "Strong evaluation and experiment tracking",
+            "Fits research and production workflows",
+            "Backed by Weights & Biases ecosystem",
+            "Good for complex LLM systems",
+            "Reproducibility-first design"
+        ],
+        cons: [
+            "More complex than lightweight tools",
+            "Best suited for ML-heavy teams",
+            "Overkill for small apps"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans via W&B"
+        },
+        alternatives: [
+            {
+                name: "LangSmith",
+                slug: "langsmith"
+            },
+            {
+                name: "Helicone",
+                slug: "helicone"
+            },
+            {
+                name: "PromptLayer",
+                slug: "promptlayer"
+            }
+        ],
+        tags: [
+            "llm",
+            "evaluation",
+            "mlops",
+            "ai"
+        ],
+        rating: 4.5,
+        users: "ML Teams",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t95",
+        slug: "calendly",
+        name: "Calendly",
+        oneLiner: "The default scheduling tool everyone already knows.",
+        description: "Calendly is a scheduling platform that lets users share availability links to book meetings automatically. It’s widely adopted across sales, recruiting, and customer success teams for reducing back-and-forth emails.",
+        useCases: [
+            "Meeting scheduling",
+            "Sales calls",
+            "Recruiting interviews",
+            "Client bookings",
+            "Calendar coordination"
+        ],
+        pros: [
+            "Very easy to use",
+            "Widely recognized and trusted",
+            "Strong calendar integrations",
+            "Reliable booking experience",
+            "Works well for individuals and teams"
+        ],
+        cons: [
+            "Pricing increases quickly for teams",
+            "Limited customization on lower tiers",
+            "Per-seat pricing can get expensive"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic plan + paid plans starting around $12/user/mo"
+        },
+        alternatives: [
+            {
+                name: "SavvyCal",
+                slug: "savvycal"
+            },
+            {
+                name: "Cal.com",
+                slug: "cal-com"
+            },
+            {
+                name: "YouCanBookMe",
+                slug: "youcanbookme"
+            }
+        ],
+        tags: [
+            "scheduling",
+            "meetings",
+            "productivity",
+            "business"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t96",
+        slug: "savvycal",
+        name: "SavvyCal",
+        oneLiner: "Scheduling with respect for everyone’s calendar.",
+        description: "SavvyCal is a scheduling tool designed to make booking meetings more considerate by overlaying availability on both sides. It’s popular with consultants, founders, and teams who want a more human scheduling experience.",
+        useCases: [
+            "Meeting scheduling",
+            "Client calls",
+            "Founder meetings",
+            "Consulting sessions",
+            "Calendar coordination"
+        ],
+        pros: [
+            "Availability overlay for both parties",
+            "Cleaner, more thoughtful UX",
+            "Highly customizable booking pages",
+            "Good for professionals and consultants",
+            "Supports team scheduling"
+        ],
+        cons: [
+            "Smaller brand than Calendly",
+            "No free forever plan",
+            "Less enterprise-focused"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Paid plans starting around $12/user/mo"
+        },
+        alternatives: [
+            {
+                name: "Calendly",
+                slug: "calendly"
+            },
+            {
+                name: "Cal.com",
+                slug: "cal-com"
+            },
+            {
+                name: "YouCanBookMe",
+                slug: "youcanbookme"
+            }
+        ],
+        tags: [
+            "scheduling",
+            "meetings",
+            "productivity"
+        ],
+        rating: 4.7,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t97",
+        slug: "youcanbookme",
+        name: "YouCanBookMe",
+        oneLiner: "Highly flexible scheduling with serious customization options.",
+        description: "YouCanBookMe is a scheduling platform offering deep customization, form logic, and booking rules. It’s often used by educators, service providers, and teams with complex scheduling requirements.",
+        useCases: [
+            "Meeting scheduling",
+            "Class bookings",
+            "Service appointments",
+            "Education scheduling",
+            "Custom booking workflows"
+        ],
+        pros: [
+            "Extremely customizable",
+            "Powerful form and rule logic",
+            "Supports complex scheduling needs",
+            "Works with multiple calendars",
+            "Reliable booking engine"
+        ],
+        cons: [
+            "Interface feels less modern",
+            "Setup can be complex",
+            "Not as beginner-friendly"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free limited plan + paid plans for advanced features"
+        },
+        alternatives: [
+            {
+                name: "Calendly",
+                slug: "calendly"
+            },
+            {
+                name: "SavvyCal",
+                slug: "savvycal"
+            },
+            {
+                name: "Cal.com",
+                slug: "cal-com"
+            }
+        ],
+        tags: [
+            "scheduling",
+            "appointments",
+            "productivity"
+        ],
+        rating: 4.4,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t98",
+        slug: "bootstrap",
+        name: "Bootstrap",
+        oneLiner: "Opinionated CSS framework for building responsive UIs fast.",
+        description: "Bootstrap is a popular front-end framework that provides prebuilt components, responsive grid systems, and utility classes. It’s designed to help developers ship consistent, mobile-friendly interfaces quickly without starting from scratch.",
+        useCases: [
+            "Responsive layouts",
+            "Rapid prototyping",
+            "Admin dashboards",
+            "Marketing sites",
+            "Frontend foundations"
+        ],
+        pros: [
+            "Very fast to get started",
+            "Large component library",
+            "Strong documentation",
+            "Consistent cross-browser behavior",
+            "Huge community ecosystem"
+        ],
+        cons: [
+            "Sites can look generic",
+            "Customization can be tedious",
+            "Less flexible than modern CSS-in-JS approaches"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Open source and free to use"
+        },
+        alternatives: [
+            {
+                name: "Tailwind CSS",
+                slug: "tailwind-css"
+            },
+            {
+                name: "Bulma",
+                slug: "bulma"
+            },
+            {
+                name: "Foundation",
+                slug: "foundation"
+            }
+        ],
+        tags: [
+            "css",
+            "frontend",
+            "framework",
+            "ui"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t99",
+        slug: "css-modules",
+        name: "CSS Modules",
+        oneLiner: "Scoped CSS that avoids naming fights and global chaos.",
+        description: "CSS Modules is a styling approach where CSS class names are locally scoped by default. It’s commonly used with modern frontend frameworks to prevent style collisions while keeping CSS syntax familiar and predictable.",
+        useCases: [
+            "Component-level styling",
+            "Large frontend codebases",
+            "React and Next.js apps",
+            "Scoped CSS management",
+            "Maintainable UI styles"
+        ],
+        pros: [
+            "No global class collisions",
+            "Works with standard CSS",
+            "Easy to reason about",
+            "Framework-agnostic",
+            "Good for long-term maintainability"
+        ],
+        cons: [
+            "No dynamic styling by default",
+            "Still requires CSS organization discipline",
+            "Less expressive than CSS-in-JS"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Open standard, no cost"
+        },
+        alternatives: [
+            {
+                name: "Styled Components",
+                slug: "styled-components"
+            },
+            {
+                name: "Tailwind CSS",
+                slug: "tailwind-css"
+            },
+            {
+                name: "Vanilla Extract",
+                slug: "vanilla-extract"
+            }
+        ],
+        tags: [
+            "css",
+            "frontend",
+            "styling",
+            "components"
+        ],
+        rating: 4.4,
+        users: "Developers",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t100",
+        slug: "styled-components",
+        name: "Styled Components",
+        oneLiner: "CSS-in-JS styling tied directly to your components.",
+        description: "Styled Components is a CSS-in-JS library that allows developers to write CSS directly inside JavaScript components. It enables dynamic styling, theming, and tight coupling between styles and component logic.",
+        useCases: [
+            "Component-based styling",
+            "Dynamic theming",
+            "Design systems",
+            "React applications",
+            "UI libraries"
+        ],
+        pros: [
+            "Dynamic styling support",
+            "Scoped styles by default",
+            "Powerful theming capabilities",
+            "Good developer experience",
+            "Widely adopted"
+        ],
+        cons: [
+            "Runtime performance overhead",
+            "Requires JavaScript for styling",
+            "Not ideal for very large style sheets"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Open source and free to use"
+        },
+        alternatives: [
+            {
+                name: "CSS Modules",
+                slug: "css-modules"
+            },
+            {
+                name: "Emotion",
+                slug: "emotion"
+            },
+            {
+                name: "Vanilla Extract",
+                slug: "vanilla-extract"
+            }
+        ],
+        tags: [
+            "css",
+            "frontend",
+            "css-in-js",
+            "react"
+        ],
+        rating: 4.4,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t101",
+        slug: "streamlabs",
+        name: "Streamlabs",
+        oneLiner: "All-in-one live streaming with overlays, alerts, and monetization baked in.",
+        description: "Streamlabs is a live streaming platform built on top of OBS that simplifies streaming with built-in overlays, alerts, chat tools, and monetization features. It’s popular with streamers who want quick setup and fewer knobs to tweak.",
+        useCases: [
+            "Live streaming",
+            "Gaming streams",
+            "YouTube and Twitch broadcasts",
+            "Audience engagement",
+            "Streamer monetization"
+        ],
+        pros: [
+            "Very easy to set up",
+            "Built-in alerts and overlays",
+            "Integrated chat and widgets",
+            "Good for beginners",
+            "Monetization features included"
+        ],
+        cons: [
+            "Less control than OBS Studio",
+            "Heavier on system resources",
+            "Some features locked behind subscription"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free basic version + optional Streamlabs Ultra subscription"
+        },
+        alternatives: [
+            {
+                name: "OBS Studio",
+                slug: "obs"
+            },
+            {
+                name: "XSplit",
+                slug: "xsplit"
+            },
+            {
+                name: "Restream",
+                slug: "restream"
+            }
+        ],
+        tags: [
+            "streaming",
+            "live",
+            "creator",
+            "broadcast"
+        ],
+        rating: 4.4,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t102",
+        slug: "camtasia",
+        name: "Camtasia",
+        oneLiner: "Screen recording and editing for tutorials that need polish.",
+        description: "Camtasia is a screen recording and video editing tool designed for creating tutorials, demos, and training videos. It combines recording, timeline editing, annotations, and effects into a single package aimed at educators and professionals.",
+        useCases: [
+            "Screen recording",
+            "Tutorial videos",
+            "Training content",
+            "Product demos",
+            "Educational videos"
+        ],
+        pros: [
+            "Very beginner-friendly",
+            "Built-in editor and effects",
+            "Good annotation and callout tools",
+            "Cross-platform support",
+            "Strong for instructional content"
+        ],
+        cons: [
+            "Expensive upfront cost",
+            "Not ideal for advanced video editing",
+            "Exports can be slower on large projects"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time license purchase with optional upgrades"
+        },
+        alternatives: [
+            {
+                name: "Screen Studio",
+                slug: "screen-studio"
+            },
+            {
+                name: "OBS Studio",
+                slug: "obs"
+            },
+            {
+                name: "Loom",
+                slug: "loom"
+            }
+        ],
+        tags: [
+            "screen-recording",
+            "video",
+            "education",
+            "editing"
+        ],
+        rating: 4.5,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t103",
+        slug: "bluehost",
+        name: "Bluehost",
+        oneLiner: "Beginner-friendly hosting heavily marketed to WordPress users.",
+        description: "Bluehost is a long-running web hosting provider best known for its tight association with WordPress. It offers shared hosting, VPS, and managed WordPress plans aimed primarily at beginners and small businesses.",
+        useCases: [
+            "WordPress hosting",
+            "Small business websites",
+            "Blogs",
+            "Personal websites",
+            "Beginner hosting"
+        ],
+        pros: [
+            "Easy WordPress setup",
+            "Beginner-friendly dashboard",
+            "Free domain on signup",
+            "Large support knowledge base",
+            "Widely recognized brand"
+        ],
+        cons: [
+            "Renewal prices increase significantly",
+            "Performance is average",
+            "Upselling during setup"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Low intro pricing with higher renewal rates"
+        },
+        alternatives: [
+            {
+                name: "SiteGround",
+                slug: "siteground"
+            },
+            {
+                name: "Hostinger",
+                slug: "hostinger"
+            },
+            {
+                name: "DreamHost",
+                slug: "dreamhost"
+            }
+        ],
+        tags: [
+            "hosting",
+            "wordpress",
+            "website",
+            "beginner"
+        ],
+        rating: 4.1,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t104",
+        slug: "namecheap",
+        name: "Namecheap",
+        oneLiner: "Domains first, hosting second, pricing that doesn’t feel hostile.",
+        description: "Namecheap is best known as a domain registrar but also offers shared hosting, VPS, and email services. It’s popular for transparent pricing, simple management, and solid value for small projects.",
+        useCases: [
+            "Domain registration",
+            "Website hosting",
+            "Email hosting",
+            "Small projects",
+            "Personal sites"
+        ],
+        pros: [
+            "Affordable domain pricing",
+            "Free WHOIS privacy",
+            "Simple control panel",
+            "Decent support",
+            "Good value for money"
+        ],
+        cons: [
+            "Hosting performance is average",
+            "Not ideal for high-traffic sites",
+            "Advanced features are limited"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Low-cost domains and affordable hosting plans"
+        },
+        alternatives: [
+            {
+                name: "Google Domains",
+                slug: "google-domains"
+            },
+            {
+                name: "Hostinger",
+                slug: "hostinger"
+            },
+            {
+                name: "Bluehost",
+                slug: "bluehost"
+            }
+        ],
+        tags: [
+            "domains",
+            "hosting",
+            "website",
+            "infrastructure"
+        ],
+        rating: 4.4,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t105",
+        slug: "siteground",
+        name: "SiteGround",
+        oneLiner: "Premium hosting focused on performance and support.",
+        description: "SiteGround is a web hosting provider known for strong performance, security, and customer support. It’s commonly recommended for WordPress and business websites that need reliability more than the cheapest possible price.",
+        useCases: [
+            "WordPress hosting",
+            "Business websites",
+            "High-performance sites",
+            "Managed hosting",
+            "Professional blogs"
+        ],
+        pros: [
+            "Excellent customer support",
+            "Strong performance and uptime",
+            "Managed WordPress features",
+            "Built-in security tools",
+            "Google Cloud infrastructure"
+        ],
+        cons: [
+            "Higher pricing than competitors",
+            "No free domain",
+            "Storage limits on lower plans"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Premium pricing with strong performance and support"
+        },
+        alternatives: [
+            {
+                name: "Bluehost",
+                slug: "bluehost"
+            },
+            {
+                name: "WP Engine",
+                slug: "wp-engine"
+            },
+            {
+                name: "Kinsta",
+                slug: "kinsta"
+            }
+        ],
+        tags: [
+            "hosting",
+            "wordpress",
+            "performance",
+            "business"
+        ],
+        rating: 4.6,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t106",
+        slug: "wp-engine",
+        name: "WP Engine",
+        oneLiner: "Managed WordPress hosting for sites that cannot afford downtime.",
+        description: "WP Engine is a managed WordPress hosting provider focused on performance, security, and reliability. It’s widely used by businesses and enterprises that want WordPress handled professionally without worrying about servers, updates, or scaling.",
+        useCases: [
+            "Managed WordPress hosting",
+            "Business websites",
+            "High-traffic blogs",
+            "Enterprise WordPress",
+            "Agency client sites"
+        ],
+        pros: [
+            "Excellent performance",
+            "Strong security and backups",
+            "Managed updates and caching",
+            "Great developer tools",
+            "Reliable support"
+        ],
+        cons: [
+            "Expensive compared to shared hosting",
+            "WordPress-only",
+            "No domain registration included"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Premium monthly pricing based on traffic and features"
+        },
+        alternatives: [
+            {
+                name: "Kinsta",
+                slug: "kinsta"
+            },
+            {
+                name: "SiteGround",
+                slug: "siteground"
+            },
+            {
+                name: "Flywheel",
+                slug: "flywheel"
+            }
+        ],
+        tags: [
+            "hosting",
+            "wordpress",
+            "managed",
+            "performance"
+        ],
+        rating: 4.6,
+        users: "Enterprise",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t107",
+        slug: "kinsta",
+        name: "Kinsta",
+        oneLiner: "High-performance managed WordPress hosting on Google Cloud.",
+        description: "Kinsta is a premium managed WordPress hosting provider built on Google Cloud Platform. It’s known for excellent speed, strong security, and a polished dashboard aimed at businesses and professional developers.",
+        useCases: [
+            "Managed WordPress hosting",
+            "High-traffic websites",
+            "E-commerce sites",
+            "Business and agency projects",
+            "Performance-critical sites"
+        ],
+        pros: [
+            "Outstanding performance",
+            "Google Cloud infrastructure",
+            "Clean and modern dashboard",
+            "Daily backups and security",
+            "Excellent support"
+        ],
+        cons: [
+            "High pricing",
+            "WordPress-only",
+            "Overkill for small sites"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Premium monthly pricing based on usage"
+        },
+        alternatives: [
+            {
+                name: "WP Engine",
+                slug: "wp-engine"
+            },
+            {
+                name: "SiteGround",
+                slug: "siteground"
+            },
+            {
+                name: "Flywheel",
+                slug: "flywheel"
+            }
+        ],
+        tags: [
+            "hosting",
+            "wordpress",
+            "performance",
+            "managed"
+        ],
+        rating: 4.7,
+        users: "Businesses",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t108",
+        slug: "google-domains",
+        name: "Google Domains",
+        oneLiner: "Simple domain registration with Google-level reliability.",
+        description: "Google Domains is a domain registrar focused on simplicity, security, and transparent pricing. It integrates cleanly with Google services and is popular with users who want no surprises, no upsells, and straightforward domain management.",
+        useCases: [
+            "Domain registration",
+            "Domain management",
+            "Small business sites",
+            "Personal projects",
+            "Google ecosystem setups"
+        ],
+        pros: [
+            "Clean and simple UI",
+            "Free WHOIS privacy",
+            "Transparent pricing",
+            "Easy DNS management",
+            "Strong reliability"
+        ],
+        cons: [
+            "Limited advanced features",
+            "No hosting beyond domains",
+            "Smaller feature set than some registrars"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Flat-rate domain pricing with free privacy"
+        },
+        alternatives: [
+            {
+                name: "Namecheap",
+                slug: "namecheap"
+            },
+            {
+                name: "Cloudflare Registrar",
+                slug: "cloudflare-registrar"
+            },
+            {
+                name: "GoDaddy",
+                slug: "godaddy"
+            }
+        ],
+        tags: [
+            "domains",
+            "dns",
+            "infrastructure",
+            "website"
+        ],
+        rating: 4.6,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t109",
+        slug: "opentelemetry",
+        name: "OpenTelemetry",
+        oneLiner: "Open standard for tracing, metrics, and logs across modern systems.",
+        description: "OpenTelemetry is an open-source observability framework that provides standardized APIs and SDKs for collecting traces, metrics, and logs. It’s widely used as the foundation for monitoring distributed systems, including backend services and increasingly LLM-powered applications.",
+        useCases: [
+            "Distributed tracing",
+            "Metrics collection",
+            "Log correlation",
+            "Backend observability",
+            "LLM and AI system monitoring"
+        ],
+        pros: [
+            "Vendor-neutral open standard",
+            "Widely adopted across the industry",
+            "Strong ecosystem and tooling",
+            "Works with most languages and platforms",
+            "Plays well with enterprise stacks"
+        ],
+        cons: [
+            "Complex to set up",
+            "Requires observability knowledge",
+            "Not beginner-friendly out of the box"
+        ],
+        pricing: {
+            tier: "free",
+            note: "Open source and free to use"
+        },
+        alternatives: [
+            {
+                name: "Datadog",
+                slug: "datadog"
+            },
+            {
+                name: "New Relic",
+                slug: "new-relic"
+            },
+            {
+                name: "LangSmith",
+                slug: "langsmith"
+            }
+        ],
+        tags: [
+            "observability",
+            "tracing",
+            "metrics",
+            "open-source"
+        ],
+        rating: 4.5,
+        users: "Industry Standard",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t110",
+        slug: "promptlayer",
+        name: "PromptLayer",
+        oneLiner: "Track, version, and debug prompts across LLM applications.",
+        description: "PromptLayer is a prompt management and observability tool designed for teams building LLM-powered applications. It helps log prompts, compare outputs, track versions, and analyze usage across environments and models.",
+        useCases: [
+            "Prompt logging",
+            "Prompt versioning",
+            "LLM debugging",
+            "Model output comparison",
+            "AI development workflows"
+        ],
+        pros: [
+            "Easy prompt tracking and history",
+            "Works across multiple LLM providers",
+            "Simple integration",
+            "Good visibility into prompt changes",
+            "Focused and lightweight"
+        ],
+        cons: [
+            "Limited beyond prompt-level observability",
+            "Not a full tracing solution",
+            "Advanced features require paid plans"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free tier available + paid plans for teams"
+        },
+        alternatives: [
+            {
+                name: "LangSmith",
+                slug: "langsmith"
+            },
+            {
+                name: "Helicone",
+                slug: "helicone"
+            },
+            {
+                name: "W&B Weave",
+                slug: "wandb-weave"
+            }
+        ],
+        tags: [
+            "llm",
+            "prompts",
+            "observability",
+            "ai"
+        ],
+        rating: 4.4,
+        users: "LLM Developers",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t111",
+        slug: "zencastr",
+        name: "Zencastr",
+        oneLiner: "Remote podcast recording with studio-quality audio.",
+        description: "Zencastr is a remote recording platform built specifically for podcasters. It records high-quality audio locally for each participant and uploads tracks separately, reducing common issues like lag, compression, and internet artifacts.",
+        useCases: [
+            "Podcast recording",
+            "Remote interviews",
+            "Audio production",
+            "Video podcasts",
+            "Content creation"
+        ],
+        pros: [
+            "Local audio recording",
+            "Separate tracks per speaker",
+            "Browser-based recording",
+            "Video recording supported",
+            "Easy guest onboarding"
+        ],
+        cons: [
+            "Free plan is limited",
+            "Editing tools are basic",
+            "Pricing can feel high for casual use"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans for advanced features"
+        },
+        alternatives: [
+            {
+                name: "Riverside",
+                slug: "riverside"
+            },
+            {
+                name: "SquadCast",
+                slug: "squadcast"
+            },
+            {
+                name: "Zoom",
+                slug: "zoom"
+            }
+        ],
+        tags: [
+            "audio",
+            "podcast",
+            "recording",
+            "creator"
+        ],
+        rating: 4.5,
+        users: "Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t112",
+        slug: "launchbar",
+        name: "LaunchBar",
+        oneLiner: "Keyboard-based launcher for macOS power users.",
+        description: "LaunchBar is a productivity launcher for macOS that allows users to open apps, search files, run actions, and automate tasks using the keyboard. It’s a long-standing alternative to Spotlight aimed at experienced users.",
+        useCases: [
+            "App launching",
+            "File search",
+            "Automation",
+            "Clipboard access",
+            "Productivity shortcuts"
+        ],
+        pros: [
+            "Fast and keyboard-centric",
+            "Powerful actions and indexing",
+            "Stable and mature product",
+            "Deep macOS integration",
+            "Highly configurable"
+        ],
+        cons: [
+            "macOS only",
+            "Paid license required",
+            "Less modern UI"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "One-time purchase license"
+        },
+        alternatives: [
+            {
+                name: "Alfred",
+                slug: "alfred"
+            },
+            {
+                name: "Spotlight",
+                slug: "spotlight"
+            },
+            {
+                name: "Raycast",
+                slug: "raycast"
+            }
+        ],
+        tags: [
+            "productivity",
+            "launcher",
+            "macos",
+            "automation"
+        ],
+        rating: 4.5,
+        users: "Power Users",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t113",
+        slug: "plane",
+        name: "Plane",
+        oneLiner: "Open-source project management built for modern teams.",
+        description: "Plane is an open-source project management tool designed as a modern alternative to Jira and Linear. It focuses on issues, cycles, and roadmaps with a clean interface and self-hosting flexibility.",
+        useCases: [
+            "Project management",
+            "Issue tracking",
+            "Sprint planning",
+            "Roadmaps",
+            "Engineering teams"
+        ],
+        pros: [
+            "Open source",
+            "Clean and modern UI",
+            "Self-hosting supported",
+            "Actively developed",
+            "Good Jira alternative"
+        ],
+        cons: [
+            "Younger product",
+            "Smaller ecosystem",
+            "Some features still evolving"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free self-hosted + paid cloud plans"
+        },
+        alternatives: [
+            {
+                name: "Linear",
+                slug: "linear"
+            },
+            {
+                name: "Jira",
+                slug: "jira"
+            },
+            {
+                name: "Trello",
+                slug: "trello"
+            }
+        ],
+        tags: [
+            "project-management",
+            "open-source",
+            "issues",
+            "teams"
+        ],
+        rating: 4.4,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t114",
+        slug: "height",
+        name: "Height",
+        oneLiner: "Autonomous project management powered by AI.",
+        description: "Height is a project management tool that uses AI to automatically handle task updates, priorities, and workflows. It’s designed to reduce manual project maintenance and keep teams focused on actual work.",
+        useCases: [
+            "Project management",
+            "Task tracking",
+            "Team collaboration",
+            "Automated workflows",
+            "Product teams"
+        ],
+        pros: [
+            "AI-assisted task management",
+            "Clean and modern UI",
+            "Reduces manual updates",
+            "Good for fast-moving teams",
+            "Strong automation focus"
+        ],
+        cons: [
+            "Newer and less proven",
+            "AI behavior may feel opaque",
+            "Smaller ecosystem"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription-based pricing"
+        },
+        alternatives: [
+            {
+                name: "ClickUp",
+                slug: "clickup"
+            },
+            {
+                name: "Linear",
+                slug: "linear"
+            },
+            {
+                name: "Monday.com",
+                slug: "monday"
+            }
+        ],
+        tags: [
+            "project-management",
+            "ai",
+            "productivity",
+            "teams"
+        ],
+        rating: 4.3,
+        users: "Early Adopters",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t115",
+        slug: "trello",
+        name: "Trello",
+        oneLiner: "Kanban-style task management that stays simple.",
+        description: "Trello is a visual task management tool based on boards, lists, and cards. It’s popular for its simplicity and flexibility, making it suitable for personal projects and small teams.",
+        useCases: [
+            "Task tracking",
+            "Kanban boards",
+            "Personal productivity",
+            "Small team projects",
+            "Workflow visualization"
+        ],
+        pros: [
+            "Very easy to use",
+            "Visual and intuitive",
+            "Good free plan",
+            "Flexible for many use cases",
+            "Large user base"
+        ],
+        cons: [
+            "Limited for complex projects",
+            "Advanced features require paid plans",
+            "Not ideal for large teams"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free plan available + paid plans"
+        },
+        alternatives: [
+            {
+                name: "Asana",
+                slug: "asana"
+            },
+            {
+                name: "ClickUp",
+                slug: "clickup"
+            },
+            {
+                name: "Notion",
+                slug: "notion"
+            }
+        ],
+        tags: [
+            "project-management",
+            "kanban",
+            "productivity"
+        ],
+        rating: 4.5,
+        users: "Very Popular",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t116",
+        slug: "squadcast",
+        name: "SquadCast",
+        oneLiner: "Remote recording built for podcasters who care about quality.",
+        description: "SquadCast is a remote audio and video recording platform focused on reliability and studio-quality output. It records locally for each participant and is commonly used for professional podcasts and interviews.",
+        useCases: [
+            "Podcast recording",
+            "Remote interviews",
+            "Audio production",
+            "Video podcasts",
+            "Professional content"
+        ],
+        pros: [
+            "Local lossless recording",
+            "Separate tracks per speaker",
+            "Reliable sync technology",
+            "Clean and simple interface",
+            "Professional-grade output"
+        ],
+        cons: [
+            "No free plan",
+            "Limited editing features",
+            "Focused mainly on podcasters"
+        ],
+        pricing: {
+            tier: "paid",
+            note: "Subscription-based pricing"
+        },
+        alternatives: [
+            {
+                name: "Riverside",
+                slug: "riverside"
+            },
+            {
+                name: "Zencastr",
+                slug: "zencastr"
+            },
+            {
+                name: "OBS Studio",
+                slug: "obs"
+            }
+        ],
+        tags: [
+            "audio",
+            "podcast",
+            "recording",
+            "professional"
+        ],
+        rating: 4.6,
+        users: "Established",
+        updatedAtISO: "2026-01-28"
+    },
+    {
+        id: "t117",
+        slug: "kimi",
+        name: "Kimi",
+        oneLiner: "Long-context AI assistant built for reading and reasoning over huge documents.",
+        description: "Kimi is an AI assistant developed by Moonshot AI, best known for its extremely long context window and strong document understanding. It’s widely used for reading, summarizing, and reasoning over long PDFs, research papers, legal documents, and technical files.",
+        useCases: [
+            "Long document analysis",
+            "PDF summarization",
+            "Research assistance",
+            "Technical reading",
+            "Knowledge extraction"
+        ],
+        pros: [
+            "Very large context window",
+            "Strong document comprehension",
+            "Handles long PDFs well",
+            "Good reasoning on dense text",
+            "Fast iteration and improvement"
+        ],
+        cons: [
+            "Less ecosystem integration than Western tools",
+            "Limited customization options",
+            "UI and language support still evolving"
+        ],
+        pricing: {
+            tier: "freemium",
+            note: "Free access with usage limits + paid plans"
+        },
+        alternatives: [
+            {
+                name: "ChatGPT",
+                slug: "chatgpt"
+            },
+            {
+                name: "Claude",
+                slug: "claude"
+            },
+            {
+                name: "Perplexity",
+                slug: "perplexity"
+            }
+        ],
+        tags: [
+            "ai",
+            "llm",
+            "documents",
+            "research"
+        ],
+        rating: 4.5,
+        users: "Growing",
+        updatedAtISO: "2026-01-28"
     }
 ];
 }),
@@ -1630,6 +6635,651 @@ FOCUS: {FOCUS}`,
             "career",
             "interview",
             "practice"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p11",
+        slug: "email-to-executive",
+        title: "Email to Executive (Clear Ask, No Rambling)",
+        purpose: "Write emails that busy executives actually read and respond to.",
+        description: "This prompt structures emails for executive audiences who value brevity and clarity. It enforces a clear ask upfront, provides just enough context without over-explaining, and respects time by making the email scannable. The output feels professional without being stiff or overly formal.",
+        whenToUse: "Use when emailing senior leadership, board members, investors, or any executive where your window of attention is measured in seconds. Essential when making requests, proposing initiatives, or escalating issues to decision-makers.",
+        howItWorks: "The prompt structures content around the executive mindset: lead with what you need, provide minimal context to support the ask, outline options or next steps, and close with a clear action item. It eliminates preamble, jargon, and unnecessary detail that dilutes the message.",
+        bestPractices: "State your ask in the first sentence. Limit emails to under 150 words. Use bullet points for anything with multiple parts. Attach supporting details as documents rather than embedding them. Follow up once if no response after 3-4 business days.",
+        commonMistakes: "Burying the ask in paragraphs of context. Writing novel-length explanations assuming they'll read it all. Using jargon or acronyms without definition. Not providing clear next steps or decision points.",
+        expectedOutput: "A concise email structured as: clear ask or purpose in opening line, 2-3 bullet points of essential context, decision options or next steps if applicable, specific call-to-action with timeline. Total length under 150 words unless complexity absolutely requires more.",
+        limitations: "Works best for business contexts, not personal or sensitive topics. Assumes the executive has baseline context about your role and projects. Can't replace relationship-building or informal communication. Not suitable for complex negotiations requiring nuance.",
+        technicalRequirements: "Compatible with all major models. Claude tends to maintain appropriate formality. GPT sometimes generates slightly more structured options. Gemini occasionally adds unnecessary creativity. No special tools needed.",
+        realWorldApplications: "Middle managers use this to communicate with C-suite. Individual contributors use it for executive updates. Consultants use it for client communications. Entrepreneurs use it for investor updates. Project managers use it for escalations.",
+        successMetrics: "Success means getting timely responses, clear decisions, or requested actions. If executives ask clarifying questions, you likely provided too little context. If they don't respond, you probably provided too much or the ask wasn't clear.",
+        relatedPrompts: "Use Rewrite for Clarity if your draft email is too long. Pair with Compare and Pick when presenting decision options. Follow up with Meeting Notes Action Items after the resulting conversation.",
+        prompt: `Write an email to an executive about {TOPIC}.
+
+Input:
+- What I need: {ASK}
+- Essential context (max 3 points): {CONTEXT}
+- Timeline: {WHEN}
+
+Rules:
+- Lead with the ask in sentence one
+- Keep under 150 words total
+- Use bullets for multiple points
+- End with clear next step
+
+Output format:
+Subject line
+Email body (ask first, context bullets, next step)
+
+Topic: {TOPIC}
+Ask: {ASK}
+Context: {CONTEXT}
+Timeline: {WHEN}`,
+        variations: [
+            "Make it more formal for board communications.",
+            "Add decision options when asking for approval.",
+            "Include a one-line impact statement for proposals.",
+            "Make it update-style (FYI, no action needed)."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "writing",
+            "executive",
+            "communication"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p12",
+        slug: "meeting-agenda-that-works",
+        title: "Meeting Agenda (Clear Outcomes, Not Generic Lists)",
+        purpose: "Create agendas that make meetings actually productive.",
+        description: "This prompt generates meeting agendas focused on outcomes rather than vague discussion topics. It allocates time realistically, specifies what success looks like for each item, assigns pre-work when needed, and ensures every topic has a clear owner and expected outcome.",
+        whenToUse: "Use before any meeting where you need alignment, decisions, or action items. Essential for recurring team meetings, project kickoffs, stakeholder reviews, or any gathering where vague agendas lead to wasted time.",
+        howItWorks: "The prompt structures agendas around decision-making and action. Each agenda item includes time allocation, expected outcome (decide, align, inform, create), owner, and any required pre-work. This prevents meetings from becoming unstructured discussions with no outputs.",
+        bestPractices: "Send agendas 24 hours before meetings. Keep meetings under 60 minutes when possible. Assign pre-work for complex topics. Include only stakeholders who need to decide or contribute. Skip topics that can be handled async.",
+        commonMistakes: "Creating agendas full of vague discussion topics. Not allocating time per item. Including too many topics for the time available. Not specifying what decisions need to be made. Forgetting to assign pre-work for complex items.",
+        expectedOutput: "A structured agenda containing: meeting purpose and success criteria, list of attendees and their roles, 3-5 agenda items each with time allocation, owner, outcome type (decide/align/inform/create), and any required pre-work, plus time reserved for questions and next steps.",
+        limitations: "Can't make poorly planned meetings productive—good agendas help but don't replace good meeting culture. Assumes attendees will actually read the agenda and complete pre-work. Won't fix fundamental meeting overload problems.",
+        technicalRequirements: "Compatible with all major models. GPT tends to create more structured formats. Claude often includes better outcome specifications. Gemini sometimes suggests creative formats. Works for any meeting type.",
+        realWorldApplications: "Project managers use this for sprint planning and retrospectives. Product managers use it for stakeholder reviews. Team leads use it for recurring team meetings. Executives use it for leadership team meetings.",
+        successMetrics: "Successful agendas mean meetings start on time, stay on topic, produce expected outcomes, end with clear action items, and don't require follow-up meetings for the same topics. If meetings consistently run over, your time allocations are unrealistic.",
+        relatedPrompts: "Follow with Meeting Notes Action Items to document outcomes. Use Email to Executive to send pre-reads. Pair with Decision Framework when agenda includes major decisions.",
+        prompt: `Create a meeting agenda for {MEETING_PURPOSE}.
+
+Input:
+- Purpose: {PURPOSE}
+- Duration: {DURATION} minutes
+- Key topics: {TOPICS}
+- Attendees: {ATTENDEES}
+
+Rules:
+- Specify outcome for each item (decide/align/inform/create)
+- Allocate realistic time per topic
+- Note any required pre-work
+- Reserve 10 minutes for questions/next steps
+
+Output format:
+Purpose & Success Criteria
+Attendees & Roles
+Agenda Items (each: Topic, Time, Owner, Outcome, Pre-work if needed)
+Q&A / Next Steps (10 min)
+
+Meeting: {MEETING_PURPOSE}
+Duration: {DURATION}
+Topics: {TOPICS}
+Attendees: {ATTENDEES}`,
+        variations: [
+            "Add a parking lot section for off-topic items.",
+            "Include decision-making framework for contentious items.",
+            "Make it workshop-style with activities and timers.",
+            "Add retrospective format (what worked, what didn't, actions)."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "meetings",
+            "productivity",
+            "planning"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p13",
+        slug: "technical-explainer",
+        title: "Technical Explainer (For Non-Technical Stakeholders)",
+        purpose: "Explain technical concepts without losing clarity or dumbing down.",
+        description: "This prompt translates technical topics into clear explanations for business stakeholders. It balances accuracy with accessibility, uses relevant analogies, focuses on impact rather than implementation details, and avoids both jargon and condescension.",
+        whenToUse: "Deploy this when presenting technical solutions to executives, explaining engineering decisions to product or business teams, writing documentation for cross-functional audiences, or any situation where technical accuracy meets non-technical readers.",
+        howItWorks: "The prompt structures explanations around business impact first, then provides just enough technical detail to support credibility. It uses analogies that connect to the stakeholder's domain knowledge, explains why something matters before how it works, and avoids unnecessary complexity.",
+        bestPractices: "Start with what it means for the business or user. Use analogies from the stakeholder's domain (finance, operations, sales). Provide diagrams or visuals when possible. Test explanations with non-technical colleagues before sharing broadly.",
+        commonMistakes: "Over-simplifying to the point of inaccuracy. Using technical jargon without definition. Explaining how before why. Not connecting technical choices to business outcomes. Being condescending by over-explaining obvious concepts.",
+        expectedOutput: "A structured explanation containing: what problem this solves (business impact), how it works at a high level (without jargon), why this approach over alternatives (tradeoffs), what stakeholders need to know or decide, and clear next steps if applicable.",
+        limitations: "Cannot make fundamentally complex systems simple without losing some nuance. Works best when you deeply understand both the technical topic and the audience's knowledge level. May require iteration based on stakeholder feedback.",
+        technicalRequirements: "Compatible with all major models. Claude excels at finding appropriate analogies. GPT tends to provide more structured explanations. Gemini sometimes surfaces creative comparisons. Works for any technical domain.",
+        realWorldApplications: "Engineers use this for architecture decision documents. Product managers use it to explain technical constraints. CTOs use it for board presentations. Consultants use it for client communications. Teachers use it for introductory technical courses.",
+        successMetrics: "Successful explanations mean stakeholders can explain the concept back to others, make informed decisions about tradeoffs, and ask relevant follow-up questions. If they look confused or ask basic questions, the explanation assumed too much knowledge.",
+        relatedPrompts: "Use Rewrite for Clarity to simplify draft explanations. Pair with Explain Like a Tutor if you need to learn the concept first. Combine with Email to Executive for stakeholder communications.",
+        prompt: `Explain {TECHNICAL_TOPIC} for non-technical stakeholders.
+
+Input:
+- Topic: {TOPIC}
+- Audience: {AUDIENCE} (e.g., executives, product team, customers)
+- Context: {CONTEXT}
+
+Rules:
+- Start with business impact / "why it matters"
+- Use analogies from the audience's domain
+- Avoid jargon; define necessary terms in one sentence
+- Explain tradeoffs in terms of outcomes, not implementation
+
+Output format:
+1) What it does & why it matters (2-3 sentences)
+2) How it works (high level, max 150 words)
+3) Key tradeoffs or constraints (bullets)
+4) What stakeholders need to know or decide
+5) Next steps (if applicable)
+
+Topic: {TECHNICAL_TOPIC}
+Audience: {AUDIENCE}
+Context: {CONTEXT}`,
+        variations: [
+            "Add a visual diagram description.",
+            "Include FAQ section for common concerns.",
+            "Make it decision-focused (what to approve/choose).",
+            "Add cost or timeline implications."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "technical",
+            "communication",
+            "stakeholders"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p14",
+        slug: "brainstorm-facilitator",
+        title: "Brainstorm Facilitator (Ideas → Prioritization)",
+        purpose: "Turn messy brainstorms into prioritized, actionable ideas.",
+        description: "This prompt facilitates structured brainstorming by first generating diverse ideas without judgment, then organizing and prioritizing them using clear criteria. It balances creativity with practicality, ensuring brainstorms produce usable outputs instead of just long lists.",
+        whenToUse: "Use when starting new projects, tackling open-ended problems, exploring product features, or whenever you need fresh ideas followed by realistic prioritization. Most effective when you're stuck or need to expand thinking beyond obvious solutions.",
+        howItWorks: "The prompt operates in two phases: divergent thinking to generate ideas without constraints, then convergent thinking to organize, evaluate, and prioritize using specified criteria (impact, effort, risk, alignment). This prevents premature judgment from killing good ideas while ensuring outputs are actionable.",
+        bestPractices: "Set a timer for idea generation to prevent overthinking. Defer judgment during the divergent phase. Be specific about evaluation criteria relevant to your situation. Include diverse perspectives if brainstorming with a team. Document everything, even ideas you don't pursue.",
+        commonMistakes: "Judging ideas during generation phase. Using generic criteria that don't match your context. Not generating enough ideas before evaluating. Picking the first decent idea without exploring alternatives. Forgetting to consider implementation feasibility.",
+        expectedOutput: "A two-part output: first, 15-20 diverse ideas organized by theme or category, then a prioritized short-list of 3-5 top ideas with evaluation scores, rationale, and recommended next steps for each. Includes criteria used for evaluation.",
+        limitations: "Quality depends on how well you define the problem and criteria. Can't replace domain expertise or market knowledge. Works best for ideation, not detailed implementation planning. Won't magically solve problems with no good solutions.",
+        technicalRequirements: "Compatible with all major models. GPT generates high volumes of ideas quickly. Claude tends to provide more nuanced evaluation. Gemini sometimes surfaces more creative angles. Works for any domain or problem type.",
+        realWorldApplications: "Product teams use this for feature brainstorming. Marketing teams use it for campaign ideation. Startups use it for business model exploration. Designers use it for concept generation. Writers use it to overcome creative blocks.",
+        successMetrics: "Successful brainstorms mean you identify ideas you wouldn't have thought of alone, can clearly articulate why top ideas are prioritized that way, and have actionable next steps for testing or implementing ideas. If every idea feels obvious, you haven't pushed far enough.",
+        relatedPrompts: "Follow with Compare and Pick to evaluate top ideas more deeply. Use Technical Explainer to communicate selected ideas to stakeholders. Pair with Meeting Agenda for brainstorm sessions.",
+        prompt: `Facilitate a brainstorm on {CHALLENGE}.
+
+Input:
+- Challenge: {CHALLENGE}
+- Constraints: {CONSTRAINTS}
+- Evaluation criteria: {CRITERIA} (e.g., impact, effort, risk, alignment)
+
+Rules:
+- Phase 1: Generate 15-20 diverse ideas without judgment
+- Phase 2: Organize, evaluate, and prioritize using criteria
+- Be specific and actionable
+
+Output format:
+PHASE 1 - Ideas (organized by theme)
+- 15-20 ideas with brief descriptions
+
+PHASE 2 - Evaluation & Prioritization
+- Top 5 ideas scored on criteria (1-10)
+- Rationale for each
+- Recommended next steps
+
+Challenge: {CHALLENGE}
+Constraints: {CONSTRAINTS}
+Criteria: {CRITERIA}`,
+        variations: [
+            "Add worst-idea brainstorm (then invert).",
+            "Include implementation complexity assessment.",
+            "Make it quick-win focused (high impact, low effort).",
+            "Add risk analysis for top ideas."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "ideation",
+            "brainstorming",
+            "prioritization"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p15",
+        slug: "postmortem-template",
+        title: "Postmortem Template (Learn, Don't Blame)",
+        purpose: "Document incidents and outages to prevent repeat failures.",
+        description: "This prompt creates blameless postmortem documents that focus on systemic issues rather than individual mistakes. It structures incident analysis around timeline, root cause, impact, and preventive measures. The goal is organizational learning, not finger-pointing.",
+        whenToUse: "Use after any significant incident, outage, missed deadline, or project failure where learning matters. Essential for engineering teams doing incident reviews, operations teams analyzing failures, or any situation where understanding what went wrong prevents future problems.",
+        howItWorks: "The prompt structures postmortems around facts and systems: what happened (timeline), why it happened (root cause analysis), what the impact was (quantified when possible), and what changes prevent recurrence. It explicitly avoids blame language and focuses on process improvements.",
+        bestPractices: "Conduct postmortems within 48 hours while details are fresh. Include all involved team members. Focus on systemic causes, not individual actions. Assign owners to action items with deadlines. Share postmortems broadly for organizational learning.",
+        commonMistakes: "Blaming individuals instead of examining systems. Rushing to solutions without understanding root causes. Writing vague action items without owners. Not following up on action items. Making postmortems feel like punishment.",
+        expectedOutput: "A structured document containing: incident summary with severity and impact, detailed timeline of events, root cause analysis with contributing factors, action items with owners and deadlines, and what went well (not just what went wrong).",
+        limitations: "Can't prevent incidents, only help learn from them. Requires honest participation from all involved. Action items need follow-through or nothing changes. Cultural resistance to blameless culture makes these less effective.",
+        technicalRequirements: "Compatible with all major models. Claude tends to maintain blameless framing well. GPT creates clear action items. Gemini sometimes surfaces less obvious contributing factors. Works for any incident type.",
+        realWorldApplications: "Engineering teams use this for production incidents. Operations teams use it for service outages. Project teams use it for delivery failures. Product teams use it for launch issues. Sales teams use it for deal losses.",
+        successMetrics: "Effective postmortems mean action items get completed, similar incidents don't recur, team members feel safe sharing mistakes, and the organization builds institutional knowledge. If people hide information, your culture needs work.",
+        relatedPrompts: "Use Bug Hunter for technical root cause analysis. Pair with Meeting Agenda for postmortem sessions. Follow with Email to Executive for incident summaries.",
+        prompt: `Create a postmortem for {INCIDENT}.
+
+Input:
+- What happened: {SUMMARY}
+- When: {DATE_TIME}
+- Duration: {DURATION}
+- Impact: {IMPACT}
+
+Rules:
+- Use blameless language (focus on systems, not people)
+- Include timeline with timestamps
+- Identify root cause and contributing factors
+- Create actionable prevention steps with owners
+
+Output format:
+SUMMARY (severity, impact, duration)
+TIMELINE (key events with timestamps)
+ROOT CAUSE ANALYSIS
+- Primary cause
+- Contributing factors
+IMPACT
+- Users affected
+- Revenue/business impact
+- Internal impact
+WHAT WENT WELL (yes, really)
+ACTION ITEMS (owner, deadline, priority)
+- Prevention
+- Detection
+- Response
+
+Incident: {INCIDENT}
+Summary: {SUMMARY}
+Date: {DATE_TIME}
+Impact: {IMPACT}`,
+        variations: [
+            "Add 5 Whys analysis for root cause.",
+            "Include communication timeline (who was notified when).",
+            "Add lessons learned section with key takeaways.",
+            "Make it short-form (one-pager for minor incidents)."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "incidents",
+            "postmortem",
+            "learning"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p16",
+        slug: "onboarding-checklist",
+        title: "Onboarding Checklist (Role-Specific, Week-by-Week)",
+        purpose: "Create onboarding plans that set new hires up for success.",
+        description: "This prompt generates structured onboarding checklists tailored to specific roles and companies. It organizes tasks by week, balances learning with doing, includes check-in points, and ensures new hires have clear success criteria. The output feels supportive, not overwhelming.",
+        whenToUse: "Use when hiring new team members, promoting internally, or whenever someone joins a new role. Essential for scaling teams, ensuring consistent onboarding experiences, or documenting tribal knowledge before it's lost.",
+        howItWorks: "The prompt structures onboarding across 4-8 weeks with increasing responsibility. Each week includes: tasks to complete, people to meet, resources to review, and checkpoints to verify progress. It balances orientation, training, and hands-on work while building relationships.",
+        bestPractices: "Customize for the specific role and company. Assign an onboarding buddy. Build in regular check-ins. Include both technical tasks and cultural integration. Get feedback from recent hires to improve the checklist.",
+        commonMistakes: "Making week one too information-dense. Not including hands-on work early enough. Forgetting to schedule regular check-ins. Creating generic checklists that don't match the role. Not assigning clear owners for each item.",
+        expectedOutput: "A week-by-week checklist spanning 30-60 days containing: orientation tasks, training modules, systems access, key relationships to build, projects to complete, checkpoints with manager, and success criteria for the first 90 days.",
+        limitations: "Can't replace good management and regular feedback. Assumes company has resources and documentation worth referencing. Works best with stable roles and processes. May need adjustment for very senior or unique positions.",
+        technicalRequirements: "Compatible with all major models. GPT creates well-structured checklists. Claude often includes better relationship-building elements. Gemini sometimes suggests creative onboarding activities. Works for any role type.",
+        realWorldApplications: "Hiring managers use this for new team members. HR teams use it to standardize onboarding. Startups use it to scale hiring beyond founders. Remote teams use it to structure virtual onboarding. Consultants use it for client team integration.",
+        successMetrics: "Successful onboarding means new hires contribute meaningfully by week 3-4, feel integrated by week 6-8, and report high satisfaction in feedback surveys. If people quit in the first 90 days, onboarding likely failed.",
+        relatedPrompts: "Use Meeting Agenda for regular check-ins. Pair with Technical Explainer for complex systems training. Follow with Interview Prep Coach for internal promotions.",
+        prompt: `Create an onboarding checklist for {ROLE}.
+
+Input:
+- Role: {ROLE}
+- Team/Department: {TEAM}
+- Duration: {WEEKS} weeks
+- Key systems/tools: {SYSTEMS}
+
+Rules:
+- Organize by week with clear tasks
+- Include people to meet and relationships to build
+- Balance learning (reading/training) with doing (hands-on tasks)
+- Add checkpoints every 1-2 weeks
+
+Output format:
+Overview & Success Criteria (30/60/90 day goals)
+
+WEEK 1: Orientation
+- Tasks (checkboxes)
+- People to meet
+- Resources to review
+- Checkpoint
+
+WEEK 2-{N}: [Continue pattern]
+- Tasks
+- People
+- Resources
+- Projects (hands-on work)
+- Checkpoint
+
+Role: {ROLE}
+Team: {TEAM}
+Duration: {WEEKS}
+Systems: {SYSTEMS}`,
+        variations: [
+            "Add remote-specific elements (virtual coffee chats, etc).",
+            "Include culture and values learning.",
+            "Make it project-based (deliver X by week 4).",
+            "Add manager guide (what to cover in check-ins)."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "onboarding",
+            "hiring",
+            "management"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p17",
+        slug: "feature-spec-template",
+        title: "Feature Spec Template (Problem → Solution → Success)",
+        purpose: "Write feature specs that engineers and designers can actually build from.",
+        description: "This prompt creates clear feature specifications that connect user problems to proposed solutions. It includes success metrics, edge cases, and dependencies without unnecessary detail. The output helps teams align on what to build and why before committing to implementation.",
+        whenToUse: "Use before starting significant features, when proposing new functionality, or whenever cross-functional alignment is needed. Essential for product managers, technical leads, or anyone translating user needs into technical requirements.",
+        howItWorks: "The prompt structures specs around: problem definition, proposed solution, user stories, acceptance criteria, technical considerations, success metrics, and open questions. This ensures teams understand context, scope, and constraints before building.",
+        bestPractices: "Write specs before designing or coding. Include designers and engineers in early review. Start with problem and impact, not solution. Define success metrics upfront. Document decisions and tradeoffs made during scoping.",
+        commonMistakes: "Writing implementation details without explaining the problem. Not defining success metrics. Leaving edge cases undocumented. Forgetting dependencies on other teams. Making specs too long or too vague.",
+        expectedOutput: "A structured spec containing: problem statement with user impact, proposed solution at high level, detailed user stories with acceptance criteria, technical considerations and constraints, success metrics, dependencies, and open questions for discussion.",
+        limitations: "Can't replace collaborative refinement with teams. Specs will evolve during implementation. Works best for features with clear scope. May need iteration based on technical feasibility discovery.",
+        technicalRequirements: "Compatible with all major models. GPT creates well-organized structures. Claude often includes better edge case coverage. Gemini sometimes surfaces creative solution angles. Works for any product type.",
+        realWorldApplications: "Product managers use this for feature planning. Tech leads use it for technical design docs. Designers use it for understanding requirements. Startups use it for MVP definition. Enterprise teams use it for stakeholder alignment.",
+        successMetrics: "Successful specs mean teams can start work without major questions, scope creep is minimal during implementation, and delivered features meet defined success criteria. If teams constantly ask clarifying questions, the spec was too vague.",
+        relatedPrompts: "Use Technical Explainer for complex technical sections. Pair with Compare and Pick when evaluating solution approaches. Follow with Postmortem Template if launch reveals issues.",
+        prompt: `Write a feature spec for {FEATURE}.
+
+Input:
+- Feature: {FEATURE}
+- Problem it solves: {PROBLEM}
+- Target users: {USERS}
+
+Rules:
+- Start with problem and user impact
+- Include user stories with acceptance criteria
+- Note technical constraints and dependencies
+- Define success metrics
+- List open questions
+
+Output format:
+OVERVIEW
+- Problem statement
+- Impact (why now, why us)
+
+SOLUTION
+- High-level approach
+- Key user stories (As a [user], I want to [action] so that [outcome])
+- Acceptance criteria per story
+
+TECHNICAL CONSIDERATIONS
+- Constraints
+- Dependencies
+- Edge cases
+
+SUCCESS METRICS
+- How we measure success
+- Target outcomes
+
+OPEN QUESTIONS
+- Decisions still needed
+
+Feature: {FEATURE}
+Problem: {PROBLEM}
+Users: {USERS}`,
+        variations: [
+            "Add mockups or wireframe descriptions.",
+            "Include technical design details for engineering.",
+            "Make it lean (one-pager for simple features).",
+            "Add competitive analysis section."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "product",
+            "specs",
+            "planning"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p18",
+        slug: "executive-summary",
+        title: "Executive Summary (Dense Information, Quick Read)",
+        purpose: "Distill complex documents into summaries executives will actually read.",
+        description: "This prompt creates executive summaries that extract key decisions, risks, and recommendations from longer documents. It front-loads critical information, uses visual hierarchy, and respects that executives need just enough context to make informed decisions quickly.",
+        whenToUse: "Use when presenting proposals, reports, or analyses to senior leadership. Essential before board meetings, investor presentations, or any situation where busy decision-makers need the essence without the details.",
+        howItWorks: "The prompt identifies the core message, extracts decision points, highlights risks and opportunities, and presents everything in scannable format. It assumes the reader may not have time for the full document and structures content for progressive disclosure.",
+        bestPractices: "Keep to one page maximum. Lead with recommendation or ask. Use bullets and visual hierarchy. Quantify impact when possible. Include one-sentence rationale for key points. Attach full document for those who want details.",
+        commonMistakes: "Writing mini-versions of the full document. Burying the recommendation. Using jargon without context. Not quantifying impact. Forgetting to include clear next steps. Making it too dense to scan.",
+        expectedOutput: "A one-page summary containing: situation in 2-3 sentences, key recommendation or ask, supporting rationale in bullets, risks and mitigations, financial or timeline impact if relevant, and explicit next steps with owners.",
+        limitations: "Can't capture all nuance from complex documents. Assumes executive has baseline context. Works best for business decisions, less effective for technical deep-dives. Requires good judgment about what to include.",
+        technicalRequirements: "Compatible with all major models. GPT creates clear hierarchical structure. Claude maintains appropriate brevity. Gemini sometimes over-simplifies. Works for any document type.",
+        realWorldApplications: "Consultants use this for client deliverables. Product managers use it for strategy documents. Finance teams use it for investment proposals. Operations teams use it for process change proposals. Analysts use it for research reports.",
+        successMetrics: "Successful summaries mean executives make informed decisions without reading full documents, meetings stay focused on decisions rather than rehashing details, and follow-up questions are about decisions rather than clarifications.",
+        relatedPrompts: "Use Email to Executive for the cover email. Pair with Technical Explainer for technical decisions. Follow with Meeting Agenda if presenting in person.",
+        prompt: `Create an executive summary for {DOCUMENT_TOPIC}.
+
+Input:
+- Topic: {TOPIC}
+- Key finding/recommendation: {FINDING}
+- Decision needed: {DECISION}
+
+Rules:
+- Maximum one page
+- Lead with recommendation/ask
+- Use bullets and hierarchy
+- Quantify impact
+- Include risks and next steps
+
+Output format:
+SITUATION (2-3 sentences)
+
+RECOMMENDATION / ASK
+- Primary recommendation
+- Key rationale (3-4 bullets)
+
+IMPACT
+- Financial/timeline/resource impact
+- Risks and mitigations
+
+NEXT STEPS
+- Action items with owners
+- Decision points
+
+Topic: {DOCUMENT_TOPIC}
+Finding: {FINDING}
+Decision: {DECISION}`,
+        variations: [
+            "Add visual layout suggestions (boxes, callouts).",
+            "Include options analysis (3 choices with pros/cons).",
+            "Make it investor-focused (TAM, traction, ask).",
+            "Add appendix section for supporting data."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "executive",
+            "summary",
+            "communication"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p19",
+        slug: "tutorial-writer",
+        title: "Tutorial Writer (Step-by-Step, No Assumptions)",
+        purpose: "Write tutorials that beginners can actually follow without getting stuck.",
+        description: "This prompt creates detailed, beginner-friendly tutorials that assume minimal prior knowledge. It breaks complex processes into discrete steps, explains why each step matters, includes troubleshooting for common issues, and validates understanding through checkpoints.",
+        whenToUse: "Use when creating how-to content, onboarding documentation, course materials, or any instructional content where readers need to successfully complete a task. Essential when teaching technical skills, software usage, or multi-step processes.",
+        howItWorks: "The prompt structures tutorials with clear prerequisites upfront, numbered steps with explanations, screenshots or visual descriptions where helpful, common error handling, and checkpoints to verify progress. It anticipates confusion and addresses it proactively.",
+        bestPractices: "Test tutorials with actual beginners. Include time estimates for completion. Show expected outputs after key steps. Provide troubleshooting for predictable issues. Link to prerequisite knowledge rather than assuming it.",
+        commonMistakes: "Skipping basic steps that seem obvious. Not showing what success looks like. Assuming too much prior knowledge. Writing for yourself rather than beginners. Not testing with actual target users.",
+        expectedOutput: "A complete tutorial containing: clear learning objective, prerequisites and setup requirements, numbered step-by-step instructions with explanations, expected outcomes at checkpoints, troubleshooting section for common issues, and next steps or related tutorials.",
+        limitations: "Can't replace hands-on practice or personalized instruction. Complex topics may need to be split into multiple tutorials. Written tutorials work best when supplemented with visuals. Can't cover every possible error or configuration.",
+        technicalRequirements: "Compatible with all major models. GPT creates clear step structures. Claude often includes better error handling. Gemini sometimes suggests helpful analogies. Works for any tutorial topic.",
+        realWorldApplications: "Educators use this for course materials. Product teams use it for user documentation. Developer advocates use it for API tutorials. Content creators use it for technical how-tos. Support teams use it for self-service resources.",
+        successMetrics: "Successful tutorials mean users complete tasks without external help, error rates are low, support tickets decrease for that topic, and users reference the tutorial later. If people frequently get stuck, the tutorial has gaps.",
+        relatedPrompts: "Use Explain Like a Tutor to understand the topic deeply first. Pair with Technical Explainer for complex concepts. Follow with FAQ sections using common issues discovered.",
+        prompt: `Write a tutorial for {TASK}.
+
+Input:
+- Task: {TASK}
+- Target audience: {AUDIENCE} (experience level)
+- Tools/platform: {TOOLS}
+
+Rules:
+- Assume minimal prior knowledge
+- Number all steps clearly
+- Explain why, not just how
+- Include expected outputs at key points
+- Add troubleshooting section
+
+Output format:
+WHAT YOU'LL LEARN
+
+PREREQUISITES
+- Required tools/knowledge
+- Time needed
+
+STEPS
+1. [Step with explanation]
+   Expected outcome: [what success looks like]
+2. [Continue...]
+
+TROUBLESHOOTING
+- Common issue 1: solution
+- Common issue 2: solution
+
+NEXT STEPS
+- Related tutorials or advanced topics
+
+Task: {TASK}
+Audience: {AUDIENCE}
+Tools: {TOOLS}`,
+        variations: [
+            "Add video script version with visual cues.",
+            "Include quiz questions to check understanding.",
+            "Make it quick-start (5 minutes to hello world).",
+            "Add advanced section for experienced users."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "tutorial",
+            "documentation",
+            "teaching"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "p20",
+        slug: "performance-review-prep",
+        title: "Performance Review Prep (Achievements + Growth)",
+        purpose: "Prepare performance reviews that are fair, specific, and actionable.",
+        description: "This prompt helps structure performance reviews for direct reports by organizing achievements, identifying growth areas, and setting clear goals. It maintains balance between recognition and development, uses specific examples, and avoids vague feedback that doesn't help people improve.",
+        whenToUse: "Use before annual or quarterly performance reviews, promotion discussions, or any formal feedback conversation. Essential for managers providing structured feedback, or individuals preparing self-reviews.",
+        howItWorks: "The prompt organizes feedback around: key accomplishments with impact, areas of strength, growth opportunities with specific examples, and future goals. It enforces specificity over generic comments and ensures feedback is actionable and tied to observable behavior.",
+        bestPractices: "Collect examples throughout the review period, not just at the end. Include feedback from peers and stakeholders. Focus on impact and outcomes, not just activities. Make growth areas specific and achievable. Set 2-3 clear goals, not ten vague ones.",
+        commonMistakes: "Using vague language like 'good communicator' without examples. Surprising people with feedback they haven't heard before. Making everything positive or everything negative. Setting unrealistic goals. Not tying feedback to business impact.",
+        expectedOutput: "A structured review containing: summary assessment, 3-5 key accomplishments with impact metrics, strengths with examples, 2-3 growth areas with specific behaviors and suggestions, and 2-3 goals for next period with success criteria.",
+        limitations: "Can't replace ongoing feedback throughout the year. Requires manager to have observed or gathered sufficient examples. Works best in supportive feedback cultures. May need customization for company-specific review formats.",
+        technicalRequirements: "Compatible with all major models. Claude maintains appropriate empathetic tone. GPT creates well-structured formats. Gemini sometimes over-focuses on positive. Works for any role level.",
+        realWorldApplications: "Managers use this for direct report reviews. HR teams use it to standardize review quality. Individuals use it to prepare self-assessments. Consultants use it for client team evaluations. Mentors use it for mentee feedback.",
+        successMetrics: "Successful reviews mean employees understand what they did well, have clear actionable feedback for improvement, feel the review was fair, and have specific goals they can work toward. If people are surprised or confused, the review failed.",
+        relatedPrompts: "Use Meeting Agenda for the review conversation. Pair with Onboarding Checklist for new manager training. Follow with Email to Executive for promotion recommendations.",
+        prompt: `Prepare a performance review for {ROLE}.
+
+Input:
+- Person: {NAME}
+- Role: {ROLE}
+- Review period: {PERIOD}
+- Key projects: {PROJECTS}
+
+Rules:
+- Use specific examples with impact
+- Balance achievements and growth areas
+- Make feedback actionable
+- Set 2-3 clear goals for next period
+
+Output format:
+OVERALL ASSESSMENT (2-3 sentences)
+
+KEY ACCOMPLISHMENTS
+- Achievement 1 (impact)
+- Achievement 2 (impact)
+- Achievement 3 (impact)
+
+STRENGTHS (with examples)
+- Strength 1: [example]
+- Strength 2: [example]
+
+GROWTH OPPORTUNITIES
+- Area 1: [specific behavior, suggestion]
+- Area 2: [specific behavior, suggestion]
+
+GOALS FOR NEXT PERIOD
+1. [Goal with success criteria]
+2. [Goal with success criteria]
+
+Name: {NAME}
+Role: {ROLE}
+Period: {PERIOD}
+Projects: {PROJECTS}`,
+        variations: [
+            "Add peer feedback section.",
+            "Include development plan with resources.",
+            "Make it promotion-focused (readiness assessment).",
+            "Add self-reflection questions for employee."
+        ],
+        modelCompatibility: [
+            "GPT",
+            "Claude",
+            "Gemini"
+        ],
+        tags: [
+            "management",
+            "performance",
+            "feedback"
         ],
         updatedAtISO: "2026-01-24"
     }
@@ -3107,6 +8757,531 @@ const collections = [
             "efficiency"
         ],
         updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c21",
+        slug: "freelancer-client-management",
+        title: "Freelancer Client Management (Professional, Not Pushy)",
+        description: "Proposals, contracts, updates, and invoicing that get you hired and paid on time.",
+        longDescription: "Successful freelancing requires clear communication, professional documentation, and systematic follow-up. This collection provides templates and workflows for the business side of freelancing—proposals that win work, contracts that protect you, updates that build trust, and invoicing that gets paid promptly.",
+        whoItsFor: "Freelancers, consultants, or contractors managing multiple clients. Anyone transitioning from employee to independent work. Service providers who need better client communication systems.",
+        howToUse: "Use proposal templates to respond to opportunities quickly. Adapt contract language for your services. Send regular progress updates without being prompted. Invoice immediately after milestones with clear payment terms.",
+        commonMistakes: "Underselling in proposals. Working without contracts. Going silent between milestones. Delayed invoicing that delays payment. Not tracking client communication systematically.",
+        successMetrics: "You win proposals at reasonable rates. Clients pay on time without chasing. Scope creep is minimal. Clients refer you to others. You maintain healthy work-life boundaries.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p11"
+            },
+            {
+                kind: "prompt",
+                id: "p3"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            },
+            {
+                kind: "tool",
+                id: "t39"
+            }
+        ],
+        tags: [
+            "freelance",
+            "business",
+            "clients"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c22",
+        slug: "startup-mvp-builder",
+        title: "Startup MVP Builder (Ship Fast, Learn Faster)",
+        description: "Build and launch your first version in weeks, not months. Validate before perfecting.",
+        longDescription: "MVPs succeed when they test core assumptions quickly with minimal investment. This collection focuses on rapid prototyping, no-code solutions where possible, and learning from real users. The goal is validation, not perfection—ship something people can actually use and judge.",
+        whoItsFor: "Founders building their first product. Technical cofounders who need to move fast. Non-technical founders who need to ship without a dev team. Anyone validating a product idea.",
+        howToUse: "Start with feature specs to define must-haves only. Use no-code tools where possible. Build rough but functional. Launch to small audience. Iterate based on actual usage data.",
+        commonMistakes: "Building features users didn't ask for. Perfecting design before validating concept. Waiting for everything to be ready. Not talking to users during build. Over-engineering the first version.",
+        successMetrics: "You launch within target timeframe. Users actually use the product. You learn what to build next from real usage. Technical debt is manageable. You avoid rebuilding from scratch.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p17"
+            },
+            {
+                kind: "tool",
+                id: "t44"
+            },
+            {
+                kind: "tool",
+                id: "t45"
+            },
+            {
+                kind: "tool",
+                id: "t10"
+            }
+        ],
+        tags: [
+            "startup",
+            "mvp",
+            "product"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c23",
+        slug: "technical-writing-system",
+        title: "Technical Writing System (Clear, Complete, Maintainable)",
+        description: "Write docs, specs, and guides that engineers and users both understand.",
+        longDescription: "Technical writing requires balancing accuracy with accessibility. This collection helps you document systems, write specifications, create guides, and maintain documentation that serves both technical and non-technical audiences. Focus on clarity without sacrificing precision.",
+        whoItsFor: "Technical writers, developers documenting features, DevRel creating guides, or anyone responsible for technical documentation. Product managers writing specs for engineering teams.",
+        howToUse: "Start with clear structure and audience definition. Use diagrams where helpful. Write in layers—overview first, details second. Test documentation with actual users. Update docs when product changes.",
+        commonMistakes: "Writing only for experts. Assuming too much context. Not providing examples. Letting documentation drift from reality. Using jargon without definition.",
+        successMetrics: "Support tickets decrease. Users successfully complete tasks using docs. Engineers can onboard using documentation. Docs stay current with product. Search finds relevant information.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p13"
+            },
+            {
+                kind: "prompt",
+                id: "p19"
+            },
+            {
+                kind: "prompt",
+                id: "p3"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            }
+        ],
+        tags: [
+            "documentation",
+            "technical-writing",
+            "dev"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c24",
+        slug: "remote-team-coordination",
+        title: "Remote Team Coordination (Async-First, Meeting-Light)",
+        description: "Keep remote teams aligned without drowning in Zoom calls and Slack noise.",
+        longDescription: "Remote work succeeds with clear communication rhythms, good documentation, and intentional synchronous time. This collection provides systems for async updates, focused meetings, and team alignment that respects time zones and deep work.",
+        whoItsFor: "Remote team managers, distributed teams, async-first companies, or anyone coordinating across time zones. Teams tired of meeting overload.",
+        howToUse: "Establish async update rhythms. Document decisions in written form. Use meetings only for collaboration and discussion. Record important meetings for absent members. Create clear communication channels.",
+        commonMistakes: "Defaulting to meetings for everything. Not documenting decisions. Expecting instant responses. Scheduling across too many time zones. Unclear communication ownership.",
+        successMetrics: "Meeting time decreases. Team reports feeling less interrupted. Decisions get made without everyone present. Documentation stays current. Team velocity improves.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p12"
+            },
+            {
+                kind: "prompt",
+                id: "p11"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            },
+            {
+                kind: "tool",
+                id: "t43"
+            }
+        ],
+        tags: [
+            "remote",
+            "management",
+            "async"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c25",
+        slug: "personal-brand-building",
+        title: "Personal Brand Building (Authentic, Not Cringe)",
+        description: "Build authority and audience without turning into a LinkedIn influencer parody.",
+        longDescription: "Personal branding works when it's genuine expertise shared consistently, not motivational quotes and humble brags. This collection focuses on demonstrating knowledge through teaching, building in public, and creating valuable content that serves your audience.",
+        whoItsFor: "Professionals building thought leadership. Job seekers standing out. Founders establishing credibility. Anyone wanting to be known for their expertise.",
+        howToUse: "Pick one platform to focus on. Share what you're learning publicly. Create content that helps others solve problems. Engage authentically with your field. Stay consistent for months, not weeks.",
+        commonMistakes: "Posting only wins without process. Writing for algorithms instead of people. Not being consistent. Copying other creators' voice. Expecting immediate results.",
+        successMetrics: "People reach out about your expertise. Job opportunities find you. Your content gets referenced by others. You build genuine professional relationships. Audience engagement grows steadily.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p4"
+            },
+            {
+                kind: "tool",
+                id: "t43"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            },
+            {
+                kind: "prompt",
+                id: "p3"
+            }
+        ],
+        tags: [
+            "personal-brand",
+            "content",
+            "career"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c26",
+        slug: "api-documentation-complete",
+        title: "API Documentation Complete (Devs Can Actually Use It)",
+        description: "Document APIs so developers succeed on first try, not third support ticket.",
+        longDescription: "Good API documentation means developers can integrate successfully without contacting support. This collection covers reference docs, integration guides, example code, and error handling—everything needed for smooth developer experience.",
+        whoItsFor: "Developer experience teams, API product managers, backend engineers documenting endpoints, or anyone building developer-facing products.",
+        howToUse: "Start with quick start guide for common use case. Provide complete reference documentation. Include real example code. Document errors and edge cases. Keep documentation current with API changes.",
+        commonMistakes: "Reference docs without examples. Examples that don't run. Outdated documentation. Missing error codes and meanings. No migration guides for breaking changes.",
+        successMetrics: "Integration time decreases. Support tickets about usage decrease. Developers successfully integrate without contacting support. API adoption increases. Positive developer sentiment.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p19"
+            },
+            {
+                kind: "prompt",
+                id: "p13"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            },
+            {
+                kind: "prompt",
+                id: "p2"
+            }
+        ],
+        tags: [
+            "api",
+            "documentation",
+            "developer-experience"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c27",
+        slug: "lead-generation-system",
+        title: "Lead Generation System (Inbound, Not Annoying)",
+        description: "Attract and qualify leads through content and tools, not cold outreach spam.",
+        longDescription: "Inbound lead generation builds trust through valuable content, clear positioning, and helpful tools. This collection focuses on creating content that attracts your ideal customers, lead magnets that qualify interest, and nurture sequences that build relationships.",
+        whoItsFor: "B2B marketers, SaaS founders, consultants, or anyone selling complex products where trust and education matter. Teams moving from outbound to inbound.",
+        howToUse: "Create content addressing customer pain points. Build calculators or tools that provide value. Capture leads with genuine value exchange. Nurture with educational content. Track engagement to identify hot leads.",
+        commonMistakes: "Creating content about yourself not customers. Gating everything behind forms. Not nurturing captured leads. Ignoring lead scoring. Following up too aggressively.",
+        successMetrics: "Qualified lead volume increases. Lead quality improves. Conversion rate from lead to customer increases. Sales team spends less time qualifying. Customer acquisition cost decreases.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p9"
+            },
+            {
+                kind: "prompt",
+                id: "p4"
+            },
+            {
+                kind: "tool",
+                id: "t37"
+            },
+            {
+                kind: "tool",
+                id: "t28"
+            }
+        ],
+        tags: [
+            "marketing",
+            "leads",
+            "growth"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c28",
+        slug: "data-dashboard-builder",
+        title: "Data Dashboard Builder (Insights, Not Just Charts)",
+        description: "Build dashboards that answer questions and drive decisions, not just look pretty.",
+        longDescription: "Effective dashboards surface insights and enable action, not just display data. This collection focuses on understanding stakeholder questions, choosing right metrics, designing for clarity, and building dashboards people actually use.",
+        whoItsFor: "Data analysts, product managers, business intelligence teams, or anyone building dashboards for stakeholders. Teams moving from static reports to self-service analytics.",
+        howToUse: "Start by understanding what decisions the dashboard should inform. Choose metrics that matter. Design for scanability. Add context to numbers. Make dashboards interactive where helpful. Iterate based on usage.",
+        commonMistakes: "Showing too many metrics. Not providing context for numbers. Building dashboards nobody asked for. Making dashboards too complex. Not maintaining data quality.",
+        successMetrics: "Stakeholders use dashboards regularly. Questions get answered without manual analysis. Decisions reference dashboard data. Ad-hoc analysis requests decrease. Dashboard loading time stays fast.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p8"
+            },
+            {
+                kind: "prompt",
+                id: "p13"
+            },
+            {
+                kind: "tool",
+                id: "t47"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            }
+        ],
+        tags: [
+            "data",
+            "analytics",
+            "dashboards"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c29",
+        slug: "code-review-system",
+        title: "Code Review System (Helpful Feedback, Not Nitpicks)",
+        description: "Review code that improves quality, teaches developers, and ships faster.",
+        longDescription: "Good code review balances quality standards with velocity and learning. This collection provides frameworks for constructive feedback, automated checks for style issues, and review processes that teach rather than block.",
+        whoItsFor: "Engineering leads, senior developers, tech leads, or anyone responsible for code quality. Teams wanting to improve review culture and velocity.",
+        howToUse: "Automate style and formatting checks. Focus reviews on logic, architecture, and edge cases. Ask questions instead of demanding changes. Explain reasoning behind feedback. Prioritize blocking versus non-blocking feedback.",
+        commonMistakes: "Nitpicking style issues humans shouldn't review. Not explaining the why behind feedback. Blocking PRs for non-critical issues. Not reviewing promptly. Inconsistent standards across reviewers.",
+        successMetrics: "PR cycle time decreases. Code quality remains high. Junior developers improve faster. Review feedback is constructive. Team doesn't dread code review.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p2"
+            },
+            {
+                kind: "prompt",
+                id: "p3"
+            },
+            {
+                kind: "tool",
+                id: "t1"
+            },
+            {
+                kind: "prompt",
+                id: "p15"
+            }
+        ],
+        tags: [
+            "dev",
+            "code-review",
+            "quality"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c30",
+        slug: "workshop-facilitation-kit",
+        title: "Workshop Facilitation Kit (Productive Sessions, Real Outcomes)",
+        description: "Run workshops that generate ideas, make decisions, and align teams.",
+        longDescription: "Effective workshops require clear goals, structured activities, good facilitation, and concrete outputs. This collection provides frameworks for ideation, decision-making, and alignment sessions that produce usable results.",
+        whoItsFor: "Product managers running feature prioritization. Design leads facilitating brainstorms. Managers running team planning. Anyone facilitating collaborative work sessions.",
+        howToUse: "Define clear workshop goals and outputs upfront. Design activities that serve the goal. Facilitate actively to keep momentum. Document decisions in real-time. Follow up with action items.",
+        commonMistakes: "Vague workshop goals. Too many activities in too little time. Not managing dominant voices. Failing to capture decisions. No follow-up after workshop.",
+        successMetrics: "Workshops produce concrete decisions or outputs. Participants feel time was well spent. Decided actions actually happen. Teams align on direction. Future meetings reference workshop decisions.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p14"
+            },
+            {
+                kind: "prompt",
+                id: "p12"
+            },
+            {
+                kind: "tool",
+                id: "t8"
+            },
+            {
+                kind: "tool",
+                id: "t31"
+            }
+        ],
+        tags: [
+            "facilitation",
+            "workshop",
+            "collaboration"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c31",
+        slug: "sales-demo-preparation",
+        title: "Sales Demo Preparation (Show Value, Not Features)",
+        description: "Prepare demos that connect product capabilities to customer problems.",
+        longDescription: "Winning demos demonstrate how your product solves the prospect's specific problems, not just showcasing features. This collection focuses on discovery, demo customization, handling objections, and following up effectively.",
+        whoItsFor: "Sales engineers, account executives, founders doing sales, or anyone demoing products to prospects. Teams wanting to improve demo conversion rates.",
+        howToUse: "Research prospect before demo. Customize demo to their use case. Start with their problem, not your features. Show specific value for their situation. Leave time for questions. Follow up with clear next steps.",
+        commonMistakes: "Generic feature tours. Not researching prospect. Talking too much. Not handling objections. Weak follow-up. Demoing everything instead of relevant features.",
+        successMetrics: "Demo-to-opportunity conversion increases. Prospects engage actively during demo. Technical objections decrease. Sales cycle length decreases. Win rate from demo stage improves.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p13"
+            },
+            {
+                kind: "prompt",
+                id: "p11"
+            },
+            {
+                kind: "tool",
+                id: "t43"
+            },
+            {
+                kind: "prompt",
+                id: "p10"
+            }
+        ],
+        tags: [
+            "sales",
+            "demo",
+            "conversion"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c32",
+        slug: "learning-new-programming-language",
+        title: "Learning New Programming Language (Practical, Not Academic)",
+        description: "Master a new language by building, not reading. Projects over textbooks.",
+        longDescription: "Language learning accelerates through building real projects that expose you to common patterns. This collection provides a project-based learning path, focuses on practical patterns over theory, and builds muscle memory through repetition.",
+        whoItsFor: "Developers learning new languages for work. Engineers exploring new technology stacks. Students moving beyond introductory courses. Anyone wanting practical proficiency fast.",
+        howToUse: "Start with small working project. Learn syntax as needed. Build increasingly complex projects. Read others' code. Solve practical problems, not puzzles. Focus on language idioms and patterns.",
+        commonMistakes: "Reading documentation without coding. Building toy projects forever. Not reading production code. Learning theory before practice. Trying to learn everything before building.",
+        successMetrics: "You build working projects in the new language. Code feels idiomatic not translated. You debug effectively. You read others' code without struggling. You choose appropriate language features.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p1"
+            },
+            {
+                kind: "prompt",
+                id: "p2"
+            },
+            {
+                kind: "tool",
+                id: "t1"
+            },
+            {
+                kind: "prompt",
+                id: "p19"
+            }
+        ],
+        tags: [
+            "learning",
+            "programming",
+            "dev"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c33",
+        slug: "user-research-synthesis",
+        title: "User Research Synthesis (Insights to Action)",
+        description: "Turn user interviews and feedback into clear insights and product decisions.",
+        longDescription: "Research synthesis transforms raw data into actionable insights. This collection helps you analyze interview transcripts, identify patterns, extract insights, and communicate findings that drive product decisions.",
+        whoItsFor: "Product managers, UX researchers, designers, or anyone conducting user research. Teams wanting to make research more actionable.",
+        howToUse: "Review all research data systematically. Tag common themes and patterns. Extract specific quotes supporting insights. Prioritize insights by impact and confidence. Present findings with recommendations.",
+        commonMistakes: "Cherry-picking quotes supporting preconceptions. Not distinguishing between what users say and do. Overwhelming stakeholders with too many findings. Not connecting insights to actions.",
+        successMetrics: "Research directly influences product decisions. Team references research in prioritization. User problems are understood deeply. Research findings are actionable. Stakeholders trust research quality.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p3"
+            },
+            {
+                kind: "prompt",
+                id: "p18"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            },
+            {
+                kind: "prompt",
+                id: "p7"
+            }
+        ],
+        tags: [
+            "research",
+            "product",
+            "ux"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c34",
+        slug: "crisis-communication-plan",
+        title: "Crisis Communication Plan (Transparent, Not Defensive)",
+        description: "Communicate during incidents, outages, or mistakes with honesty and speed.",
+        longDescription: "Crisis communication requires acknowledging problems quickly, communicating transparently, and following through on commitments. This collection provides templates for incident updates, customer communications, and internal coordination.",
+        whoItsFor: "Product managers handling outages. Support teams during incidents. Communications teams managing crises. Anyone responsible for customer communication during problems.",
+        howToUse: "Acknowledge issue immediately. Provide regular updates on progress. Be honest about impact and timeline. Follow up after resolution. Document what happened and what changed.",
+        commonMistakes: "Going silent during crisis. Being overly defensive. Over-promising on timeline. Not communicating to all affected parties. Forgetting follow-up after resolution.",
+        successMetrics: "Customers feel informed during incidents. Churn doesn't spike after problems. Team coordinates effectively during crisis. Updates are timely and accurate. Post-crisis trust recovers quickly.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p15"
+            },
+            {
+                kind: "prompt",
+                id: "p11"
+            },
+            {
+                kind: "prompt",
+                id: "p3"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            }
+        ],
+        tags: [
+            "crisis",
+            "communication",
+            "incident"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "c35",
+        slug: "performance-optimization-workflow",
+        title: "Performance Optimization Workflow (Measure, Fix, Verify)",
+        description: "Make things faster through data, not guessing. Profile, optimize, benchmark.",
+        longDescription: "Performance optimization requires measuring before and after, identifying real bottlenecks, and verifying improvements. This collection provides systematic approach to finding and fixing performance issues.",
+        whoItsFor: "Backend engineers optimizing services. Frontend developers improving page speed. Database engineers tuning queries. Anyone responsible for system performance.",
+        howToUse: "Profile to identify real bottlenecks. Focus on highest impact optimizations first. Implement changes incrementally. Benchmark before and after. Monitor production impact. Document optimizations for team.",
+        commonMistakes: "Optimizing without profiling. Premature optimization. Not measuring impact. Making changes that hurt readability for minimal gain. Not considering real-world usage patterns.",
+        successMetrics: "Performance metrics improve measurably. User experience improves noticeably. Infrastructure costs decrease. Team maintains performance gains over time. Optimization decisions are data-driven.",
+        items: [
+            {
+                kind: "prompt",
+                id: "p2"
+            },
+            {
+                kind: "prompt",
+                id: "p8"
+            },
+            {
+                kind: "tool",
+                id: "t6"
+            },
+            {
+                kind: "prompt",
+                id: "p15"
+            }
+        ],
+        tags: [
+            "performance",
+            "optimization",
+            "dev"
+        ],
+        updatedAtISO: "2026-01-24"
     }
 ];
 }),
@@ -3591,6 +9766,726 @@ const comparisons = [
         tags: [
             "automation",
             "workflow",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp9",
+        slug: "figma-vs-sketch-vs-adobe-xd",
+        title: "Figma vs Sketch vs Adobe XD",
+        description: "Design tools: collaboration, features, and which one won't drive your team crazy.",
+        whenToUse: "Reference this when choosing design tools for product teams, evaluating whether to switch from legacy tools, building design systems, or deciding on collaboration approaches. Critical when design and development workflows need tight integration.",
+        decisionContext: "Your ideal design tool depends on team size, collaboration needs, operating system constraints, existing Adobe ecosystem investment, and whether real-time collaboration justifies browser-based performance tradeoffs. Solo designers have different needs than teams of twenty.",
+        keyTradeoffs: "Figma excels at collaboration and cross-platform access but requires internet and can feel slower. Sketch offers native performance and plugin ecosystem but lacks real-time collaboration and only runs on Mac. Adobe XD integrates with Creative Cloud but lags behind in features and adoption.",
+        costConsiderations: "Figma charges per editor with unlimited viewers. Sketch requires Mac purchase plus annual licensing. Adobe XD bundles with Creative Cloud subscriptions. Factor in platform costs—forcing designers to buy Macs adds expense. Consider team size multipliers for subscription costs.",
+        migrationPath: "Moving from Sketch to Figma is increasingly common—export/import works reasonably well. XD migration requires more manual work. Component libraries need recreation regardless of tool. Budget significant time for teams to adjust to new paradigms.",
+        teamImpact: "Figma enables remote design collaboration without file version chaos. Sketch suits small Mac-based teams who prioritize native performance. XD works for teams already deep in Adobe ecosystem. Consider onboarding time and learning curves when switching.",
+        realWorldScenarios: "Remote-first companies standardize on Figma for collaboration. Traditional agencies with Mac fleets continue using Sketch. Enterprise teams with Adobe licenses try XD but often migrate to Figma. Startups default to Figma for cost and flexibility.",
+        commonPitfalls: "Teams switching to Figma sometimes create too many files without organization. Sketch users struggle with collaboration workarounds. XD adopters get frustrated by missing features competitors have. All tools require design system discipline regardless of platform.",
+        performanceProfile: "Figma performance depends on internet and browser but improves continuously. Sketch is fastest for local work on modern Macs. XD performance is adequate but not exceptional. Large files stress all platforms—good organization matters more than tool choice.",
+        successMetrics: "Successful tool adoption means designers collaborate effectively, handoff to developers improves, version control problems decrease, and design system usage increases. Survey designer satisfaction and measure time spent on tool friction versus actual design.",
+        specificRecommendations: "Choose Figma for remote teams, cross-platform needs, or when collaboration matters most. Choose Sketch if you're Mac-only and prioritize native performance with established workflows. Choose Adobe XD only if already deep in Creative Cloud and other tools don't meet regulatory requirements.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t31"
+            },
+            {
+                kind: "tool",
+                id: "t32"
+            },
+            {
+                kind: "tool",
+                id: "t33"
+            }
+        ],
+        criteria: [
+            {
+                name: "Collaboration",
+                notes: "Real-time editing, commenting, and version control."
+            },
+            {
+                name: "Performance",
+                notes: "Speed with complex files and large design systems."
+            },
+            {
+                name: "Features",
+                notes: "Prototyping, components, plugins, and developer handoff."
+            },
+            {
+                name: "Platform support",
+                notes: "Mac, Windows, web, and mobile access."
+            },
+            {
+                name: "Ecosystem",
+                notes: "Plugins, integrations, community resources, and talent availability."
+            }
+        ],
+        verdict: "Figma wins for most teams due to collaboration and platform flexibility. Sketch remains strong for Mac-centric teams prioritizing native performance. Adobe XD is the distant third unless you're locked into Adobe ecosystem for other reasons.",
+        tags: [
+            "design",
+            "tools",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp10",
+        slug: "linear-vs-jira-vs-asana",
+        title: "Linear vs Jira vs Asana",
+        description: "Project management: speed, flexibility, and which one your team will actually use.",
+        whenToUse: "Deploy this when choosing project management tools for engineering teams, migrating from legacy PM software, scaling from spreadsheets, or when current tools feel too heavyweight or too limited. Most relevant when team coordination overhead needs reduction.",
+        decisionContext: "Your ideal PM tool depends on team size, process maturity, engineering versus general project work, integration needs, and whether speed trumps customization. Developer teams have different needs than marketing teams.",
+        keyTradeoffs: "Linear optimizes for engineering velocity with keyboard shortcuts and minimal friction but lacks flexibility for non-engineering work. Jira offers maximum customization and power but requires significant setup and maintenance. Asana provides flexibility across team types but can feel cluttered for pure engineering work.",
+        costConsiderations: "Linear pricing is straightforward per-user. Jira costs escalate quickly with add-ons and scale. Asana sits between them on cost. Factor in admin time—Jira requires dedicated management. Consider whether flexibility justifies complexity and cost.",
+        migrationPath: "Moving from Jira to Linear requires simplifying processes—good and painful. Asana to Linear works for engineering teams. Moving to Jira from simpler tools means accepting complexity. Export data before migrating and plan for workflow adjustments.",
+        teamImpact: "Linear works best for engineering teams who value speed. Jira suits enterprise teams with complex workflows and compliance needs. Asana fits cross-functional teams doing diverse work. Consider whether tool matches team culture and working style.",
+        realWorldScenarios: "Startups use Linear for engineering velocity and clean design. Enterprises use Jira for compliance and process enforcement. Cross-functional teams use Asana for marketing, product, and operations. Remote teams benefit from any tool with strong collaboration features.",
+        commonPitfalls: "Teams migrate to Linear expecting Jira features and get frustrated. Jira implementations over-customize until nobody understands the workflow. Asana users create too many projects without structure. All tools require discipline regardless of feature set.",
+        performanceProfile: "Linear is fastest for keyboard-driven workflows. Jira performance varies with customization complexity. Asana is responsive but can feel busy. All scale adequately but perceived speed differs based on workflow design.",
+        successMetrics: "Successful PM tools mean teams actually update status, planning meetings get shorter, work visibility improves, and coordination overhead decreases. Survey team satisfaction and measure time spent in tool versus on actual work.",
+        specificRecommendations: "Choose Linear for engineering teams prioritizing velocity and minimal friction. Choose Jira for enterprise needs with complex workflows and compliance requirements. Choose Asana for cross-functional teams doing diverse work beyond pure engineering.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t34"
+            },
+            {
+                kind: "tool",
+                id: "t35"
+            },
+            {
+                kind: "tool",
+                id: "t36"
+            }
+        ],
+        criteria: [
+            {
+                name: "Speed",
+                notes: "How fast you can create issues, update status, and navigate."
+            },
+            {
+                name: "Engineering fit",
+                notes: "Git integration, keyboard shortcuts, developer workflow alignment."
+            },
+            {
+                name: "Flexibility",
+                notes: "Custom workflows, fields, and adapting to team needs."
+            },
+            {
+                name: "Cross-team use",
+                notes: "Works for engineering and non-engineering work."
+            },
+            {
+                name: "Admin burden",
+                notes: "Setup complexity and ongoing maintenance required."
+            }
+        ],
+        verdict: "Linear is the modern choice for engineering teams who value speed over flexibility. Jira remains dominant in enterprise despite complexity. Asana is best for teams doing more than pure engineering work.",
+        tags: [
+            "project-management",
+            "productivity",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp11",
+        slug: "webflow-vs-framer-vs-wordpress",
+        title: "Webflow vs Framer vs WordPress",
+        description: "Website builders: design freedom, maintenance, and which one scales without breaking.",
+        whenToUse: "Reference this when building marketing sites, choosing CMS platforms, migrating from legacy systems, or deciding between no-code and traditional development. Critical when balancing design flexibility against technical maintenance.",
+        decisionContext: "Your ideal platform depends on design requirements, technical resources, content management needs, budget, and growth plans. Marketing sites need different tools than content-heavy blogs or complex web applications.",
+        keyTradeoffs: "Webflow provides design freedom without code but requires learning its paradigm and costs scale with traffic. Framer offers modern component-based design but is newer with evolving CMS. WordPress provides maximum flexibility and ecosystem but requires technical maintenance and security vigilance.",
+        costConsiderations: "Webflow charges for hosting with traffic-based pricing that can spike. Framer has flat-rate hosting included. WordPress is free software but hosting, themes, plugins, and maintenance add costs. Calculate total cost of ownership including time spent on maintenance.",
+        migrationPath: "Moving to Webflow from WordPress requires complete rebuild. Framer migrations are similar. Exporting from Webflow is limited—avoid lock-in concerns upfront. WordPress migrations are easier due to open formats. Plan for SEO impact during any migration.",
+        teamImpact: "Webflow empowers designers to ship without developer dependencies. Framer suits design-forward teams building component-based sites. WordPress requires developer support for customization and maintenance. Consider who'll actually maintain the site long-term.",
+        realWorldScenarios: "Marketing teams use Webflow for landing pages and campaign sites. Design agencies use Framer for portfolio and client sites. Publishers use WordPress for content-heavy sites with complex needs. Startups use Webflow to ship quickly without engineering.",
+        commonPitfalls: "Teams choosing Webflow sometimes hit traffic pricing surprises. Framer adopters encounter CMS limitations for complex content. WordPress users struggle with plugin conflicts and security maintenance. All platforms require good information architecture regardless of tool.",
+        performanceProfile: "Webflow sites are fast out of the box with managed hosting. Framer performance is excellent with modern architecture. WordPress speed varies dramatically with hosting and optimization. Consider CDN, caching, and image optimization for all platforms.",
+        successMetrics: "Successful website platforms mean you can ship changes quickly, maintain consistent design quality, handle traffic growth, and keep costs predictable. Monitor site speed, update frequency, and designer/marketer satisfaction.",
+        specificRecommendations: "Choose Webflow for design-heavy marketing sites when designers need independence. Choose Framer for modern, component-based sites with moderate content needs. Choose WordPress for content-heavy sites, blogs, or when maximum flexibility matters more than convenience.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t37"
+            },
+            {
+                kind: "tool",
+                id: "t38"
+            },
+            {
+                kind: "tool",
+                id: "t39"
+            }
+        ],
+        criteria: [
+            {
+                name: "Design freedom",
+                notes: "How much control over visual design without code."
+            },
+            {
+                name: "CMS capabilities",
+                notes: "Content management, collections, and editorial workflow."
+            },
+            {
+                name: "Developer needs",
+                notes: "How much technical support and maintenance required."
+            },
+            {
+                name: "Cost scaling",
+                notes: "What happens to cost as traffic and content grow."
+            },
+            {
+                name: "Lock-in risk",
+                notes: "How easy it is to migrate away if needed."
+            }
+        ],
+        verdict: "Webflow is best for design-focused marketing sites with manageable content. Framer is the modern choice for component-based sites but with less mature CMS. WordPress wins for content-heavy sites and maximum flexibility despite maintenance overhead.",
+        tags: [
+            "web",
+            "no-code",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp12",
+        slug: "stripe-vs-paypal-vs-square",
+        title: "Stripe vs PayPal vs Square",
+        description: "Payment processing: fees, features, and which one won't make customers abandon checkout.",
+        whenToUse: "Consult this when building e-commerce, choosing payment processors, evaluating transaction costs, or optimizing checkout conversion. Critical when payment experience directly impacts revenue.",
+        decisionContext: "Your ideal payment processor depends on transaction volume, average order value, international needs, technical resources, and whether you're optimizing for checkout conversion or cost. Digital products have different needs than physical retail.",
+        keyTradeoffs: "Stripe offers developer-friendly APIs and flexibility but requires technical integration. PayPal provides instant brand trust and buyer protection but higher fees and customer experience issues. Square suits in-person retail with unified POS but limited for complex online needs.",
+        costConsiderations: "All charge percentage plus fixed fees per transaction. Stripe and Square are similar around 2.9% plus 30 cents. PayPal is often higher especially for international. Factor in chargeback fees, currency conversion, and payout timing. Volume discounts exist but require negotiation.",
+        migrationPath: "Switching processors requires payment integration work and customer re-entry of payment methods. Subscriptions need careful migration to avoid disruption. Test thoroughly in sandbox before switching production. Consider running both during transition.",
+        teamImpact: "Stripe requires developers for integration and customization. PayPal is mostly no-code but limits control. Square is easiest for retail staff. Consider who'll handle disputes, refunds, and payment issues when choosing.",
+        realWorldScenarios: "SaaS companies use Stripe for subscription billing and revenue optimization. E-commerce stores use Stripe or PayPal based on target audience trust. Retail businesses use Square for in-person and online unified experience. Marketplaces use Stripe Connect for split payments.",
+        commonPitfalls: "Teams underestimate PayPal checkout abandonment on unfamiliar brands. Stripe implementations sometimes over-complicate basic needs. Square users hit limitations scaling complex online business. All processors have disputes and chargeback processes requiring attention.",
+        performanceProfile: "Stripe API reliability is excellent with strong uptime. PayPal has occasional issues but generally reliable. Square performance is solid for retail focus. All handle high transaction volume adequately but check rate limits for burst scenarios.",
+        successMetrics: "Successful payment processing means high checkout conversion, low payment failures, manageable transaction costs, and minimal customer payment complaints. Monitor authorization rates, dispute rates, and checkout abandonment at payment step.",
+        specificRecommendations: "Choose Stripe for online businesses, SaaS, subscriptions, or when developer control matters. Choose PayPal when targeting budget-conscious buyers or need instant trust. Choose Square for retail businesses wanting unified in-person and online experience.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t40"
+            },
+            {
+                kind: "tool",
+                id: "t41"
+            },
+            {
+                kind: "tool",
+                id: "t42"
+            }
+        ],
+        criteria: [
+            {
+                name: "Fees",
+                notes: "Transaction costs, monthly fees, and hidden charges."
+            },
+            {
+                name: "Checkout UX",
+                notes: "Customer experience and conversion impact."
+            },
+            {
+                name: "Features",
+                notes: "Subscriptions, invoicing, fraud prevention, reporting."
+            },
+            {
+                name: "Developer experience",
+                notes: "API quality, documentation, and integration ease."
+            },
+            {
+                name: "Trust factor",
+                notes: "Brand recognition and buyer confidence."
+            }
+        ],
+        verdict: "Stripe wins for most online businesses due to flexibility and developer experience. PayPal still valuable for buyer trust and alternative payment method. Square is best for retail businesses wanting unified commerce experience.",
+        tags: [
+            "payments",
+            "e-commerce",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp13",
+        slug: "aws-vs-gcp-vs-azure",
+        title: "AWS vs Google Cloud vs Azure",
+        description: "Cloud platforms: features, costs, and which one won't surprise you with the bill.",
+        whenToUse: "Deploy this when choosing cloud infrastructure, migrating from on-premise, evaluating multi-cloud strategies, or when current cloud costs feel out of control. Most relevant when infrastructure decisions have long-term implications.",
+        decisionContext: "Your ideal cloud platform depends on existing ecosystem, team expertise, specific service needs, cost sensitivity, and whether you're optimizing for breadth versus depth of services. Startups have different needs than enterprises with existing Microsoft contracts.",
+        keyTradeoffs: "AWS offers the broadest service catalog and market dominance but complex pricing and overwhelming options. GCP provides superior data and ML services with cleaner pricing but smaller market share. Azure excels at Microsoft ecosystem integration but service maturity varies.",
+        costConsiderations: "All three can get expensive without careful monitoring. AWS has most cost optimization tools but also most complexity. GCP offers sustained use discounts automatically. Azure provides benefits with existing Microsoft agreements. Factor in data egress costs that can surprise you.",
+        migrationPath: "Multi-cloud is strategically appealing but operationally expensive. Migrating between clouds requires significant replatforming work. Start with one cloud and add others only for specific capabilities. Use containerization to maintain some portability.",
+        teamImpact: "AWS skills are most available in hiring market. GCP has growing talent pool especially for data engineering. Azure natural fit for teams with Microsoft background. Consider training costs and talent availability when choosing.",
+        realWorldScenarios: "Startups default to AWS for ecosystem and tooling. Data-heavy companies choose GCP for BigQuery and ML services. Enterprises with Microsoft contracts use Azure for Active Directory integration. Multi-billion dollar companies use all three strategically.",
+        commonPitfalls: "Teams underestimate AWS complexity and cost monitoring needs. GCP adopters occasionally hit service maturity gaps. Azure users sometimes find inconsistent service quality across offerings. All clouds require active cost optimization or bills balloon.",
+        performanceProfile: "All three provide excellent global infrastructure with regional availability. Network performance is comparable at scale. Specific services vary in maturity and performance. Test your actual workloads rather than trusting benchmarks.",
+        successMetrics: "Successful cloud adoption means predictable costs, high uptime, team productivity, and ability to leverage platform services effectively. Monitor cost per customer, infrastructure efficiency, and developer satisfaction with tooling.",
+        specificRecommendations: "Choose AWS for broadest service catalog and ecosystem maturity. Choose GCP for data-heavy workloads, ML, and cleaner pricing model. Choose Azure for Microsoft ecosystem integration and enterprise agreements.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t43"
+            },
+            {
+                kind: "tool",
+                id: "t44"
+            },
+            {
+                kind: "tool",
+                id: "t45"
+            }
+        ],
+        criteria: [
+            {
+                name: "Service breadth",
+                notes: "Range of services and maturity across categories."
+            },
+            {
+                name: "Pricing clarity",
+                notes: "How easy it is to understand and predict costs."
+            },
+            {
+                name: "Data/ML services",
+                notes: "Quality of database, analytics, and ML offerings."
+            },
+            {
+                name: "Ecosystem",
+                notes: "Tools, integrations, marketplace, and community."
+            },
+            {
+                name: "Enterprise support",
+                notes: "Compliance, contracts, and support quality."
+            }
+        ],
+        verdict: "AWS remains the safe default for most companies due to service breadth and ecosystem. GCP is strongest for data and ML workloads. Azure wins for Microsoft-centric enterprises and hybrid cloud scenarios.",
+        tags: [
+            "cloud",
+            "infrastructure",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp14",
+        slug: "postgres-vs-mysql-vs-mongodb",
+        title: "PostgreSQL vs MySQL vs MongoDB",
+        description: "Databases: relational vs document, and which one fits your actual data model.",
+        whenToUse: "Reference this when choosing databases for new projects, migrating from legacy systems, scaling beyond SQLite, or when current database feels like wrong fit. Critical when data model and query patterns are becoming clear.",
+        decisionContext: "Your ideal database depends on data model fit, query patterns, scale requirements, team expertise, and whether you're optimizing for flexibility or consistency. CRUD apps have different needs than analytics or real-time systems.",
+        keyTradeoffs: "PostgreSQL offers powerful features and reliability but requires careful schema design. MySQL provides simplicity and speed but fewer advanced features. MongoDB enables flexible schemas but sacrifices consistency guarantees and can surprise you at scale.",
+        costConsiderations: "All three are free open source. Costs come from hosting, management, and scaling. Managed services like RDS or Atlas add convenience at price premium. Factor in operational overhead—PostgreSQL's power requires expertise to leverage well.",
+        migrationPath: "Switching databases is major undertaking requiring data migration and query rewrites. Start with right choice if possible. Moving from SQL to NoSQL or vice versa is particularly painful. Test migration thoroughly before cutover.",
+        teamImpact: "PostgreSQL requires SQL expertise and schema design skills. MySQL is easier for beginners but limits power users. MongoDB appeals to developers avoiding schema design but creates operational challenges. Consider team capabilities and hiring needs.",
+        realWorldScenarios: "SaaS applications use PostgreSQL for powerful features and data integrity. High-traffic web apps use MySQL for read-heavy workloads. Startups use MongoDB for rapid iteration without schema constraints. Analytics platforms use PostgreSQL for complex queries.",
+        commonPitfalls: "Teams choose MongoDB to avoid schema design then regret it at scale. MySQL users hit feature limitations requiring PostgreSQL migration. PostgreSQL implementations sometimes over-engineer schemas. All databases require proper indexing regardless of type.",
+        performanceProfile: "PostgreSQL excels at complex queries and writes. MySQL is faster for simple read-heavy workloads. MongoDB performs well for document retrieval but struggles with complex joins. All scale adequately with proper architecture and indexing.",
+        successMetrics: "Successful database choice means queries perform well, schema accommodates growth, team can operate it effectively, and costs remain reasonable at scale. Monitor query performance, storage growth, and operational incidents.",
+        specificRecommendations: "Choose PostgreSQL for most applications requiring data integrity and powerful querying. Choose MySQL for read-heavy web applications with simple data models. Choose MongoDB only when truly document-oriented data and flexible schema justify consistency tradeoffs.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t46"
+            },
+            {
+                kind: "tool",
+                id: "t47"
+            },
+            {
+                kind: "tool",
+                id: "t48"
+            }
+        ],
+        criteria: [
+            {
+                name: "Features",
+                notes: "Query capabilities, data types, and advanced functionality."
+            },
+            {
+                name: "Performance",
+                notes: "Speed for your specific read/write patterns."
+            },
+            {
+                name: "Scalability",
+                notes: "How well it handles growth in data and traffic."
+            },
+            {
+                name: "Data integrity",
+                notes: "ACID guarantees and consistency model."
+            },
+            {
+                name: "Operational complexity",
+                notes: "Setup, maintenance, backup, and monitoring burden."
+            }
+        ],
+        verdict: "PostgreSQL is the best default for most applications requiring data integrity. MySQL wins for simple read-heavy workloads. MongoDB is appropriate for document-oriented data but often chosen for wrong reasons.",
+        tags: [
+            "database",
+            "backend",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp15",
+        slug: "react-vs-vue-vs-svelte",
+        title: "React vs Vue vs Svelte",
+        description: "Frontend frameworks: ecosystem size, learning curve, and which one you'll still like in two years.",
+        whenToUse: "Consult this when starting frontend projects, choosing technology stacks, migrating from legacy frameworks, or when team needs to standardize on modern frontend approach. Most relevant when framework choice has multi-year implications.",
+        decisionContext: "Your ideal framework depends on team size, project complexity, performance requirements, hiring market, and whether you're optimizing for ecosystem size or developer experience. Enterprise teams have different constraints than startups.",
+        keyTradeoffs: "React offers largest ecosystem and hiring pool but more boilerplate and decision fatigue. Vue provides gentle learning curve and good balance but smaller ecosystem. Svelte delivers best developer experience and performance but smallest community and limited tooling.",
+        costConsiderations: "All are free open source. Costs come from training, hiring, and tooling differences. React developers command premium but are plentiful. Vue and Svelte developers are harder to find. Consider total cost of team productivity and hiring.",
+        migrationPath: "Framework migrations are expensive multi-month projects. Incremental migration is possible but complex. Choose carefully upfront since switching is painful. Component architecture can help future portability but doesn't eliminate migration work.",
+        teamImpact: "React teams benefit from huge ecosystem but need discipline to avoid choice paralysis. Vue teams appreciate official tooling and conventions. Svelte teams enjoy productivity but may struggle hiring. Consider learning curve for junior developers.",
+        realWorldScenarios: "Large companies use React for talent availability and ecosystem. Developer tools and productivity apps use Svelte for performance. Asian markets favor Vue for community and documentation. Agencies use React for client expectations.",
+        commonPitfalls: "React teams sometimes over-engineer with unnecessary complexity. Vue adopters occasionally hit ecosystem limitations for niche needs. Svelte users struggle finding experienced developers and production examples. All frameworks require good architecture regardless of choice.",
+        performanceProfile: "Svelte delivers smallest bundle sizes and fastest runtime. React performance is good with proper optimization but requires care. Vue sits between them on performance. All are fast enough for most applications with proper practices.",
+        successMetrics: "Successful framework choice means team ships features consistently, onboarding is smooth, performance meets requirements, and hiring pipeline stays healthy. Monitor development velocity, bug rates, and developer satisfaction.",
+        specificRecommendations: "Choose React for largest ecosystem, hiring pool, and when framework choice is strategic hiring advantage. Choose Vue for balanced developer experience and when Asian markets are important. Choose Svelte for greenfield projects where performance matters and team is small.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t49"
+            },
+            {
+                kind: "tool",
+                id: "t50"
+            },
+            {
+                kind: "tool",
+                id: "t51"
+            }
+        ],
+        criteria: [
+            {
+                name: "Ecosystem",
+                notes: "Libraries, tools, components, and community resources."
+            },
+            {
+                name: "Learning curve",
+                notes: "How fast developers become productive."
+            },
+            {
+                name: "Performance",
+                notes: "Bundle size, runtime speed, and optimization ease."
+            },
+            {
+                name: "Hiring",
+                notes: "Developer availability and market demand."
+            },
+            {
+                name: "Longevity",
+                notes: "Community health and long-term viability."
+            }
+        ],
+        verdict: "React remains the safest choice for most teams due to ecosystem and hiring. Vue offers best balance of power and approachability. Svelte is the developer-favorite for greenfield projects but hiring is challenging.",
+        tags: [
+            "frontend",
+            "javascript",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp16",
+        slug: "mailchimp-vs-sendgrid-vs-postmark",
+        title: "Mailchimp vs SendGrid vs Postmark",
+        description: "Email tools: marketing campaigns vs transactional, and which one actually delivers to inbox.",
+        whenToUse: "Deploy this when choosing email infrastructure, separating marketing from transactional email, improving deliverability, or when current email solution feels limiting. Critical when email is core to customer communication.",
+        decisionContext: "Your ideal email tool depends on whether you're sending marketing campaigns or transactional emails, volume requirements, deliverability needs, technical resources, and integration requirements. Marketing newsletters need different tools than password resets.",
+        keyTradeoffs: "Mailchimp excels at marketing automation and design but expensive at scale and not for transactional. SendGrid handles both marketing and transactional but better at latter and can be complex. Postmark focuses exclusively on transactional with excellent deliverability but no marketing features.",
+        costConsiderations: "Mailchimp charges based on contact count which escalates quickly. SendGrid charges per email sent with volume discounts. Postmark has straightforward per-email pricing. Factor in deliverability value—cheap providers may harm sender reputation.",
+        migrationPath: "Switching marketing platforms loses contact data and campaign history unless exported. Transactional email migration is easier but requires DNS and integration work. Test deliverability thoroughly before fully switching. Consider overlap period for safety.",
+        teamImpact: "Mailchimp empowers marketers without developer help. SendGrid requires technical implementation for transactional use. Postmark is developer-friendly but marketing team can't use it. Consider who manages email and their technical capabilities.",
+        realWorldScenarios: "E-commerce brands use Mailchimp for newsletters and automated campaigns. SaaS applications use SendGrid or Postmark for transactional emails. Startups use SendGrid for both use cases to consolidate. Enterprises split marketing and transactional across specialized tools.",
+        commonPitfalls: "Teams use Mailchimp for transactional emails violating terms. SendGrid implementations sometimes end up in spam due to configuration errors. Postmark users hit limitations needing marketing features. All providers require proper authentication (SPF, DKIM, DMARC) for deliverability.",
+        performanceProfile: "Postmark has best deliverability and speed for transactional. SendGrid is reliable but configuration matters. Mailchimp is adequate for marketing timing. All handle volume well but check rate limits and burst capacity for your needs.",
+        successMetrics: "Successful email infrastructure means high delivery rates, low spam placement, predictable costs, and good sender reputation. Monitor delivery rates, open rates, spam complaints, and bounce rates continuously.",
+        specificRecommendations: "Choose Mailchimp for marketing-focused email with automation needs. Choose SendGrid for transactional email or when handling both marketing and transactional. Choose Postmark for mission-critical transactional email where deliverability is paramount.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t52"
+            },
+            {
+                kind: "tool",
+                id: "t53"
+            },
+            {
+                kind: "tool",
+                id: "t54"
+            }
+        ],
+        criteria: [
+            {
+                name: "Use case fit",
+                notes: "Marketing vs transactional vs both."
+            },
+            {
+                name: "Deliverability",
+                notes: "Inbox placement and sender reputation."
+            },
+            {
+                name: "Features",
+                notes: "Automation, templates, analytics, and APIs."
+            },
+            {
+                name: "Cost scaling",
+                notes: "How pricing changes with volume growth."
+            },
+            {
+                name: "Developer experience",
+                notes: "API quality, documentation, and integration ease."
+            }
+        ],
+        verdict: "Mailchimp is best for marketing-focused email campaigns. SendGrid is versatile for both use cases but better at transactional. Postmark is the gold standard for transactional email deliverability.",
+        tags: [
+            "email",
+            "marketing",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp17",
+        slug: "docker-vs-kubernetes-vs-serverless",
+        title: "Docker vs Kubernetes vs Serverless",
+        description: "Deployment: containers, orchestration, and whether serverless actually saves money.",
+        whenToUse: "Reference this when modernizing deployment infrastructure, scaling applications, evaluating container strategies, or deciding between operational complexity and serverless convenience. Critical when current deployment approach hits scaling or cost limits.",
+        decisionContext: "Your ideal deployment approach depends on application architecture, team operations expertise, scale requirements, cost sensitivity, and whether you're optimizing for control or convenience. Different application types benefit from different deployment models.",
+        keyTradeoffs: "Docker provides containerization without orchestration—simple but manual at scale. Kubernetes offers powerful orchestration but significant operational complexity. Serverless eliminates infrastructure management but constrains architecture and can surprise on costs.",
+        costConsiderations: "Docker infrastructure costs depend on hosting but operations are expensive. Kubernetes adds orchestration cost and requires dedicated expertise. Serverless has no base cost but per-invocation charges scale unpredictably. Calculate total cost including engineering time.",
+        migrationPath: "Moving to containers from VMs is incremental. Adding Kubernetes requires significant investment and expertise. Going serverless often requires application rearchitecture. Start with Docker, add orchestration when scaling requires it, consider serverless for specific workloads.",
+        teamImpact: "Docker requires moderate operations knowledge. Kubernetes demands dedicated platform team or managed service. Serverless reduces operations burden but requires different development patterns. Consider team capabilities and hiring needs.",
+        realWorldScenarios: "Startups use Docker on simple hosting to start. Growing companies adopt Kubernetes for scale and flexibility. Event-driven workloads use serverless functions. Large enterprises run hybrid approaches using appropriate tool for each workload type.",
+        commonPitfalls: "Teams adopt Kubernetes too early before needing its complexity. Docker implementations lack proper orchestration at scale. Serverless architectures hit cost surprises or cold start issues. All approaches require monitoring, logging, and observability regardless of choice.",
+        performanceProfile: "Docker startup time is fast for properly sized containers. Kubernetes adds orchestration overhead but enables better resource utilization. Serverless has cold start latency but scales instantly. Performance depends heavily on application architecture.",
+        successMetrics: "Successful deployment infrastructure means reliable releases, predictable costs, fast debugging, and team can ship confidently. Monitor deployment frequency, rollback rates, incident response time, and infrastructure costs as percentage of revenue.",
+        specificRecommendations: "Choose Docker for early stage or simple deployments without orchestration needs. Choose Kubernetes when scale and operational requirements justify complexity. Choose serverless for event-driven workloads or when minimizing operations burden matters more than control.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t55"
+            },
+            {
+                kind: "tool",
+                id: "t56"
+            },
+            {
+                kind: "tool",
+                id: "t57"
+            }
+        ],
+        criteria: [
+            {
+                name: "Operational complexity",
+                notes: "Setup, maintenance, and expertise required."
+            },
+            {
+                name: "Scalability",
+                notes: "How well it handles traffic growth and variation."
+            },
+            {
+                name: "Cost model",
+                notes: "Pricing structure and cost predictability."
+            },
+            {
+                name: "Developer experience",
+                notes: "Local development, debugging, and deployment ease."
+            },
+            {
+                name: "Flexibility",
+                notes: "Architectural constraints and customization options."
+            }
+        ],
+        verdict: "Docker is the right starting point for most applications. Kubernetes justifies complexity at scale or for platform engineering teams. Serverless is ideal for specific workloads but not complete replacement for containers.",
+        tags: [
+            "devops",
+            "deployment",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp18",
+        slug: "github-vs-gitlab-vs-bitbucket",
+        title: "GitHub vs GitLab vs Bitbucket",
+        description: "Code hosting: features, pipelines, and which one won't make code review painful.",
+        whenToUse: "Consult this when choosing code hosting platforms, migrating from on-premise, evaluating CI/CD integration, or when current platform feels limiting. Most relevant when code collaboration and automation needs are becoming clear.",
+        decisionContext: "Your ideal code platform depends on team size, CI/CD requirements, project visibility needs, existing tool ecosystem, and whether you're optimizing for features or simplicity. Open source projects have different needs than enterprise teams.",
+        keyTradeoffs: "GitHub offers largest community and ecosystem but limited free CI/CD minutes. GitLab provides complete DevOps platform including CI/CD but can feel complex. Bitbucket integrates tightly with Atlassian tools but limited ecosystem and features.",
+        costConsiderations: "GitHub pricing scales with private repos and team size. GitLab offers generous free tier with unlimited CI/CD minutes. Bitbucket bundles with Atlassian Cloud. Factor in CI/CD costs separately if using external services like CircleCI.",
+        migrationPath: "Git makes repository migration straightforward. Challenges are in CI/CD pipelines, issue tracking, and integrations. Export issues and documentation before migrating. Test CI/CD thoroughly in new platform before cutover.",
+        teamImpact: "GitHub has most familiar interface and largest talent pool. GitLab's complete platform reduces tool sprawl but increases learning curve. Bitbucket fits teams already on Jira and Confluence. Consider onboarding time and tool familiarity.",
+        realWorldScenarios: "Open source projects default to GitHub for visibility. Enterprise teams use GitLab for complete DevOps platform. Atlassian-heavy companies use Bitbucket for integration. Startups choose based on features needed and budget available.",
+        commonPitfalls: "GitHub users hit CI/CD minute limits and unexpected costs. GitLab implementations over-complicate simple workflows. Bitbucket users miss features available in competitors. All platforms require good branching strategy regardless of platform choice.",
+        performanceProfile: "All three provide reliable hosting and fast git operations. GitHub has most stable uptime record. GitLab performance depends on deployment model. Bitbucket is adequate but not exceptional. CI/CD performance varies significantly between platforms.",
+        successMetrics: "Successful code platform means fast code review cycles, reliable CI/CD, good documentation integration, and team satisfaction. Monitor pull request time-to-merge, CI/CD reliability, and developer productivity indicators.",
+        specificRecommendations: "Choose GitHub for largest ecosystem, community features, and open source hosting. Choose GitLab for complete DevOps platform with generous free tier. Choose Bitbucket only if heavily invested in Atlassian ecosystem.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t58"
+            },
+            {
+                kind: "tool",
+                id: "t59"
+            },
+            {
+                kind: "tool",
+                id: "t60"
+            }
+        ],
+        criteria: [
+            {
+                name: "Community",
+                notes: "Ecosystem, discoverability, and open source fit."
+            },
+            {
+                name: "CI/CD",
+                notes: "Pipeline features, minutes included, and build speed."
+            },
+            {
+                name: "Code review",
+                notes: "PR experience, commenting, and review workflows."
+            },
+            {
+                name: "Integrations",
+                notes: "Tools, bots, and external service connections."
+            },
+            {
+                name: "Value",
+                notes: "What you get at each pricing tier."
+            }
+        ],
+        verdict: "GitHub remains the default choice for most teams due to ecosystem and familiarity. GitLab is strong for teams wanting complete DevOps platform. Bitbucket makes sense primarily for Atlassian-heavy organizations.",
+        tags: [
+            "git",
+            "devops",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp19",
+        slug: "contentful-vs-sanity-vs-strapi",
+        title: "Contentful vs Sanity vs Strapi",
+        description: "Headless CMS: editing experience, API flexibility, and which one scales without breaking.",
+        whenToUse: "Deploy this when choosing CMS for modern websites, building content infrastructure, migrating from traditional CMS, or when current content management feels limiting. Critical when content needs to power multiple channels.",
+        decisionContext: "Your ideal headless CMS depends on content model complexity, API requirements, team technical capabilities, budget, and whether you're optimizing for editor experience or developer flexibility. Marketing sites need different CMS than complex content platforms.",
+        keyTradeoffs: "Contentful provides mature platform with great editor experience but expensive at scale. Sanity offers powerful customization and real-time collaboration but requires more technical setup. Strapi is open source and self-hosted giving control but requiring infrastructure management.",
+        costConsiderations: "Contentful charges per entry and API calls which escalates quickly. Sanity has generous free tier then per-user pricing. Strapi is free but hosting and maintenance costs add up. Calculate total cost including engineering time for customization and operations.",
+        migrationPath: "Moving between headless CMS requires content migration and API integration work. Content models must be rebuilt in new system. Test migration with subset before full cutover. Budget significant engineering time for any CMS migration.",
+        teamImpact: "Contentful empowers content teams with intuitive interface. Sanity requires developers for customization but rewards with flexibility. Strapi assumes technical team for deployment and maintenance. Consider who manages content and their technical capabilities.",
+        realWorldScenarios: "Marketing teams use Contentful for ease of use across websites. Developer-heavy companies use Sanity for flexibility and real-time features. Startups use Strapi for cost control and customization. Enterprises evaluate all three based on specific requirements.",
+        commonPitfalls: "Contentful users hit surprising costs at scale. Sanity implementations over-engineer content models. Strapi users underestimate operational burden of self-hosting. All CMS choices require good content modeling regardless of platform.",
+        performanceProfile: "Contentful CDN is fast and globally distributed. Sanity provides real-time capabilities with good performance. Strapi performance depends on hosting and database optimization. All headless approaches enable better front-end performance than traditional CMS.",
+        successMetrics: "Successful CMS means content team is productive, developers can build features quickly, API performance meets requirements, and costs remain predictable. Monitor content publishing velocity, API latency, and team satisfaction.",
+        specificRecommendations: "Choose Contentful for best editor experience and when budget allows. Choose Sanity for flexibility, real-time features, and developer control. Choose Strapi for maximum control, customization, and when technical team can manage infrastructure.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t61"
+            },
+            {
+                kind: "tool",
+                id: "t62"
+            },
+            {
+                kind: "tool",
+                id: "t63"
+            }
+        ],
+        criteria: [
+            {
+                name: "Editor experience",
+                notes: "Intuitive interface for content teams."
+            },
+            {
+                name: "Flexibility",
+                notes: "Content modeling, API customization, and extensibility."
+            },
+            {
+                name: "Performance",
+                notes: "API speed, CDN, and scaling capabilities."
+            },
+            {
+                name: "Cost scaling",
+                notes: "How pricing changes with content and traffic growth."
+            },
+            {
+                name: "Developer experience",
+                notes: "API quality, SDKs, and documentation."
+            }
+        ],
+        verdict: "Contentful is best for editor experience and mature features. Sanity wins for flexibility and real-time capabilities. Strapi is right for teams wanting control and avoiding vendor lock-in despite operational overhead.",
+        tags: [
+            "cms",
+            "content",
+            "comparison"
+        ],
+        updatedAtISO: "2026-01-24"
+    },
+    {
+        id: "cmp20",
+        slug: "amplitude-vs-mixpanel-vs-google-analytics",
+        title: "Amplitude vs Mixpanel vs Google Analytics",
+        description: "Product analytics: event tracking, insights, and which one answers actual product questions.",
+        whenToUse: "Reference this when implementing product analytics, moving beyond pageviews, understanding user behavior deeply, or when current analytics feel inadequate. Critical when data-driven product decisions require better insights.",
+        decisionContext: "Your ideal analytics platform depends on product complexity, analysis depth needed, team analytics maturity, budget, and whether you're optimizing for comprehensiveness or ease of use. Marketing teams need different tools than product teams.",
+        keyTradeoffs: "Amplitude provides powerful analysis with cohort and retention focus but expensive at scale. Mixpanel offers event-based tracking with good UX but limited free tier. Google Analytics is free and comprehensive but complex and privacy-concerning for product analytics.",
+        costConsiderations: "Amplitude charges per event with rapid cost escalation. Mixpanel has generous free tier then per-event pricing. Google Analytics 4 is free but Google Analytics 360 is expensive. Factor in implementation time and data engineering costs.",
+        migrationPath: "Switching analytics requires re-implementing event tracking and rebuilding dashboards. Historical data doesn't transfer. Run platforms in parallel during transition to validate tracking. Budget significant engineering time for proper implementation.",
+        teamImpact: "Amplitude requires analytics sophistication to leverage fully. Mixpanel is more approachable for product teams. Google Analytics assumes marketing analytics mindset. Consider team capabilities and training needs when choosing.",
+        realWorldScenarios: "Product-focused companies use Amplitude for retention analysis. Growth teams use Mixpanel for experimentation and funnels. Marketing-driven companies use Google Analytics for traffic analysis. Data-mature companies build custom analytics infrastructure.",
+        commonPitfalls: "Teams implement Amplitude without analytics expertise and waste money. Mixpanel users hit free tier limits faster than expected. Google Analytics 4 implementations struggle with event modeling. All platforms require thoughtful event taxonomy regardless of tool.",
+        performanceProfile: "All three handle high event volumes adequately. Query speed varies—Amplitude and Mixpanel generally faster than Google Analytics 4. Real-time capabilities differ. Consider how fast you need insights when choosing.",
+        successMetrics: "Successful analytics means product team makes data-driven decisions, user behavior is understood, experimentation is reliable, and insights lead to action. Monitor how often team references analytics in product decisions.",
+        specificRecommendations: "Choose Amplitude for product-focused companies needing deep retention and cohort analysis. Choose Mixpanel for balanced features with approachable interface. Choose Google Analytics 4 for marketing-focused analytics or when free is mandatory.",
+        contenders: [
+            {
+                kind: "tool",
+                id: "t64"
+            },
+            {
+                kind: "tool",
+                id: "t65"
+            },
+            {
+                kind: "tool",
+                id: "t66"
+            }
+        ],
+        criteria: [
+            {
+                name: "Analysis depth",
+                notes: "Cohorts, retention, funnels, and behavioral analysis."
+            },
+            {
+                name: "Ease of use",
+                notes: "How fast non-analysts can get insights."
+            },
+            {
+                name: "Implementation",
+                notes: "SDK quality and event tracking setup."
+            },
+            {
+                name: "Cost scaling",
+                notes: "How pricing changes with usage growth."
+            },
+            {
+                name: "Privacy",
+                notes: "GDPR compliance and data control."
+            }
+        ],
+        verdict: "Amplitude is best for product-focused companies with analytics sophistication. Mixpanel offers good balance of power and usability. Google Analytics 4 works for marketing analytics but struggles as product analytics tool.",
+        tags: [
+            "analytics",
+            "product",
             "comparison"
         ],
         updatedAtISO: "2026-01-24"
@@ -5301,6 +12196,8 @@ __turbopack_context__.s([
     ()=>findBestPagesContainingTool,
     "findCollectionsContaining",
     ()=>findCollectionsContaining,
+    "findComparisonsContainingTool",
+    ()=>findComparisonsContainingTool,
     "getAllTagsWithCounts",
     ()=>getAllTagsWithCounts,
     "getBestPageBySlug",
@@ -5362,20 +12259,30 @@ const DATA = {
     comparisons: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$content$2f$comparisons$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["comparisons"],
     bestPages: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$content$2f$best$2d$pages$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BEST_PAGES"]
 };
+// ---- Slug lookups ----
+function normalizeSlug(slug) {
+    // decode URL encoding, trim junk, and normalize casing
+    return decodeURIComponent(slug).trim().toLowerCase();
+}
 function getToolBySlug(slug) {
-    return DATA.tools.find((x)=>x.slug === slug);
+    const s = normalizeSlug(slug);
+    return DATA.tools.find((x)=>normalizeSlug(x.slug) === s);
 }
 function getPromptBySlug(slug) {
-    return DATA.prompts.find((x)=>x.slug === slug);
+    const s = normalizeSlug(slug);
+    return DATA.prompts.find((x)=>normalizeSlug(x.slug) === s);
 }
 function getUpdateBySlug(slug) {
-    return DATA.updates.find((x)=>x.slug === slug);
+    const s = normalizeSlug(slug);
+    return DATA.updates.find((x)=>normalizeSlug(x.slug) === s);
 }
 function getCollectionBySlug(slug) {
-    return DATA.collections.find((x)=>x.slug === slug);
+    const s = normalizeSlug(slug);
+    return DATA.collections.find((x)=>normalizeSlug(x.slug) === s);
 }
 function getComparisonBySlug(slug) {
-    return DATA.comparisons.find((x)=>x.slug === slug);
+    const s = normalizeSlug(slug);
+    return DATA.comparisons.find((x)=>normalizeSlug(x.slug) === s);
 }
 function resolveCollectionItems(col) {
     return col.items.map((ref)=>{
@@ -5653,6 +12560,9 @@ function resolveBestPicks(page) {
 function findBestPagesContainingTool(toolId) {
     return DATA.bestPages.filter((p)=>p.picks.some((x)=>x.toolId === toolId));
 }
+function findComparisonsContainingTool(toolId) {
+    return DATA.comparisons.filter((cmp)=>cmp.contenders.some((x)=>x.kind === "tool" && x.id === toolId));
+}
 }),
 "[project]/app/tags/page.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -5668,6 +12578,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/data.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/badge.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$seo$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/seo.ts [app-rsc] (ecmascript)");
+;
 ;
 ;
 ;
@@ -5675,7 +12587,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e
 ;
 const metadata = {
     title: "Tags — ToolDrop AI",
-    description: "Browse everything by tags: tools, prompts, updates, collections, and comparisons."
+    description: "Browse everything by tags: tools, prompts, updates, collections, and comparisons.",
+    alternates: {
+        canonical: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$seo$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["absoluteUrl"])("/tags")
+    },
+    robots: {
+        index: true,
+        follow: true
+    },
+    openGraph: {
+        title: "Tags — ToolDrop AI",
+        description: "Browse everything by tags: tools, prompts, updates, collections, and comparisons.",
+        url: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$seo$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["absoluteUrl"])("/tags"),
+        siteName: "ToolDrop AI",
+        type: "website"
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Tags — ToolDrop AI",
+        description: "Browse everything by tags: tools, prompts, updates, collections, and comparisons."
+    }
 };
 async function TagsIndexPage() {
     const tags = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getAllTagsWithCounts"])(); // works sync or async
@@ -5687,15 +12618,15 @@ async function TagsIndexPage() {
                 children: "Tags"
             }, void 0, false, {
                 fileName: "[project]/app/tags/page.tsx",
-                lineNumber: 18,
+                lineNumber: 35,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: "mt-2 text-muted-foreground",
-                children: "Browse by topic. Because scrolling forever is not a personality trait."
+                children: "Browse content by topic to quickly find what you need."
             }, void 0, false, {
                 fileName: "[project]/app/tags/page.tsx",
-                lineNumber: 19,
+                lineNumber: 36,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Card"], {
@@ -5707,18 +12638,20 @@ async function TagsIndexPage() {
                             children: "All tags"
                         }, void 0, false, {
                             fileName: "[project]/app/tags/page.tsx",
-                            lineNumber: 25,
+                            lineNumber: 42,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/tags/page.tsx",
-                        lineNumber: 24,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CardContent"], {
                         className: "flex flex-wrap gap-2",
-                        children: tags.map(({ tag, count })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
-                                href: `/tags/${tag}`,
+                        children: tags.map(({ tag, count })=>{
+                            const slug = encodeURIComponent(tag.toLowerCase());
+                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/tags/${slug}`,
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
                                     variant: "secondary",
                                     className: "rounded-full cursor-pointer",
@@ -5729,35 +12662,36 @@ async function TagsIndexPage() {
                                             children: count
                                         }, void 0, false, {
                                             fileName: "[project]/app/tags/page.tsx",
-                                            lineNumber: 36,
-                                            columnNumber: 17
+                                            lineNumber: 53,
+                                            columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/tags/page.tsx",
-                                    lineNumber: 31,
-                                    columnNumber: 15
+                                    lineNumber: 51,
+                                    columnNumber: 17
                                 }, this)
-                            }, void 0, false, {
+                            }, slug, false, {
                                 fileName: "[project]/app/tags/page.tsx",
-                                lineNumber: 30,
-                                columnNumber: 13
-                            }, this))
+                                lineNumber: 50,
+                                columnNumber: 15
+                            }, this);
+                        })
                     }, void 0, false, {
                         fileName: "[project]/app/tags/page.tsx",
-                        lineNumber: 28,
+                        lineNumber: 45,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/tags/page.tsx",
-                lineNumber: 23,
+                lineNumber: 40,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/tags/page.tsx",
-        lineNumber: 17,
+        lineNumber: 34,
         columnNumber: 5
     }, this);
 }

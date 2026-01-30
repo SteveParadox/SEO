@@ -24,18 +24,25 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const u = getUpdateBySlug(slug);
-  if (!u) return { title: "Update not found" };
 
-  const title = `${u.headline} — Update`;
+  if (!u) {
+    return {
+      title: "Update not found — ToolDrop AI",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${u.headline} — ToolDrop AI`;
   const description = u.tldr;
   const url = absoluteUrl(`/updates/${u.slug}`);
 
   return {
-    title: `${title} — ToolDrop AI`,
+    title,
     description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
       url,
       siteName: "ToolDrop AI",
@@ -43,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
     },
   };
@@ -60,31 +67,31 @@ export default async function UpdatePage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-<TrackRecent
-  kind="update"
-  id={u.id}
-  slug={u.slug}
-  title={u.headline}
-  subtitle={u.tldr}
-/>
-    <div className="flex flex-wrap gap-2">
-      <Badge variant="secondary" className="rounded-full">
-        {u.model}
-      </Badge>
+      <TrackRecent
+        kind="update"
+        id={u.id}
+        slug={u.slug}
+        title={u.headline}
+        subtitle={u.tldr}
+      />
 
-      {u.tags.map((t) => {
-        const label = t.trim();
-        const tagSlug = encodeURIComponent(label.toLowerCase());
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="secondary" className="rounded-full">
+          {u.model}
+        </Badge>
 
-        return (
-          <Link key={tagSlug} href={`/tags/${tagSlug}`}>
-            <Badge variant="secondary" className="rounded-full">
-              {label}
-            </Badge>
-          </Link>
-        );
-      })}
-    </div>
+        {u.tags.map((t) => {
+          const label = t.trim();
+          const tagSlug = encodeURIComponent(label.toLowerCase());
+          return (
+            <Link key={tagSlug} href={`/tags/${tagSlug}`}>
+              <Badge variant="secondary" className="rounded-full">
+                {label}
+              </Badge>
+            </Link>
+          );
+        })}
+      </div>
 
       <h1 className="mt-4 text-3xl font-semibold">{u.headline}</h1>
       <p className="mt-2 text-muted-foreground">{u.tldr}</p>
@@ -163,50 +170,48 @@ export default async function UpdatePage({ params }: PageProps) {
                     className="block rounded-xl border p-3 hover:bg-muted/40 transition"
                   >
                     <div className="font-medium">{ru.headline}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {ru.tldr}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{ru.tldr}</div>
                   </Link>
                 ))}
               </CardContent>
             </Card>
           ) : null}
         </div>
+
         <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle>Explore more</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-              <Link
-                href="/updates"
-                className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
-              >
-                Browse all updates
-              </Link>
-              <Link
-                href="/tags"
-                className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
-              >
-                Browse tags
-              </Link>
+          <CardHeader>
+            <CardTitle>Explore more</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            <Link
+              href="/updates"
+              className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+            >
+              Browse all updates
+            </Link>
 
-              {u.tags.slice(0, 3).map((t) => {
-                const label = t.trim();
-                const tagSlug = encodeURIComponent(label.toLowerCase());
+            <Link
+              href="/tags"
+              className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+            >
+              Browse tags
+            </Link>
 
-                return (
-                  <Link
-                    key={`more-${tagSlug}`}
-                    href={`/tags/${tagSlug}`}
-                    className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
-                  >
-                    More in {label}
-                  </Link>
-                );
-              })}
-            </CardContent>
-          </Card>
-
+            {u.tags.slice(0, 3).map((t) => {
+              const label = t.trim();
+              const tagSlug = encodeURIComponent(label.toLowerCase());
+              return (
+                <Link
+                  key={`more-${tagSlug}`}
+                  href={`/tags/${tagSlug}`}
+                  className="rounded-full border px-3 py-1 text-sm hover:bg-muted/40 transition"
+                >
+                  More in {label}
+                </Link>
+              );
+            })}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

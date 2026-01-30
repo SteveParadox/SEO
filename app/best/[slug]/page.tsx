@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
+import { DATA, getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
 import { JsonLd } from "@/components/json-ld";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -11,28 +11,41 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export function generateStaticParams() {
+  return DATA.bestPages.map((p) => ({ slug: p.slug }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const page = getBestPageBySlug(slug);
-  if (!page) return { title: "Not found" };
+
+  if (!page) {
+    return {
+      title: "Best list not found — ToolDrop AI",
+      robots: { index: false, follow: false },
+    };
+  }
 
   const url = absoluteUrl(`/best/${page.slug}`);
+  const title = `${page.title} — ToolDrop AI`;
+  const description = page.description;
 
   return {
-    title: page.title,
-    description: page.description,
+    title,
+    description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
-      title: page.title,
-      description: page.description,
+      title,
+      description,
       url,
       siteName: "ToolDrop AI",
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: page.title,
-      description: page.description,
+      title,
+      description,
     },
   };
 }
@@ -94,7 +107,6 @@ export default async function BestPage({ params }: PageProps) {
       <JsonLd data={itemListSchema} />
       {faqSchema ? <JsonLd data={faqSchema} /> : null}
 
-      {/* Title */}
       <div className="flex items-center gap-2">
         <Badge variant="outline" className="rounded-full">
           Best
@@ -102,7 +114,6 @@ export default async function BestPage({ params }: PageProps) {
         <h1 className="text-3xl font-semibold">{page.title}</h1>
       </div>
 
-      {/* Tags (cross-entity linking) */}
       {page.tags?.length ? (
         <div className="mt-3 flex flex-wrap gap-2">
           {page.tags.map((t) => {
@@ -119,14 +130,12 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       ) : null}
 
-      {/* Intro */}
       <div className="mt-4 max-w-3xl space-y-3 text-muted-foreground">
         {page.intro.map((p, i) => (
           <p key={`${page.id}-intro-${i}`}>{p}</p>
         ))}
       </div>
 
-      {/* Picks */}
       <div className="mt-8 grid gap-4">
         {picks.map(({ pick, tool }, idx) => (
           <Card key={`${tool.id}-${idx}`} className="rounded-2xl">
@@ -173,7 +182,6 @@ export default async function BestPage({ params }: PageProps) {
                 ) : null}
               </div>
 
-              {/* Links row (internal money block helpers) */}
               <div className="mt-4 flex flex-wrap gap-3 text-sm">
                 <Link className="underline" href={`/tools/${tool.slug}`}>
                   View {tool.name}
@@ -183,7 +191,11 @@ export default async function BestPage({ params }: PageProps) {
                   const label = t.trim();
                   const tagSlug = encodeURIComponent(label.toLowerCase());
                   return (
-                    <Link key={`${tool.id}-tag-${tagSlug}`} className="underline" href={`/tags/${tagSlug}`}>
+                    <Link
+                      key={`${tool.id}-tag-${tagSlug}`}
+                      className="underline"
+                      href={`/tags/${tagSlug}`}
+                    >
                       More {titleCase(label)}
                     </Link>
                   );
@@ -194,15 +206,15 @@ export default async function BestPage({ params }: PageProps) {
         ))}
       </div>
 
-      {/* Money block / recommendation */}
       <Card className="mt-10 rounded-2xl">
         <CardHeader>
           <CardTitle className="text-base">Quick recommendation</CardTitle>
         </CardHeader>
         <CardContent className="text-sm text-muted-foreground space-y-3">
           <p>
-            If you want the safest “works for most people” choice, start with the <span className="font-medium">Best Overall</span>.
-            If budget matters, pick the <span className="font-medium">Best Budget</span> option. If you’re buying for a team,
+            If you want the safest “works for most people” choice, start with the{" "}
+            <span className="font-medium">Best Overall</span>. If budget matters, pick the{" "}
+            <span className="font-medium">Best Budget</span> option. If you’re buying for a team,
             prioritize collaboration and admin controls over random flashy features.
           </p>
 
@@ -226,7 +238,6 @@ export default async function BestPage({ params }: PageProps) {
         </CardContent>
       </Card>
 
-      {/* FAQs */}
       {page.faqs?.length ? (
         <div className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold">FAQ</h2>
@@ -245,7 +256,6 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       ) : null}
 
-      {/* Related */}
       {related.length ? (
         <div className="mt-10">
           <h2 className="text-xl font-semibold">Related best lists</h2>

@@ -26,18 +26,25 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const c = getCollectionBySlug(slug);
-  if (!c) return { title: "Collection not found" };
 
-  const title = `${c.title} — Collection`;
+  if (!c) {
+    return {
+      title: "Collection not found — ToolDrop AI",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${c.title} — ToolDrop AI`;
   const description = c.description;
   const url = absoluteUrl(`/collections/${c.slug}`);
 
   return {
-    title: `${title} — ToolDrop AI`,
+    title,
     description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
       url,
       siteName: "ToolDrop AI",
@@ -45,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ToolDrop AI`,
+      title,
       description,
     },
   };
@@ -68,7 +75,8 @@ export default async function CollectionPage({ params }: PageProps) {
         title={c.title}
         subtitle={c.description}
       />
-            <div className="flex flex-wrap gap-2">
+
+      <div className="flex flex-wrap gap-2">
         {c.tags.map((t) => {
           const tag = t.trim();
           const tagSlug = encodeURIComponent(tag.toLowerCase());
@@ -82,7 +90,6 @@ export default async function CollectionPage({ params }: PageProps) {
         })}
       </div>
 
-
       <h1 className="mt-4 text-3xl font-semibold">{c.title}</h1>
       <p className="mt-2 text-muted-foreground">{c.description}</p>
 
@@ -93,9 +100,7 @@ export default async function CollectionPage({ params }: PageProps) {
       <div className="mt-6 grid gap-3">
         {items.map((x, i) => {
           const item: any = x.item;
-
-        const slug = item.slug;
-
+          const itemSlug = item.slug;
 
           const title =
             x.kind === "tool"
@@ -112,14 +117,20 @@ export default async function CollectionPage({ params }: PageProps) {
               : item.tldr;
 
           return (
-            <Link key={`${x.kind}-${item.id}`} href={hrefFor(x.kind, slug)} className="block">
+            <Link
+              key={`${x.kind}-${item.id}`}
+              href={hrefFor(x.kind, itemSlug)}
+              className="block"
+            >
               <Card className="rounded-2xl hover:bg-muted/40 transition">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base flex items-center gap-2">
                     <Badge variant="outline" className="rounded-full capitalize">
                       {x.kind}
                     </Badge>
-                    <span className="line-clamp-1">{i + 1}. {title}</span>
+                    <span className="line-clamp-1">
+                      {i + 1}. {title}
+                    </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0 text-sm text-muted-foreground">
