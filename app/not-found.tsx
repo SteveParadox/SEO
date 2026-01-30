@@ -3,6 +3,15 @@ import { ArrowLeft, Search, Flame } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "404 — ToolDrop AI",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 function MemeBlob() {
   return (
