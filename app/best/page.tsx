@@ -41,14 +41,22 @@ export default function BestIndexPage() {
           return (
             <Card
               key={p.id}
-              className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+              className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
             >
-              {/* Stretched link */}
-              <Link href={href} aria-label={p.title} className="absolute inset-0 z-10" />
+              {/* Overlay link: captures taps/clicks anywhere on the card */}
+              <Link
+                href={href}
+                aria-label={p.title}
+                className="absolute inset-0 z-10 rounded-2xl"
+              >
+                <span className="sr-only">{p.title}</span>
+              </Link>
 
-              <CardContent className="p-5 relative z-20">
+              {/* Content: disable pointer events so overlay link works everywhere */}
+              <CardContent className="relative z-20 pointer-events-none p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex flex-wrap gap-2">
+                  {/* Re-enable pointer events ONLY for tags so they remain clickable */}
+                  <div className="flex flex-wrap gap-2 pointer-events-auto">
                     {p.tags.slice(0, 4).map((t) => {
                       const label = t.trim();
                       const tagSlug = encodeURIComponent(label.toLowerCase());
@@ -57,8 +65,8 @@ export default function BestIndexPage() {
                         <Link
                           key={`${p.id}-${tagSlug}`}
                           href={`/tags/${tagSlug}`}
-                          className="relative z-30 inline-flex"
                           aria-label={`Tag: ${label}`}
+                          className="inline-flex"
                         >
                           <Badge variant="secondary" className="rounded-full">
                             {label}
