@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: "Tools — ToolDrop AI",
   description: "Discover curated AI tools by real use cases, not marketing noise.",
   alternates: { canonical: absoluteUrl("/tools") },
+  robots: { index: true, follow: true },
+
 };
 
 export default function ToolsIndexPage() {

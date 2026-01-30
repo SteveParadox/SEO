@@ -7,14 +7,14 @@ import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Best AI Tool Lists — ToolDrop AI",
-  description:
-    "High-intent tool lists: ranked picks, tradeoffs, and quick recommendations.",
+  description: "High-intent tool lists: ranked picks, tradeoffs, and quick recommendations.",
   alternates: { canonical: absoluteUrl("/best") },
+  robots: { index: true, follow: true },
 };
 
 function formatUpdated(iso: string) {
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString(undefined, {
+  return d.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "2-digit",
@@ -23,8 +23,7 @@ function formatUpdated(iso: string) {
 
 export default function BestIndexPage() {
   const pages = [...DATA.bestPages].sort(
-    (a, b) =>
-      new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
+    (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
   );
 
   return (
@@ -44,30 +43,30 @@ export default function BestIndexPage() {
               key={p.id}
               className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
             >
-              {/* Stretched link BEHIND content */}
+              {/* Stretched link: clickable + focusable */}
               <Link
                 href={href}
                 aria-label={p.title}
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-10"
               />
 
-              {/* Content ABOVE stretched link */}
-              <CardContent className="p-5 relative z-10 pointer-events-none">
+              {/* Content above the stretched link */}
+              <CardContent className="p-5 relative z-20">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex flex-wrap gap-2 pointer-events-auto">
+                  <div className="flex flex-wrap gap-2">
                     {p.tags.slice(0, 4).map((t) => {
                       const label = t.trim();
                       const tagSlug = encodeURIComponent(label.toLowerCase());
                       return (
+                        // Put tag links ABOVE the stretched link so they're clickable
                         <Link
                           key={`${p.id}-${tagSlug}`}
                           href={`/tags/${tagSlug}`}
-                          className="relative"
+                          className="relative z-30"
+                          aria-label={`Tag: ${label}`}
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <Badge
-                            variant="secondary"
-                            className="rounded-full"
-                          >
+                          <Badge variant="secondary" className="rounded-full">
                             {label}
                           </Badge>
                         </Link>

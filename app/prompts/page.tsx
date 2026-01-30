@@ -3,10 +3,13 @@ import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Prompts — ToolDrop AI",
   description: "Browse copy-paste prompts that actually improve results.",
+  alternates: { canonical: absoluteUrl("/prompts") },
+  robots: { index: true, follow: true },
 };
 
 export default function PromptsIndexPage() {
@@ -23,21 +26,30 @@ export default function PromptsIndexPage() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {prompts.map((p) => (
-          <Link key={p.id} href={`/prompts/${p.slug}`}>
-            <Card className="rounded-2xl hover:bg-muted/40 transition">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  {p.tags.slice(0, 3).map((tag) => (
-                    <Badge key={tag} variant="secondary" className="rounded-full">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="mt-2 font-semibold">{p.title}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{p.purpose}</div>
-              </CardContent>
-            </Card>
-          </Link>
+          <Card
+            key={p.id}
+            className="rounded-2xl hover:bg-muted/40 transition relative overflow-hidden"
+          >
+            {/* Stretched link for the whole card */}
+            <Link
+              href={`/prompts/${p.slug}`}
+              aria-label={p.title}
+              className="absolute inset-0 z-10"
+            />
+
+            <CardContent className="p-5 relative z-20">
+              <div className="flex items-center gap-2 flex-wrap">
+                {p.tags.slice(0, 3).map((tag) => (
+                  <Badge key={tag} variant="secondary" className="rounded-full">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              <div className="mt-2 font-semibold">{p.title}</div>
+              <div className="mt-1 text-sm text-muted-foreground">{p.purpose}</div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
