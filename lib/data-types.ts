@@ -96,7 +96,7 @@ export type Tool = BaseContent & {
   pricing: Pricing;
   alternatives: AlternativeRef[];
 
-  links?: ContentLinks;
+  affiliateUrl?: string;
 
   rating?: number;
   users?: string;
