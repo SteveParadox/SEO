@@ -2431,27 +2431,28 @@ Output format:
 ## Overview
 [Brief description of what this API does]
 
-Base URL: `{BASE_URL}`
+Base URL: \`{BASE_URL}\`
 Version: [Current version]
 Protocol: [REST/GraphQL/etc.]
 
 ## Quickstart
 
 Get started in 5 minutes:
-```bash
+
+\`\`\`bash
 # 1. Get your API key from [where]
 # 2. Make your first request
-curl -X GET "{BASE_URL}/endpoint" \
+curl -X GET "{BASE_URL}/endpoint" \\
   -H "Authorization: Bearer YOUR_API_KEY"
-```
+\`\`\`
 
 Expected response:
-```json
+\`\`\`json
 {
   "status": "success",
   "data": {...}
 }
-```
+\`\`\`
 
 ## Authentication
 
@@ -2462,7 +2463,8 @@ This API uses [authentication method].
 2. [Step to activate]
 
 ### Making authenticated requests
-```javascript
+
+\`\`\`javascript
 // JavaScript example
 const response = await fetch('{BASE_URL}/endpoint', {
   headers: {
@@ -2470,8 +2472,9 @@ const response = await fetch('{BASE_URL}/endpoint', {
     'Content-Type': 'application/json'
   }
 });
-```
-```python
+\`\`\`
+
+\`\`\`python
 # Python example
 import requests
 
@@ -2480,13 +2483,13 @@ headers = {
     'Content-Type': 'application/json'
 }
 response = requests.get('{BASE_URL}/endpoint', headers=headers)
-```
+\`\`\`
 
 ## Endpoints
 
 ### [Endpoint 1: Description]
 
-`GET /endpoint/path`
+\`GET /endpoint/path\`
 
 Description: [What this endpoint does]
 
@@ -2498,13 +2501,15 @@ Description: [What this endpoint does]
 | param2 | integer | No | [What this is]. Default: [X] |
 
 #### Request example
-```bash
-curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \
+
+\`\`\`bash
+curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \\
   -H "Authorization: Bearer YOUR_API_KEY"
-```
+\`\`\`
 
 #### Response example (200 OK)
-```json
+
+\`\`\`json
 {
   "status": "success",
   "data": {
@@ -2515,12 +2520,12 @@ curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \
     "timestamp": "2026-02-03T10:00:00Z"
   }
 }
-```
+\`\`\`
 
 #### Error responses
 
 **400 Bad Request**
-```json
+\`\`\`json
 {
   "status": "error",
   "error": {
@@ -2528,10 +2533,10 @@ curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \
     "message": "param1 is required"
   }
 }
-```
+\`\`\`
 
 **401 Unauthorized**
-```json
+\`\`\`json
 {
   "status": "error",
   "error": {
@@ -2539,7 +2544,7 @@ curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \
     "message": "Invalid or missing API key"
   }
 }
-```
+\`\`\`
 
 ### [Endpoint 2: Description]
 [Repeat structure...]
@@ -2556,12 +2561,12 @@ curl -X GET "{BASE_URL}/endpoint?param1=value&param2=123" \
 
 - Limit: [X requests per minute]
 - Headers returned:
-  - `X-RateLimit-Limit`: Total allowed
-  - `X-RateLimit-Remaining`: Remaining in window
-  - `X-RateLimit-Reset`: Unix timestamp when limit resets
+  - \`X-RateLimit-Limit\`: Total allowed
+  - \`X-RateLimit-Remaining\`: Remaining in window
+  - \`X-RateLimit-Reset\`: Unix timestamp when limit resets
 
 When rate limited:
-```json
+\`\`\`json
 {
   "status": "error",
   "error": {
@@ -2569,7 +2574,7 @@ When rate limited:
     "message": "Rate limit exceeded. Retry after 60 seconds."
   }
 }
-```
+\`\`\`
 
 ## Best Practices
 
@@ -2581,7 +2586,7 @@ When rate limited:
 ## Common Use Cases
 
 ### Use case: [Common task]
-```javascript
+\`\`\`javascript
 // Complete example showing how to [accomplish task]
 async function doCommonTask() {
   // Step 1: [Do this]
@@ -2592,7 +2597,7 @@ async function doCommonTask() {
   
   return result;
 }
-```
+\`\`\`
 
 ## Changelog
 
