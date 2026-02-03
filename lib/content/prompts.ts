@@ -3593,5 +3593,5 @@ Sample size: {SAMPLE_SIZE}`,
   modelCompatibility: ["GPT", "Claude", "Gemini"],
   tags: ["research", "surveys", "data-collection"],
   updatedAtISO: "2026-02-03",
-};
+}
 ];
