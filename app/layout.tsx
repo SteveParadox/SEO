@@ -22,13 +22,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: "ToolDrop AI",
-    template: "%s — ToolDrop AI",
+    default: "XavKit",
+    template: "%s — Xavkit",
   },
   description:
     "Discover vetted AI tools, effective prompts, and significant model updates. Curated daily to help you stay informed.",
   openGraph: {
-    siteName: "ToolDrop AI",
+    siteName: "Xavkit",
     type: "website",
   },
   twitter: {
