@@ -22,13 +22,6 @@ export type AlternativeRef = {
   slug: string;
 };
 
-export type ContentLinks = Partial<{
-  official: string;
-  affiliate: string; // just the URL, no extra fields
-  pricing: string;
-}>;
-
-
 // Standard long-form “guidance” fields you’re using across content pages.
 // Make them optional so every page can be rich without forcing all keys.
 export type GuidanceSections = Partial<{
@@ -102,8 +95,6 @@ export type Tool = BaseContent & {
 
   pricing: Pricing;
   alternatives: AlternativeRef[];
-
- links?: ContentLinks;
 
   rating?: number;
   users?: string;
