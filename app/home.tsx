@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Sparkles,
@@ -21,6 +21,11 @@ import {
   Copy,
   Wrench,
   Trophy,
+  ChevronDown,
+  ChevronUp,
+  Star,
+  Zap,
+  Filter,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -35,6 +40,16 @@ import { Scale } from "lucide-react";
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+};
+
+const staggerChildren = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const { tools, prompts, updates, collections, comparisons, bestPages } = DATA;
@@ -80,10 +95,14 @@ function Pill({
   children: React.ReactNode;
 }) {
   return (
-    <span className="inline-flex items-center rounded-full border bg-background px-3 py-1 text-xs text-muted-foreground">
+    <motion.span
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="inline-flex items-center rounded-full border bg-background px-3 py-1 text-xs text-muted-foreground hover:bg-muted/50 transition-colors cursor-default"
+    >
       {Icon ? <Icon className="h-3.5 w-3.5 mr-1" /> : null}
       {children}
-    </span>
+    </motion.span>
   );
 }
 
@@ -98,38 +117,55 @@ type IndexItem = {
   updatedAtISO: string;
 };
 
-function ItemCard({ item }: { item: IndexItem }) {
+function ItemCard({ item, index = 0 }: { item: IndexItem; index?: number }) {
   const meta = itemTypeMeta[item.kind];
   const Icon = meta.icon;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link
-      href={hrefFor(item.kind, item.slug)}
-      className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
-      aria-label={`Open ${meta.label}: ${item.title}`}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+      whileHover={{ scale: 1.02 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline" className="rounded-full">
-              {meta.label}
-            </Badge>
-            <span className="inline-flex items-center gap-1">
-              <Icon className="h-3.5 w-3.5" /> {item.typeTag}
-            </span>
-            <Badge variant="secondary" className="rounded-full">
-              {freshnessLabel(item.updatedAtISO)}
-            </Badge>
-            <span className="inline-flex items-center gap-1">
-              <Timer className="h-3.5 w-3.5" /> {item.minutes} min
-            </span>
+      <Link
+        href={hrefFor(item.kind, item.slug)}
+        className="block rounded-2xl border p-4 hover:bg-muted/40 hover:shadow-md transition-all"
+        aria-label={`Open ${meta.label}: ${item.title}`}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge variant="outline" className="rounded-full">
+                {meta.label}
+              </Badge>
+              <span className="inline-flex items-center gap-1">
+                <Icon className="h-3.5 w-3.5" /> {item.typeTag}
+              </span>
+              <Badge variant="secondary" className="rounded-full">
+                {freshnessLabel(item.updatedAtISO)}
+              </Badge>
+              <span className="inline-flex items-center gap-1">
+                <Timer className="h-3.5 w-3.5" /> {item.minutes} min
+              </span>
+            </div>
+            <div className="mt-2 font-medium leading-snug">{item.title}</div>
+            <div className="mt-2 text-sm text-muted-foreground line-clamp-2">
+              {item.subtitle}
+            </div>
           </div>
-          <div className="mt-2 font-medium leading-snug">{item.title}</div>
-          <div className="mt-2 text-sm text-muted-foreground">{item.subtitle}</div>
+          <motion.div
+            animate={{ x: isHovered ? 4 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
+          </motion.div>
         </div>
-        <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -138,6 +174,9 @@ export default function ToolDropAI() {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("tools");
+  const [showAllTrending, setShowAllTrending] = useState(false);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const [filterFreshness, setFilterFreshness] = useState<string>("all");
 
   const unifiedIndex = useMemo<IndexItem[]>(() => {
     const idx: IndexItem[] = [];
@@ -216,13 +255,20 @@ export default function ToolDropAI() {
 
   const filteredIndex = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return unifiedIndex.slice(0, 8);
-    return unifiedIndex
-      .filter((x) =>
+    let results = unifiedIndex;
+
+    if (q) {
+      results = results.filter((x) =>
         (x.title + " " + x.subtitle + " " + x.typeTag).toLowerCase().includes(q)
-      )
-      .slice(0, 12);
-  }, [query, unifiedIndex]);
+      );
+    }
+
+    if (filterFreshness !== "all") {
+      results = results.filter((x) => freshnessLabel(x.updatedAtISO) === filterFreshness);
+    }
+
+    return q ? results.slice(0, 12) : results.slice(0, 8);
+  }, [query, unifiedIndex, filterFreshness]);
 
   const featuredCollections = useMemo(() => collections.slice(0, 4), []);
 
@@ -293,7 +339,8 @@ export default function ToolDropAI() {
     []
   );
 
-  const trending = useMemo(() => unifiedIndex.slice(0, 6), [unifiedIndex]);
+  const trending = useMemo(() => unifiedIndex.slice(0, 12), [unifiedIndex]);
+  const displayedTrending = showAllTrending ? trending : trending.slice(0, 4);
 
   function subscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -310,9 +357,8 @@ export default function ToolDropAI() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-  
-
-      <section className="mx-auto max-w-6xl px-4 pt-12 pb-8">
+      {/* Hero Section - Compact */}
+      <section className="mx-auto max-w-6xl px-4 pt-12 pb-6">
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
           <div className="flex flex-wrap gap-2 mb-4">
             <Pill icon={Flame}>Daily updates</Pill>
@@ -329,52 +375,85 @@ export default function ToolDropAI() {
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <Button className="rounded-2xl" asChild>
+            <Button className="rounded-2xl group" asChild>
               <a href="#trending" className="inline-flex items-center">
-                Explore trending tools <ArrowRight className="h-4 w-4 ml-2" />
+                Explore trending tools 
+                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
             <Button variant="outline" className="rounded-2xl" asChild>
               <a href="#categories">Browse all categories</a>
             </Button>
           </div>
-
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Card className="rounded-2xl shadow-sm">
-              <CardContent className="p-5">
-                <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
-                    <Search className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-semibold leading-tight">Comprehensive Search</div>
-                    <div className="text-sm text-muted-foreground">
-                      Quickly find tools, prompts, and comparisons with intelligent search.
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="rounded-2xl shadow-sm">
-              <CardContent className="p-5">
-                <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
-                    <Rocket className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-semibold leading-tight">Stay Informed</div>
-                    <div className="text-sm text-muted-foreground">
-                      Weekly digest and daily updates delivered to keep you informed.
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-10">
+      {/* Quick Stats - More Visual */}
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={staggerChildren}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+        >
+          <motion.div variants={fadeUp}>
+            <Card className="rounded-2xl shadow-sm border-l-4 border-l-primary hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <Search className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-semibold leading-tight">Smart Search</div>
+                    <div className="text-sm text-muted-foreground">
+                      Find tools & prompts instantly
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Card className="rounded-2xl shadow-sm border-l-4 border-l-green-500 hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-2xl bg-green-500/10 flex items-center justify-center">
+                    <Zap className="h-5 w-5 text-green-500" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-semibold leading-tight">Daily Fresh</div>
+                    <div className="text-sm text-muted-foreground">
+                      New content every day
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Card className="rounded-2xl shadow-sm border-l-4 border-l-orange-500 hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-2xl bg-orange-500/10 flex items-center justify-center">
+                    <Star className="h-5 w-5 text-orange-500" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-semibold leading-tight">Curated</div>
+                    <div className="text-sm text-muted-foreground">
+                      Quality over quantity
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Search Section - Enhanced with Filters */}
+      <section className="mx-auto max-w-6xl px-4 pb-8">
         <Card className="rounded-2xl shadow-sm">
           <CardHeader className="border-b">
             <CardTitle className="text-base flex items-center gap-2">
@@ -382,258 +461,354 @@ export default function ToolDropAI() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-5">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-col sm:flex-row">
               <Input
                 placeholder="Search tools, prompts, updates, or comparisons..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="rounded-2xl"
+                className="rounded-2xl flex-1"
               />
-              <Button variant="outline" className="rounded-2xl" onClick={() => setQuery("")}>
-                Clear
-              </Button>
-            </div>
-
-            <div className="mt-4 space-y-3">
-              {filteredIndex.map((it) => (
-                <ItemCard key={`${it.kind}-${it.id}`} item={it} />
-              ))}
-
-              {filteredIndex.length === 0 ? (
-                <div className="text-sm text-muted-foreground p-4 border rounded-2xl">
-                  No results found. Try different keywords or browse our categories below.
-                </div>
-              ) : null}
-            </div>
-
-            <Separator className="my-5" />
-
-            <div className="rounded-2xl border p-4">
-              <div className="flex items-start gap-3">
-                <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
-                  <BadgeCheck className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="font-medium">Why ToolDrop AI</div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    Daily updates keep content fresh. Curated collections provide immediate value. 
-                    Weekly digests ensure you never miss important developments.
-                  </div>
-                </div>
+              <div className="flex gap-2">
+                <select
+                  value={filterFreshness}
+                  onChange={(e) => setFilterFreshness(e.target.value)}
+                  className="rounded-2xl border px-4 py-2 text-sm bg-background"
+                >
+                  <option value="all">All</option>
+                  <option value="New">New</option>
+                  <option value="This week">This week</option>
+                  <option value="Recent">Recent</option>
+                  <option value="Evergreen">Evergreen</option>
+                </select>
+                {(query || filterFreshness !== "all") && (
+                  <Button
+                    variant="outline"
+                    className="rounded-2xl"
+                    onClick={() => {
+                      setQuery("");
+                      setFilterFreshness("all");
+                    }}
+                  >
+                    Clear
+                  </Button>
+                )}
               </div>
             </div>
 
-            <Separator className="my-5" />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={query + filterFreshness}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="mt-4 space-y-3"
+              >
+                {filteredIndex.map((it, idx) => (
+                  <ItemCard key={`${it.kind}-${it.id}`} item={it} index={idx} />
+                ))}
 
-            <div className="flex items-end justify-between gap-3 flex-wrap">
+                {filteredIndex.length === 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-sm text-muted-foreground p-4 border rounded-2xl text-center"
+                  >
+                    No results found. Try different keywords or browse our categories below.
+                  </motion.div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Featured Collections - Compact Grid */}
+            <Separator className="my-6" />
+
+            <div className="flex items-end justify-between gap-3 flex-wrap mb-4">
               <div>
                 <div className="font-medium">Featured collections</div>
                 <div className="text-sm text-muted-foreground">
-                  Hand-picked collections of tools and resources for specific use cases.
+                  Hand-picked for specific use cases
                 </div>
               </div>
               <Badge variant="secondary" className="rounded-full">Collections</Badge>
             </div>
 
-            <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {featuredCollections.map((c) => (
-                <Link
+            <div className="grid gap-3 sm:grid-cols-2">
+              {featuredCollections.map((c, idx) => (
+                <motion.div
                   key={c.id}
-                  href={hrefFor("collection", c.slug)}
-                  className="block rounded-2xl border p-4 hover:bg-muted/40 transition"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                        <Badge variant="outline" className="rounded-full">Collection</Badge>
-                        <Badge variant="secondary" className="rounded-full">
-                          {freshnessLabel(c.updatedAtISO)}
-                        </Badge>
+                  <Link
+                    href={hrefFor("collection", c.slug)}
+                    className="block rounded-2xl border p-4 hover:bg-muted/40 hover:shadow-md transition-all"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-2">
+                          <Badge variant="outline" className="rounded-full">Collection</Badge>
+                          <Badge variant="secondary" className="rounded-full">
+                            {freshnessLabel(c.updatedAtISO)}
+                          </Badge>
+                        </div>
+                        <div className="font-medium leading-snug">{c.title}</div>
+                        <div className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                          {c.description}
+                        </div>
                       </div>
-                      <div className="mt-2 font-medium leading-snug">{c.title}</div>
-                      <div className="mt-2 text-sm text-muted-foreground">{c.description}</div>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {c.tags.slice(0, 3).map((t) => (
-                          <Badge key={t} variant="outline" className="rounded-full">{t}</Badge>
-                        ))}
-                      </div>
+                      <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" />
                     </div>
-                    <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </CardContent>
         </Card>
       </section>
 
-      <section id="categories" className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="flex items-end justify-between gap-4 flex-wrap">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Explore by Category</h2>
-            <p className="mt-2 text-muted-foreground max-w-2xl">
-              Browse AI tools, prompts, model updates, and comparison guides.
-            </p>
-          </div>
+      {/* Categories - Tabbed Interface */}
+      <section id="categories" className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Explore by Category</h2>
+          <p className="mt-2 text-muted-foreground">
+            Browse AI tools, prompts, model updates, and comparison guides.
+          </p>
         </div>
 
-        <div className="mt-5 flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap mb-5">
           {categories.map((c) => (
-            <Button
-              key={c.key}
-              variant={activeCategory === c.key ? "default" : "outline"}
-              className="rounded-2xl"
-              onClick={() => setActiveCategory(c.key)}
-            >
-              <c.icon className="h-4 w-4 mr-2" /> {c.label}
-            </Button>
+            <motion.div key={c.key} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant={activeCategory === c.key ? "default" : "outline"}
+                className="rounded-2xl"
+                onClick={() => setActiveCategory(c.key)}
+              >
+                <c.icon className="h-4 w-4 mr-2" /> {c.label}
+              </Button>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card className="rounded-2xl shadow-sm md:col-span-3">
-            <CardHeader className="border-b">
-              <CardTitle className="text-base">{active?.label}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">{active?.blurb}</div>
-              <div className="mt-4 flex gap-2 flex-wrap">
-                {active?.bullets?.map((b) => (
-                  <Badge key={b} variant="outline" className="rounded-full">
-                    {b}
-                  </Badge>
-                ))}
-              </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="rounded-2xl shadow-sm">
+              <CardHeader className="border-b">
+                <CardTitle className="text-base flex items-center gap-2">
+                  {active && <active.icon className="h-4 w-4" />}
+                  {active?.label}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-5">
+                <div className="text-sm text-muted-foreground">{active?.blurb}</div>
+                <div className="mt-4 flex gap-2 flex-wrap">
+                  {active?.bullets?.map((b) => (
+                    <Badge key={b} variant="outline" className="rounded-full">
+                      {b}
+                    </Badge>
+                  ))}
+                </div>
 
-              <Separator className="my-5" />
-              <div className="font-medium">Top picks</div>
-              <div className="mt-3 space-y-3">
-                {activeCategoryItems.map((it) => (
-                  <ItemCard key={`${it.kind}-${it.id}`} item={it} />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+                <Separator className="my-5" />
+                
+                <div className="space-y-3">
+                  {activeCategoryItems.map((it, idx) => (
+                    <ItemCard key={`${it.kind}-${it.id}`} item={it} index={idx} />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </AnimatePresence>
       </section>
 
-      <section id="trending" className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex items-end justify-between gap-4 flex-wrap">
+      {/* Trending - Collapsible */}
+      <section id="trending" className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-5">
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Trending now</h2>
-            <p className="mt-2 text-muted-foreground max-w-2xl">
-              Most popular resources based on user engagement, shares, and bookmarks.
+            <p className="mt-2 text-muted-foreground">
+              Most popular resources based on engagement
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="rounded-full">Tool lists</Badge>
-            <Badge variant="secondary" className="rounded-full">Prompts</Badge>
-            <Badge variant="secondary" className="rounded-full">Model updates</Badge>
-          </div>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {trending.map((it) => {
-            const href = hrefFor(it.kind, it.slug);
-
-            return (
-              <Link
+        <div className="grid gap-3 sm:grid-cols-2">
+          <AnimatePresence>
+            {displayedTrending.map((it, idx) => (
+              <motion.div
                 key={`${it.kind}-${it.id}`}
-                href={href}
-                className="block focus:outline-none"
-                aria-label={`Open ${itemTypeMeta[it.kind].label}: ${it.title}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <Card className="rounded-2xl shadow-sm hover:bg-muted/40 transition">
-                  <CardContent className="p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="rounded-full">
-                            {itemTypeMeta[it.kind].label}
-                          </Badge>
-                          <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
-                            <Timer className="h-3.5 w-3.5" /> {it.minutes} min
-                          </span>
-                          <Badge variant="secondary" className="rounded-full">
-                            {freshnessLabel(it.updatedAtISO)}
-                          </Badge>
+                <Link
+                  href={hrefFor(it.kind, it.slug)}
+                  className="block focus:outline-none"
+                >
+                  <Card className="rounded-2xl shadow-sm hover:bg-muted/40 hover:shadow-md transition-all h-full">
+                    <CardContent className="p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <Badge variant="outline" className="rounded-full">
+                              {itemTypeMeta[it.kind].label}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
+                              <Timer className="h-3.5 w-3.5" /> {it.minutes} min
+                            </span>
+                            <Badge variant="secondary" className="rounded-full">
+                              {freshnessLabel(it.updatedAtISO)}
+                            </Badge>
+                          </div>
+
+                          <div className="mt-2 text-lg font-semibold leading-snug">{it.title}</div>
+                          <div className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                            {it.subtitle}
+                          </div>
                         </div>
-
-                        <div className="mt-2 text-lg font-semibold leading-snug">{it.title}</div>
-                        <div className="mt-2 text-sm text-muted-foreground">{it.subtitle}</div>
                       </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
 
-                      <Button
-                        className="rounded-2xl"
-                        variant="outline"
-                        asChild
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <span>View details</span>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
+        <div className="mt-5 text-center">
+          <Button
+            variant="outline"
+            className="rounded-2xl"
+            onClick={() => setShowAllTrending(!showAllTrending)}
+          >
+            {showAllTrending ? (
+              <>
+                Show less <ChevronUp className="h-4 w-4 ml-2" />
+              </>
+            ) : (
+              <>
+                Show more trending <ChevronDown className="h-4 w-4 ml-2" />
+              </>
+            )}
+          </Button>
         </div>
       </section>
-<RecentlyViewed limit={6} />
-      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-10">
-        <Card className="rounded-2xl shadow-sm">
+
+      <RecentlyViewed limit={6} />
+
+      {/* Newsletter - More Engaging */}
+      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-8">
+        <Card className="rounded-2xl shadow-sm border-2 border-primary/20 bg-gradient-to-br from-background to-muted/20">
           <CardContent className="p-8">
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-                Subscribe to weekly updates
-              </h2>
-              <p className="mt-3 text-muted-foreground">
-                Get the week's best AI tools, prompts, and updates delivered to your inbox.
-              </p>
-
-              <form onSubmit={subscribe} className="mt-6 flex flex-col sm:flex-row gap-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="rounded-2xl flex-1"
-                />
-                <Button type="submit" className="rounded-2xl">
-                  Subscribe
-                </Button>
-              </form>
-
-              {toast && (
-                <div className="mt-4 rounded-2xl border bg-muted/40 p-3 text-sm">
-                  {toast}
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-primary/10 mb-4">
+                  <Sparkles className="h-6 w-6 text-primary" />
                 </div>
-              )}
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                  Subscribe to weekly updates
+                </h2>
+                <p className="mt-3 text-muted-foreground">
+                  Get the week's best AI tools, prompts, and updates delivered to your inbox.
+                </p>
+
+                <form onSubmit={subscribe} className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="rounded-2xl flex-1"
+                  />
+                  <Button type="submit" className="rounded-2xl">
+                    Subscribe
+                  </Button>
+                </form>
+
+                <AnimatePresence>
+                  {toast && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="mt-4 rounded-2xl border bg-muted/40 p-3 text-sm"
+                    >
+                      {toast}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </div>
           </CardContent>
         </Card>
       </section>
 
-      <section id="faq" className="mx-auto max-w-6xl px-4 py-10">
+      {/* FAQ - Accordion Style */}
+      <section id="faq" className="mx-auto max-w-6xl px-4 py-8">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
             Frequently Asked Questions
           </h2>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq) => (
-            <Card key={faq.q} className="rounded-2xl shadow-sm">
-              <CardContent className="p-5">
-                <div className="font-medium">{faq.q}</div>
-                <div className="mt-2 text-sm text-muted-foreground">{faq.a}</div>
-              </CardContent>
-            </Card>
+        <div className="max-w-3xl mx-auto space-y-3">
+          {faqs.map((faq, idx) => (
+            <motion.div
+              key={faq.q}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              <Card
+                className="rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition-all"
+                onClick={() => setExpandedFAQ(expandedFAQ === idx ? null : idx)}
+              >
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="font-medium flex-1">{faq.q}</div>
+                    <motion.div
+                      animate={{ rotate: expandedFAQ === idx ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    </motion.div>
+                  </div>
+                  <AnimatePresence>
+                    {expandedFAQ === idx && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-3 text-sm text-muted-foreground pt-3 border-t">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
-
     </div>
   );
 }
-// What changed in AI today?
