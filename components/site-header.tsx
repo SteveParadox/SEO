@@ -33,7 +33,7 @@ export function SiteHeader() {
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="leading-tight">
-            <div className="font-semibold">ToolDrop AI</div>
+            <div className="font-semibold">XavKit</div>
             <div className="text-xs text-muted-foreground">
               Daily AI tools, prompts, and model updates
             </div>
