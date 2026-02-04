@@ -30,7 +30,6 @@ export const tools: Tool[] = [
       tier: "freemium",
       note: "Free Hobby tier + paid tiers (Pro and above). Pro is commonly listed at $20/mo; higher tiers expand limits and context windows.",
     },
-    affiliateUrl: "https://cursor.com/?ref=tooldrop",
     alternatives: [
       { name: "VS Code + Copilot", slug: "vscode-copilot" },
       { name: "JetBrains AI", slug: "jetbrains-ai" },
