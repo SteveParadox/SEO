@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="border-t bg-background">
       <div className="mx-auto max-w-6xl px-4 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} ToolDrop AI. All rights reserved.
+          © {new Date().getFullYear()} XavKit. All rights reserved.
         </div>
 
         <nav className="flex items-center gap-4 text-sm">
