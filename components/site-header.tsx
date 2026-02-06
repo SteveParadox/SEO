@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Sparkles, Search, Flame, Menu, X } from "lucide-react";
+import { Sparkles, Newspaper, Menu, X, Search, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count-badge";
@@ -19,10 +19,6 @@ const NAV: NavItem[] = [
   { href: "/comparisons", label: "Comparisons" },
   { href: "/tags", label: "Tags" },
   { href: "/best", label: "Best" },
-
-  // New pages (since you removed them from homepage)
-  { href: "/search", label: "Search" },
-  { href: "/trending", label: "Trending" },
 ];
 
 export function SiteHeader() {
@@ -77,16 +73,23 @@ export function SiteHeader() {
 
         {/* Right side controls */}
         <div className="flex items-center gap-2">
-          {/* CTA: desktop */}
+          {/* Search + Trending (desktop) */}
           <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
             <Link href="/search" className="inline-flex items-center">
-              <Search className="h-4 w-4 mr-2" /> Search everything
+              <Search className="h-4 w-4 mr-2" /> Search
             </Link>
           </Button>
 
           <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
             <Link href="/trending" className="inline-flex items-center">
               <Flame className="h-4 w-4 mr-2" /> Trending
+            </Link>
+          </Button>
+
+          {/* Newsletter CTA: desktop */}
+          <Button variant="outline" className="rounded-2xl hidden lg:inline-flex" asChild>
+            <Link href="/#newsletter" className="inline-flex items-center">
+              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
             </Link>
           </Button>
 
@@ -107,6 +110,7 @@ export function SiteHeader() {
       {open ? (
         <div className="md:hidden border-t bg-background">
           <div className="mx-auto max-w-6xl px-4 py-3 grid gap-2">
+            {/* Primary nav */}
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -118,6 +122,24 @@ export function SiteHeader() {
               </Link>
             ))}
 
+            {/* Search + Trending (mobile) */}
+            <Link
+              href="/search"
+              onClick={() => setOpen(false)}
+              className="flex items-center rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <Search className="h-4 w-4 mr-2" /> Search
+            </Link>
+
+            <Link
+              href="/trending"
+              onClick={() => setOpen(false)}
+              className="flex items-center rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <Flame className="h-4 w-4 mr-2" /> Trending
+            </Link>
+
+            {/* Library + Recent */}
             <Link
               href="/saved"
               onClick={() => setOpen(false)}
@@ -136,20 +158,13 @@ export function SiteHeader() {
               <RecentCountBadge />
             </Link>
 
+            {/* Newsletter */}
             <Link
-              href="/search"
+              href="/#newsletter"
               onClick={() => setOpen(false)}
               className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
             >
-              <Search className="h-4 w-4 mr-2" /> Search everything
-            </Link>
-
-            <Link
-              href="/trending"
-              onClick={() => setOpen(false)}
-              className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
-            >
-              <Flame className="h-4 w-4 mr-2" /> Trending
+              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
             </Link>
           </div>
         </div>
