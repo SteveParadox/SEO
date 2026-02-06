@@ -27,20 +27,22 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <div className="h-9 w-9 rounded-2xl border flex items-center justify-center shadow-sm">
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-2 min-w-0" onClick={() => setOpen(false)}>
+          <div className="h-9 w-9 shrink-0 rounded-2xl border flex items-center justify-center shadow-sm">
             <Sparkles className="h-5 w-5" />
           </div>
-          <div className="leading-tight">
-            <div className="font-semibold">XavKit</div>
-            <div className="text-xs text-muted-foreground">
+
+          <div className="min-w-0 leading-tight">
+            <div className="font-semibold truncate">XavKit</div>
+            {/* hide tagline on mobile to avoid tall header */}
+            <div className="hidden md:block text-xs text-muted-foreground truncate">
               Daily AI tools, prompts, and model updates
             </div>
           </div>
         </Link>
 
-        {/* Main nav (desktop) */}
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-4">
           {NAV.map((item) => (
             <Link
@@ -52,7 +54,6 @@ export function SiteHeader() {
             </Link>
           ))}
 
-          {/* Library (Saved) */}
           <Link
             href="/saved"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
@@ -61,7 +62,6 @@ export function SiteHeader() {
             <SavedCountBadge />
           </Link>
 
-          {/* Recent */}
           <Link
             href="/recent"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
@@ -71,9 +71,22 @@ export function SiteHeader() {
           </Link>
         </nav>
 
-        {/* Right side controls */}
+        {/* Actions */}
         <div className="flex items-center gap-2">
-          {/* Search + Trending (desktop) */}
+          {/* Mobile: ONLY search icon */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden rounded-2xl"
+            asChild
+            aria-label="Search"
+          >
+            <Link href="/search">
+              <Search className="h-5 w-5" />
+            </Link>
+          </Button>
+
+          {/* Desktop: Search + Trending buttons */}
           <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
             <Link href="/search" className="inline-flex items-center">
               <Search className="h-4 w-4 mr-2" /> Search
@@ -86,14 +99,13 @@ export function SiteHeader() {
             </Link>
           </Button>
 
-          {/* Newsletter CTA: desktop */}
           <Button variant="outline" className="rounded-2xl hidden lg:inline-flex" asChild>
             <Link href="/#newsletter" className="inline-flex items-center">
               <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
             </Link>
           </Button>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile menu */}
           <Button
             variant="outline"
             size="icon"
@@ -110,7 +122,6 @@ export function SiteHeader() {
       {open ? (
         <div className="md:hidden border-t bg-background">
           <div className="mx-auto max-w-6xl px-4 py-3 grid gap-2">
-            {/* Primary nav */}
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -122,15 +133,7 @@ export function SiteHeader() {
               </Link>
             ))}
 
-            {/* Search + Trending (mobile) */}
-            <Link
-              href="/search"
-              onClick={() => setOpen(false)}
-              className="flex items-center rounded-xl px-3 py-2 text-sm hover:bg-muted/50"
-            >
-              <Search className="h-4 w-4 mr-2" /> Search
-            </Link>
-
+            {/* Put Trending + Weekly drop here on mobile */}
             <Link
               href="/trending"
               onClick={() => setOpen(false)}
@@ -139,7 +142,14 @@ export function SiteHeader() {
               <Flame className="h-4 w-4 mr-2" /> Trending
             </Link>
 
-            {/* Library + Recent */}
+            <Link
+              href="/#newsletter"
+              onClick={() => setOpen(false)}
+              className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+            </Link>
+
             <Link
               href="/saved"
               onClick={() => setOpen(false)}
@@ -156,15 +166,6 @@ export function SiteHeader() {
             >
               <span>Recent</span>
               <RecentCountBadge />
-            </Link>
-
-            {/* Newsletter */}
-            <Link
-              href="/#newsletter"
-              onClick={() => setOpen(false)}
-              className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
-            >
-              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
             </Link>
           </div>
         </div>
