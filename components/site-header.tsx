@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Sparkles, Newspaper, Menu, X } from "lucide-react";
+import { Sparkles, Search, Flame, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count-badge";
@@ -19,6 +19,10 @@ const NAV: NavItem[] = [
   { href: "/comparisons", label: "Comparisons" },
   { href: "/tags", label: "Tags" },
   { href: "/best", label: "Best" },
+
+  // New pages (since you removed them from homepage)
+  { href: "/search", label: "Search" },
+  { href: "/trending", label: "Trending" },
 ];
 
 export function SiteHeader() {
@@ -75,8 +79,14 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           {/* CTA: desktop */}
           <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
-            <Link href="/#newsletter" className="inline-flex items-center">
-              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+            <Link href="/search" className="inline-flex items-center">
+              <Search className="h-4 w-4 mr-2" /> Search everything
+            </Link>
+          </Button>
+
+          <Button variant="outline" className="rounded-2xl hidden md:inline-flex" asChild>
+            <Link href="/trending" className="inline-flex items-center">
+              <Flame className="h-4 w-4 mr-2" /> Trending
             </Link>
           </Button>
 
@@ -127,11 +137,19 @@ export function SiteHeader() {
             </Link>
 
             <Link
-              href="/#newsletter"
+              href="/search"
               onClick={() => setOpen(false)}
               className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
             >
-              <Newspaper className="h-4 w-4 mr-2" /> Get the weekly drop
+              <Search className="h-4 w-4 mr-2" /> Search everything
+            </Link>
+
+            <Link
+              href="/trending"
+              onClick={() => setOpen(false)}
+              className="flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-muted/50"
+            >
+              <Flame className="h-4 w-4 mr-2" /> Trending
             </Link>
           </div>
         </div>
