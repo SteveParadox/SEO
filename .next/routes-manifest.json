@@ -14,7 +14,34 @@
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
     }
   ],
-  "headers": [],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-no-referrer-when-downgrade"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;"
+        }
+      ],
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
   "rewrites": {
     "beforeFiles": [],
     "afterFiles": [],
@@ -52,6 +79,14 @@
         "nxtPslug": "nxtPslug"
       },
       "namedRegex": "^/prompts/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/tags/[tag]",
+      "regex": "^/tags/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtag": "nxtPtag"
+      },
+      "namedRegex": "^/tags/(?<nxtPtag>[^/]+?)(?:/)?$"
     },
     {
       "page": "/tools/[slug]",
@@ -108,10 +143,22 @@
       "namedRegex": "^/comparisons(?:/)?$"
     },
     {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
     },
     {
       "page": "/prompts",
@@ -138,6 +185,12 @@
       "namedRegex": "^/saved(?:/)?$"
     },
     {
+      "page": "/search",
+      "regex": "^/search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/search(?:/)?$"
+    },
+    {
       "page": "/sitemap.xml",
       "regex": "^/sitemap\\.xml(?:/)?$",
       "routeKeys": {},
@@ -150,10 +203,22 @@
       "namedRegex": "^/tags(?:/)?$"
     },
     {
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/terms(?:/)?$"
+    },
+    {
       "page": "/tools",
       "regex": "^/tools(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/tools(?:/)?$"
+    },
+    {
+      "page": "/trending",
+      "regex": "^/trending(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/trending(?:/)?$"
     },
     {
       "page": "/updates",

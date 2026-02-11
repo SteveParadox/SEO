@@ -677,7 +677,7 @@ export const collections: Collection[] = [
 
   {
     id: "c33",
-    slug: "user-research-synthesis",
+    slug: "user-research-insights-action",
     title: "User Research Synthesis (Insights to Action)",
     description:
       "Turn user interviews and feedback into clear insights and product decisions.",

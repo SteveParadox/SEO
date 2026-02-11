@@ -11,7 +11,7 @@
     "cleanDistDir": true,
     "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
-    "configOrigin": "default",
+    "configOrigin": "next.config.ts",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
     "pageExtensions": [
@@ -34,6 +34,7 @@
         3840
       ],
       "imageSizes": [
+        16,
         32,
         48,
         64,
@@ -82,7 +83,7 @@
     "productionBrowserSourceMaps": false,
     "excludeDefaultMomentLocales": true,
     "reactProductionProfiling": false,
-    "reactStrictMode": null,
+    "reactStrictMode": true,
     "reactMaxHeadersLength": 6000,
     "httpAgentOptions": {
       "keepAlive": true
@@ -99,7 +100,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/workspaces/SEO",
+    "outputFileTracingRoot": "C:\\Users\\USER-PC\\Desktop\\SEO",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -156,7 +157,7 @@
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 1,
+      "cpus": 5,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -208,7 +209,6 @@
       "turbopackFileSystemCacheForDev": true,
       "turbopackFileSystemCacheForBuild": false,
       "turbopackInferModuleSideEffects": false,
-      "middlewarePrefetch": "flexible",
       "optimizePackageImports": [
         "lucide-react",
         "date-fns",
@@ -291,30 +291,36 @@
     },
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
-    "configFileName": "next.config.js",
+    "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "/workspaces/SEO"
+      "root": "C:\\Users\\USER-PC\\Desktop\\SEO"
     },
-    "distDirRoot": ".next"
+    "distDirRoot": ".next",
+    "_originalRewrites": {
+      "beforeFiles": [],
+      "afterFiles": [],
+      "fallback": []
+    },
+    "_originalRedirects": []
   },
-  "appDir": "/workspaces/SEO",
+  "appDir": "C:\\Users\\USER-PC\\Desktop\\SEO",
   "relativeAppDir": "",
   "files": [
-    ".next/routes-manifest.json",
-    ".next/server/pages-manifest.json",
-    ".next/build-manifest.json",
-    ".next/prerender-manifest.json",
-    ".next/server/functions-config-manifest.json",
-    ".next/server/middleware-manifest.json",
-    ".next/server/middleware-build-manifest.js",
-    ".next/server/app-paths-manifest.json",
-    ".next/app-path-routes-manifest.json",
-    ".next/server/server-reference-manifest.js",
-    ".next/server/server-reference-manifest.json",
-    ".next/BUILD_ID",
-    ".next/server/next-font-manifest.js",
-    ".next/server/next-font-manifest.json",
-    ".next/required-server-files.json"
+    ".next\\routes-manifest.json",
+    ".next\\server\\pages-manifest.json",
+    ".next\\build-manifest.json",
+    ".next\\prerender-manifest.json",
+    ".next\\server\\functions-config-manifest.json",
+    ".next\\server\\middleware-manifest.json",
+    ".next\\server\\middleware-build-manifest.js",
+    ".next\\server\\app-paths-manifest.json",
+    ".next\\app-path-routes-manifest.json",
+    ".next\\server\\server-reference-manifest.js",
+    ".next\\server\\server-reference-manifest.json",
+    ".next\\BUILD_ID",
+    ".next\\server\\next-font-manifest.js",
+    ".next\\server\\next-font-manifest.json",
+    ".next\\required-server-files.json"
   ],
   "ignore": []
 }
