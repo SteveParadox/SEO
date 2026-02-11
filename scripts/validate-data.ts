@@ -1,10 +1,10 @@
 /**
  * Build-time data validation script
  * Run this before deployment to catch data issues early
- * Usage: node scripts/validate-data.js
+ * Usage: tsx scripts/validate-data.ts
  */
 
-import { DATA } from "./lib/data.js";
+import { DATA } from "@/lib/data";
 
 interface ValidationError {
   type: string;
