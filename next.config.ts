@@ -56,12 +56,8 @@ const nextConfig: NextConfig = {
     // Make sure NEXT_PUBLIC_SITE_URL is set (but it's client-side, so validate in code)
   },
 
-  // Optimize for production
-  swcMinify: true,
+  // Production optimizations (swcMinify is now the default behavior)
   productionBrowserSourceMaps: false,
-
-  // Disable telemetry
-  telemetry: false,
 };
 
 export default nextConfig;
