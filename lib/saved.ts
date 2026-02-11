@@ -12,7 +12,7 @@ export type SavedItem = {
 const STORAGE_KEY = "tooldrop_saved_v1";
 export const SAVED_EVENT = "tooldrop:saved-changed";
 
-type SavedKey = { kind: SavedKind; id: string };
+type SavedKey = { kind: SavedKind; id: string; savedAtISO?: string };
 
 import { getUnifiedIndex, type UnifiedItem } from "@/lib/data";
 
@@ -25,7 +25,11 @@ function readRaw(): SavedKey[] {
     if (!Array.isArray(parsed)) return [];
     return parsed
       .filter((x) => x?.kind && x?.id)
-      .map((x) => ({ kind: x.kind as SavedKind, id: String(x.id) }));
+      .map((x) => ({ 
+        kind: x.kind as SavedKind, 
+        id: String(x.id),
+        savedAtISO: x.savedAtISO ? String(x.savedAtISO) : undefined
+      }));
   } catch {
     return [];
   }
@@ -46,17 +50,17 @@ export function readSaved(): SavedItem[] {
   const map = new Map(all.map((it) => [`${it.kind}:${it.id}`, it] as const));
 
   return keys
-    .map((k) => map.get(`${k.kind}:${k.id}`))
+    .map((k) => map.get(`${k.kind}:${k.id}`) ? { ...k, item: map.get(`${k.kind}:${k.id}`)! } : null)
     .filter(Boolean)
-    .map((it) => {
-      const x = it as UnifiedItem;
+    .map((matched) => {
+      const item = matched!.item as UnifiedItem;
       return {
-        kind: x.kind,
-        id: x.id,
-        slug: x.slug,
-        title: x.title,
-        subtitle: x.subtitle,
-        savedAtISO: new Date().toISOString(),
+        kind: item.kind,
+        id: item.id,
+        slug: item.slug,
+        title: item.title,
+        subtitle: item.subtitle,
+        savedAtISO: matched!.savedAtISO || new Date().toISOString(),
       };
     });
 }
@@ -79,9 +83,10 @@ export function toggleSaved(key: SavedKey, limit = 200) {
   const keys = readRaw();
   const exists = keys.some((x) => x.kind === key.kind && x.id === key.id);
 
+  const now = new Date().toISOString();
   const next = exists
     ? keys.filter((x) => !(x.kind === key.kind && x.id === key.id))
-    : [{ kind: key.kind, id: key.id }, ...keys];
+    : [{ kind: key.kind, id: key.id, savedAtISO: now }, ...keys];
 
   writeRaw(next.slice(0, limit));
   return !exists;

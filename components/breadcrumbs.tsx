@@ -36,7 +36,7 @@ export function Breadcrumbs() {
   if (parts.length === 0) return null;
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://example.com";
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://xavkit.com";
 
   const crumbs = [
     { name: "Home", href: "/" },

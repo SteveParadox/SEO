@@ -13,11 +13,16 @@ function normalizeBaseUrl(raw: string) {
 export function siteUrl() {
   const env = process.env.NEXT_PUBLIC_SITE_URL;
 
-  // Use localhost only in dev. In prod, don't quietly ship http://localhost canonicals.
+  // Use localhost only in dev. In prod, require explicit config.
   if (!env) {
-    return process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://example.com"; // replace with your real default domain if you want
+    if (process.env.NODE_ENV === "development") {
+      return "http://localhost:3000";
+    }
+    // In production, NEXT_PUBLIC_SITE_URL MUST be set - crash early rather than silently ship wrong canonicals
+    throw new Error(
+      "NEXT_PUBLIC_SITE_URL environment variable is required in production. " +
+      "Set it to your domain (e.g., https://xavkit.com) before deploying."
+    );
   }
 
   return normalizeBaseUrl(env);
