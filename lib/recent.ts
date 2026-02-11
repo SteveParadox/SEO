@@ -14,8 +14,8 @@ export type RecentItem = {
   viewedAtISO: string;
 };
 
-const STORAGE_KEY = "tooldrop_recent_v1";
-export const RECENT_EVENT = "tooldrop:recent-changed";
+const STORAGE_KEY = "xavkit_recent_v1";
+export const RECENT_EVENT = "xavkit:recent-changed";
 
 function safeParse(raw: string | null): unknown {
   if (!raw) return null;

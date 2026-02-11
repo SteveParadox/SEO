@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — ToolDrop AI",
-  description: "How ToolDrop AI collects, uses, and protects your information.",
+  title: "Privacy Policy — Xavkit",
+  description: "How Xavkit collects, uses, and protects your information.",
 };
 
 export default function PrivacyPage() {
@@ -15,7 +15,7 @@ export default function PrivacyPage() {
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed">
         <p>
-          ToolDrop AI respects your privacy. This page explains what information
+          Xavkit respects your privacy. This page explains what information
           we collect, how it is used, and what control you have over it.
         </p>
 
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-medium">Third-party services</h2>
           <p className="mt-2 text-muted-foreground">
-            ToolDrop AI may link to external tools and services. We are not
+            Xavkit may link to external tools and services. We are not
             responsible for their privacy practices.
           </p>
         </section>

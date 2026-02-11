@@ -3,8 +3,8 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 
-const STORAGE_KEY = "tooldrop_saved_v1";
-const EVENT_NAME = "tooldrop:saved-changed";
+const STORAGE_KEY = "xavkit_saved_v1";
+const EVENT_NAME = "xavkit:saved-changed";
 
 function readCount(): number {
   if (typeof window === "undefined") return 0;

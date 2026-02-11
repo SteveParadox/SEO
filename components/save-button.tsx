@@ -33,7 +33,7 @@ export function SaveButton({
 
     // cross-tab updates (localStorage event)
     function onStorage(e: StorageEvent) {
-      if (e.key === "tooldrop_saved_v1") sync();
+      if (e.key === "xavkit_saved_v1") sync();
     }
     window.addEventListener("storage", onStorage);
 

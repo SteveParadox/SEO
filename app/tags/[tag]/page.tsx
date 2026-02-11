@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!tag) {
     return {
-      title: "Tag not found — ToolDrop AI",
+      title: "Tag not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
@@ -68,8 +68,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `${titleCase(tag)} — Tag — ToolDrop AI`;
-  const description = `${items.length} item${items.length === 1 ? "" : "s"} tagged with “${tag}”.`;
+  // Sanitize tag name for display
+  const displayTag = titleCase(tag).trim();
+  const title = `${displayTag} — Tag — Xavkit`;
+  const description = `${items.length} item${items.length === 1 ? "" : "s"} tagged with "${displayTag}".`.slice(0, 160);
   const url = absoluteUrl(`/tags/${encodeURIComponent(tag)}`);
 
   return {
@@ -81,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "website",
     },
     twitter: {

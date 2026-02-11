@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — ToolDrop AI",
-  description: "Rules, responsibilities, and limitations for using ToolDrop AI.",
+  title: "Terms & Conditions — Xavkit",
+  description: "Rules, responsibilities, and limitations for using Xavkit.",
   alternates: { canonical: absoluteUrl("/terms") },
   robots: { index: true, follow: true },
 };
@@ -16,14 +16,14 @@ export default function TermsPage() {
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed">
         <p>
-          By using ToolDrop AI, you agree to the following terms. If you do not agree,
+          By using Xavkit, you agree to the following terms. If you do not agree,
           please stop using the site. Simple.
         </p>
 
         <section>
           <h2 className="font-medium">Purpose of the site</h2>
           <p className="mt-2 text-muted-foreground">
-            ToolDrop AI provides curated information about AI tools, prompts, updates,
+            Xavkit provides curated information about AI tools, prompts, updates,
             and comparisons for educational and informational purposes only.
           </p>
         </section>

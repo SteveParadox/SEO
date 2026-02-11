@@ -9,8 +9,8 @@ export type SavedItem = {
   savedAtISO: string;
 };
 
-const STORAGE_KEY = "tooldrop_saved_v1";
-export const SAVED_EVENT = "tooldrop:saved-changed";
+const STORAGE_KEY = "xavkit_saved_v1";
+export const SAVED_EVENT = "xavkit:saved-changed";
 
 type SavedKey = { kind: SavedKind; id: string; savedAtISO?: string };
 

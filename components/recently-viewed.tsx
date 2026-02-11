@@ -25,7 +25,7 @@ export function RecentlyViewed({ limit = 6 }: { limit?: number }) {
     refresh();
 
     function onStorage(e: StorageEvent) {
-      if (e.key === "tooldrop_recent_v1") refresh();
+      if (e.key === "xavkit_recent_v1") refresh();
     }
 
     function onRecentChanged() {

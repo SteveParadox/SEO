@@ -12,7 +12,7 @@ export function RecentCountBadge() {
     update();
 
     function onStorage(e: StorageEvent) {
-      if (e.key === "tooldrop_recent_v1") update();
+      if (e.key === "xavkit_recent_v1") update();
     }
 
     function onLocal() {

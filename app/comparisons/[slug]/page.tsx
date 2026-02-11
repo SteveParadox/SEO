@@ -27,13 +27,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!cmp) {
     return {
-      title: "Comparison not found — ToolDrop AI",
+      title: "Comparison not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${cmp.title} — ToolDrop AI`;
-  const description = cmp.description;
+  // Sanitize and ensure title/description are not empty
+  const baseTitle = cmp.title?.trim() || "Unnamed Comparison";
+  const baseDescription = cmp.description?.trim() || "AI tool comparison";
+  
+  const title = `${baseTitle} — Xavkit`;
+  const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/comparisons/${cmp.slug}`);
 
   return {
@@ -45,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {
