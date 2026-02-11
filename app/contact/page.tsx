@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact — ToolDrop AI",
-  description: "Get in touch with ToolDrop AI for questions, feedback, or corrections.",
+  title: "Contact — Xavkit",
+  description: "Get in touch with Xavkit for questions, feedback, or corrections.",
 };
 
 export default function ContactPage() {
@@ -15,7 +15,7 @@ export default function ContactPage() {
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed">
         <p>
-          ToolDrop AI is a curated directory, not a support desk for every AI tool
+          Xavkit is a curated directory, not a support desk for every AI tool
           on the internet. If something looks wrong or outdated, that’s fair.
           If you want us to fix your code, less fair.
         </p>

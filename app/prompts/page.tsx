@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Prompts — ToolDrop AI",
+  title: "Prompts — Xavkit",
   description: "Browse copy-paste prompts that actually improve results.",
   alternates: { canonical: absoluteUrl("/prompts") },
   robots: { index: true, follow: true },

@@ -27,13 +27,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!u) {
     return {
-      title: "Update not found — ToolDrop AI",
+      title: "Update not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${u.headline} — ToolDrop AI`;
-  const description = u.tldr;
+  // Sanitize and ensure title/description are not empty
+  const baseHeadline = u.headline?.trim() || "Model Update";
+  const baseTldr = u.tldr?.trim() || "AI model update";
+  
+  const title = `${baseHeadline} — Xavkit`;
+  const description = baseTldr.slice(0, 160);
   const url = absoluteUrl(`/updates/${u.slug}`);
 
   return {
@@ -45,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {

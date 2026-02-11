@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Best AI Tool Lists — ToolDrop AI",
+  title: "Best AI Tool Lists — Xavkit",
   description: "High-intent tool lists: ranked picks, tradeoffs, and quick recommendations.",
   alternates: { canonical: absoluteUrl("/best") },
   robots: { index: true, follow: true },

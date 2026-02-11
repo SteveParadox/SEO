@@ -6,17 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Tags — ToolDrop AI",
+  title: "Tags — Xavkit",
   description:
     "Browse everything by tags: tools, prompts, updates, collections, and comparisons.",
   alternates: { canonical: absoluteUrl("/tags") },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Tags — ToolDrop AI",
+    title: "Tags — Xavkit",
     description:
       "Browse everything by tags: tools, prompts, updates, collections, and comparisons.",
     url: absoluteUrl("/tags"),
-    siteName: "ToolDrop AI",
+    siteName: "Xavkit",
     type: "website",
   },
   twitter: {

@@ -29,13 +29,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!c) {
     return {
-      title: "Collection not found — ToolDrop AI",
+      title: "Collection not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${c.title} — ToolDrop AI`;
-  const description = c.description;
+  // Sanitize and ensure title/description are not empty
+  const baseTitle = c.title?.trim() || "Unnamed Collection";
+  const baseDescription = c.description?.trim() || "AI tool collection";
+  
+  const title = `${baseTitle} — Xavkit`;
+  const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/collections/${c.slug}`);
 
   return {
@@ -47,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {

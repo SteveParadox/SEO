@@ -29,13 +29,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!p) {
     return {
-      title: "Prompt not found — ToolDrop AI",
+      title: "Prompt not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${p.title} — ToolDrop AI`;
-  const description = p.purpose;
+  // Sanitize and ensure title/description are not empty
+  const baseTitle = p.title?.trim() || "Unnamed Prompt";
+  const baseDescription = p.purpose?.trim() || "AI prompt template";
+  
+  const title = `${baseTitle} — Xavkit`;
+  const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/prompts/${p.slug}`);
 
   return {
@@ -47,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {

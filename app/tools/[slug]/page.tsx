@@ -30,13 +30,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!tool) {
     return {
-      title: "Tool not found — ToolDrop AI",
+      title: "Tool not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${tool.name} — ToolDrop AI`;
-  const description = tool.oneLiner;
+  // Sanitize and ensure title/description are not empty
+  const baseName = tool.name?.trim() || "Unnamed Tool";
+  const baseDescription = (tool.oneLiner || tool.description)?.trim() || "AI tool information";
+  
+  const title = `${baseName} — Xavkit`;
+  const description = baseDescription.slice(0, 160); // Ensure meta description length
   const url = absoluteUrl(`/tools/${tool.slug}`);
 
   return {
@@ -48,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {

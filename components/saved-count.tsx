@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 
-const STORAGE_KEY = "tooldrop_saved_v1";
+const STORAGE_KEY = "xavkit_saved_v1";
 
 function readCount() {
   try {

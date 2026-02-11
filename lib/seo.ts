@@ -3,7 +3,7 @@
 function normalizeBaseUrl(raw: string) {
   const trimmed = raw.trim().replace(/\/+$/, ""); // remove ALL trailing slashes
 
-  // If someone sets NEXT_PUBLIC_SITE_URL="tooldropai.com" (humans love doing that),
+  // If someone sets NEXT_PUBLIC_SITE_URL="xavkit.com" (humans love doing that),
   // force it to be an absolute origin.
   if (!/^https?:\/\//i.test(trimmed)) return `https://${trimmed}`;
 

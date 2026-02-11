@@ -21,14 +21,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!page) {
     return {
-      title: "Best list not found — ToolDrop AI",
+      title: "Best list not found — Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
+  // Sanitize and ensure title/description are not empty
+  const baseTitle = page.title?.trim() || "Best List";
+  const baseDescription = page.description?.trim() || "Curated AI tool list";
+  
   const url = absoluteUrl(`/best/${page.slug}`);
-  const title = `${page.title} — ToolDrop AI`;
-  const description = page.description;
+  const title = `${baseTitle} — Xavkit`;
+  const description = baseDescription.slice(0, 160);
 
   return {
     title,
@@ -39,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      siteName: "ToolDrop AI",
+      siteName: "Xavkit",
       type: "article",
     },
     twitter: {
