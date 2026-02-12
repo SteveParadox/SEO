@@ -2,28 +2,11 @@
 
 import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 import {
-  Sparkles,
-  Flame,
-  TrendingUp,
-  ShieldCheck,
-  ArrowRight,
-  BadgeCheck,
-  BookOpen,
-  LineChart,
-  Cpu,
-  Globe,
-  Timer,
-  Copy,
-  Wrench,
-  Trophy,
-  ChevronDown,
-  Star,
-  Zap,
-  Dot,
-  Menu,
-  X,
+  Sparkles, Flame, TrendingUp, ShieldCheck, ArrowRight, BadgeCheck,
+  BookOpen, LineChart, Cpu, Globe, Timer, Copy, Wrench, Trophy,
+  ChevronDown, Star, Zap, ArrowUpRight, ScanLine, Radio,
 } from "lucide-react";
 import { Scale } from "lucide-react";
 
@@ -33,51 +16,40 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { RecentlyViewed } from "@/components/recently-viewed";
-
 import { DATA } from "@/lib/data";
 
-// ─── Motion variants ──────────────────────────────────────────────────────────
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
-};
-
-const staggerChildren = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.07 } },
-};
-
 // ─── Data ─────────────────────────────────────────────────────────────────────
-
 const { tools, prompts, updates, collections, comparisons } = DATA;
 
-const itemTypeMeta = {
-  tool: { label: "Tool", icon: Wrench },
-  prompt: { label: "Prompt", icon: Copy },
-  update: { label: "Update", icon: TrendingUp },
-  collection: { label: "Collection", icon: BadgeCheck },
-  comparison: { label: "Comparison", icon: Scale },
-  best: { label: "Best List", icon: Trophy },
+const KIND_META = {
+  tool:       { label: "Tool",       icon: Wrench,    accent: "bg-primary",              text: "text-primary"              },
+  prompt:     { label: "Prompt",     icon: Copy,      accent: "bg-green-500",            text: "text-green-500"            },
+  update:     { label: "Update",     icon: TrendingUp, accent: "bg-orange-500",          text: "text-orange-500"           },
+  collection: { label: "Collection", icon: BadgeCheck, accent: "bg-primary",             text: "text-primary"              },
+  comparison: { label: "Comparison", icon: Scale,     accent: "bg-muted-foreground",     text: "text-muted-foreground"     },
+  best:       { label: "Best List",  icon: Trophy,    accent: "bg-orange-500",           text: "text-orange-500"           },
 } as const;
 
-type Kind = keyof typeof itemTypeMeta;
+type Kind = keyof typeof KIND_META;
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+type IndexItem = {
+  kind: Kind; id: string; slug: string;
+  title: string; subtitle: string; typeTag: string;
+  minutes: number; updatedAtISO: string;
+};
+
+type CategoryKey = "tools" | "prompts" | "updates" | "compare";
 
 function daysAgo(iso: string) {
-  const ms = Date.now() - new Date(iso + "T00:00:00").getTime();
-  return Math.max(0, Math.floor(ms / (1000 * 60 * 60 * 24)));
+  return Math.max(0, Math.floor((Date.now() - new Date(iso + "T00:00:00").getTime()) / 86400000));
 }
-
 function freshnessLabel(iso: string) {
   const d = daysAgo(iso);
-  if (d <= 1) return "New";
-  if (d <= 7) return "This week";
-  if (d <= 21) return "Recent";
-  return "Evergreen";
+  if (d <= 1) return "NEW";
+  if (d <= 7) return "THIS WK";
+  if (d <= 21) return "RECENT";
+  return "EVERGREEN";
 }
-
 function hrefFor(kind: Kind, slug: string) {
   if (kind === "tool") return `/tools/${slug}`;
   if (kind === "prompt") return `/prompts/${slug}`;
@@ -87,944 +59,776 @@ function hrefFor(kind: Kind, slug: string) {
   return `/comparisons/${slug}`;
 }
 
-// ─── Shared sub-components ────────────────────────────────────────────────────
-
-function Pill({
-  icon: Icon,
-  children,
-}: {
-  icon?: React.ElementType;
-  children: React.ReactNode;
-}) {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border bg-background/70 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
-      {Icon && <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
-      {children}
-    </span>
-  );
-}
-
-type IndexItem = {
-  kind: Kind;
-  id: string;
-  slug: string;
-  title: string;
-  subtitle: string;
-  typeTag: string;
-  minutes: number;
-  updatedAtISO: string;
+// ─── Motion ───────────────────────────────────────────────────────────────────
+const clipReveal = {
+  hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+  show: { clipPath: "inset(0 0% 0 0)", opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+const slideUp = {
+  hidden: { y: 32, opacity: 0 },
+  show: (i: number) => ({ y: 0, opacity: 1, transition: { delay: i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }),
+};
+const stagger = {
+  hidden: {}, show: { transition: { staggerChildren: 0.06 } },
 };
 
-function GlowCard({
-  children,
-  tone = "primary",
-  className = "",
-}: {
-  children: React.ReactNode;
-  tone?: "primary" | "green" | "orange" | "neutral";
-  className?: string;
-}) {
-  const ring =
-    tone === "primary"
-      ? "from-primary/35 via-primary/10 to-transparent"
-      : tone === "green"
-      ? "from-green-500/35 via-green-500/10 to-transparent"
-      : tone === "orange"
-      ? "from-orange-500/35 via-orange-500/10 to-transparent"
-      : "from-muted/60 via-muted/20 to-transparent";
+// ─── CATEGORIES ───────────────────────────────────────────────────────────────
+const CATEGORIES = [
+  { key: "tools" as CategoryKey,   label: "AI Tools",      icon: Cpu,       blurb: "Vetted. Not 300 fake directories.", bullets: ["Free", "Latest", "Gems"], to: "/tools" },
+  { key: "prompts" as CategoryKey, label: "Prompts",       icon: BookOpen,  blurb: "Prompts you'll actually reuse.",    bullets: ["Top-rated", "Collections", "Advanced"], to: "/prompts" },
+  { key: "updates" as CategoryKey, label: "Model Updates", icon: TrendingUp,blurb: "What changed & why it matters.",    bullets: ["Summaries", "Impact", "Implications"], to: "/updates" },
+  { key: "compare" as CategoryKey, label: "Comparisons",   icon: LineChart, blurb: "Side-by-side. No fluff.",           bullets: ["Chat models", "Image gen", "Writers"], to: "/comparisons" },
+] as const;
 
+// ─── TICKER ITEM ──────────────────────────────────────────────────────────────
+function TickerItem({ item }: { item: IndexItem }) {
+  const meta = KIND_META[item.kind];
   return (
-    <div className={`relative rounded-2xl sm:rounded-3xl ${className}`}>
-      <div
-        className={`absolute -inset-[1px] rounded-2xl sm:rounded-3xl bg-gradient-to-br ${ring} blur-sm`}
-        aria-hidden="true"
-      />
-      <div className="relative rounded-2xl sm:rounded-3xl border bg-background/80 backdrop-blur">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/** Touch-friendly row – min 48px tap target */
-function ItemRow({ item }: { item: IndexItem }) {
-  const meta = itemTypeMeta[item.kind];
-  const Icon = meta.icon;
-
-  return (
-    <Link
-      href={hrefFor(item.kind, item.slug)}
-      className="group block rounded-xl sm:rounded-2xl border bg-background active:bg-muted/60 hover:bg-muted/35 transition-colors"
-      aria-label={`Open ${meta.label}: ${item.title}`}
-    >
-      {/* min-height ensures 48px tap target */}
-      <div className="p-3 sm:p-4 min-h-[56px] flex items-start">
-        <div className="flex items-start justify-between gap-2 w-full">
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground">
-              <Badge variant="outline" className="rounded-full text-[10px] sm:text-xs px-1.5 py-0">
-                {meta.label}
-              </Badge>
-              <span className="inline-flex items-center gap-1 leading-none">
-                <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" aria-hidden="true" />
-                <span className="truncate max-w-[80px] sm:max-w-none">{item.typeTag}</span>
-              </span>
-              <Badge
-                variant="secondary"
-                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
-              >
-                {freshnessLabel(item.updatedAtISO)}
-              </Badge>
-              {/* Hide read-time on smallest screens */}
-              <span className="hidden xs:inline-flex items-center gap-1 leading-none">
-                <Timer className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" aria-hidden="true" />
-                {item.minutes} min
-              </span>
-            </div>
-            <div className="mt-1.5 font-medium leading-snug line-clamp-1 text-sm sm:text-base">
-              {item.title}
-            </div>
-            <div className="mt-0.5 text-xs sm:text-sm text-muted-foreground line-clamp-2">
-              {item.subtitle}
-            </div>
-          </div>
-          <ArrowRight
-            className="h-4 w-4 mt-1 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform"
-            aria-hidden="true"
-          />
+    <Link href={hrefFor(item.kind, item.slug)}
+      className="group flex items-start gap-2 py-3 border-b border-border/40 hover:bg-muted/20 px-3 transition-colors last:border-0">
+      <span className={`mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full ${meta.accent}`} />
+      <div className="min-w-0 flex-1">
+        <div className={`font-mono text-[9px] uppercase tracking-widest mb-0.5 ${meta.text}`}>
+          {meta.label}
+        </div>
+        <div className="text-xs font-medium leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+          {item.title}
         </div>
       </div>
     </Link>
   );
 }
 
-function StatTile({
-  title,
-  desc,
-  icon: Icon,
-  tone,
-}: {
-  title: string;
-  desc: string;
-  icon: React.ElementType;
-  tone: "primary" | "green" | "orange";
-}) {
-  const iconBg =
-    tone === "primary"
-      ? "bg-primary/10 text-primary"
-      : tone === "green"
-      ? "bg-green-500/10 text-green-500"
-      : "bg-orange-500/10 text-orange-500";
-
+// ─── SIGNAL CARD (hero-style large card) ─────────────────────────────────────
+function SignalCard({ item, index }: { item: IndexItem; index: number }) {
+  const meta = KIND_META[item.kind];
+  const Icon = meta.icon;
   return (
-    <GlowCard tone={tone} className="h-full">
-      <div className="p-4 sm:p-6">
-        <div className="flex items-start gap-3 sm:gap-4">
-          <div
-            className={`h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl sm:rounded-2xl flex items-center justify-center ${iconBg}`}
-          >
-            <Icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+    <motion.div custom={index} variants={slideUp}>
+      <Link href={hrefFor(item.kind, item.slug)}
+        className="group relative flex flex-col h-full rounded-2xl border bg-background overflow-hidden hover:shadow-lg transition-all duration-300 active:scale-[0.98]"
+        aria-label={`${meta.label}: ${item.title}`}>
+        {/* top accent bar */}
+        <div className={`h-0.5 w-full ${meta.accent}`} />
+        <div className="p-4 sm:p-5 flex flex-col flex-1">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className={`h-7 w-7 rounded-lg flex items-center justify-center ${meta.accent}/10`}>
+                <Icon className={`h-3.5 w-3.5 ${meta.text}`} aria-hidden />
+              </div>
+              <span className={`font-mono text-[9px] uppercase tracking-widest ${meta.text}`}>
+                {meta.label}
+              </span>
+            </div>
+            <span className="font-mono text-[9px] text-muted-foreground/60 uppercase tracking-widest">
+              {freshnessLabel(item.updatedAtISO)}
+            </span>
           </div>
-          <div className="min-w-0">
-            <div className="text-base sm:text-lg font-semibold leading-tight">{title}</div>
-            <div className="mt-1 text-xs sm:text-sm text-muted-foreground">{desc}</div>
+          <div className="font-semibold text-sm sm:text-base leading-snug line-clamp-2 flex-1 mb-2">
+            {item.title}
+          </div>
+          <div className="text-xs text-muted-foreground line-clamp-2 mb-4">
+            {item.subtitle}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[9px] text-muted-foreground/50 uppercase">
+              {item.minutes} MIN READ
+            </span>
+            <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors">
+              <span>Read</span>
+              <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
           </div>
         </div>
-      </div>
-    </GlowCard>
+      </Link>
+    </motion.div>
   );
 }
 
-// ─── Horizontal scroll marquee (pauses on reduced-motion) ─────────────────────
+// ─── DENSE ROW (list-style item) ─────────────────────────────────────────────
+function DenseRow({ item, index }: { item: IndexItem; index: number }) {
+  const meta = KIND_META[item.kind];
+  return (
+    <motion.div custom={index} variants={slideUp}>
+      <Link href={hrefFor(item.kind, item.slug)}
+        className="group flex items-start gap-3 py-3.5 px-4 rounded-xl hover:bg-muted/30 active:bg-muted/50 transition-colors border border-transparent hover:border-border/60"
+        aria-label={`${meta.label}: ${item.title}`}>
+        <div className={`mt-0.5 h-2 w-2 shrink-0 rounded-full ${meta.accent} mt-1.5`} />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="font-medium text-sm leading-snug">{item.title}</span>
+            <span className={`font-mono text-[9px] uppercase tracking-widest shrink-0 ${meta.text}`}>
+              {meta.label}
+            </span>
+          </div>
+          <div className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{item.subtitle}</div>
+        </div>
+        <div className="shrink-0 flex items-center gap-1.5 text-muted-foreground/40">
+          <span className="font-mono text-[9px]">{item.minutes}m</span>
+          <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 group-hover:text-primary transition-all" />
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
 
-function LiveMarquee({ items }: { items: IndexItem[] }) {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
+// ─── LIVE TICKER STRIP (vertical on desktop, horizontal marquee on mobile) ────
+function VerticalTicker({ items }: { items: IndexItem[] }) {
+  const shouldReduce = useReducedMotion();
+  if (shouldReduce) {
     return (
-      <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 pb-3">
-        {items.slice(0, 6).map((it) => (
-          <span
-            key={`${it.kind}-${it.id}`}
-            className="inline-flex shrink-0 items-center gap-1 rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
-          >
-            <span className="text-foreground">{itemTypeMeta[it.kind].label}:</span>
-            <span className="truncate max-w-[180px]">{it.title}</span>
-          </span>
-        ))}
+      <div className="flex flex-col">
+        {items.slice(0, 8).map((it) => <TickerItem key={`${it.kind}-${it.id}`} item={it} />)}
       </div>
     );
   }
-
-  const doubled = [...items, ...items];
-
+  const tripled = [...items, ...items, ...items];
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden h-full" style={{ maxHeight: 480 }}>
       <motion.div
-        initial={{ x: 0 }}
-        animate={{ x: "-50%" }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        className="flex gap-2 whitespace-nowrap px-4 pb-3"
+        animate={{ y: "-33.33%" }}
+        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        className="flex flex-col"
       >
-        {doubled.map((it, i) => (
-          <span
-            key={`${it.kind}-${it.id}-${i}`}
-            className="inline-flex shrink-0 items-center gap-1 rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
-          >
-            <span className="text-foreground">{itemTypeMeta[it.kind].label}:</span>
-            <span className="truncate max-w-[180px] sm:max-w-[220px]">{it.title}</span>
-          </span>
+        {tripled.map((it, i) => (
+          <TickerItem key={`${it.kind}-${it.id}-${i}`} item={it} />
         ))}
       </motion.div>
     </div>
   );
 }
 
-// ─── Category tabs (horizontal scroll on mobile, sidebar on desktop) ──────────
+function HorizontalTicker({ items }: { items: IndexItem[] }) {
+  const shouldReduce = useReducedMotion();
+  const doubled = [...items, ...items];
+  if (shouldReduce) {
+    return (
+      <div className="flex gap-2 overflow-x-auto no-scrollbar py-2 px-4">
+        {items.slice(0, 6).map((it) => {
+          const meta = KIND_META[it.kind];
+          return (
+            <span key={`${it.kind}-${it.id}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs">
+              <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${meta.accent}`} />
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">{meta.label}:</span>
+              <span className="truncate max-w-[160px] font-medium text-xs">{it.title}</span>
+            </span>
+          );
+        })}
+      </div>
+    );
+  }
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        animate={{ x: "-50%" }}
+        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+        className="flex gap-2 whitespace-nowrap py-2 px-4"
+      >
+        {doubled.map((it, i) => {
+          const meta = KIND_META[it.kind];
+          return (
+            <span key={`${it.kind}-${it.id}-${i}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs">
+              <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${meta.accent}`} />
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">{meta.label}:</span>
+              <span className="font-medium text-xs">{it.title}</span>
+            </span>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
 
-type CategoryKey = "tools" | "prompts" | "updates" | "compare";
+// ─── CATEGORY PILL TAB ────────────────────────────────────────────────────────
+function CategoryPill({
+  cat, active, onClick,
+}: { cat: typeof CATEGORIES[number]; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      role="tab"
+      aria-selected={active}
+      data-active={active}
+      onClick={onClick}
+      className={[
+        "shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all h-10",
+        active
+          ? "bg-foreground text-background border-foreground shadow-sm"
+          : "bg-background text-muted-foreground border-border hover:border-foreground/40 hover:text-foreground",
+      ].join(" ")}
+    >
+      <cat.icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+      {cat.label}
+    </button>
+  );
+}
 
-const CATEGORIES = [
-  {
-    key: "tools" as CategoryKey,
-    label: "AI Tools",
-    icon: Cpu,
-    blurb: "Fast, vetted tools. Not 300 fake directories and a prayer.",
-    bullets: ["Free resources", "Latest releases", "Hidden gems"],
-    to: "/tools",
-  },
-  {
-    key: "prompts" as CategoryKey,
-    label: "Prompts",
-    icon: BookOpen,
-    blurb: "Prompts you'll actually reuse, not motivational quotes in disguise.",
-    bullets: ["Top-rated prompts", "Curated collections", "Advanced techniques"],
-    to: "/prompts",
-  },
-  {
-    key: "updates" as CategoryKey,
-    label: "Model Updates",
-    icon: TrendingUp,
-    blurb: "What changed, why it matters, and what breaks because of it.",
-    bullets: ["Change summaries", "Impact analysis", "Practical implications"],
-    to: "/updates",
-  },
-  {
-    key: "compare" as CategoryKey,
-    label: "Comparisons",
-    icon: LineChart,
-    blurb: "Side-by-side, no fluff. Pick the right model and move on.",
-    bullets: ["Chat models", "Image generators", "Writing assistants"],
-    to: "/comparisons",
-  },
-] as const;
+// ─── SECTION LABEL (editorial running head) ───────────────────────────────────
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 mb-5 sm:mb-6">
+      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+        {children}
+      </span>
+      <div className="flex-1 h-px bg-border" />
+    </div>
+  );
+}
 
-// ─── Main component ───────────────────────────────────────────────────────────
+// ─── STAT STRIP ───────────────────────────────────────────────────────────────
+function StatStrip({ icon: Icon, label, value, tone }: {
+  icon: React.ElementType; label: string; value: string;
+  tone: "primary" | "green" | "orange";
+}) {
+  const color = tone === "primary" ? "text-primary" : tone === "green" ? "text-green-500" : "text-orange-500";
+  const bg    = tone === "primary" ? "bg-primary/8" : tone === "green" ? "bg-green-500/8" : "bg-orange-500/8";
+  return (
+    <div className={`rounded-2xl border ${bg} p-4 sm:p-5 flex items-center gap-3`}>
+      <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${bg}`}>
+        <Icon className={`h-4 w-4 ${color}`} aria-hidden />
+      </div>
+      <div>
+        <div className={`text-xl sm:text-2xl font-bold font-mono leading-none ${color}`}>{value}</div>
+        <div className="text-xs text-muted-foreground mt-0.5">{label}</div>
+      </div>
+    </div>
+  );
+}
 
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function ToolDropAI() {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("tools");
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroInView = useInView(heroRef, { once: true });
 
-  // Scroll active tab into view on mobile
   useEffect(() => {
     const el = tabsRef.current?.querySelector(`[data-active="true"]`) as HTMLElement | null;
     el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
   }, [activeCategory]);
 
-  // ── Data ──
-
   const unifiedIndex = useMemo<IndexItem[]>(() => {
     const idx: IndexItem[] = [];
-
-    tools.forEach((t) =>
-      idx.push({
-        kind: "tool",
-        id: t.id,
-        slug: t.slug,
-        title: t.name,
-        subtitle: t.oneLiner,
-        typeTag: (t.tags[0] || "tool").toUpperCase(),
-        minutes: 6,
-        updatedAtISO: t.updatedAtISO,
-      })
-    );
-    prompts.forEach((p) =>
-      idx.push({
-        kind: "prompt",
-        id: p.id,
-        slug: p.slug,
-        title: p.title,
-        subtitle: p.purpose,
-        typeTag: (p.tags[0] || "prompt").toUpperCase(),
-        minutes: 5,
-        updatedAtISO: p.updatedAtISO,
-      })
-    );
-    updates.forEach((u) =>
-      idx.push({
-        kind: "update",
-        id: u.id,
-        slug: u.slug,
-        title: u.headline,
-        subtitle: u.tldr,
-        typeTag: u.model.toUpperCase(),
-        minutes: 4,
-        updatedAtISO: u.updatedAtISO,
-      })
-    );
-    collections.forEach((c) =>
-      idx.push({
-        kind: "collection",
-        id: c.id,
-        slug: c.slug,
-        title: c.title,
-        subtitle: c.description,
-        typeTag: "COLLECTION",
-        minutes: 7,
-        updatedAtISO: c.updatedAtISO,
-      })
-    );
-    comparisons.forEach((c) =>
-      idx.push({
-        kind: "comparison",
-        id: c.id,
-        slug: c.slug,
-        title: c.title,
-        subtitle: c.description,
-        typeTag: "VS",
-        minutes: 6,
-        updatedAtISO: c.updatedAtISO,
-      })
-    );
-
-    idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
-    return idx;
+    tools.forEach((t) => idx.push({ kind: "tool", id: t.id, slug: t.slug, title: t.name, subtitle: t.oneLiner, typeTag: (t.tags[0] || "tool").toUpperCase(), minutes: 6, updatedAtISO: t.updatedAtISO }));
+    prompts.forEach((p) => idx.push({ kind: "prompt", id: p.id, slug: p.slug, title: p.title, subtitle: p.purpose, typeTag: (p.tags[0] || "prompt").toUpperCase(), minutes: 5, updatedAtISO: p.updatedAtISO }));
+    updates.forEach((u) => idx.push({ kind: "update", id: u.id, slug: u.slug, title: u.headline, subtitle: u.tldr, typeTag: u.model.toUpperCase(), minutes: 4, updatedAtISO: u.updatedAtISO }));
+    collections.forEach((c) => idx.push({ kind: "collection", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, typeTag: "COLLECTION", minutes: 7, updatedAtISO: c.updatedAtISO }));
+    comparisons.forEach((c) => idx.push({ kind: "comparison", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, typeTag: "VS", minutes: 6, updatedAtISO: c.updatedAtISO }));
+    return idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
   }, []);
 
-  const featuredCollections = useMemo(() => collections.slice(0, 4), []);
-  const latestFeed = useMemo(() => unifiedIndex.slice(0, 6), [unifiedIndex]);
+  const latestFeed   = useMemo(() => unifiedIndex.slice(0, 9), [unifiedIndex]);
+  const featuredCols = useMemo(() => collections.slice(0, 4), []);
 
   const active = CATEGORIES.find((c) => c.key === activeCategory)!;
-
   const categoryItems = useMemo(() => {
     const base =
-      activeCategory === "tools"
-        ? unifiedIndex.filter((x) => x.kind === "tool")
-        : activeCategory === "prompts"
-        ? unifiedIndex.filter((x) => x.kind === "prompt")
-        : activeCategory === "updates"
-        ? unifiedIndex.filter((x) => x.kind === "update")
-        : unifiedIndex.filter((x) => x.kind === "comparison");
-
-    return { hero: base[0], rest: base.slice(1, 6) };
+      activeCategory === "tools"   ? unifiedIndex.filter((x) => x.kind === "tool") :
+      activeCategory === "prompts" ? unifiedIndex.filter((x) => x.kind === "prompt") :
+      activeCategory === "updates" ? unifiedIndex.filter((x) => x.kind === "update") :
+      unifiedIndex.filter((x) => x.kind === "comparison");
+    return { cards: base.slice(0, 3), rows: base.slice(3, 9) };
   }, [activeCategory, unifiedIndex]);
 
   const faqs = [
-    {
-      q: "Why visit regularly?",
-      a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise.",
-    },
-    {
-      q: "How do you curate?",
-      a: "New, clearly useful, or showing real traction. If it's vague or hype-first, it doesn't get featured.",
-    },
-    {
-      q: "Who is this for?",
-      a: "Builders, students, and working humans who want signal, not a 40-tab research session.",
-    },
+    { q: "Why visit regularly?", a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise." },
+    { q: "How do you curate?",   a: "New, clearly useful, or showing real traction. If it's vague or hype-first, it doesn't get featured." },
+    { q: "Who is this for?",     a: "Builders, students, and working humans who want signal, not a 40-tab research session." },
   ];
 
-  const subscribe = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!/.+@.+\..+/.test(email)) {
-        setToast("Please enter a valid email address.");
-        setTimeout(() => setToast(null), 2500);
-        return;
-      }
-      setToast("Successfully subscribed! Check your inbox for confirmation.");
-      setEmail("");
+  const subscribe = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (!/.+@.+\..+/.test(email)) {
+      setToast("Please enter a valid email address.");
       setTimeout(() => setToast(null), 2500);
-    },
-    [email]
-  );
+      return;
+    }
+    setToast("Subscribed! Check your inbox.");
+    setEmail("");
+    setTimeout(() => setToast(null), 2500);
+  }, [email]);
 
-  const toggleFAQ = useCallback(
-    (idx: number) => setExpandedFAQ((prev) => (prev === idx ? null : idx)),
-    []
-  );
-
-  // ── Render ──
-
+  // ── Render ──────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* ── Background accents (hidden on reduced-motion) ── */}
-      <div className="pointer-events-none fixed inset-0 -z-10 motion-safe:block hidden" aria-hidden="true">
-        <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute top-48 -left-24 h-80 w-80 rounded-full bg-green-500/10 blur-3xl" />
-        <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+
+      {/* ── Subtle noise texture overlay ── */}
+      <div className="pointer-events-none fixed inset-0 -z-20 opacity-[0.015]"
+        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }}
+        aria-hidden />
+
+      {/* ── Background orbs ── */}
+      <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
+        <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-primary/6 blur-[120px]" />
+        <div className="absolute top-1/3 -left-48 h-[400px] w-[400px] rounded-full bg-green-500/5 blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 h-[350px] w-[350px] rounded-full bg-orange-500/5 blur-[100px]" />
       </div>
 
-      {/* ────────────────────────────────────────────────────────────────────────
-          HERO
-      ──────────────────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-6xl px-4 pt-8 sm:pt-12 pb-6 sm:pb-8">
+      {/* ════════════════════════════════════════════════════════════════════════
+          HERO — editorial asymmetric layout
+      ════════════════════════════════════════════════════════════════════════ */}
+      <section ref={heroRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-16 pb-0">
+
+        {/* Top meta bar */}
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={staggerChildren}
-          className="grid gap-6 lg:grid-cols-12"
+          initial={{ opacity: 0, y: -12 }}
+          animate={heroInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-between mb-8 sm:mb-12"
         >
-          {/* Left: headline + CTAs */}
-          <motion.div variants={fadeUp} className="lg:col-span-7">
-            {/* Pills */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Pill icon={Flame}>Daily updates</Pill>
-              <Pill icon={ShieldCheck}>Curated for quality</Pill>
-              <Pill icon={Globe}>Signal over noise</Pill>
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              Live feed
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[10px] text-muted-foreground/60 hidden sm:block uppercase tracking-widest">
+              Signal / Noise ratio: ∞
+            </span>
+            <Button variant="outline" size="sm" className="rounded-full h-8 text-xs font-mono" asChild>
+              <Link href="/search">Search ⌘K</Link>
+            </Button>
+          </div>
+        </motion.div>
+
+        {/* Main hero grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-6">
+
+          {/* ── LEFT: Massive editorial headline ── */}
+          <div className="lg:col-span-7 xl:col-span-8 pb-8 lg:pb-16 lg:pr-8 lg:border-r border-border/50">
+
+            {/* Overline tags */}
+            <motion.div
+              initial="hidden" animate={heroInView ? "show" : "hidden"} variants={stagger}
+              className="flex flex-wrap gap-2 mb-6"
+            >
+              {[
+                { icon: Flame, label: "Daily updates" },
+                { icon: ShieldCheck, label: "Curated for quality" },
+                { icon: Globe, label: "Signal over noise" },
+              ].map(({ icon: Icon, label }, i) => (
+                <motion.span key={label} variants={clipReveal}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs text-muted-foreground bg-background/60 backdrop-blur">
+                  <Icon className="h-3 w-3 shrink-0" />
+                  {label}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* Headline — oversized, slightly offset */}
+            <div className="relative">
+              {/* Decorative large number */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={heroInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="absolute -right-4 sm:-right-8 -top-6 sm:-top-8 font-mono text-[80px] sm:text-[120px] font-bold text-foreground/[0.03] leading-none select-none pointer-events-none hidden sm:block"
+                aria-hidden
+              >
+                AI
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="text-[2.4rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold tracking-tight leading-[1.05] relative"
+              >
+                What changed<br />
+                <span className="relative inline-block">
+                  in AI
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    animate={heroInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary origin-left"
+                    aria-hidden
+                  />
+                </span>
+                {" "}today?
+              </motion.h1>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-              What changed in AI today?
-            </h1>
-
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground max-w-xl">
-              Discover vetted tools, reusable prompts, and model updates that actually matter.
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-5 sm:mt-6 text-base sm:text-lg text-muted-foreground max-w-lg"
+            >
+              Vetted tools, reusable prompts, and model updates that actually matter.
               No noise. No "Top 200 AI Tools" nonsense.
-            </p>
+            </motion.p>
 
-            {/* CTA row – stacks to single col on mobile */}
-            <div className="mt-5 sm:mt-6 grid grid-cols-1 xs:grid-cols-3 gap-2 sm:flex sm:flex-row sm:gap-3">
-              <Button className="rounded-2xl group w-full sm:w-auto h-11 sm:h-10 text-sm" asChild>
-                <Link href="/trending" className="inline-flex items-center justify-center gap-2">
+            {/* Stat strips */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg"
+            >
+              <StatStrip icon={Zap}       value="Daily"  label="Fresh content"   tone="primary" />
+              <StatStrip icon={ScanLine}  value="100%"   label="Vetted"          tone="green" />
+              <StatStrip icon={Radio}     value="Live"   label="Updates"         tone="orange" />
+            </motion.div>
+
+            {/* CTA row */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.48 }}
+              className="mt-6 sm:mt-8 flex flex-col xs:flex-row gap-2 sm:gap-3"
+            >
+              <Button className="rounded-2xl h-11 group text-sm font-medium" asChild>
+                <Link href="/trending" className="inline-flex items-center gap-2">
                   Explore trending
-                  <ArrowRight
-                    className="h-4 w-4 group-hover:translate-x-1 transition-transform"
-                    aria-hidden="true"
-                  />
+                  <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </Button>
-              <Button
-                variant="outline"
-                className="rounded-2xl w-full sm:w-auto h-11 sm:h-10 text-sm"
-                asChild
-              >
-                <Link href="/search">Search everything</Link>
-              </Button>
-              <Button
-                variant="outline"
-                className="rounded-2xl w-full sm:w-auto h-11 sm:h-10 text-sm"
-                asChild
-              >
+              <Button variant="outline" className="rounded-2xl h-11 text-sm" asChild>
                 <a href="#explore">Browse categories</a>
               </Button>
-            </div>
-
-            {/* Live marquee strip */}
-            <div className="mt-6 rounded-2xl sm:rounded-3xl border bg-muted/25 overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-2.5 text-xs text-muted-foreground border-b">
-                <Dot className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
-                <span className="font-medium text-foreground">Live:</span>
-                <span>new tools, prompts, and model updates rolling in</span>
-              </div>
-              <LiveMarquee items={latestFeed} />
-            </div>
-          </motion.div>
-
-          {/* Right: today's feed card */}
-          <motion.div variants={fadeUp} className="lg:col-span-5">
-            <GlowCard tone="primary" className="h-full">
-              <CardHeader className="border-b px-4 sm:px-6 py-3 sm:py-4">
-                <CardTitle className="text-sm sm:text-base flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2">
-                    <Sparkles
-                      className="h-4 w-4 text-primary shrink-0"
-                      aria-hidden="true"
-                    />
-                    Today's feed
-                  </span>
-                  <Link
-                    href="/updates"
-                    className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
-                  >
-                    See all
-                  </Link>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-3 sm:p-5">
-                <div className="space-y-2 sm:space-y-3">
-                  {latestFeed.map((it) => (
-                    <ItemRow key={`${it.kind}-${it.id}`} item={it} />
-                  ))}
-                </div>
-              </CardContent>
-            </GlowCard>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ────────────────────────────────────────────────────────────────────────
-          BENTO – stats + featured collections
-      ──────────────────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-6xl px-4 pb-8 sm:pb-10">
-        {/* Stat tiles – 1 col mobile, 3 col md+ */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
-          <StatTile
-            tone="primary"
-            title="Fast Discover"
-            desc="Browse curated tools & resources without losing your weekend."
-            icon={Zap}
-          />
-          <StatTile
-            tone="green"
-            title="Daily Fresh"
-            desc={`New content every day, not "updated 6 months ago."`}
-            icon={TrendingUp}
-          />
-          <StatTile
-            tone="orange"
-            title="Curated"
-            desc="Quality over quantity. Shocking concept, I know."
-            icon={Star}
-          />
-        </div>
-
-        {/* Featured collections + quick actions */}
-        <div className="grid gap-3 sm:gap-4 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <GlowCard tone="neutral" className="h-full">
-              <CardHeader className="border-b px-4 sm:px-6 py-3 sm:py-4">
-                <CardTitle className="text-sm sm:text-base flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-2">
-                    <BadgeCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    Featured collections
-                  </span>
-                  <Link
-                    href="/collections"
-                    className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
-                  >
-                    Browse all
-                  </Link>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-3 sm:p-5">
-                {/* 1-col on mobile, 2-col on sm+ */}
-                <div className="grid gap-2 sm:gap-3 sm:grid-cols-2">
-                  {featuredCollections.map((c, idx) => (
-                    <motion.div
-                      key={c.id}
-                      initial={{ opacity: 0, y: 14 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.06 }}
-                    >
-                      <Link
-                        href={hrefFor("collection", c.slug)}
-                        className="block rounded-xl sm:rounded-2xl border p-3 sm:p-4 active:bg-muted/60 hover:bg-muted/35 hover:shadow-md transition-all"
-                        aria-label={`Open collection: ${c.title}`}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
-                              <Badge
-                                variant="outline"
-                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
-                              >
-                                Collection
-                              </Badge>
-                              <Badge
-                                variant="secondary"
-                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
-                              >
-                                {freshnessLabel(c.updatedAtISO)}
-                              </Badge>
-                            </div>
-                            <div className="font-medium leading-snug text-sm sm:text-base line-clamp-1">
-                              {c.title}
-                            </div>
-                            <div className="mt-0.5 text-xs sm:text-sm text-muted-foreground line-clamp-2">
-                              {c.description}
-                            </div>
-                          </div>
-                          <ArrowRight
-                            className="h-4 w-4 mt-0.5 text-muted-foreground shrink-0"
-                            aria-hidden="true"
-                          />
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </GlowCard>
+            </motion.div>
           </div>
 
-          <div className="lg:col-span-4">
-            <GlowCard tone="primary" className="h-full">
-              <div className="p-4 sm:p-6">
-                <div className="text-xs sm:text-sm text-muted-foreground">Quick actions</div>
-                <div className="mt-1 text-base sm:text-lg font-semibold">
-                  Go from browsing to building
-                </div>
-                <div className="mt-3 sm:mt-4 grid gap-2 sm:gap-3">
-                  <Button
-                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
-                    asChild
-                  >
-                    <Link href="/tools" className="flex items-center justify-between">
-                      Browse tools <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
-                    asChild
-                  >
-                    <Link href="/prompts" className="flex items-center justify-between">
-                      Browse prompts <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
-                    asChild
-                  >
-                    <Link href="/updates" className="flex items-center justify-between">
-                      Model updates <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-                <div className="mt-4 text-xs text-muted-foreground hidden sm:block">
-                  Pro tip: keep the layout asymmetric. Symmetry screams "template."
-                </div>
+          {/* ── RIGHT: Vertical live ticker (desktop only) ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={heroInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="hidden lg:flex lg:col-span-5 xl:col-span-4 flex-col"
+          >
+            <div className="sticky top-6">
+              <div className="flex items-center gap-2 mb-4 px-3">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Latest
+                </span>
+                <Link href="/updates" className="ml-auto text-[10px] font-mono text-muted-foreground/60 hover:text-foreground uppercase tracking-widest transition-colors">
+                  All →
+                </Link>
               </div>
-            </GlowCard>
+              <div className="rounded-2xl border bg-background/50 backdrop-blur overflow-hidden">
+                <VerticalTicker items={latestFeed} />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Mobile horizontal ticker strip ── */}
+        <div className="lg:hidden mt-6 -mx-4 sm:-mx-6">
+          <div className="flex items-center gap-2 mb-2 px-4 sm:px-6">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              Latest
+            </span>
+          </div>
+          <div className="border-t border-b border-border/60 bg-muted/10">
+            <HorizontalTicker items={latestFeed} />
           </div>
         </div>
       </section>
 
-      {/* ────────────────────────────────────────────────────────────────────────
-          EXPLORE – horizontal tab strip on mobile, sidebar on desktop
-      ──────────────────────────────────────────────────────────────────────── */}
-      <section id="explore" className="mx-auto max-w-6xl px-4 pb-8 sm:pb-10">
-        <div className="mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
-            Explore by Category
-          </h2>
-          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-muted-foreground">
-            Pick a lane. Get the best of it, fast.
-          </p>
-        </div>
+      {/* ════════════════════════════════════════════════════════════════════════
+          COLLECTIONS — magazine mosaic
+      ════════════════════════════════════════════════════════════════════════ */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-0">
+        <SectionLabel>Featured Collections</SectionLabel>
 
-        <div className="grid gap-4 lg:grid-cols-12">
-          {/* ── Mobile: scrollable chip strip ── */}
-          <div className="lg:hidden">
-            <div
-              ref={tabsRef}
-              role="tablist"
-              aria-label="Browse categories"
-              className="flex gap-2 overflow-x-auto no-scrollbar pb-1"
+        {/* Asymmetric mosaic: big card left + 3 smaller right on md+, stacked on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {featuredCols.map((c, i) => (
+            <motion.div
+              key={c.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              // first card spans 2 cols on lg
+              className={i === 0 ? "lg:col-span-2 lg:row-span-1" : ""}
             >
-              {CATEGORIES.map((c) => {
-                const isActive = activeCategory === c.key;
-                return (
-                  <button
-                    key={c.key}
-                    role="tab"
-                    aria-selected={isActive}
-                    data-active={isActive}
-                    onClick={() => setActiveCategory(c.key)}
-                    className={[
-                      "shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors h-10",
-                      isActive
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background text-muted-foreground hover:bg-muted/40",
-                    ].join(" ")}
-                  >
-                    <c.icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                    {c.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ── Desktop: left rail ── */}
-          <div className="hidden lg:block lg:col-span-4">
-            <GlowCard tone="neutral">
-              <div className="p-4">
-                <div className="grid gap-2" role="tablist" aria-label="Browse categories">
-                  {CATEGORIES.map((c) => {
-                    const isActive = activeCategory === c.key;
-                    return (
-                      <button
-                        key={c.key}
-                        role="tab"
-                        aria-selected={isActive}
-                        onClick={() => setActiveCategory(c.key)}
-                        className={[
-                          "w-full text-left rounded-2xl border px-4 py-3 transition-colors",
-                          isActive
-                            ? "bg-muted/40 border-primary/30"
-                            : "hover:bg-muted/30",
-                        ].join(" ")}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="flex items-center gap-2">
-                            <c.icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                            <span className="font-medium">{c.label}</span>
-                          </div>
-                          <ChevronDown
-                            className={[
-                              "h-4 w-4 text-muted-foreground transition-transform",
-                              isActive ? "rotate-180" : "rotate-0",
-                            ].join(" ")}
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <div className="mt-1 text-xs text-muted-foreground">{c.blurb}</div>
-                        <div className="mt-2 flex flex-wrap gap-1.5">
-                          {c.bullets.map((b) => (
-                            <Badge
-                              key={b}
-                              variant="outline"
-                              className="rounded-full text-[11px]"
-                            >
-                              {b}
-                            </Badge>
-                          ))}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </GlowCard>
-          </div>
-
-          {/* ── Content panel (full width on mobile, 8/12 on desktop) ── */}
-          <div className="lg:col-span-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.22 }}
-                className="space-y-3"
-                role="tabpanel"
-                aria-label={`${active.label} content`}
-              >
-                {/* Hero item */}
-                {categoryItems.hero && (
-                  <GlowCard tone="primary">
-                    <div className="p-4 sm:p-6">
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-xs sm:text-sm">
-                          <active.icon
-                            className="h-4 w-4 text-primary shrink-0"
-                            aria-hidden="true"
-                          />
-                          <span className="font-semibold">{active.label}</span>
-                          <span className="text-muted-foreground hidden xs:inline">
-                            • spotlight
-                          </span>
-                        </div>
-                        <Link
-                          href={active.to}
-                          className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
-                        >
-                          Browse all
-                        </Link>
-                      </div>
-
-                      <Separator className="my-3 sm:my-4" />
-
-                      <Link
-                        href={hrefFor(categoryItems.hero.kind, categoryItems.hero.slug)}
-                        className="group block rounded-xl sm:rounded-2xl border p-3 sm:p-5 active:bg-muted/60 hover:bg-muted/35 transition-colors"
-                        aria-label={`Open ${categoryItems.hero.title}`}
-                      >
-                        <div className="flex items-start justify-between gap-3 sm:gap-4">
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
-                              <Badge
-                                variant="outline"
-                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
-                              >
-                                {itemTypeMeta[categoryItems.hero.kind].label}
-                              </Badge>
-                              <Badge
-                                variant="secondary"
-                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
-                              >
-                                {freshnessLabel(categoryItems.hero.updatedAtISO)}
-                              </Badge>
-                              <span className="inline-flex items-center gap-1 leading-none">
-                                <Timer className="h-3 w-3 shrink-0" aria-hidden="true" />
-                                {categoryItems.hero.minutes} min
-                              </span>
-                            </div>
-                            <div className="mt-1.5 text-base sm:text-xl font-semibold leading-snug line-clamp-2">
-                              {categoryItems.hero.title}
-                            </div>
-                            <div className="mt-1 text-xs sm:text-sm text-muted-foreground line-clamp-2">
-                              {categoryItems.hero.subtitle}
-                            </div>
-                          </div>
-                          <div className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center">
-                            <ArrowRight
-                              className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:translate-x-1 transition-transform"
-                              aria-hidden="true"
-                            />
-                          </div>
-                        </div>
-                      </Link>
+              <Link href={hrefFor("collection", c.slug)}
+                className={[
+                  "group block rounded-2xl border bg-background overflow-hidden hover:shadow-lg active:scale-[0.99] transition-all duration-300",
+                  i === 0 ? "p-6 sm:p-8" : "p-5",
+                ].join(" ")}
+                aria-label={`Open collection: ${c.title}`}>
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 block mb-2">
+                      Collection · {freshnessLabel(c.updatedAtISO)}
+                    </span>
+                    <div className={[
+                      "font-bold leading-tight",
+                      i === 0 ? "text-xl sm:text-2xl" : "text-base",
+                    ].join(" ")}>
+                      {c.title}
                     </div>
-                  </GlowCard>
-                )}
-
-                {/* Supporting list */}
-                <div className="grid gap-2 sm:gap-3">
-                  {categoryItems.rest.map((it) => (
-                    <ItemRow key={`${it.kind}-${it.id}`} item={it} />
-                  ))}
+                  </div>
+                  <div className="h-8 w-8 rounded-xl border flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:border-primary transition-all">
+                    <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+                <p className={[
+                  "text-muted-foreground line-clamp-2",
+                  i === 0 ? "text-sm sm:text-base" : "text-xs",
+                ].join(" ")}>
+                  {c.description}
+                </p>
+              </Link>
+            </motion.div>
+          ))}
+          {/* Browse all tile */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.32, duration: 0.5 }}
+          >
+            <Link href="/collections"
+              className="group flex h-full min-h-[120px] flex-col items-center justify-center rounded-2xl border border-dashed border-border/60 hover:border-primary/50 hover:bg-muted/20 active:bg-muted/40 transition-all p-5 text-center">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
+                Browse all
+              </span>
+              <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════════════
+          EXPLORE — category tabs + grid/list hybrid
+      ════════════════════════════════════════════════════════════════════════ */}
+      <section id="explore" className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-0">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6 sm:mb-8">
+          <div>
+            <SectionLabel>Explore by Category</SectionLabel>
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight -mt-4">
+              Pick a lane. Get the best of it.
+            </h2>
           </div>
+          <Link href={active.to}
+            className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors self-start sm:self-auto pb-0.5 border-b border-transparent hover:border-foreground">
+            Browse all {active.label} →
+          </Link>
+        </div>
+
+        {/* Tabs */}
+        <div
+          ref={tabsRef}
+          role="tablist"
+          aria-label="Browse categories"
+          className="flex gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 sm:mb-8"
+        >
+          {CATEGORIES.map((c) => (
+            <CategoryPill
+              key={c.key}
+              cat={c}
+              active={activeCategory === c.key}
+              onClick={() => setActiveCategory(c.key)}
+            />
+          ))}
+        </div>
+
+        {/* Content: animated */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            role="tabpanel"
+            aria-label={`${active.label} content`}
+          >
+            {/* 3-up card grid */}
+            {categoryItems.cards.length > 0 && (
+              <motion.div
+                variants={stagger}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4"
+              >
+                {categoryItems.cards.map((it, i) => (
+                  <SignalCard key={`${it.kind}-${it.id}`} item={it} index={i} />
+                ))}
+              </motion.div>
+            )}
+
+            {/* Dense rows */}
+            {categoryItems.rows.length > 0 && (
+              <div className="rounded-2xl border bg-background/50 overflow-hidden">
+                <div className="px-4 py-3 border-b border-border/60 flex items-center justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
+                    More {active.label}
+                  </span>
+                  <Link href={active.to}
+                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 hover:text-foreground transition-colors">
+                    All →
+                  </Link>
+                </div>
+                <motion.div variants={stagger} initial="hidden" animate="show" className="divide-y divide-border/30">
+                  {categoryItems.rows.map((it, i) => (
+                    <DenseRow key={`${it.kind}-${it.id}`} item={it} index={i} />
+                  ))}
+                </motion.div>
+              </div>
+            )}
+
+            {categoryItems.cards.length === 0 && categoryItems.rows.length === 0 && (
+              <div className="text-center py-16 text-muted-foreground font-mono text-sm">
+                No items yet — check back soon.
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </section>
+
+      {/* ── Quick actions strip ── */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
+        <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 sm:gap-3">
+          {[
+            { label: "Browse tools",   href: "/tools",   tone: "primary" as const },
+            { label: "Browse prompts", href: "/prompts", tone: "green"   as const },
+            { label: "Model updates",  href: "/updates", tone: "orange"  as const },
+          ].map(({ label, href, tone }) => {
+            const bg   = tone === "primary" ? "hover:bg-primary/5 hover:border-primary/40"  :
+                         tone === "green"   ? "hover:bg-green-500/5 hover:border-green-500/40" :
+                         "hover:bg-orange-500/5 hover:border-orange-500/40";
+            const text = tone === "primary" ? "group-hover:text-primary" :
+                         tone === "green"   ? "group-hover:text-green-500" :
+                         "group-hover:text-orange-500";
+            return (
+              <Link key={href} href={href}
+                className={`group rounded-2xl border bg-background p-4 sm:p-5 flex items-center justify-between transition-all active:scale-[0.98] ${bg}`}>
+                <span className="font-medium text-sm">{label}</span>
+                <ArrowUpRight className={`h-4 w-4 text-muted-foreground transition-colors ${text} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform`} />
+              </Link>
+            );
+          })}
         </div>
       </section>
 
       <RecentlyViewed limit={6} />
 
-      {/* ────────────────────────────────────────────────────────────────────────
-          NEWSLETTER
-      ──────────────────────────────────────────────────────────────────────── */}
-      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
-        <GlowCard tone="primary">
-          <CardContent className="p-5 sm:p-8">
-            <div className="max-w-2xl mx-auto text-center">
-              <motion.div
-                initial={{ scale: 0.96, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <div className="inline-flex items-center justify-center h-11 w-11 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-primary/10 mb-3 sm:mb-4">
-                  <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" aria-hidden="true" />
-                </div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
-                  Subscribe to weekly updates
-                </h2>
-                <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">
-                  Get the week's best AI tools, prompts, and updates delivered to your inbox.
-                </p>
+      {/* ════════════════════════════════════════════════════════════════════════
+          NEWSLETTER — editorial inset block
+      ════════════════════════════════════════════════════════════════════════ */}
+      <section id="newsletter" className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20">
+        <div className="relative rounded-3xl border bg-foreground text-background overflow-hidden">
+          {/* decorative bg text */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden>
+            <span className="font-mono font-bold text-[100px] sm:text-[160px] text-background/[0.04] leading-none">
+              SIGNAL
+            </span>
+          </div>
 
-                <form
-                  onSubmit={subscribe}
-                  className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3"
-                  noValidate
+          <div className="relative p-8 sm:p-12 max-w-2xl mx-auto text-center">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-background/50 block mb-3">
+              Weekly digest
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3">
+              Subscribe to weekly updates
+            </h2>
+            <p className="text-background/60 text-sm sm:text-base mb-6 sm:mb-8">
+              Get the week's best AI tools, prompts, and updates delivered to your inbox.
+            </p>
+            <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-2 sm:gap-3" noValidate>
+              <Input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded-2xl flex-1 h-12 bg-background/10 border-background/20 placeholder:text-background/40 text-background focus:border-background/60"
+                autoComplete="email"
+                inputMode="email"
+                aria-label="Email address"
+                required
+              />
+              <Button type="submit"
+                className="rounded-2xl h-12 bg-background text-foreground hover:bg-background/90 font-medium px-6 sm:px-8">
+                Subscribe
+              </Button>
+            </form>
+            <AnimatePresence>
+              {toast && (
+                <motion.div
+                  role="status" aria-live="polite"
+                  initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                  className="mt-4 rounded-xl bg-background/10 border border-background/20 p-3 text-sm text-background/80"
                 >
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="rounded-2xl flex-1 h-11"
-                    autoComplete="email"
-                    inputMode="email"
-                    aria-label="Email address"
-                    required
-                  />
-                  <Button type="submit" className="rounded-2xl h-11 sm:h-auto">
-                    Subscribe
-                  </Button>
-                </form>
-
-                <AnimatePresence>
-                  {toast && (
-                    <motion.div
-                      role="status"
-                      aria-live="polite"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="mt-4 rounded-2xl border bg-muted/40 p-3 text-xs sm:text-sm"
-                    >
-                      {toast}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </div>
-          </CardContent>
-        </GlowCard>
+                  {toast}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
       </section>
 
-      {/* ────────────────────────────────────────────────────────────────────────
-          FAQ
-      ──────────────────────────────────────────────────────────────────────── */}
-      <section id="faq" className="mx-auto max-w-6xl px-4 pb-10 sm:pb-12">
-        <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="max-w-3xl mx-auto space-y-2 sm:space-y-3">
+      {/* ════════════════════════════════════════════════════════════════════════
+          FAQ — accordion with editorial formatting
+      ════════════════════════════════════════════════════════════════════════ */}
+      <section id="faq" className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-14 sm:pb-20">
+        <SectionLabel>FAQ</SectionLabel>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-0 max-w-5xl">
           {faqs.map((faq, idx) => (
             <motion.div
               key={faq.q}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
+              transition={{ delay: idx * 0.09, duration: 0.45 }}
+              className="border-t border-border/60"
             >
-              <Card
-                className="rounded-xl sm:rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition-all"
-                onClick={() => toggleFAQ(idx)}
+              <button
+                className="flex items-start justify-between gap-4 w-full text-left py-5 group"
+                aria-expanded={expandedFAQ === idx}
+                aria-controls={`faq-answer-${idx}`}
+                onClick={() => setExpandedFAQ(expandedFAQ === idx ? null : idx)}
               >
-                <CardContent className="p-4 sm:p-5">
-                  {/* aria: treat as disclosure button */}
-                  <button
-                    className="flex items-start justify-between gap-3 w-full text-left"
-                    aria-expanded={expandedFAQ === idx}
-                    aria-controls={`faq-answer-${idx}`}
+                <div className="flex items-start gap-3">
+                  <span className="font-mono text-[10px] text-muted-foreground/50 mt-0.5 shrink-0 w-4">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-semibold text-sm sm:text-base leading-snug">{faq.q}</span>
+                </div>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === idx ? 45 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="shrink-0 mt-0.5 text-muted-foreground group-hover:text-foreground transition-colors"
+                >
+                  <ChevronDown className="h-4 w-4" aria-hidden />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === idx && (
+                  <motion.div
+                    id={`faq-answer-${idx}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.22 }}
+                    className="overflow-hidden"
                   >
-                    <div className="font-medium flex-1 text-sm sm:text-base">{faq.q}</div>
-                    <motion.div
-                      animate={{ rotate: expandedFAQ === idx ? 180 : 0 }}
-                      transition={{ duration: 0.22 }}
-                      className="shrink-0 mt-0.5"
-                    >
-                      <ChevronDown
-                        className="h-5 w-5 text-muted-foreground"
-                        aria-hidden="true"
-                      />
-                    </motion.div>
-                  </button>
-
-                  <AnimatePresence>
-                    {expandedFAQ === idx && (
-                      <motion.div
-                        id={`faq-answer-${idx}`}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.22 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="mt-3 text-xs sm:text-sm text-muted-foreground pt-3 border-t">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </CardContent>
-              </Card>
+                    <div className="pl-7 pb-5 text-sm text-muted-foreground leading-relaxed">
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
