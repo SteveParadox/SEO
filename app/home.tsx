@@ -2,11 +2,35 @@
 
 import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 import {
-  Sparkles, Flame, TrendingUp, ShieldCheck, ArrowRight, BadgeCheck,
-  BookOpen, LineChart, Cpu, Globe, Timer, Copy, Wrench, Trophy,
-  ChevronDown, Star, Zap, ArrowUpRight, ScanLine, Radio,
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useInView,
+} from "framer-motion";
+import type { Variants, Easing } from "framer-motion";
+
+import {
+  Sparkles,
+  Flame,
+  TrendingUp,
+  ShieldCheck,
+  ArrowRight,
+  BadgeCheck,
+  BookOpen,
+  LineChart,
+  Cpu,
+  Globe,
+  Timer,
+  Copy,
+  Wrench,
+  Trophy,
+  ChevronDown,
+  Star,
+  Zap,
+  ArrowUpRight,
+  ScanLine,
+  Radio,
 } from "lucide-react";
 import { Scale } from "lucide-react";
 
@@ -22,26 +46,66 @@ import { DATA } from "@/lib/data";
 const { tools, prompts, updates, collections, comparisons } = DATA;
 
 const KIND_META = {
-  tool:       { label: "Tool",       icon: Wrench,    accent: "bg-primary",              text: "text-primary"              },
-  prompt:     { label: "Prompt",     icon: Copy,      accent: "bg-green-500",            text: "text-green-500"            },
-  update:     { label: "Update",     icon: TrendingUp, accent: "bg-orange-500",          text: "text-orange-500"           },
-  collection: { label: "Collection", icon: BadgeCheck, accent: "bg-primary",             text: "text-primary"              },
-  comparison: { label: "Comparison", icon: Scale,     accent: "bg-muted-foreground",     text: "text-muted-foreground"     },
-  best:       { label: "Best List",  icon: Trophy,    accent: "bg-orange-500",           text: "text-orange-500"           },
+  tool: {
+    label: "Tool",
+    icon: Wrench,
+    accent: "bg-primary",
+    text: "text-primary",
+  },
+  prompt: {
+    label: "Prompt",
+    icon: Copy,
+    accent: "bg-green-500",
+    text: "text-green-500",
+  },
+  update: {
+    label: "Update",
+    icon: TrendingUp,
+    accent: "bg-orange-500",
+    text: "text-orange-500",
+  },
+  collection: {
+    label: "Collection",
+    icon: BadgeCheck,
+    accent: "bg-primary",
+    text: "text-primary",
+  },
+  comparison: {
+    label: "Comparison",
+    icon: Scale,
+    accent: "bg-muted-foreground",
+    text: "text-muted-foreground",
+  },
+  best: {
+    label: "Best List",
+    icon: Trophy,
+    accent: "bg-orange-500",
+    text: "text-orange-500",
+  },
 } as const;
 
 type Kind = keyof typeof KIND_META;
 
 type IndexItem = {
-  kind: Kind; id: string; slug: string;
-  title: string; subtitle: string; typeTag: string;
-  minutes: number; updatedAtISO: string;
+  kind: Kind;
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  typeTag: string;
+  minutes: number;
+  updatedAtISO: string;
 };
 
 type CategoryKey = "tools" | "prompts" | "updates" | "compare";
 
 function daysAgo(iso: string) {
-  return Math.max(0, Math.floor((Date.now() - new Date(iso + "T00:00:00").getTime()) / 86400000));
+  return Math.max(
+    0,
+    Math.floor(
+      (Date.now() - new Date(iso + "T00:00:00").getTime()) / 86400000
+    )
+  );
 }
 function freshnessLabel(iso: string) {
   const d = daysAgo(iso);
@@ -59,36 +123,85 @@ function hrefFor(kind: Kind, slug: string) {
   return `/comparisons/${slug}`;
 }
 
-// ─── Motion ───────────────────────────────────────────────────────────────────
-const clipReveal = {
+// ─── Motion (FIXED) ───────────────────────────────────────────────────────────
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
+
+const clipReveal: Variants = {
   hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0 },
-  show: { clipPath: "inset(0 0% 0 0)", opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    clipPath: "inset(0 0% 0 0)",
+    opacity: 1,
+    transition: { duration: 0.6, ease: EASE_OUT },
+  },
 };
-const slideUp = {
+
+const slideUp: Variants = {
   hidden: { y: 32, opacity: 0 },
-  show: (i: number) => ({ y: 0, opacity: 1, transition: { delay: i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }),
+  show: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.07,
+      duration: 0.5,
+      ease: EASE_OUT,
+    },
+  }),
 };
-const stagger = {
-  hidden: {}, show: { transition: { staggerChildren: 0.06 } },
+
+const stagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
 // ─── CATEGORIES ───────────────────────────────────────────────────────────────
 const CATEGORIES = [
-  { key: "tools" as CategoryKey,   label: "AI Tools",      icon: Cpu,       blurb: "Vetted. Not 300 fake directories.", bullets: ["Free", "Latest", "Gems"], to: "/tools" },
-  { key: "prompts" as CategoryKey, label: "Prompts",       icon: BookOpen,  blurb: "Prompts you'll actually reuse.",    bullets: ["Top-rated", "Collections", "Advanced"], to: "/prompts" },
-  { key: "updates" as CategoryKey, label: "Model Updates", icon: TrendingUp,blurb: "What changed & why it matters.",    bullets: ["Summaries", "Impact", "Implications"], to: "/updates" },
-  { key: "compare" as CategoryKey, label: "Comparisons",   icon: LineChart, blurb: "Side-by-side. No fluff.",           bullets: ["Chat models", "Image gen", "Writers"], to: "/comparisons" },
+  {
+    key: "tools" as CategoryKey,
+    label: "AI Tools",
+    icon: Cpu,
+    blurb: "Vetted. Not 300 fake directories.",
+    bullets: ["Free", "Latest", "Gems"],
+    to: "/tools",
+  },
+  {
+    key: "prompts" as CategoryKey,
+    label: "Prompts",
+    icon: BookOpen,
+    blurb: "Prompts you'll actually reuse.",
+    bullets: ["Top-rated", "Collections", "Advanced"],
+    to: "/prompts",
+  },
+  {
+    key: "updates" as CategoryKey,
+    label: "Model Updates",
+    icon: TrendingUp,
+    blurb: "What changed & why it matters.",
+    bullets: ["Summaries", "Impact", "Implications"],
+    to: "/updates",
+  },
+  {
+    key: "compare" as CategoryKey,
+    label: "Comparisons",
+    icon: LineChart,
+    blurb: "Side-by-side. No fluff.",
+    bullets: ["Chat models", "Image gen", "Writers"],
+    to: "/comparisons",
+  },
 ] as const;
 
 // ─── TICKER ITEM ──────────────────────────────────────────────────────────────
 function TickerItem({ item }: { item: IndexItem }) {
   const meta = KIND_META[item.kind];
   return (
-    <Link href={hrefFor(item.kind, item.slug)}
-      className="group flex items-start gap-2 py-3 border-b border-border/40 hover:bg-muted/20 px-3 transition-colors last:border-0">
+    <Link
+      href={hrefFor(item.kind, item.slug)}
+      className="group flex items-start gap-2 py-3 border-b border-border/40 hover:bg-muted/20 px-3 transition-colors last:border-0"
+    >
       <span className={`mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full ${meta.accent}`} />
       <div className="min-w-0 flex-1">
-        <div className={`font-mono text-[9px] uppercase tracking-widest mb-0.5 ${meta.text}`}>
+        <div
+          className={`font-mono text-[9px] uppercase tracking-widest mb-0.5 ${meta.text}`}
+        >
           {meta.label}
         </div>
         <div className="text-xs font-medium leading-tight line-clamp-2 group-hover:text-primary transition-colors">
@@ -105,18 +218,24 @@ function SignalCard({ item, index }: { item: IndexItem; index: number }) {
   const Icon = meta.icon;
   return (
     <motion.div custom={index} variants={slideUp}>
-      <Link href={hrefFor(item.kind, item.slug)}
+      <Link
+        href={hrefFor(item.kind, item.slug)}
         className="group relative flex flex-col h-full rounded-2xl border bg-background overflow-hidden hover:shadow-lg transition-all duration-300 active:scale-[0.98]"
-        aria-label={`${meta.label}: ${item.title}`}>
+        aria-label={`${meta.label}: ${item.title}`}
+      >
         {/* top accent bar */}
         <div className={`h-0.5 w-full ${meta.accent}`} />
         <div className="p-4 sm:p-5 flex flex-col flex-1">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className={`h-7 w-7 rounded-lg flex items-center justify-center ${meta.accent}/10`}>
+              <div
+                className={`h-7 w-7 rounded-lg flex items-center justify-center ${meta.accent}/10`}
+              >
                 <Icon className={`h-3.5 w-3.5 ${meta.text}`} aria-hidden />
               </div>
-              <span className={`font-mono text-[9px] uppercase tracking-widest ${meta.text}`}>
+              <span
+                className={`font-mono text-[9px] uppercase tracking-widest ${meta.text}`}
+              >
                 {meta.label}
               </span>
             </div>
@@ -150,9 +269,11 @@ function DenseRow({ item, index }: { item: IndexItem; index: number }) {
   const meta = KIND_META[item.kind];
   return (
     <motion.div custom={index} variants={slideUp}>
-      <Link href={hrefFor(item.kind, item.slug)}
+      <Link
+        href={hrefFor(item.kind, item.slug)}
         className="group flex items-start gap-3 py-3.5 px-4 rounded-xl hover:bg-muted/30 active:bg-muted/50 transition-colors border border-transparent hover:border-border/60"
-        aria-label={`${meta.label}: ${item.title}`}>
+        aria-label={`${meta.label}: ${item.title}`}
+      >
         <div className={`mt-0.5 h-2 w-2 shrink-0 rounded-full ${meta.accent} mt-1.5`} />
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2 flex-wrap">
@@ -161,7 +282,9 @@ function DenseRow({ item, index }: { item: IndexItem; index: number }) {
               {meta.label}
             </span>
           </div>
-          <div className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{item.subtitle}</div>
+          <div className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
+            {item.subtitle}
+          </div>
         </div>
         <div className="shrink-0 flex items-center gap-1.5 text-muted-foreground/40">
           <span className="font-mono text-[9px]">{item.minutes}m</span>
@@ -178,7 +301,9 @@ function VerticalTicker({ items }: { items: IndexItem[] }) {
   if (shouldReduce) {
     return (
       <div className="flex flex-col">
-        {items.slice(0, 8).map((it) => <TickerItem key={`${it.kind}-${it.id}`} item={it} />)}
+        {items.slice(0, 8).map((it) => (
+          <TickerItem key={`${it.kind}-${it.id}`} item={it} />
+        ))}
       </div>
     );
   }
@@ -207,11 +332,17 @@ function HorizontalTicker({ items }: { items: IndexItem[] }) {
         {items.slice(0, 6).map((it) => {
           const meta = KIND_META[it.kind];
           return (
-            <span key={`${it.kind}-${it.id}`}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs">
+            <span
+              key={`${it.kind}-${it.id}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs"
+            >
               <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${meta.accent}`} />
-              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">{meta.label}:</span>
-              <span className="truncate max-w-[160px] font-medium text-xs">{it.title}</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
+                {meta.label}:
+              </span>
+              <span className="truncate max-w-[160px] font-medium text-xs">
+                {it.title}
+              </span>
             </span>
           );
         })}
@@ -228,10 +359,14 @@ function HorizontalTicker({ items }: { items: IndexItem[] }) {
         {doubled.map((it, i) => {
           const meta = KIND_META[it.kind];
           return (
-            <span key={`${it.kind}-${it.id}-${i}`}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs">
+            <span
+              key={`${it.kind}-${it.id}-${i}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-background/70 px-3 py-1.5 text-xs"
+            >
               <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${meta.accent}`} />
-              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">{meta.label}:</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
+                {meta.label}:
+              </span>
               <span className="font-medium text-xs">{it.title}</span>
             </span>
           );
@@ -243,8 +378,14 @@ function HorizontalTicker({ items }: { items: IndexItem[] }) {
 
 // ─── CATEGORY PILL TAB ────────────────────────────────────────────────────────
 function CategoryPill({
-  cat, active, onClick,
-}: { cat: typeof CATEGORIES[number]; active: boolean; onClick: () => void }) {
+  cat,
+  active,
+  onClick,
+}: {
+  cat: (typeof CATEGORIES)[number];
+  active: boolean;
+  onClick: () => void;
+}) {
   return (
     <button
       role="tab"
@@ -277,19 +418,38 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 // ─── STAT STRIP ───────────────────────────────────────────────────────────────
-function StatStrip({ icon: Icon, label, value, tone }: {
-  icon: React.ElementType; label: string; value: string;
+function StatStrip({
+  icon: Icon,
+  label,
+  value,
+  tone,
+}: {
+  icon: React.ElementType;
+  label: string;
+  value: string;
   tone: "primary" | "green" | "orange";
 }) {
-  const color = tone === "primary" ? "text-primary" : tone === "green" ? "text-green-500" : "text-orange-500";
-  const bg    = tone === "primary" ? "bg-primary/8" : tone === "green" ? "bg-green-500/8" : "bg-orange-500/8";
+  const color =
+    tone === "primary"
+      ? "text-primary"
+      : tone === "green"
+      ? "text-green-500"
+      : "text-orange-500";
+  const bg =
+    tone === "primary"
+      ? "bg-primary/8"
+      : tone === "green"
+      ? "bg-green-500/8"
+      : "bg-orange-500/8";
   return (
     <div className={`rounded-2xl border ${bg} p-4 sm:p-5 flex items-center gap-3`}>
       <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${bg}`}>
         <Icon className={`h-4 w-4 ${color}`} aria-hidden />
       </div>
       <div>
-        <div className={`text-xl sm:text-2xl font-bold font-mono leading-none ${color}`}>{value}</div>
+        <div className={`text-xl sm:text-2xl font-bold font-mono leading-none ${color}`}>
+          {value}
+        </div>
         <div className="text-xs text-muted-foreground mt-0.5">{label}</div>
       </div>
     </div>
@@ -307,59 +467,138 @@ export default function ToolDropAI() {
   const heroInView = useInView(heroRef, { once: true });
 
   useEffect(() => {
-    const el = tabsRef.current?.querySelector(`[data-active="true"]`) as HTMLElement | null;
+    const el = tabsRef.current?.querySelector(
+      `[data-active="true"]`
+    ) as HTMLElement | null;
     el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
   }, [activeCategory]);
 
   const unifiedIndex = useMemo<IndexItem[]>(() => {
     const idx: IndexItem[] = [];
-    tools.forEach((t) => idx.push({ kind: "tool", id: t.id, slug: t.slug, title: t.name, subtitle: t.oneLiner, typeTag: (t.tags[0] || "tool").toUpperCase(), minutes: 6, updatedAtISO: t.updatedAtISO }));
-    prompts.forEach((p) => idx.push({ kind: "prompt", id: p.id, slug: p.slug, title: p.title, subtitle: p.purpose, typeTag: (p.tags[0] || "prompt").toUpperCase(), minutes: 5, updatedAtISO: p.updatedAtISO }));
-    updates.forEach((u) => idx.push({ kind: "update", id: u.id, slug: u.slug, title: u.headline, subtitle: u.tldr, typeTag: u.model.toUpperCase(), minutes: 4, updatedAtISO: u.updatedAtISO }));
-    collections.forEach((c) => idx.push({ kind: "collection", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, typeTag: "COLLECTION", minutes: 7, updatedAtISO: c.updatedAtISO }));
-    comparisons.forEach((c) => idx.push({ kind: "comparison", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, typeTag: "VS", minutes: 6, updatedAtISO: c.updatedAtISO }));
-    return idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
+    tools.forEach((t) =>
+      idx.push({
+        kind: "tool",
+        id: t.id,
+        slug: t.slug,
+        title: t.name,
+        subtitle: t.oneLiner,
+        typeTag: (t.tags[0] || "tool").toUpperCase(),
+        minutes: 6,
+        updatedAtISO: t.updatedAtISO,
+      })
+    );
+    prompts.forEach((p) =>
+      idx.push({
+        kind: "prompt",
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        subtitle: p.purpose,
+        typeTag: (p.tags[0] || "prompt").toUpperCase(),
+        minutes: 5,
+        updatedAtISO: p.updatedAtISO,
+      })
+    );
+    updates.forEach((u) =>
+      idx.push({
+        kind: "update",
+        id: u.id,
+        slug: u.slug,
+        title: u.headline,
+        subtitle: u.tldr,
+        typeTag: u.model.toUpperCase(),
+        minutes: 4,
+        updatedAtISO: u.updatedAtISO,
+      })
+    );
+    collections.forEach((c) =>
+      idx.push({
+        kind: "collection",
+        id: c.id,
+        slug: c.slug,
+        title: c.title,
+        subtitle: c.description,
+        typeTag: "COLLECTION",
+        minutes: 7,
+        updatedAtISO: c.updatedAtISO,
+      })
+    );
+    comparisons.forEach((c) =>
+      idx.push({
+        kind: "comparison",
+        id: c.id,
+        slug: c.slug,
+        title: c.title,
+        subtitle: c.description,
+        typeTag: "VS",
+        minutes: 6,
+        updatedAtISO: c.updatedAtISO,
+      })
+    );
+    return idx.sort(
+      (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
+    );
   }, []);
 
-  const latestFeed   = useMemo(() => unifiedIndex.slice(0, 9), [unifiedIndex]);
+  const latestFeed = useMemo(() => unifiedIndex.slice(0, 9), [unifiedIndex]);
   const featuredCols = useMemo(() => collections.slice(0, 4), []);
 
   const active = CATEGORIES.find((c) => c.key === activeCategory)!;
   const categoryItems = useMemo(() => {
     const base =
-      activeCategory === "tools"   ? unifiedIndex.filter((x) => x.kind === "tool") :
-      activeCategory === "prompts" ? unifiedIndex.filter((x) => x.kind === "prompt") :
-      activeCategory === "updates" ? unifiedIndex.filter((x) => x.kind === "update") :
-      unifiedIndex.filter((x) => x.kind === "comparison");
+      activeCategory === "tools"
+        ? unifiedIndex.filter((x) => x.kind === "tool")
+        : activeCategory === "prompts"
+        ? unifiedIndex.filter((x) => x.kind === "prompt")
+        : activeCategory === "updates"
+        ? unifiedIndex.filter((x) => x.kind === "update")
+        : unifiedIndex.filter((x) => x.kind === "comparison");
     return { cards: base.slice(0, 3), rows: base.slice(3, 9) };
   }, [activeCategory, unifiedIndex]);
 
   const faqs = [
-    { q: "Why visit regularly?", a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise." },
-    { q: "How do you curate?",   a: "New, clearly useful, or showing real traction. If it's vague or hype-first, it doesn't get featured." },
-    { q: "Who is this for?",     a: "Builders, students, and working humans who want signal, not a 40-tab research session." },
+    {
+      q: "Why visit regularly?",
+      a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise.",
+    },
+    {
+      q: "How do you curate?",
+      a: "New, clearly useful, or showing real traction. If it's vague or hype-first, it doesn't get featured.",
+    },
+    {
+      q: "Who is this for?",
+      a: "Builders, students, and working humans who want signal, not a 40-tab research session.",
+    },
   ];
 
-  const subscribe = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (!/.+@.+\..+/.test(email)) {
-      setToast("Please enter a valid email address.");
+  const subscribe = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!/.+@.+\..+/.test(email)) {
+        setToast("Please enter a valid email address.");
+        setTimeout(() => setToast(null), 2500);
+        return;
+      }
+      setToast("Subscribed! Check your inbox.");
+      setEmail("");
       setTimeout(() => setToast(null), 2500);
-      return;
-    }
-    setToast("Subscribed! Check your inbox.");
-    setEmail("");
-    setTimeout(() => setToast(null), 2500);
-  }, [email]);
+    },
+    [email]
+  );
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-
       {/* ── Subtle noise texture overlay ── */}
-      <div className="pointer-events-none fixed inset-0 -z-20 opacity-[0.015]"
-        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }}
-        aria-hidden />
+      <div
+        className="pointer-events-none fixed inset-0 -z-20 opacity-[0.015]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundSize: "200px 200px",
+        }}
+        aria-hidden
+      />
 
       {/* ── Background orbs ── */}
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
@@ -371,8 +610,10 @@ export default function ToolDropAI() {
       {/* ════════════════════════════════════════════════════════════════════════
           HERO — editorial asymmetric layout
       ════════════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-16 pb-0">
-
+      <section
+        ref={heroRef}
+        className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-16 pb-0"
+      >
         {/* Top meta bar */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
@@ -393,7 +634,12 @@ export default function ToolDropAI() {
             <span className="font-mono text-[10px] text-muted-foreground/60 hidden sm:block uppercase tracking-widest">
               Signal / Noise ratio: ∞
             </span>
-            <Button variant="outline" size="sm" className="rounded-full h-8 text-xs font-mono" asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full h-8 text-xs font-mono"
+              asChild
+            >
               <Link href="/search">Search ⌘K</Link>
             </Button>
           </div>
@@ -401,22 +647,25 @@ export default function ToolDropAI() {
 
         {/* Main hero grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-6">
-
           {/* ── LEFT: Massive editorial headline ── */}
           <div className="lg:col-span-7 xl:col-span-8 pb-8 lg:pb-16 lg:pr-8 lg:border-r border-border/50">
-
             {/* Overline tags */}
             <motion.div
-              initial="hidden" animate={heroInView ? "show" : "hidden"} variants={stagger}
+              initial="hidden"
+              animate={heroInView ? "show" : "hidden"}
+              variants={stagger}
               className="flex flex-wrap gap-2 mb-6"
             >
               {[
                 { icon: Flame, label: "Daily updates" },
                 { icon: ShieldCheck, label: "Curated for quality" },
                 { icon: Globe, label: "Signal over noise" },
-              ].map(({ icon: Icon, label }, i) => (
-                <motion.span key={label} variants={clipReveal}
-                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs text-muted-foreground bg-background/60 backdrop-blur">
+              ].map(({ icon: Icon, label }) => (
+                <motion.span
+                  key={label}
+                  variants={clipReveal}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs text-muted-foreground bg-background/60 backdrop-blur"
+                >
                   <Icon className="h-3 w-3 shrink-0" />
                   {label}
                 </motion.span>
@@ -439,21 +688,22 @@ export default function ToolDropAI() {
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.15, ease: EASE_OUT }}
                 className="text-[2.4rem] sm:text-[3.5rem] md:text-[4.5rem] font-bold tracking-tight leading-[1.05] relative"
               >
-                What changed<br />
+                What changed
+                <br />
                 <span className="relative inline-block">
                   in AI
                   <motion.span
                     initial={{ scaleX: 0 }}
                     animate={heroInView ? { scaleX: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.5, delay: 0.55, ease: EASE_OUT }}
                     className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary origin-left"
                     aria-hidden
                   />
-                </span>
-                {" "}today?
+                </span>{" "}
+                today?
               </motion.h1>
             </div>
 
@@ -474,9 +724,9 @@ export default function ToolDropAI() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg"
             >
-              <StatStrip icon={Zap}       value="Daily"  label="Fresh content"   tone="primary" />
-              <StatStrip icon={ScanLine}  value="100%"   label="Vetted"          tone="green" />
-              <StatStrip icon={Radio}     value="Live"   label="Updates"         tone="orange" />
+              <StatStrip icon={Zap} value="Daily" label="Fresh content" tone="primary" />
+              <StatStrip icon={ScanLine} value="100%" label="Vetted" tone="green" />
+              <StatStrip icon={Radio} value="Live" label="Updates" tone="orange" />
             </motion.div>
 
             {/* CTA row */}
@@ -514,7 +764,10 @@ export default function ToolDropAI() {
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   Latest
                 </span>
-                <Link href="/updates" className="ml-auto text-[10px] font-mono text-muted-foreground/60 hover:text-foreground uppercase tracking-widest transition-colors">
+                <Link
+                  href="/updates"
+                  className="ml-auto text-[10px] font-mono text-muted-foreground/60 hover:text-foreground uppercase tracking-widest transition-colors"
+                >
                   All →
                 </Link>
               </div>
@@ -548,7 +801,6 @@ export default function ToolDropAI() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-0">
         <SectionLabel>Featured Collections</SectionLabel>
 
-        {/* Asymmetric mosaic: big card left + 3 smaller right on md+, stacked on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {featuredCols.map((c, i) => (
             <motion.div
@@ -556,25 +808,28 @@ export default function ToolDropAI() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              // first card spans 2 cols on lg
+              transition={{ delay: i * 0.08, duration: 0.5, ease: EASE_OUT }}
               className={i === 0 ? "lg:col-span-2 lg:row-span-1" : ""}
             >
-              <Link href={hrefFor("collection", c.slug)}
+              <Link
+                href={hrefFor("collection", c.slug)}
                 className={[
                   "group block rounded-2xl border bg-background overflow-hidden hover:shadow-lg active:scale-[0.99] transition-all duration-300",
                   i === 0 ? "p-6 sm:p-8" : "p-5",
                 ].join(" ")}
-                aria-label={`Open collection: ${c.title}`}>
+                aria-label={`Open collection: ${c.title}`}
+              >
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div>
                     <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 block mb-2">
                       Collection · {freshnessLabel(c.updatedAtISO)}
                     </span>
-                    <div className={[
-                      "font-bold leading-tight",
-                      i === 0 ? "text-xl sm:text-2xl" : "text-base",
-                    ].join(" ")}>
+                    <div
+                      className={[
+                        "font-bold leading-tight",
+                        i === 0 ? "text-xl sm:text-2xl" : "text-base",
+                      ].join(" ")}
+                    >
                       {c.title}
                     </div>
                   </div>
@@ -582,15 +837,18 @@ export default function ToolDropAI() {
                     <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                   </div>
                 </div>
-                <p className={[
-                  "text-muted-foreground line-clamp-2",
-                  i === 0 ? "text-sm sm:text-base" : "text-xs",
-                ].join(" ")}>
+                <p
+                  className={[
+                    "text-muted-foreground line-clamp-2",
+                    i === 0 ? "text-sm sm:text-base" : "text-xs",
+                  ].join(" ")}
+                >
                   {c.description}
                 </p>
               </Link>
             </motion.div>
           ))}
+
           {/* Browse all tile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -598,8 +856,10 @@ export default function ToolDropAI() {
             viewport={{ once: true }}
             transition={{ delay: 0.32, duration: 0.5 }}
           >
-            <Link href="/collections"
-              className="group flex h-full min-h-[120px] flex-col items-center justify-center rounded-2xl border border-dashed border-border/60 hover:border-primary/50 hover:bg-muted/20 active:bg-muted/40 transition-all p-5 text-center">
+            <Link
+              href="/collections"
+              className="group flex h-full min-h-[120px] flex-col items-center justify-center rounded-2xl border border-dashed border-border/60 hover:border-primary/50 hover:bg-muted/20 active:bg-muted/40 transition-all p-5 text-center"
+            >
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
                 Browse all
               </span>
@@ -620,8 +880,10 @@ export default function ToolDropAI() {
               Pick a lane. Get the best of it.
             </h2>
           </div>
-          <Link href={active.to}
-            className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors self-start sm:self-auto pb-0.5 border-b border-transparent hover:border-foreground">
+          <Link
+            href={active.to}
+            className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors self-start sm:self-auto pb-0.5 border-b border-transparent hover:border-foreground"
+          >
             Browse all {active.label} →
           </Link>
         </div>
@@ -675,12 +937,19 @@ export default function ToolDropAI() {
                   <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">
                     More {active.label}
                   </span>
-                  <Link href={active.to}
-                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 hover:text-foreground transition-colors">
+                  <Link
+                    href={active.to}
+                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 hover:text-foreground transition-colors"
+                  >
                     All →
                   </Link>
                 </div>
-                <motion.div variants={stagger} initial="hidden" animate="show" className="divide-y divide-border/30">
+                <motion.div
+                  variants={stagger}
+                  initial="hidden"
+                  animate="show"
+                  className="divide-y divide-border/30"
+                >
                   {categoryItems.rows.map((it, i) => (
                     <DenseRow key={`${it.kind}-${it.id}`} item={it} index={i} />
                   ))}
@@ -701,21 +970,32 @@ export default function ToolDropAI() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
         <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 sm:gap-3">
           {[
-            { label: "Browse tools",   href: "/tools",   tone: "primary" as const },
-            { label: "Browse prompts", href: "/prompts", tone: "green"   as const },
-            { label: "Model updates",  href: "/updates", tone: "orange"  as const },
+            { label: "Browse tools", href: "/tools", tone: "primary" as const },
+            { label: "Browse prompts", href: "/prompts", tone: "green" as const },
+            { label: "Model updates", href: "/updates", tone: "orange" as const },
           ].map(({ label, href, tone }) => {
-            const bg   = tone === "primary" ? "hover:bg-primary/5 hover:border-primary/40"  :
-                         tone === "green"   ? "hover:bg-green-500/5 hover:border-green-500/40" :
-                         "hover:bg-orange-500/5 hover:border-orange-500/40";
-            const text = tone === "primary" ? "group-hover:text-primary" :
-                         tone === "green"   ? "group-hover:text-green-500" :
-                         "group-hover:text-orange-500";
+            const bg =
+              tone === "primary"
+                ? "hover:bg-primary/5 hover:border-primary/40"
+                : tone === "green"
+                ? "hover:bg-green-500/5 hover:border-green-500/40"
+                : "hover:bg-orange-500/5 hover:border-orange-500/40";
+            const text =
+              tone === "primary"
+                ? "group-hover:text-primary"
+                : tone === "green"
+                ? "group-hover:text-green-500"
+                : "group-hover:text-orange-500";
             return (
-              <Link key={href} href={href}
-                className={`group rounded-2xl border bg-background p-4 sm:p-5 flex items-center justify-between transition-all active:scale-[0.98] ${bg}`}>
+              <Link
+                key={href}
+                href={href}
+                className={`group rounded-2xl border bg-background p-4 sm:p-5 flex items-center justify-between transition-all active:scale-[0.98] ${bg}`}
+              >
                 <span className="font-medium text-sm">{label}</span>
-                <ArrowUpRight className={`h-4 w-4 text-muted-foreground transition-colors ${text} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform`} />
+                <ArrowUpRight
+                  className={`h-4 w-4 text-muted-foreground transition-colors ${text} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform`}
+                />
               </Link>
             );
           })}
@@ -730,7 +1010,10 @@ export default function ToolDropAI() {
       <section id="newsletter" className="mx-auto max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20">
         <div className="relative rounded-3xl border bg-foreground text-background overflow-hidden">
           {/* decorative bg text */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden>
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+            aria-hidden
+          >
             <span className="font-mono font-bold text-[100px] sm:text-[160px] text-background/[0.04] leading-none">
               SIGNAL
             </span>
@@ -758,16 +1041,21 @@ export default function ToolDropAI() {
                 aria-label="Email address"
                 required
               />
-              <Button type="submit"
-                className="rounded-2xl h-12 bg-background text-foreground hover:bg-background/90 font-medium px-6 sm:px-8">
+              <Button
+                type="submit"
+                className="rounded-2xl h-12 bg-background text-foreground hover:bg-background/90 font-medium px-6 sm:px-8"
+              >
                 Subscribe
               </Button>
             </form>
             <AnimatePresence>
               {toast && (
                 <motion.div
-                  role="status" aria-live="polite"
-                  initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                  role="status"
+                  aria-live="polite"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   className="mt-4 rounded-xl bg-background/10 border border-background/20 p-3 text-sm text-background/80"
                 >
                   {toast}
@@ -803,7 +1091,9 @@ export default function ToolDropAI() {
                   <span className="font-mono text-[10px] text-muted-foreground/50 mt-0.5 shrink-0 w-4">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-semibold text-sm sm:text-base leading-snug">{faq.q}</span>
+                  <span className="font-semibold text-sm sm:text-base leading-snug">
+                    {faq.q}
+                  </span>
                 </div>
                 <motion.div
                   animate={{ rotate: expandedFAQ === idx ? 45 : 0 }}
