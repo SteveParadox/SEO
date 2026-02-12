@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   Sparkles,
   Flame,
@@ -22,6 +22,8 @@ import {
   Star,
   Zap,
   Dot,
+  Menu,
+  X,
 } from "lucide-react";
 import { Scale } from "lucide-react";
 
@@ -34,15 +36,19 @@ import { RecentlyViewed } from "@/components/recently-viewed";
 
 import { DATA } from "@/lib/data";
 
+// ─── Motion variants ──────────────────────────────────────────────────────────
+
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
 const staggerChildren = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.07 } },
 };
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const { tools, prompts, updates, collections, comparisons } = DATA;
 
@@ -56,6 +62,8 @@ const itemTypeMeta = {
 } as const;
 
 type Kind = keyof typeof itemTypeMeta;
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function daysAgo(iso: string) {
   const ms = Date.now() - new Date(iso + "T00:00:00").getTime();
@@ -79,16 +87,20 @@ function hrefFor(kind: Kind, slug: string) {
   return `/comparisons/${slug}`;
 }
 
-function Pill({ icon: Icon, children }: { icon: any; children: React.ReactNode }) {
+// ─── Shared sub-components ────────────────────────────────────────────────────
+
+function Pill({
+  icon: Icon,
+  children,
+}: {
+  icon?: React.ElementType;
+  children: React.ReactNode;
+}) {
   return (
-    <motion.span
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="inline-flex items-center gap-1.5 rounded-full border bg-background/70 backdrop-blur px-3 py-1 text-xs text-muted-foreground hover:bg-muted/40 transition-colors cursor-default"
-    >
-      {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
+    <span className="inline-flex items-center gap-1.5 rounded-full border bg-background/70 backdrop-blur px-3 py-1 text-xs text-muted-foreground">
+      {Icon && <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
       {children}
-    </motion.span>
+    </span>
   );
 }
 
@@ -122,15 +134,19 @@ function GlowCard({
       : "from-muted/60 via-muted/20 to-transparent";
 
   return (
-    <div className={`relative rounded-3xl ${className}`}>
-      <div className={`absolute -inset-[1px] rounded-3xl bg-gradient-to-br ${ring} blur-sm`} />
-      <div className="relative rounded-3xl border bg-background/80 backdrop-blur">
+    <div className={`relative rounded-2xl sm:rounded-3xl ${className}`}>
+      <div
+        className={`absolute -inset-[1px] rounded-2xl sm:rounded-3xl bg-gradient-to-br ${ring} blur-sm`}
+        aria-hidden="true"
+      />
+      <div className="relative rounded-2xl sm:rounded-3xl border bg-background/80 backdrop-blur">
         {children}
       </div>
     </div>
   );
 }
 
+/** Touch-friendly row – min 48px tap target */
 function ItemRow({ item }: { item: IndexItem }) {
   const meta = itemTypeMeta[item.kind];
   const Icon = meta.icon;
@@ -138,32 +154,44 @@ function ItemRow({ item }: { item: IndexItem }) {
   return (
     <Link
       href={hrefFor(item.kind, item.slug)}
-      className="group block rounded-2xl border bg-background hover:bg-muted/35 transition-colors"
+      className="group block rounded-xl sm:rounded-2xl border bg-background active:bg-muted/60 hover:bg-muted/35 transition-colors"
       aria-label={`Open ${meta.label}: ${item.title}`}
     >
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-3">
+      {/* min-height ensures 48px tap target */}
+      <div className="p-3 sm:p-4 min-h-[56px] flex items-start">
+        <div className="flex items-start justify-between gap-2 w-full">
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-              <Badge variant="outline" className="rounded-full">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground">
+              <Badge variant="outline" className="rounded-full text-[10px] sm:text-xs px-1.5 py-0">
                 {meta.label}
               </Badge>
-              <span className="inline-flex items-center gap-1">
-                <Icon className="h-3.5 w-3.5" /> {item.typeTag}
+              <span className="inline-flex items-center gap-1 leading-none">
+                <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" aria-hidden="true" />
+                <span className="truncate max-w-[80px] sm:max-w-none">{item.typeTag}</span>
               </span>
-              <Badge variant="secondary" className="rounded-full">
+              <Badge
+                variant="secondary"
+                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
+              >
                 {freshnessLabel(item.updatedAtISO)}
               </Badge>
-              <span className="inline-flex items-center gap-1">
-                <Timer className="h-3.5 w-3.5" /> {item.minutes} min
+              {/* Hide read-time on smallest screens */}
+              <span className="hidden xs:inline-flex items-center gap-1 leading-none">
+                <Timer className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" aria-hidden="true" />
+                {item.minutes} min
               </span>
             </div>
-
-            <div className="mt-2 font-medium leading-snug truncate">{item.title}</div>
-            <div className="mt-1 text-sm text-muted-foreground line-clamp-2">{item.subtitle}</div>
+            <div className="mt-1.5 font-medium leading-snug line-clamp-1 text-sm sm:text-base">
+              {item.title}
+            </div>
+            <div className="mt-0.5 text-xs sm:text-sm text-muted-foreground line-clamp-2">
+              {item.subtitle}
+            </div>
           </div>
-
-          <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+          <ArrowRight
+            className="h-4 w-4 mt-1 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </Link>
@@ -178,7 +206,7 @@ function StatTile({
 }: {
   title: string;
   desc: string;
-  icon: any;
+  icon: React.ElementType;
   tone: "primary" | "green" | "orange";
 }) {
   const iconBg =
@@ -190,14 +218,16 @@ function StatTile({
 
   return (
     <GlowCard tone={tone} className="h-full">
-      <div className="p-6">
-        <div className="flex items-start gap-4">
-          <div className={`h-11 w-11 rounded-2xl flex items-center justify-center ${iconBg}`}>
-            <Icon className="h-5 w-5" />
+      <div className="p-4 sm:p-6">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div
+            className={`h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl sm:rounded-2xl flex items-center justify-center ${iconBg}`}
+          >
+            <Icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
           </div>
           <div className="min-w-0">
-            <div className="text-lg font-semibold leading-tight">{title}</div>
-            <div className="mt-1 text-sm text-muted-foreground">{desc}</div>
+            <div className="text-base sm:text-lg font-semibold leading-tight">{title}</div>
+            <div className="mt-1 text-xs sm:text-sm text-muted-foreground">{desc}</div>
           </div>
         </div>
       </div>
@@ -205,11 +235,106 @@ function StatTile({
   );
 }
 
+// ─── Horizontal scroll marquee (pauses on reduced-motion) ─────────────────────
+
+function LiveMarquee({ items }: { items: IndexItem[] }) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return (
+      <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 pb-3">
+        {items.slice(0, 6).map((it) => (
+          <span
+            key={`${it.kind}-${it.id}`}
+            className="inline-flex shrink-0 items-center gap-1 rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
+          >
+            <span className="text-foreground">{itemTypeMeta[it.kind].label}:</span>
+            <span className="truncate max-w-[180px]">{it.title}</span>
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  const doubled = [...items, ...items];
+
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: "-50%" }}
+        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        className="flex gap-2 whitespace-nowrap px-4 pb-3"
+      >
+        {doubled.map((it, i) => (
+          <span
+            key={`${it.kind}-${it.id}-${i}`}
+            className="inline-flex shrink-0 items-center gap-1 rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
+          >
+            <span className="text-foreground">{itemTypeMeta[it.kind].label}:</span>
+            <span className="truncate max-w-[180px] sm:max-w-[220px]">{it.title}</span>
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+// ─── Category tabs (horizontal scroll on mobile, sidebar on desktop) ──────────
+
+type CategoryKey = "tools" | "prompts" | "updates" | "compare";
+
+const CATEGORIES = [
+  {
+    key: "tools" as CategoryKey,
+    label: "AI Tools",
+    icon: Cpu,
+    blurb: "Fast, vetted tools. Not 300 fake directories and a prayer.",
+    bullets: ["Free resources", "Latest releases", "Hidden gems"],
+    to: "/tools",
+  },
+  {
+    key: "prompts" as CategoryKey,
+    label: "Prompts",
+    icon: BookOpen,
+    blurb: "Prompts you'll actually reuse, not motivational quotes in disguise.",
+    bullets: ["Top-rated prompts", "Curated collections", "Advanced techniques"],
+    to: "/prompts",
+  },
+  {
+    key: "updates" as CategoryKey,
+    label: "Model Updates",
+    icon: TrendingUp,
+    blurb: "What changed, why it matters, and what breaks because of it.",
+    bullets: ["Change summaries", "Impact analysis", "Practical implications"],
+    to: "/updates",
+  },
+  {
+    key: "compare" as CategoryKey,
+    label: "Comparisons",
+    icon: LineChart,
+    blurb: "Side-by-side, no fluff. Pick the right model and move on.",
+    bullets: ["Chat models", "Image generators", "Writing assistants"],
+    to: "/comparisons",
+  },
+] as const;
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export default function ToolDropAI() {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<"tools" | "prompts" | "updates" | "compare">("tools");
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>("tools");
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  // Scroll active tab into view on mobile
+  useEffect(() => {
+    const el = tabsRef.current?.querySelector(`[data-active="true"]`) as HTMLElement | null;
+    el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }, [activeCategory]);
+
+  // ── Data ──
 
   const unifiedIndex = useMemo<IndexItem[]>(() => {
     const idx: IndexItem[] = [];
@@ -226,7 +351,6 @@ export default function ToolDropAI() {
         updatedAtISO: t.updatedAtISO,
       })
     );
-
     prompts.forEach((p) =>
       idx.push({
         kind: "prompt",
@@ -239,7 +363,6 @@ export default function ToolDropAI() {
         updatedAtISO: p.updatedAtISO,
       })
     );
-
     updates.forEach((u) =>
       idx.push({
         kind: "update",
@@ -252,7 +375,6 @@ export default function ToolDropAI() {
         updatedAtISO: u.updatedAtISO,
       })
     );
-
     collections.forEach((c) =>
       idx.push({
         kind: "collection",
@@ -265,7 +387,6 @@ export default function ToolDropAI() {
         updatedAtISO: c.updatedAtISO,
       })
     );
-
     comparisons.forEach((c) =>
       idx.push({
         kind: "comparison",
@@ -286,45 +407,7 @@ export default function ToolDropAI() {
   const featuredCollections = useMemo(() => collections.slice(0, 4), []);
   const latestFeed = useMemo(() => unifiedIndex.slice(0, 6), [unifiedIndex]);
 
-  const categories = useMemo(
-    () => [
-      {
-        key: "tools" as const,
-        label: "AI Tools",
-        icon: Cpu,
-        blurb: "Fast, vetted tools. Not 300 fake directories and a prayer.",
-        bullets: ["Free resources", "Latest releases", "Hidden gems"],
-        to: "/tools",
-      },
-      {
-        key: "prompts" as const,
-        label: "Prompts",
-        icon: BookOpen,
-        blurb: "Prompts you’ll actually reuse, not motivational quotes in disguise.",
-        bullets: ["Top-rated prompts", "Curated collections", "Advanced techniques"],
-        to: "/prompts",
-      },
-      {
-        key: "updates" as const,
-        label: "Model Updates",
-        icon: TrendingUp,
-        blurb: "What changed, why it matters, and what breaks because of it.",
-        bullets: ["Change summaries", "Impact analysis", "Practical implications"],
-        to: "/updates",
-      },
-      {
-        key: "compare" as const,
-        label: "Comparisons",
-        icon: LineChart,
-        blurb: "Side-by-side, no fluff. Pick the right model and move on.",
-        bullets: ["Chat models", "Image generators", "Writing assistants"],
-        to: "/comparisons",
-      },
-    ],
-    []
-  );
-
-  const active = categories.find((c) => c.key === activeCategory);
+  const active = CATEGORIES.find((c) => c.key === activeCategory)!;
 
   const categoryItems = useMemo(() => {
     const base =
@@ -336,128 +419,143 @@ export default function ToolDropAI() {
         ? unifiedIndex.filter((x) => x.kind === "update")
         : unifiedIndex.filter((x) => x.kind === "comparison");
 
-    // editorial split: 1 hero item + supporting list
-    return {
-      hero: base[0],
-      rest: base.slice(1, 6),
-    };
+    return { hero: base[0], rest: base.slice(1, 6) };
   }, [activeCategory, unifiedIndex]);
 
-  const faqs = useMemo(
-    () => [
-      {
-        q: "Why visit regularly?",
-        a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise.",
-      },
-      {
-        q: "How do you curate?",
-        a: "New, clearly useful, or showing real traction. If it’s vague or hype-first, it doesn’t get featured.",
-      },
-      {
-        q: "Who is this for?",
-        a: "Builders, students, and working humans who want signal, not a 40-tab research session.",
-      },
-    ],
+  const faqs = [
+    {
+      q: "Why visit regularly?",
+      a: "Because AI changes daily and humans love reinventing the same tool with a new name. This filters the noise.",
+    },
+    {
+      q: "How do you curate?",
+      a: "New, clearly useful, or showing real traction. If it's vague or hype-first, it doesn't get featured.",
+    },
+    {
+      q: "Who is this for?",
+      a: "Builders, students, and working humans who want signal, not a 40-tab research session.",
+    },
+  ];
+
+  const subscribe = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!/.+@.+\..+/.test(email)) {
+        setToast("Please enter a valid email address.");
+        setTimeout(() => setToast(null), 2500);
+        return;
+      }
+      setToast("Successfully subscribed! Check your inbox for confirmation.");
+      setEmail("");
+      setTimeout(() => setToast(null), 2500);
+    },
+    [email]
+  );
+
+  const toggleFAQ = useCallback(
+    (idx: number) => setExpandedFAQ((prev) => (prev === idx ? null : idx)),
     []
   );
 
-  function subscribe(e: React.FormEvent) {
-    e.preventDefault();
-    if (!/.+@.+\..+/.test(email)) {
-      setToast("Please enter a valid email address.");
-      return;
-    }
-    setToast("Successfully subscribed! Check your inbox for confirmation.");
-    setEmail("");
-    window.setTimeout(() => setToast(null), 2500);
-  }
+  // ── Render ──
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Background accents */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
+      {/* ── Background accents (hidden on reduced-motion) ── */}
+      <div className="pointer-events-none fixed inset-0 -z-10 motion-safe:block hidden" aria-hidden="true">
         <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute top-48 -left-24 h-80 w-80 rounded-full bg-green-500/10 blur-3xl" />
         <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
       </div>
 
-      {/* HERO: split + live feed */}
-      <section className="mx-auto max-w-6xl px-4 pt-12 pb-8">
-        <motion.div initial="hidden" animate="show" variants={staggerChildren} className="grid gap-6 lg:grid-cols-12">
+      {/* ────────────────────────────────────────────────────────────────────────
+          HERO
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-6xl px-4 pt-8 sm:pt-12 pb-6 sm:pb-8">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={staggerChildren}
+          className="grid gap-6 lg:grid-cols-12"
+        >
+          {/* Left: headline + CTAs */}
           <motion.div variants={fadeUp} className="lg:col-span-7">
+            {/* Pills */}
             <div className="flex flex-wrap gap-2 mb-4">
               <Pill icon={Flame}>Daily updates</Pill>
               <Pill icon={ShieldCheck}>Curated for quality</Pill>
               <Pill icon={Globe}>Signal over noise</Pill>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
               What changed in AI today?
             </h1>
 
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl">
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground max-w-xl">
               Discover vetted tools, reusable prompts, and model updates that actually matter.
-              No noise. No “Top 200 AI Tools” nonsense.
+              No noise. No "Top 200 AI Tools" nonsense.
             </p>
 
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Button className="rounded-2xl group" asChild>
-                <Link href="/trending" className="inline-flex items-center">
+            {/* CTA row – stacks to single col on mobile */}
+            <div className="mt-5 sm:mt-6 grid grid-cols-1 xs:grid-cols-3 gap-2 sm:flex sm:flex-row sm:gap-3">
+              <Button className="rounded-2xl group w-full sm:w-auto h-11 sm:h-10 text-sm" asChild>
+                <Link href="/trending" className="inline-flex items-center justify-center gap-2">
                   Explore trending
-                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight
+                    className="h-4 w-4 group-hover:translate-x-1 transition-transform"
+                    aria-hidden="true"
+                  />
                 </Link>
               </Button>
-
-              <Button variant="outline" className="rounded-2xl" asChild>
+              <Button
+                variant="outline"
+                className="rounded-2xl w-full sm:w-auto h-11 sm:h-10 text-sm"
+                asChild
+              >
                 <Link href="/search">Search everything</Link>
               </Button>
-
-              <Button variant="outline" className="rounded-2xl" asChild>
+              <Button
+                variant="outline"
+                className="rounded-2xl w-full sm:w-auto h-11 sm:h-10 text-sm"
+                asChild
+              >
                 <a href="#explore">Browse categories</a>
               </Button>
             </div>
 
-            {/* micro marquee */}
-            <div className="mt-7 rounded-3xl border bg-muted/25 overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-3 text-xs text-muted-foreground">
-                <Dot className="h-4 w-4 text-primary" />
+            {/* Live marquee strip */}
+            <div className="mt-6 rounded-2xl sm:rounded-3xl border bg-muted/25 overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-2.5 text-xs text-muted-foreground border-b">
+                <Dot className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                 <span className="font-medium text-foreground">Live:</span>
                 <span>new tools, prompts, and model updates rolling in</span>
               </div>
-              <motion.div
-                initial={{ x: 0 }}
-                animate={{ x: "-50%" }}
-                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                className="flex gap-2 whitespace-nowrap px-4 pb-3"
-              >
-                {[...latestFeed, ...latestFeed].map((it, i) => (
-                  <span
-                    key={`${it.kind}-${it.id}-${i}`}
-                    className="inline-flex items-center gap-1 rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
-                  >
-                    <span className="text-foreground">{itemTypeMeta[it.kind].label}:</span>
-                    <span className="truncate max-w-[220px]">{it.title}</span>
-                  </span>
-                ))}
-              </motion.div>
+              <LiveMarquee items={latestFeed} />
             </div>
           </motion.div>
 
+          {/* Right: today's feed card */}
           <motion.div variants={fadeUp} className="lg:col-span-5">
             <GlowCard tone="primary" className="h-full">
-              <CardHeader className="border-b">
-                <CardTitle className="text-base flex items-center justify-between">
+              <CardHeader className="border-b px-4 sm:px-6 py-3 sm:py-4">
+                <CardTitle className="text-sm sm:text-base flex items-center justify-between">
                   <span className="inline-flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-primary" />
-                    Today’s feed
+                    <Sparkles
+                      className="h-4 w-4 text-primary shrink-0"
+                      aria-hidden="true"
+                    />
+                    Today's feed
                   </span>
-                  <Link href="/updates" className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground">
+                  <Link
+                    href="/updates"
+                    className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
+                  >
                     See all
                   </Link>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-5">
-                <div className="space-y-3">
+              <CardContent className="p-3 sm:p-5">
+                <div className="space-y-2 sm:space-y-3">
                   {latestFeed.map((it) => (
                     <ItemRow key={`${it.kind}-${it.id}`} item={it} />
                   ))}
@@ -468,48 +566,53 @@ export default function ToolDropAI() {
         </motion.div>
       </section>
 
-      {/* BENTO: stats + featured collections in one interesting grid */}
-      <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="grid gap-4 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <StatTile
-              tone="primary"
-              title="Fast Discover"
-              desc="Browse curated tools & resources without losing your weekend."
-              icon={Zap}
-            />
-          </div>
-          <div className="lg:col-span-4">
-            <StatTile
-              tone="green"
-              title="Daily Fresh"
-              desc="New content every day, not “updated 6 months ago.”"
-              icon={TrendingUp}
-            />
-          </div>
-          <div className="lg:col-span-4">
-            <StatTile
-              tone="orange"
-              title="Curated"
-              desc="Quality over quantity. Shocking concept, I know."
-              icon={Star}
-            />
-          </div>
+      {/* ────────────────────────────────────────────────────────────────────────
+          BENTO – stats + featured collections
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-6xl px-4 pb-8 sm:pb-10">
+        {/* Stat tiles – 1 col mobile, 3 col md+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <StatTile
+            tone="primary"
+            title="Fast Discover"
+            desc="Browse curated tools & resources without losing your weekend."
+            icon={Zap}
+          />
+          <StatTile
+            tone="green"
+            title="Daily Fresh"
+            desc={`New content every day, not "updated 6 months ago."`}
+            icon={TrendingUp}
+          />
+          <StatTile
+            tone="orange"
+            title="Curated"
+            desc="Quality over quantity. Shocking concept, I know."
+            icon={Star}
+          />
+        </div>
 
+        {/* Featured collections + quick actions */}
+        <div className="grid gap-3 sm:gap-4 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <GlowCard tone="neutral" className="h-full">
-              <CardHeader className="border-b">
-                <CardTitle className="text-base flex items-center justify-between gap-2">
+              <CardHeader className="border-b px-4 sm:px-6 py-3 sm:py-4">
+                <CardTitle className="text-sm sm:text-base flex items-center justify-between gap-2">
                   <span className="inline-flex items-center gap-2">
-                    <BadgeCheck className="h-4 w-4" /> Featured collections
+                    <BadgeCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    Featured collections
                   </span>
-                  <Link href="/collections" className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground">
+                  <Link
+                    href="/collections"
+                    className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
+                  >
                     Browse all
                   </Link>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-5">
-                <div className="grid gap-3 sm:grid-cols-2">
+              <CardContent className="p-3 sm:p-5">
+                {/* 1-col on mobile, 2-col on sm+ */}
+                <div className="grid gap-2 sm:gap-3 sm:grid-cols-2">
                   {featuredCollections.map((c, idx) => (
                     <motion.div
                       key={c.id}
@@ -517,26 +620,39 @@ export default function ToolDropAI() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.06 }}
-                      whileHover={{ scale: 1.02 }}
                     >
                       <Link
                         href={hrefFor("collection", c.slug)}
-                        className="block rounded-2xl border p-4 hover:bg-muted/35 hover:shadow-md transition-all"
+                        className="block rounded-xl sm:rounded-2xl border p-3 sm:p-4 active:bg-muted/60 hover:bg-muted/35 hover:shadow-md transition-all"
+                        aria-label={`Open collection: ${c.title}`}
                       >
                         <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1">
-                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-2">
-                              <Badge variant="outline" className="rounded-full">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
+                              <Badge
+                                variant="outline"
+                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
+                              >
                                 Collection
                               </Badge>
-                              <Badge variant="secondary" className="rounded-full">
+                              <Badge
+                                variant="secondary"
+                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
+                              >
                                 {freshnessLabel(c.updatedAtISO)}
                               </Badge>
                             </div>
-                            <div className="font-medium leading-snug">{c.title}</div>
-                            <div className="mt-1 text-sm text-muted-foreground line-clamp-2">{c.description}</div>
+                            <div className="font-medium leading-snug text-sm sm:text-base line-clamp-1">
+                              {c.title}
+                            </div>
+                            <div className="mt-0.5 text-xs sm:text-sm text-muted-foreground line-clamp-2">
+                              {c.description}
+                            </div>
                           </div>
-                          <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" />
+                          <ArrowRight
+                            className="h-4 w-4 mt-0.5 text-muted-foreground shrink-0"
+                            aria-hidden="true"
+                          />
                         </div>
                       </Link>
                     </motion.div>
@@ -548,28 +664,41 @@ export default function ToolDropAI() {
 
           <div className="lg:col-span-4">
             <GlowCard tone="primary" className="h-full">
-              <div className="p-6">
-                <div className="text-sm text-muted-foreground">Quick actions</div>
-                <div className="mt-2 text-lg font-semibold">Go from browsing to building</div>
-                <div className="mt-4 grid gap-3">
-                  <Button className="rounded-2xl justify-between" asChild>
-                    <Link href="/tools">
-                      Browse tools <ArrowRight className="h-4 w-4" />
+              <div className="p-4 sm:p-6">
+                <div className="text-xs sm:text-sm text-muted-foreground">Quick actions</div>
+                <div className="mt-1 text-base sm:text-lg font-semibold">
+                  Go from browsing to building
+                </div>
+                <div className="mt-3 sm:mt-4 grid gap-2 sm:gap-3">
+                  <Button
+                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
+                    asChild
+                  >
+                    <Link href="/tools" className="flex items-center justify-between">
+                      Browse tools <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                     </Link>
                   </Button>
-                  <Button variant="outline" className="rounded-2xl justify-between" asChild>
-                    <Link href="/prompts">
-                      Browse prompts <ArrowRight className="h-4 w-4" />
+                  <Button
+                    variant="outline"
+                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
+                    asChild
+                  >
+                    <Link href="/prompts" className="flex items-center justify-between">
+                      Browse prompts <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                     </Link>
                   </Button>
-                  <Button variant="outline" className="rounded-2xl justify-between" asChild>
-                    <Link href="/updates">
-                      Model updates <ArrowRight className="h-4 w-4" />
+                  <Button
+                    variant="outline"
+                    className="rounded-2xl justify-between h-11 sm:h-10 text-sm"
+                    asChild
+                  >
+                    <Link href="/updates" className="flex items-center justify-between">
+                      Model updates <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                     </Link>
                   </Button>
                 </div>
-                <div className="mt-5 text-xs text-muted-foreground">
-                  Pro tip: keep the layout asymmetric. Symmetry screams “template.”
+                <div className="mt-4 text-xs text-muted-foreground hidden sm:block">
+                  Pro tip: keep the layout asymmetric. Symmetry screams "template."
                 </div>
               </div>
             </GlowCard>
@@ -577,56 +706,106 @@ export default function ToolDropAI() {
         </div>
       </section>
 
-      {/* EXPLORE: side tabs + editorial layout */}
-      <section id="explore" className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Explore by Category</h2>
-          <p className="mt-2 text-muted-foreground">Pick a lane. Get the best of it, fast.</p>
+      {/* ────────────────────────────────────────────────────────────────────────
+          EXPLORE – horizontal tab strip on mobile, sidebar on desktop
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section id="explore" className="mx-auto max-w-6xl px-4 pb-8 sm:pb-10">
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+            Explore by Category
+          </h2>
+          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-muted-foreground">
+            Pick a lane. Get the best of it, fast.
+          </p>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-12">
-          {/* left rail */}
-          <div className="lg:col-span-4">
+          {/* ── Mobile: scrollable chip strip ── */}
+          <div className="lg:hidden">
+            <div
+              ref={tabsRef}
+              role="tablist"
+              aria-label="Browse categories"
+              className="flex gap-2 overflow-x-auto no-scrollbar pb-1"
+            >
+              {CATEGORIES.map((c) => {
+                const isActive = activeCategory === c.key;
+                return (
+                  <button
+                    key={c.key}
+                    role="tab"
+                    aria-selected={isActive}
+                    data-active={isActive}
+                    onClick={() => setActiveCategory(c.key)}
+                    className={[
+                      "shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors h-10",
+                      isActive
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background text-muted-foreground hover:bg-muted/40",
+                    ].join(" ")}
+                  >
+                    <c.icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    {c.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ── Desktop: left rail ── */}
+          <div className="hidden lg:block lg:col-span-4">
             <GlowCard tone="neutral">
               <div className="p-4">
-                <div className="grid gap-2">
-                  {categories.map((c) => (
-                    <button
-                      key={c.key}
-                      onClick={() => setActiveCategory(c.key)}
-                      className={[
-                        "w-full text-left rounded-2xl border px-4 py-3 transition-colors",
-                        activeCategory === c.key ? "bg-muted/40 border-primary/30" : "hover:bg-muted/30",
-                      ].join(" ")}
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <c.icon className="h-4 w-4" />
-                          <span className="font-medium">{c.label}</span>
+                <div className="grid gap-2" role="tablist" aria-label="Browse categories">
+                  {CATEGORIES.map((c) => {
+                    const isActive = activeCategory === c.key;
+                    return (
+                      <button
+                        key={c.key}
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => setActiveCategory(c.key)}
+                        className={[
+                          "w-full text-left rounded-2xl border px-4 py-3 transition-colors",
+                          isActive
+                            ? "bg-muted/40 border-primary/30"
+                            : "hover:bg-muted/30",
+                        ].join(" ")}
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-2">
+                            <c.icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            <span className="font-medium">{c.label}</span>
+                          </div>
+                          <ChevronDown
+                            className={[
+                              "h-4 w-4 text-muted-foreground transition-transform",
+                              isActive ? "rotate-180" : "rotate-0",
+                            ].join(" ")}
+                            aria-hidden="true"
+                          />
                         </div>
-                        <ChevronDown
-                          className={[
-                            "h-4 w-4 text-muted-foreground transition-transform",
-                            activeCategory === c.key ? "rotate-180" : "rotate-0",
-                          ].join(" ")}
-                        />
-                      </div>
-                      <div className="mt-1 text-xs text-muted-foreground">{c.blurb}</div>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {c.bullets.map((b) => (
-                          <Badge key={b} variant="outline" className="rounded-full text-[11px]">
-                            {b}
-                          </Badge>
-                        ))}
-                      </div>
-                    </button>
-                  ))}
+                        <div className="mt-1 text-xs text-muted-foreground">{c.blurb}</div>
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {c.bullets.map((b) => (
+                            <Badge
+                              key={b}
+                              variant="outline"
+                              className="rounded-full text-[11px]"
+                            >
+                              {b}
+                            </Badge>
+                          ))}
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </GlowCard>
           </div>
 
-          {/* content */}
+          {/* ── Content panel (full width on mobile, 8/12 on desktop) ── */}
           <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -634,64 +813,82 @@ export default function ToolDropAI() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-4"
+                transition={{ duration: 0.22 }}
+                className="space-y-3"
+                role="tabpanel"
+                aria-label={`${active.label} content`}
               >
-                {/* hero item */}
-                {categoryItems.hero ? (
+                {/* Hero item */}
+                {categoryItems.hero && (
                   <GlowCard tone="primary">
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-sm">
-                          {active && <active.icon className="h-4 w-4 text-primary" />}
-                          <span className="font-semibold">{active?.label}</span>
-                          <span className="text-muted-foreground">• spotlight</span>
+                        <div className="flex items-center gap-2 text-xs sm:text-sm">
+                          <active.icon
+                            className="h-4 w-4 text-primary shrink-0"
+                            aria-hidden="true"
+                          />
+                          <span className="font-semibold">{active.label}</span>
+                          <span className="text-muted-foreground hidden xs:inline">
+                            • spotlight
+                          </span>
                         </div>
                         <Link
-                          href={active?.to || "/"}
-                          className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
+                          href={active.to}
+                          className="text-xs sm:text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
                         >
                           Browse all
                         </Link>
                       </div>
 
-                      <Separator className="my-4" />
+                      <Separator className="my-3 sm:my-4" />
 
                       <Link
                         href={hrefFor(categoryItems.hero.kind, categoryItems.hero.slug)}
-                        className="group block rounded-2xl border p-5 hover:bg-muted/35 transition-colors"
+                        className="group block rounded-xl sm:rounded-2xl border p-3 sm:p-5 active:bg-muted/60 hover:bg-muted/35 transition-colors"
+                        aria-label={`Open ${categoryItems.hero.title}`}
                       >
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start justify-between gap-3 sm:gap-4">
                           <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                              <Badge variant="outline" className="rounded-full">
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                              <Badge
+                                variant="outline"
+                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
+                              >
                                 {itemTypeMeta[categoryItems.hero.kind].label}
                               </Badge>
-                              <Badge variant="secondary" className="rounded-full">
+                              <Badge
+                                variant="secondary"
+                                className="rounded-full text-[10px] sm:text-xs px-1.5 py-0"
+                              >
                                 {freshnessLabel(categoryItems.hero.updatedAtISO)}
                               </Badge>
-                              <span className="inline-flex items-center gap-1">
-                                <Timer className="h-3.5 w-3.5" /> {categoryItems.hero.minutes} min
+                              <span className="inline-flex items-center gap-1 leading-none">
+                                <Timer className="h-3 w-3 shrink-0" aria-hidden="true" />
+                                {categoryItems.hero.minutes} min
                               </span>
                             </div>
-                            <div className="mt-2 text-xl font-semibold leading-snug">
+                            <div className="mt-1.5 text-base sm:text-xl font-semibold leading-snug line-clamp-2">
                               {categoryItems.hero.title}
                             </div>
-                            <div className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                            <div className="mt-1 text-xs sm:text-sm text-muted-foreground line-clamp-2">
                               {categoryItems.hero.subtitle}
                             </div>
                           </div>
-                          <div className="h-10 w-10 rounded-2xl bg-primary/10 flex items-center justify-center">
-                            <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform" />
+                          <div className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center">
+                            <ArrowRight
+                              className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:translate-x-1 transition-transform"
+                              aria-hidden="true"
+                            />
                           </div>
                         </div>
                       </Link>
                     </div>
                   </GlowCard>
-                ) : null}
+                )}
 
-                {/* supporting list */}
-                <div className="grid gap-3">
+                {/* Supporting list */}
+                <div className="grid gap-2 sm:gap-3">
                   {categoryItems.rest.map((it) => (
                     <ItemRow key={`${it.kind}-${it.id}`} item={it} />
                   ))}
@@ -704,44 +901,62 @@ export default function ToolDropAI() {
 
       <RecentlyViewed limit={6} />
 
-      {/* Newsletter */}
-      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-10">
+      {/* ────────────────────────────────────────────────────────────────────────
+          NEWSLETTER
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section id="newsletter" className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <GlowCard tone="primary">
-          <CardContent className="p-8">
+          <CardContent className="p-5 sm:p-8">
             <div className="max-w-2xl mx-auto text-center">
-              <motion.div initial={{ scale: 0.96, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }}>
-                <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-primary/10 mb-4">
-                  <Sparkles className="h-6 w-6 text-primary" />
+              <motion.div
+                initial={{ scale: 0.96, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center justify-center h-11 w-11 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-primary/10 mb-3 sm:mb-4">
+                  <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" aria-hidden="true" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Subscribe to weekly updates</h2>
-                <p className="mt-3 text-muted-foreground">
-                  Get the week’s best AI tools, prompts, and updates delivered to your inbox.
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+                  Subscribe to weekly updates
+                </h2>
+                <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">
+                  Get the week's best AI tools, prompts, and updates delivered to your inbox.
                 </p>
 
-                <form onSubmit={subscribe} className="mt-6 flex flex-col sm:flex-row gap-3">
+                <form
+                  onSubmit={subscribe}
+                  className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3"
+                  noValidate
+                >
                   <Input
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="rounded-2xl flex-1"
+                    className="rounded-2xl flex-1 h-11"
+                    autoComplete="email"
+                    inputMode="email"
+                    aria-label="Email address"
+                    required
                   />
-                  <Button type="submit" className="rounded-2xl">
+                  <Button type="submit" className="rounded-2xl h-11 sm:h-auto">
                     Subscribe
                   </Button>
                 </form>
 
                 <AnimatePresence>
-                  {toast ? (
+                  {toast && (
                     <motion.div
+                      role="status"
+                      aria-live="polite"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="mt-4 rounded-2xl border bg-muted/40 p-3 text-sm"
+                      className="mt-4 rounded-2xl border bg-muted/40 p-3 text-xs sm:text-sm"
                     >
                       {toast}
                     </motion.div>
-                  ) : null}
+                  )}
                 </AnimatePresence>
               </motion.div>
             </div>
@@ -749,13 +964,17 @@ export default function ToolDropAI() {
         </GlowCard>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="mx-auto max-w-6xl px-4 pb-12">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+      {/* ────────────────────────────────────────────────────────────────────────
+          FAQ
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section id="faq" className="mx-auto max-w-6xl px-4 pb-10 sm:pb-12">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+            Frequently Asked Questions
+          </h2>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-3">
+        <div className="max-w-3xl mx-auto space-y-2 sm:space-y-3">
           {faqs.map((faq, idx) => (
             <motion.div
               key={faq.q}
@@ -765,29 +984,44 @@ export default function ToolDropAI() {
               transition={{ delay: idx * 0.08 }}
             >
               <Card
-                className="rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition-all"
-                onClick={() => setExpandedFAQ(expandedFAQ === idx ? null : idx)}
+                className="rounded-xl sm:rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition-all"
+                onClick={() => toggleFAQ(idx)}
               >
-                <CardContent className="p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="font-medium flex-1">{faq.q}</div>
-                    <motion.div animate={{ rotate: expandedFAQ === idx ? 180 : 0 }} transition={{ duration: 0.25 }}>
-                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                <CardContent className="p-4 sm:p-5">
+                  {/* aria: treat as disclosure button */}
+                  <button
+                    className="flex items-start justify-between gap-3 w-full text-left"
+                    aria-expanded={expandedFAQ === idx}
+                    aria-controls={`faq-answer-${idx}`}
+                  >
+                    <div className="font-medium flex-1 text-sm sm:text-base">{faq.q}</div>
+                    <motion.div
+                      animate={{ rotate: expandedFAQ === idx ? 180 : 0 }}
+                      transition={{ duration: 0.22 }}
+                      className="shrink-0 mt-0.5"
+                    >
+                      <ChevronDown
+                        className="h-5 w-5 text-muted-foreground"
+                        aria-hidden="true"
+                      />
                     </motion.div>
-                  </div>
+                  </button>
 
                   <AnimatePresence>
-                    {expandedFAQ === idx ? (
+                    {expandedFAQ === idx && (
                       <motion.div
+                        id={`faq-answer-${idx}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
+                        transition={{ duration: 0.22 }}
                         className="overflow-hidden"
                       >
-                        <div className="mt-3 text-sm text-muted-foreground pt-3 border-t">{faq.a}</div>
+                        <div className="mt-3 text-xs sm:text-sm text-muted-foreground pt-3 border-t">
+                          {faq.a}
+                        </div>
                       </motion.div>
-                    ) : null}
+                    )}
                   </AnimatePresence>
                 </CardContent>
               </Card>
