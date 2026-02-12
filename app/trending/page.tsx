@@ -71,7 +71,7 @@ function TrendingCard({ item }: { item: IndexItem }) {
         <div className="mt-2 text-sm text-muted-foreground line-clamp-2">{item.subtitle}</div>
 
         <div className="mt-3 text-sm text-muted-foreground inline-flex items-center gap-1">
-          Open <ArrowRight className="h-4 w-4" />
+          Open <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </div>
       </CardContent>
     </Card>
