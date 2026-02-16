@@ -151,7 +151,7 @@ function ItemCard({ item, index = 0 }: { item: IndexItem; index?: number }) {
           </div>
 
           <motion.div animate={{ x: isHovered ? 4 : 0 }} transition={{ duration: 0.2 }}>
-            <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
+            <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" aria-hidden="true" />
           </motion.div>
         </div>
       </Link>
@@ -333,7 +333,7 @@ export default function ToolDropAI() {
             <Button className="rounded-2xl group" asChild>
               <Link href="/trending" className="inline-flex items-center">
                 Explore trending
-                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </Link>
             </Button>
 
@@ -448,7 +448,7 @@ export default function ToolDropAI() {
                           {c.description}
                         </div>
                       </div>
-                      <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" />
+                      <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
                     </div>
                   </Link>
                 </motion.div>
@@ -543,9 +543,143 @@ export default function ToolDropAI() {
         </AnimatePresence>
       </section>
 
-      <RecentlyViewed limit={6} />
+      {/* Best Lists (Money Pages) */}
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Popular AI Tool Rankings</h2>
+          <p className="mt-2 text-muted-foreground">
+            Find the right AI tools for your specific use case. Ranked by usefulness with honest assessments of strengths and limitations.
+          </p>
+        </div>
 
-      {/* Newsletter */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={staggerChildren}
+          className="grid gap-4 md:grid-cols-3"
+        >
+          <motion.div variants={fadeUp}>
+            <Link href="/best/best-ai-tools-for-students" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-sm text-primary font-semibold uppercase">Best For Students</div>
+                  <div className="mt-2 font-semibold leading-snug">Best AI Tools for Students</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Research tools, writing helpers, and coding assistants students actually use without academic trouble.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Link href="/best/best-ai-tools-for-writing" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-sm text-primary font-semibold uppercase">Best For Writing</div>
+                  <div className="mt-2 font-semibold leading-snug">Best AI Tools for Writing</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Drafting, editing, and clarity tools that help you write better without losing your voice.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Link href="/best/best-ai-coding-tools" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-sm text-primary font-semibold uppercase">Best For Coding</div>
+                  <div className="mt-2 font-semibold leading-snug">Best AI Coding Tools for Developers</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Code generation, debugging, and refactoring tools that actually speed up development.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        <div className="mt-4 text-center">
+          <Link href="/best" className="text-sm underline underline-offset-4 hover:text-primary transition-colors">
+            Browse all AI tool rankings →
+          </Link>
+        </div>
+      </section>
+
+      {/* Key Comparisons */}
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Detailed Comparisons</h2>
+          <p className="mt-2 text-muted-foreground">
+            Side-by-side breakdowns helping you choose between popular tools. Real-world scenarios, tradeoffs, and recommendations.
+          </p>
+        </div>
+
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={staggerChildren}
+          className="grid gap-4 md:grid-cols-3"
+        >
+          <motion.div variants={fadeUp}>
+            <Link href="/comparisons/cursor-vs-vscode-ai-vs-jetbrains-ai" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Comparison</div>
+                  <div className="mt-2 font-semibold leading-snug">Cursor vs VS Code + AI vs JetBrains</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Which AI-enhanced editor actually speeds up shipping without breaking code review.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Link href="/comparisons/perplexity-vs-kagi-vs-google" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Comparison</div>
+                  <div className="mt-2 font-semibold leading-snug">Perplexity vs Kagi vs Google</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    AI answers, quality search, and which one actually wins for research-heavy work.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <Link href="/comparisons/elevenlabs-vs-playht-vs-azure-tts" className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Comparison</div>
+                  <div className="mt-2 font-semibold leading-snug">ElevenLabs vs PlayHT vs Azure TTS</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Text-to-speech quality, pricing, and which one delivers natural voices at scale.
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+              </div>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        <div className="mt-4 text-center">
+          <Link href="/comparisons" className="text-sm underline underline-offset-4 hover:text-primary transition-colors">
+            Browse all detailed comparisons →
+          </Link>
+        </div>
+      </section>
+
+      
       <section id="newsletter" className="mx-auto max-w-6xl px-4 py-8">
         <Card className="rounded-2xl shadow-sm border-2 border-primary/20 bg-gradient-to-br from-background to-muted/20">
           <CardContent className="p-8">
@@ -632,7 +766,7 @@ export default function ToolDropAI() {
                       animate={{ rotate: expandedFAQ === idx ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                     </motion.div>
                   </div>
 

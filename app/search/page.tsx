@@ -83,7 +83,7 @@ function ItemRow({ item }: { item: IndexItem }) {
           </div>
         </div>
 
-        <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" />
+        <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" aria-hidden="true" />
       </div>
     </Link>
   );

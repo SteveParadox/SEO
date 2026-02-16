@@ -134,13 +134,38 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       ) : null}
 
-      <div className="mt-4 max-w-3xl space-y-3 text-muted-foreground">
-        {page.intro.map((p, i) => (
-          <p key={`${page.id}-intro-${i}`}>{p}</p>
-        ))}
+      <div className="mt-6 max-w-3xl space-y-4 text-muted-foreground">
+        {page.intro.map((p, i) => {
+          // First paragraph gets special styling
+          if (i === 0) {
+            return (
+              <p key={`${page.id}-intro-${i}`} className="text-base leading-relaxed">
+                {p}
+              </p>
+            );
+          }
+          return (
+            <p key={`${page.id}-intro-${i}`} className="text-base leading-relaxed">
+              {p}
+            </p>
+          );
+        })}
+      </div>
+
+      {/* How to use this guide */}
+      <div className="mt-8 rounded-2xl border bg-muted/40 p-5">
+        <h2 className="text-base font-semibold">How to use this guide</h2>
+        <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc pl-5">
+          <li>Each tool is ranked with a badge showing its strongest use case</li>
+          <li><span className="font-medium text-foreground">Best for</span> shows what this tool excels at</li>
+          <li><span className="font-medium text-foreground">Watch out for</span> highlights real limitations to consider</li>
+          <li>Click any tool name to see detailed features, pricing, and full reviews</li>
+        </ul>
       </div>
 
       <div className="mt-8 grid gap-4">
+        <h2 className="text-2xl font-semibold">Ranked picks</h2>
+        <div className="grid gap-4">
         {picks.map(({ pick, tool }, idx) => (
           <Card key={`${tool.id}-${idx}`} className="rounded-2xl">
             <CardHeader className="pb-2">
@@ -208,6 +233,7 @@ export default async function BestPage({ params }: PageProps) {
             </CardContent>
           </Card>
         ))}
+        </div>
       </div>
 
       <Card className="mt-10 rounded-2xl">

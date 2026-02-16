@@ -104,7 +104,29 @@ export default async function ComparisonPage({ params }: PageProps) {
         <SaveButton kind="comparison" id={cmp.id} className="rounded-xl" />
       </div>
 
-      <Card className="mt-6 rounded-2xl">
+      {/* Intro section with all guidance */}
+      <div className="mt-8 max-w-3xl space-y-4 text-muted-foreground">
+        {cmp.whenToUse && (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">When to Use This Comparison</h2>
+            <p>{cmp.whenToUse}</p>
+          </div>
+        )}
+        {cmp.decisionContext && (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">Decision Context</h2>
+            <p>{cmp.decisionContext}</p>
+          </div>
+        )}
+        {cmp.keyTradeoffs && (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">Key Tradeoffs</h2>
+            <p>{cmp.keyTradeoffs}</p>
+          </div>
+        )}
+      </div>
+
+      <Card className="mt-8 rounded-2xl">
         <CardHeader>
           <CardTitle>Contenders</CardTitle>
         </CardHeader>
