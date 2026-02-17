@@ -32,10 +32,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  // Sanitize and ensure title/description are not empty
   const baseTitle = cmp.title?.trim() || "Unnamed Comparison";
   const baseDescription = cmp.description?.trim() || "AI tool comparison";
-  
+
   const title = `${baseTitle} — Xavkit`;
   const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/comparisons/${cmp.slug}`);
@@ -104,7 +103,33 @@ export default async function ComparisonPage({ params }: PageProps) {
         <SaveButton kind="comparison" id={cmp.id} className="rounded-xl" />
       </div>
 
-      <Card className="mt-6 rounded-2xl">
+      {/* Intro section with all guidance (NEW) */}
+      <div className="mt-8 max-w-3xl space-y-4 text-muted-foreground">
+        {cmp.whenToUse ? (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">
+              When to Use This Comparison
+            </h2>
+            <p>{cmp.whenToUse}</p>
+          </div>
+        ) : null}
+
+        {cmp.decisionContext ? (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">Decision Context</h2>
+            <p>{cmp.decisionContext}</p>
+          </div>
+        ) : null}
+
+        {cmp.keyTradeoffs ? (
+          <div>
+            <h2 className="mb-2 font-semibold text-foreground">Key Tradeoffs</h2>
+            <p>{cmp.keyTradeoffs}</p>
+          </div>
+        ) : null}
+      </div>
+
+      <Card className="mt-8 rounded-2xl">
         <CardHeader>
           <CardTitle>Contenders</CardTitle>
         </CardHeader>

@@ -65,13 +65,18 @@ function ItemRow({ item }: { item: IndexItem }) {
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline" className="rounded-full">{meta.label}</Badge>
+            <Badge variant="outline" className="rounded-full">
+              {meta.label}
+            </Badge>
+
             <span className="inline-flex items-center gap-1">
               <Icon className="h-3.5 w-3.5" /> {item.typeTag}
             </span>
+
             <Badge variant="secondary" className="rounded-full">
               {freshnessLabel(item.updatedAtISO)}
             </Badge>
+
             <span className="inline-flex items-center gap-1">
               <Timer className="h-3.5 w-3.5" /> {item.minutes} min
             </span>
@@ -83,6 +88,7 @@ function ItemRow({ item }: { item: IndexItem }) {
           </div>
         </div>
 
+        {/* single decorative arrow */}
         <ArrowRight className="h-4 w-4 mt-1 text-muted-foreground" aria-hidden="true" />
       </div>
     </Link>

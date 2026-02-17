@@ -3,7 +3,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DATA, getBestPageBySlug, resolveBestPicks, getRelatedBestPages } from "@/lib/data";
+import {
+  DATA,
+  getBestPageBySlug,
+  resolveBestPicks,
+  getRelatedBestPages,
+} from "@/lib/data";
 import { JsonLd } from "@/components/json-ld";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -26,10 +31,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  // Sanitize and ensure title/description are not empty
   const baseTitle = page.title?.trim() || "Best List";
   const baseDescription = page.description?.trim() || "Curated AI tool list";
-  
+
   const url = absoluteUrl(`/best/${page.slug}`);
   const title = `${baseTitle} — Xavkit`;
   const description = baseDescription.slice(0, 160);
@@ -134,80 +138,118 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       ) : null}
 
-      <div className="mt-4 max-w-3xl space-y-3 text-muted-foreground">
-        {page.intro.map((p, i) => (
-          <p key={`${page.id}-intro-${i}`}>{p}</p>
-        ))}
+      {/* Intro (updated per your change) */}
+      <div className="mt-6 max-w-3xl space-y-4 text-muted-foreground">
+        {page.intro.map((p, i) => {
+          // First paragraph gets special styling (currently same classes, but kept for future tweaks)
+          if (i === 0) {
+            return (
+              <p
+                key={`${page.id}-intro-${i}`}
+                className="text-base leading-relaxed"
+              >
+                {p}
+              </p>
+            );
+          }
+          return (
+            <p key={`${page.id}-intro-${i}`} className="text-base leading-relaxed">
+              {p}
+            </p>
+          );
+        })}
       </div>
 
+      {/* How to use this guide (new) */}
+      <div className="mt-8 rounded-2xl border bg-muted/40 p-5">
+        <h2 className="text-base font-semibold">How to use this guide</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+          <li>Each tool is ranked with a badge showing its strongest use case</li>
+          <li>
+            <span className="font-medium text-foreground">Best for</span> shows what
+            this tool excels at
+          </li>
+          <li>
+            <span className="font-medium text-foreground">Watch out for</span>{" "}
+            highlights real limitations to consider
+          </li>
+          <li>Click any tool name to see detailed features, pricing, and full reviews</li>
+        </ul>
+      </div>
+
+      {/* Ranked picks section wrapper (updated per your change) */}
       <div className="mt-8 grid gap-4">
-        {picks.map(({ pick, tool }, idx) => (
-          <Card key={`${tool.id}-${idx}`} className="rounded-2xl">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2 flex-wrap">
-                {pick.badge ? (
-                  <Badge variant="secondary" className="rounded-full">
-                    {pick.badge}
-                  </Badge>
-                ) : (
-                  <Badge variant="outline" className="rounded-full">
-                    #{idx + 1}
-                  </Badge>
-                )}
+        <h2 className="text-2xl font-semibold">Ranked picks</h2>
 
-                <Link className="hover:underline" href={`/tools/${tool.slug}`}>
-                  {tool.name}
-                </Link>
-              </CardTitle>
-            </CardHeader>
+        <div className="grid gap-4">
+          {picks.map(({ pick, tool }, idx) => (
+            <Card key={`${tool.id}-${idx}`} className="rounded-2xl">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2 flex-wrap">
+                  {pick.badge ? (
+                    <Badge variant="secondary" className="rounded-full">
+                      {pick.badge}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline" className="rounded-full">
+                      #{idx + 1}
+                    </Badge>
+                  )}
 
-            <CardContent className="pt-0">
-              <div className="text-sm text-muted-foreground">{pick.why}</div>
+                  <Link className="hover:underline" href={`/tools/${tool.slug}`}>
+                    {tool.name}
+                  </Link>
+                </CardTitle>
+              </CardHeader>
 
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div>
-                  <div className="text-sm font-medium">Best for</div>
-                  <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                    {pick.bestFor.map((x) => (
-                      <li key={`${tool.id}-bestfor-${x}`}>{x}</li>
-                    ))}
-                  </ul>
-                </div>
+              <CardContent className="pt-0">
+                <div className="text-sm text-muted-foreground">{pick.why}</div>
 
-                {pick.watchOutFor?.length ? (
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium">Watch out for</div>
+                    <div className="text-sm font-medium">Best for</div>
                     <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                      {pick.watchOutFor.map((x) => (
-                        <li key={`${tool.id}-watch-${x}`}>{x}</li>
+                      {pick.bestFor.map((x) => (
+                        <li key={`${tool.id}-bestfor-${x}`}>{x}</li>
                       ))}
                     </ul>
                   </div>
-                ) : null}
-              </div>
 
-              <div className="mt-4 flex flex-wrap gap-3 text-sm">
-                <Link className="underline" href={`/tools/${tool.slug}`}>
-                  View {tool.name}
-                </Link>
+                  {pick.watchOutFor?.length ? (
+                    <div>
+                      <div className="text-sm font-medium">Watch out for</div>
+                      <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
+                        {pick.watchOutFor.map((x) => (
+                          <li key={`${tool.id}-watch-${x}`}>{x}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
 
-                {tool.tags?.slice(0, 2).map((t) => {
-                  const label = t.trim();
-                  const tagSlug = encodeURIComponent(label.toLowerCase());
-                  return (
-                    <Link
-                      key={`${tool.id}-tag-${tagSlug}`}
-                      className="underline"
-                      href={`/tags/${tagSlug}`}
-                    >
-                      More {titleCase(label)}
-                    </Link>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                <div className="mt-4 flex flex-wrap gap-3 text-sm">
+                  <Link className="underline" href={`/tools/${tool.slug}`}>
+                    View {tool.name}
+                  </Link>
+
+                  {tool.tags?.slice(0, 2).map((t) => {
+                    const label = t.trim();
+                    const tagSlug = encodeURIComponent(label.toLowerCase());
+                    return (
+                      <Link
+                        key={`${tool.id}-tag-${tagSlug}`}
+                        className="underline"
+                        href={`/tags/${tagSlug}`}
+                      >
+                        More {titleCase(label)}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <Card className="mt-10 rounded-2xl">
@@ -217,9 +259,10 @@ export default async function BestPage({ params }: PageProps) {
         <CardContent className="text-sm text-muted-foreground space-y-3">
           <p>
             If you want the safest “works for most people” choice, start with the{" "}
-            <span className="font-medium">Best Overall</span>. If budget matters, pick the{" "}
-            <span className="font-medium">Best Budget</span> option. If you’re buying for a team,
-            prioritize collaboration and admin controls over random flashy features.
+            <span className="font-medium">Best Overall</span>. If budget matters, pick
+            the <span className="font-medium">Best Budget</span> option. If you’re
+            buying for a team, prioritize collaboration and admin controls over random
+            flashy features.
           </p>
 
           <div className="flex flex-wrap gap-3">

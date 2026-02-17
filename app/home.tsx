@@ -288,7 +288,10 @@ function DenseRow({ item, index }: { item: IndexItem; index: number }) {
         </div>
         <div className="shrink-0 flex items-center gap-1.5 text-muted-foreground/40">
           <span className="font-mono text-[9px]">{item.minutes}m</span>
-          <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 group-hover:text-primary transition-all" />
+            <ArrowRight
+              className="h-3.5 w-3.5 group-hover:translate-x-1 group-hover:text-primary transition-all"
+              aria-hidden="true"
+            />
         </div>
       </Link>
     </motion.div>
@@ -1003,6 +1006,148 @@ export default function ToolDropAI() {
       </section>
 
       <RecentlyViewed limit={6} />
+
+      {/* Best Lists (Money Pages) */}
+<section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
+  <div className="mb-5">
+    <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+      Popular AI Tool Rankings
+    </h2>
+    <p className="mt-2 text-muted-foreground">
+      Find the right AI tools for your specific use case. Ranked by usefulness with honest
+      assessments of strengths and limitations.
+    </p>
+  </div>
+
+  <motion.div
+    variants={stagger}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    className="grid gap-4 md:grid-cols-3"
+  >
+    {[
+      {
+        href: "/best/best-ai-tools-for-students",
+        kicker: "Best For Students",
+        title: "Best AI Tools for Students",
+        desc: "Research tools, writing helpers, and coding assistants students actually use without academic trouble.",
+      },
+      {
+        href: "/best/best-ai-tools-for-writing",
+        kicker: "Best For Writing",
+        title: "Best AI Tools for Writing",
+        desc: "Drafting, editing, and clarity tools that help you write better without losing your voice.",
+      },
+      {
+        href: "/best/best-ai-coding-tools",
+        kicker: "Best For Coding",
+        title: "Best AI Coding Tools for Developers",
+        desc: "Code generation, debugging, and refactoring tools that actually speed up development.",
+      },
+    ].map((x) => (
+      <motion.div key={x.href} variants={slideUp}>
+        <Link
+          href={x.href}
+          className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1">
+              <div className="text-sm text-primary font-semibold uppercase">
+                {x.kicker}
+              </div>
+              <div className="mt-2 font-semibold leading-snug">{x.title}</div>
+              <div className="mt-2 text-sm text-muted-foreground">{x.desc}</div>
+            </div>
+            <ArrowRight
+              className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0"
+              aria-hidden="true"
+            />
+          </div>
+        </Link>
+      </motion.div>
+    ))}
+  </motion.div>
+
+  <div className="mt-4 text-center">
+    <Link
+      href="/best"
+      className="text-sm underline underline-offset-4 hover:text-primary transition-colors"
+    >
+      Browse all AI tool rankings →
+    </Link>
+  </div>
+</section>
+
+{/* Key Comparisons */}
+<section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
+  <div className="mb-5">
+    <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+      Detailed Comparisons
+    </h2>
+    <p className="mt-2 text-muted-foreground">
+      Side-by-side breakdowns helping you choose between popular tools. Real-world scenarios,
+      tradeoffs, and recommendations.
+    </p>
+  </div>
+
+  <motion.div
+    variants={stagger}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    className="grid gap-4 md:grid-cols-3"
+  >
+    {[
+      {
+        href: "/comparisons/cursor-vs-vscode-ai-vs-jetbrains-ai",
+        title: "Cursor vs VS Code + AI vs JetBrains",
+        desc: "Which AI-enhanced editor actually speeds up shipping without breaking code review.",
+      },
+      {
+        href: "/comparisons/perplexity-vs-kagi-vs-google",
+        title: "Perplexity vs Kagi vs Google",
+        desc: "AI answers, quality search, and which one actually wins for research-heavy work.",
+      },
+      {
+        href: "/comparisons/elevenlabs-vs-playht-vs-azure-tts",
+        title: "ElevenLabs vs PlayHT vs Azure TTS",
+        desc: "Text-to-speech quality, pricing, and which one delivers natural voices at scale.",
+      },
+    ].map((x) => (
+      <motion.div key={x.href} variants={slideUp}>
+        <Link
+          href={x.href}
+          className="block rounded-2xl border p-5 hover:bg-muted/40 hover:shadow-lg transition-all h-full"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1">
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                Comparison
+              </div>
+              <div className="mt-2 font-semibold leading-snug">{x.title}</div>
+              <div className="mt-2 text-sm text-muted-foreground">{x.desc}</div>
+            </div>
+            <ArrowRight
+              className="h-4 w-4 mt-1 text-muted-foreground flex-shrink-0"
+              aria-hidden="true"
+            />
+          </div>
+        </Link>
+      </motion.div>
+    ))}
+  </motion.div>
+
+  <div className="mt-4 text-center">
+    <Link
+      href="/comparisons"
+      className="text-sm underline underline-offset-4 hover:text-primary transition-colors"
+    >
+      Browse all detailed comparisons →
+    </Link>
+  </div>
+</section>
+
 
       {/* ════════════════════════════════════════════════════════════════════════
           NEWSLETTER — editorial inset block

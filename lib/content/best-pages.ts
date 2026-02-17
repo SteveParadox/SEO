@@ -31,9 +31,11 @@ export const BEST_PAGES: BestPage[] = [
       "Top AI tools for studying, writing, research, and note-taking. Ranked picks with best-for, tradeoffs, and quick recommendations.",
     primaryKeyword: "best ai tools for students",
     intro: [
-      "Students don't need 400 AI tools. They need a few that actually help with essays, research, flashcards, and staying organized.",
-      "This list ranks tools based on usefulness, learning value, and how likely they are to cause academic disaster if misused.",
-      "The goal is to learn faster and write better, not to outsource thinking to machines. Use these tools as tutors and editors, not replacements for your own brain.",
+      "Students today have access to more AI tools than ever before—research assistants, writing helpers, code debuggers, and note-taking platforms. But having options doesn't mean you should use all of them. The question isn't what tools exist, but which ones actually improve your grades, save time, and help you learn better without getting you in academic trouble.",
+      "Most students waste hours trying different AI tools randomly, copying outputs directly, and then getting flagged for AI usage. This list cuts through the noise by focusing only on tools that integrate into legitimate study workflows: understanding concepts, drafting better essays, organizing research, and improving your writing voice.",
+      "The reality is simple: professors can often tell when AI wrote something. Generic tone, perfect but vague answers, suspicious fluency shifts, and missing your usual mistakes are red flags. The students winning with AI aren't using it to cheat—they're using it to think better and write stronger work. AI works best as a tutor for concepts you don't understand, an editor for rough drafts that need polish, and a research partner for finding starting sources to explore.",
+      "This ranked list covers three categories: the tool everyone should know about (Perplexity for research), the tool that works best in teams (Notion AI for group projects), and the tool that matters most for CS students (Cursor for coding). Each comes with honest advice on how to use it without academic consequences, plus a breakdown of what makes each tool worth your time versus another distraction tab.",
+      "Whether you're writing essays, debugging code, preparing for exams, or managing a semester's worth of research—these picks will save you time and help you produce better work. The secret is understanding the tool's actual strengths and using it intentionally, not relying on it completely.",
     ],
     picks: [
       {
@@ -77,9 +79,11 @@ export const BEST_PAGES: BestPage[] = [
       "Best AI writing tools for drafting, rewriting, and summarizing. Ranked picks with strengths, weaknesses, and best use cases.",
     primaryKeyword: "best ai tools for writing",
     intro: [
-      "Writing tools are everywhere. Most are the same thing with different branding and a loud landing page.",
-      "These picks are the ones people actually keep open in tabs.",
-      "Good writing tools help you think more clearly, not just rearrange words. They catch unclear sentences, suggest better structure, and help you find your point when you've lost it three paragraphs ago.",
+      "The writing tool market is crowded with products that all promise the same thing: write faster, better, smarter. But most are variations on the same core functionality—spell-checking, tone suggestions, and template-based drafting. What separates genuinely useful writing tools from noise is how they fit into real workflows. The best ones disappear into where you're already writing instead of forcing you into new platforms.",
+      "Good writing tools don't just rearrange words or suggest synonyms. They help you think more clearly by catching unclear sentences, pointing out when you've buried your main idea three paragraphs down, suggesting improved structure, and catching words you've repeated too often. They work best as a second pair of eyes during the messy middle of writing, not as replacement writers taking over your keyboard.",
+      "The tools ranked here split into three distinct use cases: drafting and collaboration (Cursor in Notion), research-driven content production (Perplexity for sources), and grammar and clarity polishing (Grammarly free tier for detail work). Each serves a different part of the writing process, so the best writeup workflow often uses multiple tools at different stages.",
+      "What separates these picks from the endless alternatives is that they actually integrate into where writers work—Google Docs, Microsoft Word, your note-taking app, or your web browser. You don't have to switch tools or copy-paste content between platforms. You write where you normally write, and AI assistance is there when you need it. That low friction is what makes the difference between tools you use weekly and tools you install then forget about.",
+      "Whether you're writing business emails, long-form content, academic papers, or marketing copy—these tools will make you faster and produce better first drafts. The catch? They're still writing assistance, not writing automation. Every output needs your judgment, your voice, and your edits to become something worth publishing.",
     ],
     picks: [
       {
@@ -121,9 +125,11 @@ export const BEST_PAGES: BestPage[] = [
       "Top AI tools for code generation, debugging, and refactoring. Practical picks that actually speed up development without creating review nightmares.",
     primaryKeyword: "best ai coding tools",
     intro: [
-      "AI coding tools promise to 10x your productivity. In reality, they save you from typing boilerplate and help you understand unfamiliar codebases.",
-      "The best tools make you faster without making code review a horror show.",
-      "These picks focus on tools that integrate into real development workflows, not demo videos that never happen in production.",
+      "Developer productivity tools promise 10x gains. Reality is more modest—good AI coding tools might save you 20-30% of time on specific tasks while dramatically increasing the confidence you feel tackling unfamiliar code or complex refactors. The tools that matter most integrate smoothly into your existing development environment and produce diffs you can confidently review without paranoia about hallucinated bugs.",
+      "The challenge isn't finding AI tools that can write code—almost every editor has some AI feature now. The challenge is finding tools that understand your specific codebase, respect existing patterns, produce reviewable diffs, and work well in team environments without creating bottlenecks or making code review exponentially harder. A tool that generates correct but unmaintainable code has negative value regardless of how fast it writes.",
+      "These picks split across three developer personas: solo developers or small teams prioritizing shipping speed and willing to review AI suggestions carefully (Cursor), budget-conscious developers or students using free tiers (GitHub Copilot), and organized teams where type-safety and IDE integration matter most (JetBrains AI). Each has different economics, learning curves, and trade-offs when it comes to codebase context, refactor reliability, and long-term maintainability.",
+      "The best AI coding tool for your situation depends on: how much you trust AI output (if low, avoid tools that encourage blind acceptance), whether your team has a standardized IDE (which tools integrate tightly with), and whether you're building quick prototypes or production systems (different tools have different quality levels). A tool that's perfect for startup velocity might be problematic for enterprise stability, and vice versa.",
+      "What matters most is approaching AI coding tools with healthy skepticism: they're amazing at boilerplate and speeding up exploratory coding, they're risky for security-critical code or architectural changes, and they require strong developer judgment to use effectively. The developers who benefit most from AI aren't replacing their critical thinking—they're amplifying their speed on the parts where speed doesn't require judgment.",
     ],
     picks: [
       {
