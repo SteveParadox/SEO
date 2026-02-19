@@ -472,23 +472,21 @@ const heroLogos = [
 
 function LogoStrip() {
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-2">
+    <div className="mt-6 sm:mt-8 flex items-center gap-4 sm:gap-6 opacity-20 grayscale">
       {heroLogos.map((l) => (
         <div
           key={l.name}
-          className="flex items-center gap-2 rounded-2xl border bg-muted/20 px-3 py-2"
+          className="relative h-12 sm:h-16 w-12 sm:w-16 shrink-0 flex items-center justify-center"
           title={l.name}
+          aria-hidden
         >
-          <div className="relative h-5 w-5 overflow-hidden rounded-md">
-            <Image
-              src={l.src}
-              alt={`${l.name} logo`}
-              fill
-              className="object-contain"
-              sizes="20px"
-            />
-          </div>
-          <span className="text-xs text-muted-foreground">{l.name}</span>
+          <Image
+            src={l.src}
+            alt={l.name}
+            fill
+            className="object-contain"
+            sizes="64px"
+          />
         </div>
       ))}
     </div>
