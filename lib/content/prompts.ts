@@ -3592,5 +3592,729 @@ Sample size: {SAMPLE_SIZE}`,
   modelCompatibility: ["GPT", "Claude", "Gemini"],
   tags: ["research", "surveys", "data-collection"],
   updatedAtISO: "2026-02-03",
-}
+},
+
+{
+  id: "p39",
+  slug: "interview-prep-coach",
+  title: "Interview Prep Coach (Technical Deep Dives)",
+  purpose: "Prepare for technical interviews by covering real scenarios, edge cases, and explaining your thought process clearly.",
+  description: "This prompt simulates a technical interviewer who asks progressively harder questions, challenges your solutions, and coaches you on communication. It covers problem-solving approach, code quality, optimization, and how to articulate your thinking under pressure.",
+  whenToUse: "Use before coding interviews, system design interviews, or any technical screening. Effective 2-3 days before the actual interview as a confidence builder and knowledge check.",
+  howItWorks: "The prompt presents a coding problem or system design challenge, evaluates your solution, asks clarifying questions, suggests optimizations, and provides real feedback on communication. It simulates the collaborative aspect of technical interviews, not just problem-solving.",
+  bestPractices: "Work through problems out loud—articulate your thinking. Start with clarifying questions about requirements. Propose a brute-force solution first, then optimize. Walk through your code step-by-step. Handle edge cases. Admit when you don't know something. Prepare follow-up questions about the role.",
+  commonMistakes: "Jumping to optimization before solving the base case. Not asking clarifying questions. Writing code without explaining your approach first. Not testing edge cases. Being defensive about feedback. Forgetting the human side—enthusiasm and fit matter as much as technical chops.",
+  expectedOutput: "Interactive interview session including: a real-world problem or scenario, feedback on your initial approach, 3-5 follow-up questions testing depth of understanding, suggested optimizations, discussion of trade-offs, and specific feedback on how you communicated your solution.",
+  limitations: "Can't perfectly simulate a live interview's pressure and personality. Limited to text-based explanation of visual design problems. Can't evaluate code execution or performance in actual systems. Follow-up questions based on text may miss some nuances.",
+  technicalRequirements: "Works best with GPT-4 and Claude for complex technical reasoning. Provide complete code or detailed descriptions of your approach. Specify the programming language and any framework constraints. Include any relevant requirements or edge cases from the problem.",
+  realWorldApplications: "Career changers use this to brush up on interview fundamentals. Senior engineers use this when switching companies. Hiring managers use this to create interview questions. Students use this when preparing for first tech jobs.",
+  successMetrics: "You can explain your approach clearly before coding. You catch your own edge cases. You can optimize solutions and discuss trade-offs. The interviewer's feedback no longer surprises you. You feel confident articulating your technical thinking.",
+  relatedPrompts: "Use Explain Like a Tutor for foundational concepts you're shaky on. Combine with Career Positioning to articulate your experience clearly. Reference Real-World Problem Solver for practice with open-ended challenges.",
+  prompt: `You are a technical interviewer coaching someone for their first interview (or brushing up after years away).
+
+Their background: {BACKGROUND}
+Interview type: {TYPE} (e.g., "phone screen", "coding round", "system design")
+Topics to focus on: {TOPICS}
+
+Rules:
+- Start with a realistic problem or scenario
+- Ask about approach before code
+- Challenge edge cases and assumptions
+- Ask how they'd optimize after initial solution
+- Give honest, actionable feedback
+- Simulate the collaborative nature of real interviews
+
+Interview scenario:
+
+[Present the problem or scenario clearly]
+
+Now walk me through:
+1. Your approach (before coding)
+2. The code or design
+3. How you'd test it
+4. How you'd optimize it
+
+Then we'll discuss trade-offs and I'll ask follow-up questions.`,
+  variations: [
+    "Make it system design instead of coding.",
+    "Include a tricky requirement reveal halfway through.",
+    "Focus on communication and explaining under pressure.",
+    "Add real-time feedback as I code.",
+  ],
+  modelCompatibility: ["GPT", "Claude"],
+  tags: ["career", "interview", "technical-skills"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p40",
+  slug: "content-calendar-planner",
+  title: "Content Calendar Planner (Strategy to Schedule)",
+  purpose: "Create a quarterly content calendar with strategy, themes, distribution channels, and specific pieces all coordinated.",
+  description: "This prompt builds aligned content calendars that balance strategy with execution. It ensures content serves business goals, spreads consistency across channels, and creates enough variety to stay interesting without spinning wheels on random ideas.",
+  whenToUse: "Use at the start of each quarter, when launching a new product or brand initiative, or when your content feels scattered. Most valuable when you want content that actually connects to business outcomes, not just 'posting consistently.'",
+  howItWorks: "The prompt defines business goals and audience, creates monthly themes that ladder to those goals, maps specific content pieces to channels and formats, and ensures distribution timing maximizes reach. It outputs a structured calendar you can immediately publish to a tool like Asana or Notion.",
+  bestPractices: "Start with clear business goals—'increase brand awareness' is vague, 'reach 5,000 new engineering managers with content about scaling teams' is actionable. Define your audience specifically. Include content types that work for your platform. Plan 10% more ideas than you'll publish to keep flexibility.",
+  commonMistakes: "No connection between content and business goals—just posting because 'we need content.' Overloading one channel while ignoring others. Not batching content creation with a content calendar mindset. Ignoring seasonal trends and company events. No measurement plan tied to the calendar.",
+  expectedOutput: "A complete quarterly calendar including: business goals and success metrics, audience profile and preferred formats, monthly themes with narratives, 60-90 specific content pieces with dates, channels, and distribution strategy, content format mix (blog, video, social, email, etc.), and a simple measurement plan.",
+  limitations: "Calendar is only a plan—execution quality matters more. Content preferences change month-to-month based on trends and feedback. Can't predict viral moments or account for breaking news. Calendar is a constraint that enables consistency, not a cage.",
+  technicalRequirements: "Works with all major models. GPT tends to create clear, structured calendars. Claude provides thematically cohesive content ideas. Gemini sometimes suggests unexpected but effective content angles. Export-ready for spreadsheets, Asana, or Notion.",
+  realWorldApplications: "Marketing teams use this to coordinate campaigns across channels. Content creators use it to plan blogs and social consistently. Product teams use it for feature announcements and user education. Community managers use this for engagement initiatives.",
+  successMetrics: "Team executes 80%+ of the calendar without last-minute scrambling. Content feels cohesive across channels. Engagement and traffic increase compared to previous quarter. Business goals are measurable and achieved.",
+  relatedPrompts: "Use Rewrite for Clarity to refine calendar content. Combine with Audience Persona Builder to define who you're reaching. Follow with Email Sequence Designer if implementing email content.",
+  prompt: `Create a quarterly content calendar aligned with business goals.
+
+Business context:
+- Company/Creator: {COMPANY}
+- Primary goal this quarter: {GOAL}
+- Secondary goals: {SECONDARY}
+
+Audience:
+- Who we're reaching: {AUDIENCE}
+- What formats they prefer: {FORMATS}
+- Where they hang out: {CHANNELS}
+
+Output a complete content calendar with:
+
+QUARTERLY OVERVIEW
+
+Primary success metric: [What success looks like]
+Content formats breakdown: [60% blog, 20% video, 20% social]
+Publishing schedule: [3x blog per week, 2x social per day, 1x email per week]
+
+MONTHLY THEMES
+
+Month 1: [Theme] - [How it connects to business goal]
+Month 2: [Theme] - [How it connects to business goal]
+Month 3: [Theme] - [How it connects to business goal]
+
+WEEK-BY-WEEK CONTENT BLOCKS
+
+Week 1 of Month 1:
+Topic: [Specific topic]
+Format: [Blog / Video / Social / Email]
+Channel: [Where it goes]
+Call-to-action: [What you want them to do]
+Publish date: [Date]
+Owner: [Who creates]
+
+[Continue for all 13 weeks...]
+
+DISTRIBUTION STRATEGY
+
+Blog (3x per week):
+- Monday: [Topic type]
+- Wednesday: [Topic type]
+- Friday: [Topic type]
+- Promotion: [How promoted on social]
+
+Social media (daily):
+- Focus: [What kind of content does well]
+- Format: [Threads / Carousels / Reels / etc.]
+- Engagement goal: [Comment prompts / Question types]
+
+Email (weekly):
+- Day: [When sent]
+- Type: [Newsletter / Promotional / Educational]
+- Segment: [If applicable]
+
+Paid amplification:
+- Budget: [If allocated]
+- What gets promoted: [Top-performing organic content]
+
+CONTENT PRODUCTION CHECKLIST
+
+Essential supplies:
+- [Templates, lists, tools needed]
+
+Content batch schedule:
+- Record videos on: [Day]
+- Write blogs on: [Day]
+- Create graphics on: [Day]
+- Schedule social on: [Day]
+
+Holidays/Events to plan:
+- [Major events to tie content to]
+
+MEASUREMENT PLAN
+
+Track weekly:
+- Page views by format
+- Social engagement rate
+- Email open/click rate
+
+Track monthly:
+- Leads generated
+- Sales attributed to content
+- Brand mentions increase
+
+Success criteria:
+- [Specific, measurable goals for the quarter]
+
+Goal: {GOAL}
+Channels: {CHANNELS}`,
+  variations: [
+    "Add customer case study schedule throughout.",
+    "Focus on SEO content strategy (target keywords per piece).",
+    "Create a launch-specific calendar (one-month blitz).",
+    "Build a personal brand content calendar instead.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["marketing", "content", "strategy"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p41",
+  slug: "real-world-problem-solver",
+  title: "Real-World Problem Solver (Constraints + Tradeoffs)",
+  purpose: "Think through messy real problems with competing constraints and find practical, implementable solutions.",
+  description: "This prompt helps solve problems that have no clean answer—where speed conflicts with quality, where different stakeholders want different things, where perfect isn't possible. It forces uncomfortable tradeoff conversations upfront rather than discovering conflicts later.",
+  whenToUse: "Use when facing decisions with competing priorities (shipping fast vs. shipping right), complex projects with multiple stakeholders, resource constraints that force choices, or strategic decisions where different departments disagree.",
+  howItWorks: "The prompt frames the problem, lists all constraints and stakeholders, evaluates options against tradeoffs systematically, and forces a decision with clear reasoning. It doesn't pretend there's a perfect answer—it surfaces the real tension and forces conscious choice.",
+  bestPractices: "List all constraints honestly, including uncomfortable truths. Name who cares about what outcome. Think through second-order effects (short-term fix that breaks long-term goals). Document the tradeoff for future reference so people understand why you chose what you did.",
+  commonMistakes: "Pretending constraints don't exist or avoiding the hard conversation. Optimizing for the loudest stakeholder instead of the business goal. Making decisions in a vacuum without explicit stakeholder input. Changing course when the original tradeoff is re-examined without new information.",
+  expectedOutput: "A decision brief with: problem statement, all stakeholders and their priorities, complete list of constraints, 3-4 viable options with pros/cons, explicit tradeoffs explained clearly, recommended decision with reasoning, implementation plan, and a success metric to validate the choice.",
+  limitations: "Can't make the decision for you—forces you to make it consciously. Can't predict all future consequences. Doesn't remove the need for human judgment. Complex organizational politics may override 'logical' choices.",
+  technicalRequirements: "Works well with all major models. Claude often surfaces nuance in stakeholder conflicts. GPT tends toward structured decision matrices. Gemini might suggest creative options you hadn't considered. Clear problem framing is key.",
+  realWorldApplications: "Product teams use this for feature prioritization decisions. Engineering teams use it for technical debt vs. new features. Startups use this for go-to-market decisions. Organizations use this for difficult people or process decisions.",
+  successMetrics: "All stakeholders understand why the decision was made, even if it's not their preferred outcome. Implementation proceeds without constant re-negotiation. If you need to revisit the decision, new information clearly justifies the change.",
+  relatedPrompts: "Use Stakeholder Communication Plan after deciding how to communicate the tradeoff. Combine with Project Management Framework for implementation. Reference Data Storytelling to present the analysis to leadership.",
+  prompt: `Help me think through a real-world problem with competing priorities.
+
+PROBLEM STATEMENT
+{PROBLEM}
+
+THE CONSTRAINTS (be honest about these)
+1. {CONSTRAINT_1}
+2. {CONSTRAINT_2}
+3. {CONSTRAINT_3}
+
+THE STAKEHOLDERS & WHAT THEY WANT
+- {STAKEHOLDER_1}: wants {WANT_1}
+- {STAKEHOLDER_2}: wants {WANT_2}
+- {STAKEHOLDER_3}: wants {WANT_3}
+
+THE SITUATION
+- Time pressure: {TIME}
+- Budget: {BUDGET}
+- Resource availability: {RESOURCES}
+- Business impact if we get it wrong: {IMPACT}
+
+NOW: Help me think through this by:
+
+1) Reframing the problem (what's the actual issue)
+2) Listing all viable options (including ones I haven't thought of)
+3) For each option, showing:
+   - What each stakeholder gets
+   - What they lose
+   - The business impact
+   - Implementation difficulty
+   - Any unexpected consequences
+
+4) Recommending the best path with clear reasoning
+5) One-paragraph explanation of tradeoffs for stakeholders
+6) Implementation roadmap to reduce friction
+
+Problem: {PROBLEM}
+Context: {CONTEXT}`,
+  variations: [
+    "Frame it as a decision matrix comparing 5+ options.",
+    "Add a 'what happens if we change course later' analysis.",
+    "Include a risk analysis for the recommended solution.",
+    "Focus on stakeholder communication strategy.",
+  ],
+  modelCompatibility: ["GPT", "Claude"],
+  tags: ["strategy", "decision-making", "business"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p42",
+  slug: "code-review-accelerator",
+  title: "Code Review Accelerator (Fast, Fair, Actionable)",
+  purpose: "Conduct thorough code reviews efficiently, catching real issues while respecting developers' time with clear, actionable feedback.",
+  description: "This prompt helps you review code critically without being nitpicky, surface architectural issues early, and communicate feedback that helps developers improve rather than frustrate them. It balances rigor with speed.",
+  whenToUse: "Use when reviewing pull requests, especially in fast-moving teams where reviews can become bottlenecks. Most valuable when you want consistency in standards and clear communication.",
+  howItWorks: "The prompt reviews code for correctness, performance, maintainability, and security. It separates critical issues from nice-to-haves, explains the 'why' behind suggestions, and proposes concrete improvements. It avoids pedantic style comments in favor of meaningful feedback.",
+  bestPractices: "Read for function first, style second. Ask 'why' if something looks odd rather than assuming it's wrong. Suggest improvements, don't demand them. Acknowledge good solutions and learning progress. Check tests before diving into code. Keep feedback constructive and actionable.",
+  commonMistakes: "Bikeshedding on variable names instead of logic. Reviewing style instead of substance. Long feedback threads that overwhelm the developer. Not acknowledging context (maybe there's a good reason for the approach). Blocking on improvement suggestions that aren't bugs.",
+  expectedOutput: "A structured code review with: brief summary of what the code does, any critical issues blocking approval, architectural or performance concerns to address, specific improvement suggestions with examples, stylistic observations and standards enforcement, and the reviewer's confidence level in the code.",
+  limitations: "Can't see the full system context or understand long-term architectural plans. Doesn't replace pair programming for complex logic. Can't evaluate user-facing impact without seeing it. Suggestions need to be weighed against project momentum.",
+  technicalRequirements: "Works best with GPT-4 and Claude for code-heavy reviews. Provide complete code in markdown blocks with language specified. Mention the code's purpose and any relevant context. Include test code if available.",
+  realWorldApplications: "Senior engineers use this to review junior developers' code while being educational. Teams use this for consistent code quality standards. Open-source projects use this to review community contributions fairly. Technical leads use this for architectural consistency.",
+  successMetrics: "Code quality improves over time. Developers feel feedback is fair and educational. Review cycle time decreases. Fewer bugs make it to production from these components.",
+  relatedPrompts: "Use Technical Documentation Writer to document complex code. Combine with Bug Hunter if reviewing error handling. Reference Testing Framework Designer for robust test coverage.",
+  prompt: `Review this code carefully and fairly. Separate real issues from style opinions.
+
+CODE PURPOSE: {PURPOSE}
+PROGRAMMING LANGUAGE: {LANGUAGE}
+CONTEXT: {CONTEXT}
+
+CODE TO REVIEW:
+{CODE}
+
+RELEVANT TESTS:
+{TESTS}
+
+Review this code for:
+
+1) CORRECTNESS (does it do what it's supposed to?)
+   - Does it handle edge cases?
+   - Are there any logic errors?
+   - Does it match the branch description?
+
+2) PERFORMANCE & SCALABILITY
+   - Any obvious performance issues?
+   - Will it scale with expected load?
+   - Could it be optimized?
+
+3) MAINTAINABILITY & CLARITY
+   - Is it clear what it does?
+   - Could future developers understand this?
+   - Is there duplication that could be extracted?
+
+4) SECURITY & SAFETY
+   - Any security vulnerabilities?
+   - Proper error handling?
+   - Any dangerous assumptions?
+
+5) TESTING
+   - Is test coverage adequate?
+   - Do tests cover edge cases?
+   - Are tests clear?
+
+PROVIDED FEEDBACK FORMAT:
+
+SUMMARY
+[One paragraph overview]
+
+CRITICAL ISSUES (block approval)
+- Issue: [What the problem is]
+  Why: [Why this matters]
+  Fix: [Specific suggestion]
+
+IMPORTANT IMPROVEMENTS (should fix before merge)
+- Suggestion: [What to improve]
+  Why: [Why this is important]
+  Example: [How to implement]
+
+NICE-TO-HAVE OBSERVATIONS (consider for next refactor)
+- Note: [Observation]
+  Alternative: [Different approach]
+
+STYLE & STANDARDS
+[Any consistency notes]
+
+CONFIDENCE LEVEL
+[Your confidence in this code going to production]
+
+Approval: [approve / request changes / comment]
+
+Purpose: {PURPOSE}
+Language: {LANGUAGE}`,
+  variations: [
+    "Focus only on architecture, ignore implementation details.",
+    "Make it educational—explain the 'why' behind each suggestion.",
+    "Add security-focused review focusing on vulnerabilities.",
+    "Create a checklist-style review for consistency.",
+  ],
+  modelCompatibility: ["GPT", "Claude"],
+  tags: ["dev", "code-review", "collaboration"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p43",
+  slug: "data-storytelling-distiller",
+  title: "Data Storytelling Distiller (Insights → Impact)",
+  purpose: "Transform raw data analysis into compelling narratives that convince stakeholders and drive decisions.",
+  description: "This prompt turns numbers into stories that people care about, starting with the insight (not the data), then building evidence. It prevents the common mistake of overwhelming people with analysis when they need clarity on what it means.",
+  whenToUse: "Use when presenting analysis to stakeholders, writing reports, or when you've found something important but struggle to make others care. Essential for communicating findings that will drive decisions.",
+  howItWorks: "The prompt extracts the insight first (what matters), then frames data as evidence for that insight. It includes objections to pre-empt, provides context for why this matters now, and suggests actions based on findings. It structures narrative flow, not just bullet points.",
+  bestPractices: "Lead with the insight, not the data. Use comparisons to make numbers meaningful (not 'revenue grew 23%' but 'revenue grew more than industry average'). Show change where it matters. Anticipate objections and address them upfront. Connect to business goals the audience cares about.",
+  commonMistakes: "Dumping all data then drawing a conclusion. Using jargon that makes simple ideas complicated. Cherry-picking data to support a desired conclusion. Not providing enough context to understand significance. Overwhelming with options instead of recommending action.",
+  expectedOutput: "A structured narrative including: headline insight in plain language, context showing why it matters, the data evidence supporting it, comparison points for perspective, anticipated objections with responses, clear recommendation or next steps, and a single visual that captures the insight.",
+  limitations: "Can't make boring data interesting if there's nothing meaningful there. Storytelling doesn't replace data quality—bad data told well is still bad data. Stakeholders may still disagree with interpretation. Short narratives force you to leave things out.",
+  technicalRequirements: "Works well with all major models. Claude excels at narrative storytelling. GPT is strong at structured evidence presentation. Gemini often suggests unexpected but effective framings. Include all relevant numbers and context.",
+  realWorldApplications: "Analysts use this to communicate findings to executives. Marketers use this to justify ad spend. Product teams use this to argue for feature prioritization. Finance teams use this to sell budget requests. Researchers use this for compelling reports.",
+  successMetrics: "Stakeholders understand the insight in the first 60 seconds. They remember the core finding afterward. They take the recommended action. Data convinces rather than confuses.",
+  relatedPrompts: "Use Real-World Problem Solver if the data should influence a key decision. Combine with Content Calendar Planner to turn data into shareable insights. Reference Rewrite for Clarity if narrative feels clunky.",
+  prompt: `Transform this analysis into a story that will convince stakeholders to care and act.
+
+RAW ANALYSIS:
+The data/analysis: {ANALYSIS}
+Sample size: {SAMPLE}
+Time period: {PERIOD}
+
+CONTEXT:
+Who's the audience: {AUDIENCE}
+What do they care about: {GOALS}
+What's the business impact: {IMPACT}
+What decision should this influence: {DECISION}
+
+TURN THIS INTO A COMPELLING NARRATIVE:
+
+HEADLINE (what really matters here)
+[One sentence capturing the insight]
+
+THE CONTEXT (why should they care NOW)
+[Paragraph setting up relevance]
+
+THE INSIGHT (in plain English)
+[Explain what the data shows, why it's noteworthy]
+
+THE EVIDENCE (here's the data backing this up)
+[Specific numbers with comparisons for perspective]
+- [Number] compared to [baseline/industry/previous]
+- [Number] meaning [what it represents]
+- [Number] showing [the change]
+
+WHY THIS MATTERS (so what?)
+[How this connects to their goals]
+[What's the opportunity or risk]
+[Why timing matters]
+
+ANTICIPATED OBJECTIONS & RESPONSES
+Q: Skeptic might ask: "[Skeptical question]"
+A: "[Direct, evidence-based response]"
+
+[Address 2-3 key objections]
+
+THE RECOMMENDATION
+[Clear, specific call-to-action]
+[What success looks like]
+[Timeline if applicable]
+
+ONE SUPPORTING VISUAL
+[Describe a single chart/graph that captures this insight—clarity over complexity]
+
+Data points: {DATA}
+Audience: {AUDIENCE}`,
+  variations: [
+    "Format as a one-page executive summary.",
+    "Create a 5-minute presentation outline.",
+    "Focus on surprising insights that contradict assumptions.",
+    "Build a case for a major strategic shift based on data.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["data", "communication", "business"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p44",
+  slug: "email-sequence-designer",
+  title: "Email Sequence Designer (Welcome → Value → Convert)",
+  purpose: "Create email sequences that guide readers from welcome to action without feeling pushy or repetitive.",
+  description: "This prompt designs multi-email sequences with clear progression—each email serves a purpose, moves readers closer to action, and respects their inbox. It balances education with appeal to prevent the common pitfalls of email marketing (too salesy, too frequent, irrelevant).",
+  whenToUse: "Use when launching an email list, onboarding new customers, or converting prospects. Most effective when you have a clear action you want readers to take and a genuinely valuable reason for them to take it.",
+  howItWorks: "The prompt maps sequence stages (welcome, education, engagement, conversion, retention) and creates specific emails for each. It ensures each email provides value upfront, includes a clear next step, and maintains engagement without over-sending.",
+  bestPractices: "Email 1 should deliver value immediately. Space emails strategically—no daily blasts unless you're a news outlet. Every email should have a single, clear next step. Test subject lines for open rates. Segment if you can—different people have different needs. Measure engagement to refine.",
+  commonMistakes: "First email is purely pitchy with no value. Too many emails too fast (email fatigue). Every email is a sales pitch (people unsubscribe fast). Subject lines are clickbait (destroys trust). Not providing unsubscribe clearly. Sending to a disengaged list.",
+  expectedOutput: "A complete email sequence with 5-8 emails including: subject line, preview text, email copy with clear sections, call-to-action, sending timing, and segmentation notes. Each email is ready to draft and send.",
+  limitations: "Email design/layout not included—just copy. Can't account for unique brand voice variations (personalization). Needs testing and iteration—won't be perfect first try. Spam filters are outside your control.",
+  technicalRequirements: "Works well with all models. GPT creates clear structure. Claude excels at conversational tone. Provide your goal, audience, and typical actions you want. Format: plain copy, ready for email platform HTML.",
+  realWorldApplications: "Startups use this to build email funnels. SaaS companies use this for onboarding flows. Creators use this to convert subscribers to paying. Agencies use this for client nurture sequences.",
+  successMetrics: "Email open rates 25%+, click rates 5%+, conversion on final CTA 2%+ depending on industry. Low unsubscribe rate. Steady growth in engaged list. Action rates increase with each email in sequence.",
+  relatedPrompts: "Use Rewrite for Clarity if email copy feels stiff. Combine with Content Calendar Planner if building weekly nurture. Reference Data Storytelling for analytics-driven emails.",
+  prompt: `Design an email sequence that guides readers to {ACTION}.
+
+SEQUENCE PURPOSE
+What action do you want? {ACTION}
+Who's the reader? {AUDIENCE}
+Why should they care? {VALUE}
+
+BUSINESS GOAL
+What succeeds: {SUCCESS}
+What fails: {FAILURE}
+Timeframe: {TIMEFRAME}
+
+OUTPUT A SEQUENCE:
+
+EMAIL 1: WELCOME + INSTANT VALUE
+Send: Immediately on signup
+Subject line: [Intriguing, benefit-driven]
+Preview: [First 50 chars matter]
+
+Body:
+[Greeting - use their name if available]
+
+[Quick value upfront—deliver on signup promise]
+
+[Why this matters / what they'll get]
+
+[CTA: Next step]
+
+[Signature]
+
+EMAIL 2: ENGAGEMENT + DEEPER VALUE
+Send: 2 days after Email 1
+Subject: [Continue the conversation]
+
+Body:
+[Reference Email 1 briefly]
+
+[New valuable insight / resource]
+
+[Story or example]
+
+[CTA: Explore more / Watch / Read]
+
+EMAIL 3: SOCIAL PROOF + CREDIBILITY
+Send: 4 days after Email 2
+Subject: [What others are doing...]
+
+Body:
+[Real result or testimonial]
+
+[Why this works (the mechanism)]
+
+[Common objection + honest response]
+
+[CTA: See how / Learn more]
+
+EMAIL 4: URGENCY + FINAL PITCH
+Send: 6 days after Email 3
+Subject: [Limited / Last chance / Final invitation]
+
+Body:
+[Quick recap of emails 1-3]
+
+[Why now matters (deadline, scarcity, etc.)]
+
+[What they'll get from taking action]
+
+[CTA: Let's go / Claim your spot]
+
+[P.S. Address biggest objection here]
+
+[Optional: add Email 5 RETENTION (24 hours after conversion) to thank and set expectations]
+
+SEQUENCE METADATA
+
+Target list: {AUDIENCE}
+Sending frequency: {FREQUENCY}
+Best send time: {SEND_TIME}
+Unsubscribe message: [Always include clear unsubscribe]
+A/B test: [What to test—subject lines, CTA text, send time]
+
+Goal: {ACTION}
+Audience: {AUDIENCE}`,
+  variations: [
+    "Add a re-engagement sequence for inactive subscribers.",
+    "Create a post-purchase onboarding sequence.",
+    "Build a weekly educational sequence (long-term nurture).",
+    "Design a seasonal/event-triggered sequence.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["email", "marketing", "conversion"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p45",
+  slug: "product-requirements-generator",
+  title: "Product Requirements Generator (Spec → Build)",
+  purpose: "Turn product ideas into clear specifications that engineering can build without constant clarification meetings.",
+  description: "This prompt creates comprehensive product requirements that include the 'why,' detailed user flows, technical constraints, and acceptance criteria. It prevents the common problem where requirements are vague until engineering starts building and discovers missing details.",
+  whenToUse: "Use before handing a project to engineering, when committing to a new feature, or when you want clarity on scope before starting. Most valuable for preventing 'wait, I didn't mean that' moments.",
+  howItWorks: "The prompt structures requirements with: problem statement and goals, user personas and flows, detailed feature breakdown, edge cases and error handling, technical constraints, and clear acceptance criteria for done-ness.",
+  bestPractices: "Start with the problem you're solving, not the solution. Involve engineering early to understand technical feasibility. Define success metrics upfront. Test with real users if possible before building. Document assumptions explicitly.",
+  commonMistakes: "Vague requirements ('make it better'). Forgetting edge cases and error states. No acceptance criteria (how do you know it's done?). Constraints discovered mid-build. Missing why this matters (context for engineering).",
+  expectedOutput: "A specification document including: problem statement, goals and success metrics, complete user flows with mockup descriptions, feature breakdown, technical requirements, edge cases and error handling, acceptance criteria, and dependencies.",
+  limitations: "Specs never capture everything—engineering will discover questions. User feedback may change specs mid-build. Perfect specs slow down iteration. Shipping often reveals what specs missed.",
+  technicalRequirements: "Works with all models. Claude creates thorough specs. GPT structures them well. Provide your feature idea, target impact, and any constraints you know. Format: detailed narrative, technically feasible.",
+  realWorldApplications: "SaaS companies use this for feature specs. Product managers use this to brief engineering. Startups use this to clarify MVP scope. Teams use this to reduce build ambiguity.",
+  successMetrics: "Engineering builds it right the first time with minimal questions. QA can test against clear acceptance criteria. Launch meets the original goals. Negative scope creep during build.",
+  relatedPrompts: "Use Real-World Problem Solver if facing scope tradeoffs. Combine with Project Management Framework for timeline. Reference Data Storytelling to justify the requirements.",
+  prompt: `Create a product specification for: {FEATURE}
+
+PROBLEM STATEMENT
+What problem does this solve? {PROBLEM}
+For whom? {USERS}
+Why is it urgent? {URGENCY}
+
+BUSINESS GOALS
+Success means: {SUCCESS_METRIC}
+This will increase: {IMPACT}
+Timeline: {TIMELINE}
+
+THE FEATURE: {FEATURE}
+
+COMPLETE SPECIFICATION:
+
+OVERVIEW
+[1 sentence what this is]
+
+GOALS FOR THIS FEATURE
+- Goal 1: [Specific, measurable]
+- Goal 2: [Specific, measurable]
+- Goal 3: [Specific, measurable]
+
+USER PERSONAS & FLOWS
+[For each main user type:]
+
+Persona: {PERSONA}
+Pain point: [What they struggle with]
+
+User flow: "{PERSONA}"
+[Step 1: User does X]
+[Step 2: System shows Y]
+[Step 3: User takes action Z]
+[Step 4: Outcome/success state]
+
+FEATURE BREAKDOWN
+[Specific components/functionality]
+
+Component 1: {DESCRIPTION}
+- What it does
+- Where it appears
+- How users interact with it
+
+Component 2: {DESCRIPTION}
+[Continue...]
+
+EDGE CASES & ERROR HANDLING
+- If [condition], then [system does]
+- Error: [What could go wrong] → [Recovery]
+- Edge case: [Unusual but possible scenario] → [How handled]
+
+TECHNICAL REQUIREMENTS
+Platform: {PLATFORM}
+Technology constraints: {CONSTRAINTS}
+Integration needs: {INTEGRATIONS}
+Performance needs: {PERFORMANCE}
+
+ACCEPTANCE CRITERIA
+The feature is done when:
+- [ ] User can [action 1]
+- [ ] System shows [outcome 1]
+- [ ] [Edge case] is handled correctly
+- [ ] Performance is [metric]
+- [ ] All error states show helpful messages
+- [ ] [Integration] works end-to-end
+
+DEPENDENCIES
+- Does this depend on [X]? Timeline: [when]
+- Does [Y] depend on this? Timeline: [when]
+
+Feature: {FEATURE}
+Users: {USERS}`,
+  variations: [
+    "Format as user stories (As a [user], I want [feature], so [benefit]).",
+    "Add technical architecture diagram.",
+    "Include data model changes required.",
+    "Create a phased rollout plan.",
+  ],
+  modelCompatibility: ["GPT", "Claude"],
+  tags: ["product", "specs", "technical"],
+  updatedAtISO: "2026-02-03",
+},
+
+{
+  id: "p46",
+  slug: "audience-persona-builder",
+  title: "Audience Persona Builder (Research → Action)",
+  purpose: "Create detailed audience personas grounded in real research, not assumptions, so marketing and product decisions are data-driven.",
+  description: "This prompt transforms research data (interviews, surveys, analytics) into practical personas that include goals, pain points, behaviors, and media consumption. These aren't vague descriptions—they're specific enough to guide decisions.",
+  whenToUse: "Use when starting a marketing initiative, building a new product, or when current strategies aren't working and you suspect you're targeting the wrong audience. Most valuable when you have some customer data to start from.",
+  howItWorks: "The prompt synthesizes research into detailed personas including: demographics, psychographics, goals, pain points, objections, media habits, and buying process. Each persona includes enough detail to feel real and guide real decisions.",
+  bestPractices: "Base personas on actual customer research, not hunches. Interview 10-15 customers to find patterns. Look for anxieties and aspirations, not just surface wants. Create 3-5 personas, not 20 (personas become useless if too many). Regularly update with new data.",
+  commonMistakes: "Creating personas from assumptions ('I think young people like memes'). Too many personas that blur together. Personas that are too vague to guide decisions. Ignoring that personas change as your market changes. Not using personas once created.",
+  expectedOutput: "3-5 detailed personas each including: name and photo, demographics, role/job context, primary goal and secondary goals, main pain points, objections to your solution, media consumption, buying process, and 2-3 key insights for messaging.",
+  limitations: "Personas are generalizations—real people are messier. Personas can codify bias if research was biased. Market changes faster than personas update. Personas guide strategy but don't replace talking to real customers.",
+  technicalRequirements: "Works with all models. Claude creates nuanced personas. GPT creates structured, actionable personas. Provide customer interviews, survey data, or behavioral data. Format: narrative with supporting details.",
+  realWorldApplications: "Marketers use personas for messaging strategy. Product teams use personas for feature prioritization. Sales teams use personas to tailor pitches. Designers use personas for UX decisions.",
+  successMetrics: "Marketing campaigns resonate better with the target audience. Product decisions align with persona needs. Conversion rates improve. Customer acquisition cost decreases. Team alignment increases (everyone understands who's buying).",
+  relatedPrompts: "Use Content Calendar Planner to create content for specific personas. Combine with Email Sequence Designer to build persona-specific flows. Reference Data Storytelling to present personas to stakeholders.",
+  prompt: `Build audience personas from research data: {RESEARCH_DATA}
+
+RESEARCH INPUT
+Customer interviews: [Number and summaries]
+Survey data: [Key findings]
+Behavioral data: [Purchase/usage patterns]
+Market segment: {SEGMENT}
+
+CREATE DETAILED PERSONAS:
+
+PERSONA 1: {PERSONA_NAME}
+
+DEMOGRAPHICS & CONTEXT
+Age: [Range]
+Role/Title: [Job or situation]
+Industry/Context: [Where they work/operate]
+Experience level: [Expertise in domain]
+Income range: [If relevant]
+
+PSYCHOGRAPHICS
+Values: [What matters to them]
+Aspirations: [What do they want to achieve]
+Anxieties: [What worries them most]
+Identity: [How they see themselves]
+
+PRIMARY GOAL
+[What they're trying to accomplish]
+Why it matters: [Why they care]
+Current approach: [How they try to solve it now]
+Frustrations: [What's not working]
+
+SECONDARY GOALS
+- Goal 1: [What else matters]
+- Goal 2: [What else matters]
+
+PAIN POINTS (the hard parts)
+1. [Specific challenge]
+   Impact: [How it affects them]
+   Attempted solutions: [What they've tried]
+
+2. [Specific challenge]
+   Impact: [How it affects them]
+   Attempted solutions: [What they've tried]
+
+KEY OBJECTIONS TO YOUR SOLUTION
+- "I already have a solution" → [Overcome with]
+- "This seems complicated" → [Overcome with]
+- "I'm not sure it's worth it" → [Overcome with]
+
+MEDIA CONSUMPTION
+Where they go:
+- Websites/publications they read: {WEBSITES}
+- Social platforms: {PLATFORMS}
+- Podcasts/content they follow: {CONTENT}
+- How they learn: {LEARNING}
+
+BUYING PROCESS
+Decision maker? [Yes/No/Sometimes]
+Budget available? [Yes/No/Sometimes]
+Timeline: [Fast / Considered / Slow]
+Research process: [How they evaluate options]
+Influencers: [Who influences the decision]
+
+MESSAGING & POSITIONING
+In one sentence, {PERSONA_NAME} wants to [goal] so they can [outcome].
+
+Key messaging angles:
+- Angle 1: [Specific value prop for this persona]
+- Angle 2: [Specific value prop for this persona]
+- Angle 3: [Specific value prop for this persona]
+
+DO NOT say: [Messaging that won't resonate]
+
+PERSONA 2: {PERSONA_NAME}
+[Repeat structure]
+
+RESEARCH: {RESEARCH_DATA}
+Market: {SEGMENT}`,
+  variations: [
+    "Add buying committee personas (for B2B).",
+    "Include anti-persona (who is NOT your customer).",
+    "Create seasonal or lifecycle personas.",
+    "Build personas for different product tiers.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["audience", "marketing", "research"],
+  updatedAtISO: "2026-02-03",
+},
 ];
+
