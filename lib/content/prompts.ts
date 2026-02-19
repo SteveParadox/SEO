@@ -3596,7 +3596,7 @@ Sample size: {SAMPLE_SIZE}`,
 
 {
   id: "p39",
-  slug: "interview-prep-coach",
+  slug: "technical-interview-prep",
   title: "Interview Prep Coach (Technical Deep Dives)",
   purpose: "Prepare for technical interviews by covering real scenarios, edge cases, and explaining your thought process clearly.",
   description: "This prompt simulates a technical interviewer who asks progressively harder questions, challenges your solutions, and coaches you on communication. It covers problem-solving approach, code quality, optimization, and how to articulate your thinking under pressure.",

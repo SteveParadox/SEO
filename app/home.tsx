@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -459,6 +460,41 @@ function StatStrip({
   );
 }
 
+// ─── Logo Strip ───────────────────────────────────────────────────────────────
+const heroLogos = [
+  { name: "OpenAI", src: "/logos/openai.png" },
+  { name: "Anthropic", src: "/logos/anthropic.png" },
+  { name: "Notion", src: "/logos/notion.png" },
+  { name: "Netlify", src: "/logos/netlify.png" },
+  { name: "Perplexity", src: "/logos/perplexity.png" },
+  { name: "Midjourney", src: "/logos/midjourney.png" },
+];
+
+function LogoStrip() {
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-2">
+      {heroLogos.map((l) => (
+        <div
+          key={l.name}
+          className="flex items-center gap-2 rounded-2xl border bg-muted/20 px-3 py-2"
+          title={l.name}
+        >
+          <div className="relative h-5 w-5 overflow-hidden rounded-md">
+            <Image
+              src={l.src}
+              alt={`${l.name} logo`}
+              fill
+              className="object-contain"
+              sizes="20px"
+            />
+          </div>
+          <span className="text-xs text-muted-foreground">{l.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function ToolDropAI() {
   const [email, setEmail] = useState("");
@@ -719,6 +755,22 @@ export default function ToolDropAI() {
               Vetted tools, reusable prompts, and model updates that actually matter.
               No noise. No "Top 200 AI Tools" nonsense.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-4 text-xs text-muted-foreground"
+            >
+              Tracking updates across leading AI tools
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.37 }}
+            >
+              <LogoStrip />
+            </motion.div>
 
             {/* Stat strips */}
             <motion.div
