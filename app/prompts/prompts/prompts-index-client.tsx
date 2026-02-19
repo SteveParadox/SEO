@@ -31,7 +31,7 @@ export default function PromptsIndexClient() {
           p.title.toLowerCase().includes(lowerQuery) ||
           p.purpose.toLowerCase().includes(lowerQuery) ||
           p.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)) ||
-          p.description.toLowerCase().includes(lowerQuery)
+          p.description?.toLowerCase().includes(lowerQuery)
       );
     },
     [searchQuery]
