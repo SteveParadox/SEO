@@ -751,8 +751,8 @@ export default function ToolDropAI() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-5 sm:mt-6 text-base sm:text-lg text-muted-foreground max-w-lg"
             >
-              Vetted tools, reusable prompts, and model updates that actually matter.
-              No noise. No "Top 200 AI Tools" nonsense.
+              Vetted tools, reusable prompts and model updates that actually matter.
+             
             </motion.p>
 
             <motion.div
