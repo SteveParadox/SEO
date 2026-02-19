@@ -98,6 +98,10 @@ export type Tool = BaseContent & {
 
   rating?: number;
   users?: string;
+
+  officialUrl?: string;
+  affiliateUrl?: string;
+  isAffiliate?: boolean;
 };
 
 // ---------- Prompts ----------

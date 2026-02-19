@@ -232,6 +232,17 @@ export default async function BestPage({ params }: PageProps) {
                     View {tool.name}
                   </Link>
 
+                  {tool.officialUrl && (
+                    <a
+                      href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
+                      target="_blank"
+                      rel="nofollow sponsored noopener"
+                      className="underline underline-offset-4"
+                    >
+                      Visit site →
+                    </a>
+                  )}
+
                   {tool.tags?.slice(0, 2).map((t) => {
                     const label = t.trim();
                     const tagSlug = encodeURIComponent(label.toLowerCase());

@@ -182,6 +182,24 @@ export default async function ToolPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
+        {tool.officialUrl && (
+          <div>
+            <a
+              href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
+              target="_blank"
+              rel="nofollow sponsored noopener"
+              className="inline-flex items-center justify-center rounded-xl bg-foreground text-background px-5 py-2 text-sm font-medium hover:opacity-90 transition"
+            >
+              Visit Official Site
+            </a>
+            {tool.isAffiliate ? (
+              <p className="mt-3 text-xs text-muted-foreground">
+                Some links may be affiliate links. We may earn a commission at no extra cost to you.
+              </p>
+            ) : null}
+          </div>
+        )}
+
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Alternatives</CardTitle>

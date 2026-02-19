@@ -39,6 +39,9 @@ export const tools: Tool[] = [
     rating: 4.6,
     users: "Popular",
     updatedAtISO: "2026-01-24",
+    officialUrl: "https://cursor.com",
+    affiliateUrl: "https://cursor.com?ref=tooldrop",
+    isAffiliate: true,
   },
 
   {
@@ -61,6 +64,9 @@ export const tools: Tool[] = [
     rating: 4.3,
     users: "Popular",
     updatedAtISO: "2026-01-24",
+    officialUrl: "https://perplexity.ai",
+    affiliateUrl: "https://perplexity.ai?ref=tooldrop",
+    isAffiliate: true,
   },
 
   {
@@ -83,6 +89,9 @@ export const tools: Tool[] = [
     rating: 4.0,
     users: "Popular",
     updatedAtISO: "2026-01-24",
+    officialUrl: "https://notion.so",
+    affiliateUrl: "https://notion.so?ref=tooldrop",
+    isAffiliate: true,
   },
 
   {
@@ -105,6 +114,9 @@ export const tools: Tool[] = [
     rating: 4.6,
     users: "Popular",
     updatedAtISO: "2026-01-24",
+    officialUrl: "https://elevenlabs.io",
+    affiliateUrl: "https://elevenlabs.io?ref=tooldrop",
+    isAffiliate: true,
   },
 
   {
