@@ -464,8 +464,9 @@ function StatStrip({
 const heroLogos = [
   { name: "OpenAI", src: "/logos/openai.png" },
   { name: "Anthropic", src: "/logos/anthropic.png" },
-  { name: "Notion", src: "/logos/notion.png" },
+  { name: "Endnote", src: "/logos/endnote.png" },
   { name: "Netlify", src: "/logos/netlify.png" },
+  { name: "Google-Cloud-Speech-to-text", src: "/logos/google-cloud.png" },
   { name: "Perplexity", src: "/logos/perplexity.png" },
   { name: "Midjourney", src: "/logos/midjourney.png" },
 ];
