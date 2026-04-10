@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Search, Timer, ArrowRight, Copy, Wrench, TrendingUp, BadgeCheck, Trophy } from "lucide-react";
@@ -96,7 +96,7 @@ function ItemRow({ item }: { item: IndexItem }) {
   );
 }
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [filterFreshness, setFilterFreshness] = useState<string>("all");
@@ -274,5 +274,29 @@ export default function SearchPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="mx-auto max-w-6xl px-4 py-10">
+          <div className="flex items-center gap-2">
+            <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
+              <Search className="h-5 w-5" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-semibold">Search</h1>
+              <p className="mt-1 text-muted-foreground">
+                Loading search experience...
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <SearchPageContent />
+    </Suspense>
   );
 }
