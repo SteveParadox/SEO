@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Search, Timer, ArrowRight, Copy, Wrench, TrendingUp, BadgeCheck, Trophy } from "lucide-react";
 import { Scale } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -96,8 +97,13 @@ function ItemRow({ item }: { item: IndexItem }) {
 }
 
 export default function SearchPage() {
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [filterFreshness, setFilterFreshness] = useState<string>("all");
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
 
   const unifiedIndex = useMemo<IndexItem[]>(() => {
     const idx: IndexItem[] = [];

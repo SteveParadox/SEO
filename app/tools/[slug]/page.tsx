@@ -20,8 +20,47 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type ToolSection = {
+  title: string;
+  items: string[];
+};
+
+function buildDecisionSections(tool: NonNullable<ReturnType<typeof getToolBySlug>>): ToolSection[] {
+  return [
+    {
+      title: `Choose ${tool.name} if you need`,
+      items: tool.useCases.slice(0, 5),
+    },
+    {
+      title: `What ${tool.name} does well`,
+      items: tool.pros.slice(0, 5),
+    },
+    {
+      title: "Where it can fall short",
+      items: tool.cons.slice(0, 5),
+    },
+  ];
+}
+
+function buildFaq(tool: NonNullable<ReturnType<typeof getToolBySlug>>) {
+  return [
+    {
+      q: `What is ${tool.name} best for?`,
+      a: `${tool.name} is strongest for ${tool.useCases.slice(0, 3).join(", ")}.`,
+    },
+    {
+      q: `Who should consider ${tool.name}?`,
+      a: `${tool.name} fits teams that value ${tool.pros.slice(0, 2).join(" and ")} more than ${tool.cons.slice(0, 1).join("")}.`,
+    },
+    {
+      q: `What should you watch before choosing ${tool.name}?`,
+      a: tool.cons.join(". "),
+    },
+  ];
+}
+
 export function generateStaticParams() {
-  return DATA.tools.map((t) => ({ slug: t.slug }));
+  return DATA.tools.map((tool) => ({ slug: tool.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -30,17 +69,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!tool) {
     return {
-      title: "Tool not found — Xavkit",
+      title: "Tool not found - Xavkit",
       robots: { index: false, follow: false },
     };
   }
 
-  // Sanitize and ensure title/description are not empty
   const baseName = tool.name?.trim() || "Unnamed Tool";
-  const baseDescription = (tool.oneLiner || tool.description)?.trim() || "AI tool information";
-  
-  const title = `${baseName} — Xavkit`;
-  const description = baseDescription.slice(0, 160); // Ensure meta description length
+  const baseDescription = (tool.description || tool.oneLiner)?.trim() || "AI tool information";
+  const title = `${baseName} review - Xavkit`;
+  const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/tools/${tool.slug}`);
 
   return {
@@ -72,6 +109,9 @@ export default async function ToolPage({ params }: PageProps) {
   const inCollections = findCollectionsContaining({ kind: "tool", id: tool.id });
   const inComparisons = findComparisonsContainingTool(tool.id);
   const featured = findBestPagesContainingTool(tool.id);
+  const decisionSections = buildDecisionSections(tool);
+  const faq = buildFaq(tool);
+  const toolUrl = absoluteUrl(`/tools/${tool.slug}`);
 
   const toolSchema = {
     "@context": "https://schema.org",
@@ -80,13 +120,13 @@ export default async function ToolPage({ params }: PageProps) {
     description: tool.description ?? tool.oneLiner,
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Web",
-    url: absoluteUrl(`/tools/${tool.slug}`),
+    url: toolUrl,
     keywords: tool.tags?.join(", "),
     offers: {
       "@type": "Offer",
+      category: tool.pricing?.tier ?? "paid",
       price: tool.pricing?.tier === "free" ? "0" : undefined,
       priceCurrency: tool.pricing?.tier === "free" ? "USD" : undefined,
-      category: tool.pricing?.tier ?? "paid",
     },
     aggregateRating: tool.rating
       ? {
@@ -99,9 +139,23 @@ export default async function ToolPage({ params }: PageProps) {
       : undefined,
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
+    <div className="mx-auto max-w-5xl px-4 py-10">
       <JsonLd data={toolSchema} />
+      <JsonLd data={faqSchema} />
 
       <TrackRecent
         kind="tool"
@@ -112,13 +166,13 @@ export default async function ToolPage({ params }: PageProps) {
       />
 
       <div className="flex flex-wrap gap-2">
-        {tool.tags.map((t) => {
-          const tag = t.trim();
-          const tagSlug = encodeURIComponent(tag.toLowerCase());
+        {tool.tags.map((tag) => {
+          const label = tag.trim();
+          const tagSlug = encodeURIComponent(label.toLowerCase());
           return (
             <Link key={tagSlug} href={`/tags/${tagSlug}`}>
               <Badge variant="secondary" className="rounded-full">
-                {tag}
+                {label}
               </Badge>
             </Link>
           );
@@ -126,177 +180,225 @@ export default async function ToolPage({ params }: PageProps) {
       </div>
 
       <h1 className="mt-4 text-3xl font-semibold">{tool.name}</h1>
-      <p className="mt-2 text-muted-foreground">{tool.oneLiner}</p>
+      <p className="mt-3 max-w-3xl text-muted-foreground">{tool.description}</p>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-4 flex flex-wrap items-center gap-2">
         <SaveButton kind="tool" id={tool.id} className="rounded-xl" />
+        <Badge variant="outline" className="rounded-full capitalize">
+          {tool.pricing.tier}
+        </Badge>
+        {tool.rating ? (
+          <Badge variant="outline" className="rounded-full">
+            Rated {tool.rating}/5
+          </Badge>
+        ) : null}
+        {tool.users ? (
+          <Badge variant="outline" className="rounded-full">
+            {tool.users}
+          </Badge>
+        ) : null}
       </div>
 
-      <div className="mt-6 grid gap-4">
+      <div className="mt-8 grid gap-4 md:grid-cols-3">
         <Card className="rounded-2xl">
           <CardHeader>
-            <CardTitle>Best use cases</CardTitle>
+            <CardTitle className="text-base">Why people pick it</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            {tool.useCases.map((x) => (
-              <div key={x}>• {x}</div>
+          <CardContent className="text-sm text-muted-foreground">
+            {tool.oneLiner}
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle className="text-base">Pricing snapshot</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <div className="font-medium capitalize text-foreground">{tool.pricing.tier}</div>
+            {tool.pricing.note ? <p>{tool.pricing.note}</p> : null}
+            {tool.pricing.details ? <p>{tool.pricing.details}</p> : null}
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle className="text-base">Best fit</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            {tool.useCases.slice(0, 3).map((item) => (
+              <div key={item} className="rounded-xl border px-3 py-2">
+                {item}
+              </div>
             ))}
           </CardContent>
         </Card>
+      </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <Card className="rounded-2xl">
+      <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {decisionSections.map((section) => (
+          <Card key={section.title} className="rounded-2xl">
             <CardHeader>
-              <CardTitle>Pros</CardTitle>
+              <CardTitle className="text-base">{section.title}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              {tool.pros.map((x) => (
-                <div key={x}>• {x}</div>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              {section.items.map((item) => (
+                <div key={item} className="rounded-xl border px-3 py-2">
+                  {item}
+                </div>
               ))}
             </CardContent>
           </Card>
+        ))}
+      </div>
 
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle>Cons</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {tool.cons.map((x) => (
-                <div key={x}>• {x}</div>
-              ))}
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="rounded-2xl">
+      {tool.officialUrl ? (
+        <Card className="mt-8 rounded-2xl">
           <CardHeader>
-            <CardTitle>Pricing</CardTitle>
+            <CardTitle className="text-base">Visit the product</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="capitalize">{tool.pricing.tier}</div>
-            {tool.pricing.note ? (
-              <div className="text-sm text-muted-foreground mt-1">
-                {tool.pricing.note}
-              </div>
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            <p>
+              Use the official site when you want current pricing, feature rollouts, or account
+              setup details.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                className="inline-flex items-center justify-center rounded-xl bg-foreground px-5 py-2 text-sm font-medium text-background transition hover:opacity-90"
+              >
+                Visit official site
+              </a>
+              <Link
+                href="/tools"
+                className="inline-flex items-center justify-center rounded-xl border px-5 py-2 text-sm font-medium transition hover:bg-muted/40"
+              >
+                Browse more tools
+              </Link>
+            </div>
+            {tool.isAffiliate ? (
+              <p className="text-xs">
+                Some outbound links may be affiliate links. That does not change the price you pay.
+              </p>
             ) : null}
           </CardContent>
         </Card>
+      ) : null}
 
-        {tool.officialUrl && (
-          <div>
-            <a
-              href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
-              target="_blank"
-              rel="nofollow sponsored noopener"
-              className="inline-flex items-center justify-center rounded-xl bg-foreground text-background px-5 py-2 text-sm font-medium hover:opacity-90 transition"
-            >
-              Visit Official Site
-            </a>
-            {tool.isAffiliate ? (
-              <p className="mt-3 text-xs text-muted-foreground">
-                Some links may be affiliate links. We may earn a commission at no extra cost to you.
-              </p>
-            ) : null}
-          </div>
-        )}
-
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Alternatives</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            {tool.alternatives.map((a) => (
-              <div key={a.slug}>
-                •{" "}
-                <Link className="hover:underline" href={`/tools/${a.slug}`}>
-                  {a.name}
-                </Link>
-              </div>
+            {tool.alternatives.map((alternative) => (
+              <Link
+                key={alternative.slug}
+                href={`/tools/${alternative.slug}`}
+                className="block rounded-xl border p-3 text-sm hover:bg-muted/40 transition"
+              >
+                {alternative.name}
+              </Link>
             ))}
           </CardContent>
         </Card>
 
-        {featured.length > 0 ? (
-          <div className="mt-10">
-            <h2 className="text-xl font-semibold">Featured in best lists</h2>
-            <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {featured.map((p) => (
-                <Link key={p.id} href={`/best/${p.slug}`}>
-                  <Card className="rounded-2xl hover:bg-muted/40 transition">
-                    <CardContent className="p-4">
-                      <div className="font-medium">{p.title}</div>
-                      <div className="text-sm text-muted-foreground line-clamp-2">
-                        {p.intro?.[0] ?? p.description}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>FAQ</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            {faq.map((item) => (
+              <div key={item.q}>
+                <div className="font-medium text-foreground">{item.q}</div>
+                <p className="mt-1">{item.a}</p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+
+      {featured.length > 0 ? (
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold">Featured in best lists</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {featured.map((page) => (
+              <Link key={page.id} href={`/best/${page.slug}`}>
+                <Card className="rounded-2xl hover:bg-muted/40 transition">
+                  <CardContent className="p-4">
+                    <div className="font-medium">{page.title}</div>
+                    <div className="text-sm text-muted-foreground line-clamp-2">
+                      {page.intro?.[0] ?? page.description}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
-        ) : null}
-
-        {inComparisons.length > 0 ? (
-          <div className="mt-10">
-            <h2 className="text-xl font-semibold">Compared in</h2>
-            <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {inComparisons.slice(0, 6).map((cmp) => (
-                <Link key={cmp.id} href={`/comparisons/${cmp.slug}`} className="block">
-                  <Card className="rounded-2xl hover:bg-muted/40 transition">
-                    <CardContent className="p-4">
-                      <div className="font-medium">{cmp.title}</div>
-                      <div className="text-sm text-muted-foreground line-clamp-2">
-                        {cmp.description}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        <div className="mt-8 grid gap-4">
-          {inCollections.length > 0 ? (
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>Appears in collections</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {inCollections.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={`/collections/${c.slug}`}
-                    className="block rounded-xl border p-3 hover:bg-muted/40 transition"
-                  >
-                    <div className="font-medium">{c.title}</div>
-                    <div className="text-sm text-muted-foreground">{c.description}</div>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
-          ) : null}
-
-          {related.length > 0 ? (
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>Related tools</CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-3 md:grid-cols-2">
-                {related.map((t) => (
-                  <Link
-                    key={t.id}
-                    href={`/tools/${t.slug}`}
-                    className="block rounded-xl border p-3 hover:bg-muted/40 transition"
-                  >
-                    <div className="font-medium">{t.name}</div>
-                    <div className="text-sm text-muted-foreground">{t.oneLiner}</div>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
-          ) : null}
         </div>
+      ) : null}
+
+      {inComparisons.length > 0 ? (
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold">Compared in</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {inComparisons.slice(0, 6).map((comparison) => (
+              <Link key={comparison.id} href={`/comparisons/${comparison.slug}`} className="block">
+                <Card className="rounded-2xl hover:bg-muted/40 transition">
+                  <CardContent className="p-4">
+                    <div className="font-medium">{comparison.title}</div>
+                    <div className="text-sm text-muted-foreground line-clamp-2">
+                      {comparison.description}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <div className="mt-8 grid gap-4">
+        {inCollections.length > 0 ? (
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Appears in collections</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {inCollections.map((collection) => (
+                <Link
+                  key={collection.id}
+                  href={`/collections/${collection.slug}`}
+                  className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+                >
+                  <div className="font-medium">{collection.title}</div>
+                  <div className="text-sm text-muted-foreground">{collection.description}</div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
+
+        {related.length > 0 ? (
+          <Card className="rounded-2xl">
+            <CardHeader>
+              <CardTitle>Related tools</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3 md:grid-cols-2">
+              {related.map((relatedTool) => (
+                <Link
+                  key={relatedTool.id}
+                  href={`/tools/${relatedTool.slug}`}
+                  className="block rounded-xl border p-3 hover:bg-muted/40 transition"
+                >
+                  <div className="font-medium">{relatedTool.name}</div>
+                  <div className="text-sm text-muted-foreground">{relatedTool.oneLiner}</div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
       </div>
     </div>
   );

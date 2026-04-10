@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { siteUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,9 +51,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Xavkit",
+    url: siteUrl(),
+    description:
+      "Discover vetted AI tools, effective prompts, and important model updates with practical guidance.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteUrl()}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <JsonLd data={websiteSchema} />
         <div className="min-h-screen flex flex-col">
           <SiteHeader />
           <main className="flex-1">{children}</main>

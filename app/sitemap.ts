@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { DATA, getAllTagsWithCounts } from "@/lib/data";
+import { DATA, getAllTagsWithCounts, getLatestUpdatedForTag } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -62,15 +62,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Tags: await + normalize to lowercase for consistency
   const tagRows = await getAllTagsWithCounts();
-  const tags = tagRows.map(({ tag }) => {
+  const tags = tagRows
+    .filter(({ count }) => count >= 2)
+    .map(({ tag }) => {
+      const lastModified = getLatestUpdatedForTag(tag);
     const slug = encodeURIComponent(tag.trim().toLowerCase());
     return {
       url: absoluteUrl(`/tags/${slug}`),
-      lastModified: now,
+      lastModified: lastModified ? new Date(lastModified) : now,
       changeFrequency: "weekly" as const,
       priority: 0.6,
     };
-  });
+    });
 
   return [
     ...staticPages,
