@@ -19,7 +19,8 @@ function kindLabel(kind: Kind) {
   if (kind === "prompt") return "Prompt";
   if (kind === "update") return "Update";
   if (kind === "collection") return "Collection";
-  return "Comparison";
+  if (kind === "comparison") return "Comparison";
+  return "Best List";
 }
 
 function Tabs({
@@ -198,6 +199,7 @@ export default function LibraryClient() {
               <option value="update">Updates</option>
               <option value="collection">Collections</option>
               <option value="comparison">Comparisons</option>
+              <option value="best">Best lists</option>
             </select>
           </div>
         </div>

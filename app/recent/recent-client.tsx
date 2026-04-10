@@ -14,7 +14,8 @@ function kindLabel(kind: RecentItem["kind"]) {
   if (kind === "prompt") return "Prompt";
   if (kind === "update") return "Update";
   if (kind === "collection") return "Collection";
-  return "Comparison";
+  if (kind === "comparison") return "Comparison";
+  return "Best List";
 }
 
 export default function RecentClient() {

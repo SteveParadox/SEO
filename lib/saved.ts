@@ -1,4 +1,4 @@
-export type SavedKind = "tool" | "prompt" | "update" | "collection" | "comparison";
+export type SavedKind = "tool" | "prompt" | "update" | "collection" | "comparison" | "best";
 
 export type SavedItem = {
   kind: SavedKind;

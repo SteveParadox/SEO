@@ -3,7 +3,8 @@ export type RecentKind =
   | "prompt"
   | "update"
   | "collection"
-  | "comparison";
+  | "comparison"
+  | "best";
 
 export type RecentItem = {
   kind: RecentKind;
