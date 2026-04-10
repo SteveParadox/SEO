@@ -4321,5 +4321,158 @@ Market: {SEGMENT}`,
   tags: ["audience", "marketing", "research"],
   updatedAtISO: "2026-02-03",
 },
+{
+  id: "p47",
+  slug: "seo-content-refresh-brief",
+  title: "SEO Content Refresh Brief (Traffic Decay to Update Plan)",
+  purpose: "Turn aging pages into clear refresh plans that improve usefulness, depth, and ranking potential.",
+  description: "This prompt creates a page-specific SEO refresh brief that focuses on content quality, missing intent coverage, weak sections, internal linking gaps, and opportunities to make a page more differentiated. It is built for updating existing content, not churning out disposable rewrites.",
+  whenToUse: "Use this when a page has impressions but weak clicks, traffic has declined over time, Search Console shows pages as crawled but not indexed, or your content feels thin compared with stronger competitors. Most valuable for existing pages with some search demand already.",
+  decisionContext: "Refreshing content works best when the page already has a viable topic and some evidence of demand. If the topic is irrelevant or the page has no unique angle, a refresh may not be enough. This prompt helps you decide what to deepen, remove, restructure, or add so the page becomes more useful and more index-worthy.",
+  howItWorks: "The prompt audits the current page against search intent, user value, structure, and evidence of originality. It then turns those findings into a prioritized refresh brief covering title/H1 opportunities, section upgrades, missing FAQs, internal links, schema opportunities, and specific editorial additions that make the page stronger instead of simply longer.",
+  bestPractices: "Include the current page copy, target keyword, Search Console patterns, and at least a short note on competing pages. Ask the model to prioritize recommendations by impact so you avoid spending time polishing low-value sections first. Use the output as an editor's brief, not a blind rewrite command.",
+  commonMistakes: "Refreshing pages by just adding words. Stuffing keywords into headings. Rewriting sections that were already fine while ignoring missing intent coverage. Updating title tags without improving the actual content. Treating refreshes as technical SEO only when the main problem is page value.",
+  expectedOutput: "A refresh brief containing: page diagnosis, likely indexing or ranking blockers, sections to rewrite, sections to add, internal links to create, FAQ ideas, metadata improvements, schema suggestions, and a prioritized execution plan.",
+  limitations: "A refresh cannot rescue a page targeting a weak topic, duplicated topic, or query that has no realistic demand. It also cannot replace genuine expertise or examples if the page has nothing original to say. Search performance still depends on competition and site-wide trust.",
+  technicalRequirements: "Works with GPT, Claude, and Gemini. Claude is strong at editorial diagnosis, GPT is strong at structure and action plans, and Gemini can be useful for broader SERP-pattern brainstorming. Provide page content and keyword context for best results.",
+  realWorldApplications: "SEO teams use this for updating decayed blog posts. Niche site owners use it to improve thin affiliate or tool pages. Editorial teams use it before quarterly refresh sprints. Agencies use it to turn vague improve-this-page tasks into execution-ready briefs.",
+  successMetrics: "A successful refresh increases click-through rate, improves coverage of user questions, reduces thin sections, and creates more internal routes into the page. In Search Console, you should expect stronger impression-to-click performance over time and fewer obviously weak indexed pages.",
+  specificRecommendations: "Ask for a before-and-after outline so the new structure is obvious. Request three truly new sections instead of generic filler. If the page is already indexed, ask for changes that improve differentiation rather than total reinvention.",
+  relatedPrompts: "Use Search Console Triage to decide which pages deserve refresh priority. Pair with Comparison Page Outline for decision-heavy topics. Follow with Content Repurposing to turn the upgraded page into supporting assets.",
+  whenToIgnore: "Skip a refresh when the page should really be merged, redirected, or deleted instead of improved.",
+  prompt: `Create an SEO refresh brief for this page.
+
+PAGE URL: {URL}
+PRIMARY QUERY: {KEYWORD}
+SEARCH CONSOLE SIGNS: {SEARCH_CONSOLE_DATA}
+CURRENT PAGE COPY:
+{PAGE_CONTENT}
+
+OPTIONAL COMPETITOR NOTES:
+{COMPETITOR_NOTES}
+
+Rules:
+- Diagnose likely quality or indexing weaknesses first
+- Focus on usefulness, differentiation, and intent coverage
+- Do not recommend keyword stuffing
+- Prioritize highest-impact changes
+
+Output format:
+1) Page diagnosis
+2) Likely blockers
+3) Refresh strategy
+4) New sections to add
+5) Sections to rewrite or compress
+6) Internal links to add
+7) Metadata + schema ideas
+8) 7-day implementation plan`,
+  variations: [
+    "Make the brief specific for a tool review page.",
+    "Make the brief specific for a prompt page.",
+    "Add a section for pages marked Crawled - currently not indexed.",
+    "Create a version optimized for affiliate or money pages.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "content", "refresh", "search"],
+  updatedAtISO: "2026-04-10",
+},
+
+{
+  id: "p48",
+  slug: "topical-authority-cluster-planner",
+  title: "Topical Authority Cluster Planner (Pillar + Support Pages)",
+  purpose: "Turn a broad topic into a practical cluster strategy with pillar pages, support content, and internal-link logic.",
+  description: "This prompt designs a content cluster around a topic by mapping high-intent pages, supporting articles, comparisons, FAQs, and tag-like supporting assets. It helps publishers create topic depth instead of isolated posts that never reinforce each other.",
+  whenToUse: "Use this when entering a new niche, expanding a category, building a content moat around a topic, or trying to improve internal link structure across related pages. Especially useful when your site has scattered posts but no visible topic system.",
+  decisionContext: "Topical authority is not just publishing more pages. It comes from covering adjacent user intents clearly and connecting them through useful internal links. This prompt helps define what deserves a pillar page, what should be a comparison, what should be a best list, and what should remain a lighter support page.",
+  howItWorks: "The prompt starts with a root topic, then expands it into sub-intents such as definitions, comparisons, tools, use cases, workflows, buyer questions, and troubleshooting angles. It organizes those into a prioritized cluster and proposes internal links so the site structure supports both crawling and user navigation.",
+  bestPractices: "Pick a topic narrow enough that one cluster can feel cohesive. Ask for intent labels on each page idea so you do not create overlap. Use the output to identify a few strong pages first rather than publishing the entire cluster at once.",
+  commonMistakes: "Confusing volume with authority. Creating pages that target the same intent with slightly different keywords. Forgetting internal links. Publishing support pages before defining the main pillar. Making every page informational when some should be decisional or transactional.",
+  expectedOutput: "A topic cluster map including: pillar page, comparison pages, best pages, support content, FAQ opportunities, tag or taxonomy ideas, and internal linking guidance showing how pages should reinforce each other.",
+  limitations: "A good cluster plan does not guarantee rankings if the site lacks trust, execution quality, or useful differentiation. It also needs editorial judgment to merge or remove overlapping ideas.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the root topic, target audience, business goal, and any existing pages you already have.",
+  realWorldApplications: "Niche publishers use this to plan category expansion. SEO teams use it for topic maps. Startup content teams use it to build educational libraries that support product-led growth. Agencies use it to justify content roadmaps to clients.",
+  successMetrics: "A successful cluster reduces orphan pages, increases internal link density, creates clear page roles, and makes the site easier to navigate by topic. Over time, that should improve crawl efficiency and strengthen topic-level performance.",
+  relatedPrompts: "Use SEO Content Refresh Brief to upgrade weak pages inside the cluster. Pair with Search Console Triage to prioritize what to build first. Follow with Comparison Page Outline for the most valuable decision pages.",
+  prompt: `Build a topical authority cluster for this root topic.
+
+ROOT TOPIC: {TOPIC}
+AUDIENCE: {AUDIENCE}
+BUSINESS GOAL: {GOAL}
+EXISTING PAGES: {EXISTING_CONTENT}
+
+Rules:
+- Separate informational, decisional, and commercial intent
+- Avoid overlapping page ideas
+- Include pillar, support, comparison, and best-list opportunities
+- Show how pages should internally link
+
+Output format:
+1) Cluster overview
+2) Pillar page
+3) Support pages
+4) Comparison / best-list pages
+5) FAQ and glossary opportunities
+6) Internal linking map
+7) Publishing priority order`,
+  variations: [
+    "Make the cluster specifically for an AI tools site.",
+    "Make the cluster specifically for an SEO niche site.",
+    "Include tag-page recommendations and when not to index them.",
+    "Create a lean 10-page starter cluster instead of a full map.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "strategy", "topical-authority", "content"],
+  updatedAtISO: "2026-04-10",
+},
+
+{
+  id: "p49",
+  slug: "search-console-triage",
+  title: "Search Console Triage (Coverage Issue to Action Plan)",
+  purpose: "Turn Search Console coverage and performance problems into prioritized actions instead of vague SEO anxiety.",
+  description: "This prompt analyzes Search Console patterns and converts them into a triage plan covering which pages to improve, merge, noindex, redirect, or leave alone. It is designed for messy real-world sites where not every issue deserves the same amount of work.",
+  whenToUse: "Use this when Search Console shows coverage issues like Crawled - currently not indexed, when clicks are flat despite impressions, when indexing changes after a content migration, or when you need to prioritize SEO tasks for limited time.",
+  decisionContext: "Search Console reports are signals, not instructions. Some pages should be improved, others should be merged, and some should never have been indexed in the first place. This prompt helps separate high-value opportunities from low-value cleanup.",
+  howItWorks: "The prompt groups pages by likely root cause, such as thin content, duplicate intent, weak internal links, stale content, or low search value. It then assigns an action type and priority so you can move through the backlog systematically instead of randomly.",
+  bestPractices: "Provide examples of affected URLs, page type, impressions, clicks, and a short note on content quality. Ask for actions grouped by impact and effort. Use the output to drive batches of fixes rather than reacting to each URL one by one.",
+  commonMistakes: "Trying to force every page into the index. Treating all coverage issues as technical. Spending hours on pages with no real value. Ignoring internal linking and site structure. Looking only at affected URLs without grouping them by template or type.",
+  expectedOutput: "A triage plan containing: issue categories, likely causes, which pages to improve versus prune, what templates need attention, what should be submitted for reindexing, and a practical order of operations.",
+  limitations: "The prompt cannot see the live site or SERP by itself. It depends on the quality of the examples and notes you provide. Final decisions still need judgment about business value and content quality.",
+  technicalRequirements: "Works well with all major models. Best results come when you include Search Console notes, sample URLs, and a short explanation of what each page type is trying to do.",
+  realWorldApplications: "Solo site owners use this to prioritize cleanup. Agencies use it to turn audit data into a plan. Editorial teams use it after publishing sprints to understand what templates are underperforming. Product content sites use it to decide whether thin taxonomy pages should remain indexable.",
+  successMetrics: "Successful triage means fewer low-value URLs competing for crawl budget, clearer page priorities, and a sharper roadmap for improving the pages that actually matter. You should end up with fewer random SEO tasks and more template-level fixes.",
+  relatedPrompts: "Use SEO Content Refresh Brief for the pages marked improve. Pair with Topical Authority Cluster Planner when the issue is weak site structure rather than isolated pages. Follow with redirect planning for pages marked merge or remove.",
+  prompt: `Analyze these Search Console issues and create a triage plan.
+
+SITE TYPE: {SITE_TYPE}
+MAIN PAGE TYPES: {PAGE_TYPES}
+ISSUES OBSERVED: {SEARCH_CONSOLE_ISSUES}
+SAMPLE URLS: {URL_EXAMPLES}
+KNOWN CONTEXT: {CONTEXT}
+
+Rules:
+- Group by likely root cause
+- Prioritize business value and page quality
+- Distinguish improve vs merge vs noindex vs ignore
+- Focus on practical actions, not generic SEO advice
+
+Output format:
+1) Core diagnosis
+2) Issue categories
+3) URL groups and recommended action
+4) Template-level fixes
+5) Reindexing priority list
+6) 14-day action plan`,
+  variations: [
+    "Make the plan specific for an AI tools directory.",
+    "Add a section for tag and taxonomy pages.",
+    "Focus only on coverage issues, not performance.",
+    "Focus only on the highest-impact 20 percent of URLs.",
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "search-console", "triage", "indexing"],
+  updatedAtISO: "2026-04-10",
+},
 ];
 

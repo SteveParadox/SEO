@@ -573,4 +573,90 @@ export const updates: ModelUpdate[] = [
     tags: ["policy", "compliance", "legal"],
     updatedAtISO: "2026-01-24",
   },
+  {
+    id: "u21",
+    slug: "content-refresh-systems-beating-publishing-volume",
+    model: "SEO",
+    headline: "Content refresh systems are beating pure publishing volume.",
+    context: "Sites that revisit aging pages with structured refresh workflows are outperforming sites that only push new URLs. The pattern is especially visible on informational sites where older pages already have impressions but weak click-through or shallow coverage.",
+    why: "Search engines and users both reward pages that stay useful. Refreshes improve intent coverage, remove stale framing, add internal links, and deepen pages that were previously too thin to deserve stronger visibility.",
+    commonMistakes: "Adding filler instead of real depth. Refreshing title tags without improving page value. Updating every page equally instead of prioritizing high-signal URLs. Treating a weak topic as a refresh problem when it may be a prune-or-merge problem.",
+    realWorldImpact: "Editorial teams are getting more value from existing libraries instead of endlessly publishing net-new content. Search Console becomes more actionable because pages with impressions but weak clicks can be triaged and improved systematically.",
+    whenToIgnore: "Brand-new sites with almost no content. Topics that have no search demand. Pages that should be redirected or consolidated instead of improved.",
+    whatChanged: [
+      "Refresh workflows are outperforming publish-more strategies on many content sites",
+      "Aging pages with impressions are becoming higher-priority SEO assets",
+      "Structured editorial updates often beat cosmetic metadata tweaks"
+    ],
+    whoItAffects: ["Publishers", "SEO teams", "Niche sites", "Anyone with an existing content library"],
+    whatToDoNow: [
+      "Find pages with impressions but weak clicks",
+      "Group weak pages by template instead of reviewing them one by one",
+      "Refresh for usefulness and differentiation, not just length",
+      "Resubmit only the pages that meaningfully improved"
+    ],
+    relatedUpdates: ["u15"],
+    additionalResources: "Build a quarterly refresh queue. Track page type, not just individual URLs. Compare pre-refresh and post-refresh CTR and impression trends.",
+    tldr: "A strong refresh system is often more valuable than publishing 20 more average pages.",
+    tags: ["seo", "content", "refresh"],
+    updatedAtISO: "2026-04-10",
+  },
+
+  {
+    id: "u22",
+    slug: "comparison-pages-and-best-pages-winning-higher-intent-clicks",
+    model: "Publishing",
+    headline: "Comparison pages and best pages are winning the higher-intent clicks.",
+    context: "As zero-click search grows on basic informational queries, decisional pages such as comparisons, best-of lists, and structured recommendations are becoming more important traffic assets. Users still click when they need help choosing, not just defining.",
+    why: "Quick factual answers are easier for search engines to summarize. Decision-heavy pages remain harder to compress because they involve tradeoffs, scenarios, recommendations, and opinionated framing. That makes them more resilient traffic targets.",
+    commonMistakes: "Publishing only top-of-funnel explainers. Writing comparison pages with no real verdict. Creating best pages that are just affiliate grids with no judgment. Forgetting to link tool pages back into comparisons and rankings.",
+    realWorldImpact: "Sites are shifting effort toward pages that help users choose. Internal linking strategies increasingly point from broad informational pages into higher-intent comparison and ranking pages.",
+    whenToIgnore: "Sites without enough topical depth to support comparison claims. Topics where there are no meaningful choices to compare. Very early-stage content libraries still missing basic coverage.",
+    whatChanged: [
+      "Higher-intent pages are becoming more strategically valuable",
+      "Comparison and best-list pages often hold clicks better than basic explainers",
+      "Opinionated recommendations matter more than generic summaries"
+    ],
+    whoItAffects: ["Affiliate publishers", "Tool directories", "Review sites", "SEO teams building money pages"],
+    whatToDoNow: [
+      "Create comparison and best pages for your strongest topic clusters",
+      "Make verdicts explicit instead of hedging everything",
+      "Link tool and article pages into the decision pages users actually need",
+      "Upgrade weak list pages with real tradeoffs and use-case framing"
+    ],
+    relatedUpdates: ["u21"],
+    additionalResources: "Audit which of your pages answer choose-this-versus-that questions. Build internal link routes from informational pages into comparison and best-list pages.",
+    tldr: "Decision pages are often better traffic assets now than generic informational pages.",
+    tags: ["seo", "comparisons", "money-pages"],
+    updatedAtISO: "2026-04-10",
+  },
+
+  {
+    id: "u23",
+    slug: "thin-taxonomy-pages-need-stricter-indexing-choices",
+    model: "Taxonomy",
+    headline: "Thin taxonomy pages need stricter index-or-not decisions.",
+    context: "Tag, category, and archive pages are still useful for navigation, but many of them are not strong enough to earn indexation by default. Sites that treat every taxonomy page as a destination often end up with large pools of low-value URLs.",
+    why: "Not every taxonomy page has enough unique value, content diversity, or demand to justify indexing. Search engines are better at ignoring thin archives, especially when they look templated and add little beyond links.",
+    commonMistakes: "Including every tag page in the sitemap. Assuming a page should be indexed just because it exists. Leaving archives with one or two weak items as crawl targets. Writing the same intro for every taxonomy page.",
+    realWorldImpact: "Publishers are becoming more selective: index stronger taxonomy hubs, improve them with editorial framing and richer internal paths, and leave weaker ones as navigational only. This improves crawl quality and reduces wasted attention on pages that were never likely to rank.",
+    whenToIgnore: "Large archives with strong demand and lots of varied content. Ecommerce categories with clear commercial intent. Topic hubs that genuinely help users navigate choices.",
+    whatChanged: [
+      "Taxonomy pages are being judged more strictly on standalone value",
+      "Editorialized topic hubs perform better than empty archives",
+      "Selective indexing is often healthier than blanket indexing"
+    ],
+    whoItAffects: ["Directory sites", "Publishers", "Blog-heavy sites", "Anyone using tags and archives aggressively"],
+    whatToDoNow: [
+      "Review taxonomy pages by content count and usefulness",
+      "Noindex or omit weak archives from the sitemap",
+      "Improve stronger hubs with unique intros and related-topic guidance",
+      "Focus indexing effort on pages with real demand and breadth"
+    ],
+    relatedUpdates: ["u21", "u22"],
+    additionalResources: "Segment taxonomy pages by item count, intent clarity, and uniqueness. Treat taxonomies like products: some deserve improvement, some deserve restraint.",
+    tldr: "Taxonomy pages can help users, but only stronger ones should be pushed as indexable destinations.",
+    tags: ["seo", "taxonomy", "indexing"],
+    updatedAtISO: "2026-04-10",
+  },
 ];
