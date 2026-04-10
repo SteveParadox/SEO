@@ -470,21 +470,39 @@ export const tools: Tool[] = [
     name: "Azure Text to Speech",
     oneLiner: "Enterprise-friendly TTS with predictable billing if you're already in Azure land.",
     description:
-      "Azure Text to Speech (part of Azure AI Speech) is designed for production and enterprise use: stable APIs, predictable ops, and easy integration if your stack already uses Microsoft services.",
-    useCases: ["Product TTS", "Enterprise apps", "Accessibility", "IVR/call flows", "Multilingual narration"],
-    pros: ["Enterprise integration", "Stable platform", "Good docs", "Works well at scale"],
-    cons: ["Less creator-friendly UX", "Can feel heavyweight for small projects", "Voice 'personality' may be less fun than creator-first tools"],
+      "Azure Text to Speech is one of the safer choices for teams shipping voice into real products instead of running one-off creator workflows. It fits enterprise environments that care about uptime, access control, regional infrastructure, and predictable procurement, while still covering multilingual narration, accessibility, and automated voice generation. The tradeoff is that it feels more like infrastructure than a polished creator studio, so it shines most when reliability matters more than voice theatrics.",
+    useCases: [
+      "Product TTS for apps and dashboards",
+      "Accessibility narration",
+      "IVR and support call flows",
+      "Multilingual announcements",
+      "Internal enterprise tools",
+      "High-volume automated voice generation"
+    ],
+    pros: [
+      "Fits existing Azure security and billing workflows",
+      "Stable APIs for production use",
+      "Good documentation and SDK coverage",
+      "Predictable for teams that need procurement clarity",
+      "Works well for multilingual enterprise scenarios"
+    ],
+    cons: [
+      "Creator workflow is less polished than creator-first TTS tools",
+      "Setup can feel heavy for small teams or solo builders",
+      "Some voices sound clean but not especially distinctive",
+      "Best experience often assumes Azure familiarity"
+    ],
     pricing: {
       tier: "paid",
       note: "Usage-based (Azure billing)",
-      details: "Pricing depends on usage volume and voice type. Best for teams already paying Azure bills.",
+      details: "Pricing depends on usage volume, voice type, and deployment choices. The value is usually strongest for teams already managing Azure spend and wanting voice costs to live inside the same procurement model.",
     },
     alternatives: [
       { name: "ElevenLabs", slug: "elevenlabs" },
       { name: "PlayHT", slug: "playht" },
       { name: "Google Cloud TTS", slug: "google-cloud-tts" },
     ],
-    tags: ["audio", "voice", "dev", "enterprise"],
+    tags: ["audio", "voice", "tts", "dev", "enterprise"],
     rating: 4.1,
     users: "Enterprise",
     updatedAtISO: "2026-01-24",
@@ -715,11 +733,31 @@ export const tools: Tool[] = [
     name: "Adobe XD",
     oneLiner: "Adobe's design tool that's fine if you're already paying for Creative Cloud.",
     description:
-      "Adobe XD is a design and prototyping tool bundled with Creative Cloud. Decent features but lags behind competitors in adoption and innovation. Main value is ecosystem integration.",
-    useCases: ["UI design", "Prototyping", "Adobe ecosystem workflows", "Simple design projects"],
-    pros: ["Included with Creative Cloud", "Good Adobe integration", "Clean interface", "Decent prototyping"],
-    cons: ["Losing features and focus", "Smaller community", "Behind competitors", "Future unclear"],
-    pricing: { tier: "freemium", note: "Free basic + included in Creative Cloud (~$55/mo)" },
+      "Adobe XD still makes the most sense for teams that are already deeply committed to Adobe workflows and want a lightweight way to move from mockups to clickable prototypes. The problem is that most modern product teams now evaluate design tools around collaboration, component systems, developer handoff, and hiring familiarity, and XD is weaker on all of those than the category leaders. That makes it hard to recommend as a fresh standard unless Creative Cloud bundling matters more to you than momentum and ecosystem depth.",
+    useCases: [
+      "Simple UI mockups",
+      "Clickable prototypes",
+      "Adobe-heavy creative workflows",
+      "Internal concept validation",
+      "Small design projects without complex collaboration"
+    ],
+    pros: [
+      "Included for many Creative Cloud subscribers",
+      "Comfortable for teams already using Adobe tooling",
+      "Clean learning curve for basic prototyping",
+      "Reasonable option for lighter-weight design tasks"
+    ],
+    cons: [
+      "Collaboration story is weaker than Figma",
+      "Community momentum and hiring familiarity are lower",
+      "Feature development feels behind category leaders",
+      "Long-term strategic direction remains less convincing"
+    ],
+    pricing: {
+      tier: "freemium",
+      note: "Free basic + included in Creative Cloud (~$55/mo)",
+      details: "The price argument for XD is mostly a bundle argument. If you are buying Creative Cloud anyway, XD feels cheap. If you are choosing a design platform from scratch, the opportunity cost versus Figma or Sketch matters more."
+    },
     alternatives: [
       { name: "Figma", slug: "figma" },
       { name: "Sketch", slug: "sketch" },
@@ -1546,7 +1584,7 @@ export const tools: Tool[] = [
   users: "Very Popular",
   updatedAtISO: "2026-01-28",
 },
-{
+  {
   id: "t62",
   slug: "miro",
   name: "Miro",
@@ -1581,7 +1619,7 @@ export const tools: Tool[] = [
     { name: "Whimsical", slug: "whimsical" },
     { name: "Lucid", slug: "lucid" }
   ],
-  tags: ["whiteboard", "collaboration", "planning", "productivity"],
+  tags: ["whiteboard", "collaboration", "planning", "productivity", "diagrams"],
   rating: 4.7,
   users: "Very Popular",
   updatedAtISO: "2026-01-28",
@@ -1621,7 +1659,7 @@ export const tools: Tool[] = [
     { name: "FigJam", slug: "figjam" },
     { name: "Miro", slug: "miro" }
   ],
-  tags: ["whiteboard", "open-source", "diagramming", "thinking"],
+  tags: ["whiteboard", "open-source", "diagramming", "thinking", "diagrams"],
   rating: 4.6,
   users: "Growing",
   updatedAtISO: "2026-01-28",
@@ -2512,29 +2550,33 @@ export const tools: Tool[] = [
   name: "Amplitude",
   oneLiner: "Product analytics for understanding what users actually do.",
   description:
-    "Amplitude is a product analytics platform focused on tracking user behavior, funnels, and retention. It’s widely used by product and growth teams to understand how users interact with features and where engagement drops off.",
+    "Amplitude is built for teams that want product analytics to answer behavior questions, not just report traffic. It is strongest when a product team needs to understand retention, activation, adoption paths, and the downstream impact of feature changes across cohorts over time. The upside is analysis depth and serious product thinking; the downside is that you need a clean event model and enough analytics maturity to justify the extra complexity and spend.",
   useCases: [
     "Product analytics",
     "User behavior tracking",
     "Funnel analysis",
     "Retention analysis",
-    "Growth experimentation"
+    "Growth experimentation",
+    "Feature adoption reporting"
   ],
   pros: [
     "Powerful funnel and cohort analysis",
     "Great for product-led growth",
     "Strong visualization tools",
     "Scales well for large teams",
-    "Good documentation"
+    "Good documentation",
+    "Excellent for retention and activation questions"
   ],
   cons: [
     "Can be complex for beginners",
     "Pricing increases quickly at scale",
-    "Setup requires planning"
+    "Setup requires planning",
+    "Weak event taxonomy will make the product feel harder than it should"
   ],
   pricing: {
     tier: "freemium",
-    note: "Free tier available + paid plans for advanced analytics"
+    note: "Free tier available + paid plans for advanced analytics",
+    details: "Amplitude usually becomes expensive only after a team is sending meaningful event volume, which means implementation discipline matters early. It is a better fit for companies that will actually use advanced retention and cohort analysis than for teams that mostly need traffic dashboards."
   },
   alternatives: [
     { name: "Mixpanel", slug: "mixpanel" },

@@ -186,7 +186,7 @@ export function findCollectionsContaining(
   return DATA.collections.filter((c) => c.items.some((it) => it.kind === kind && it.id === targetId));
 }
 
-export type UnifiedKind = "tool" | "prompt" | "update" | "collection" | "comparison";
+export type UnifiedKind = "tool" | "prompt" | "update" | "collection" | "comparison" | "best";
 
 export type UnifiedItem = {
   kind: UnifiedKind;
@@ -203,7 +203,8 @@ export function hrefFor(kind: UnifiedKind, slug: string) {
   if (kind === "prompt") return `/prompts/${slug}`;
   if (kind === "update") return `/updates/${slug}`;
   if (kind === "collection") return `/collections/${slug}`;
-  return `/comparisons/${slug}`;
+  if (kind === "comparison") return `/comparisons/${slug}`;
+  return `/best/${slug}`;
 }
 
 export function getUnifiedIndex(): UnifiedItem[] {
@@ -269,6 +270,18 @@ export function getUnifiedIndex(): UnifiedItem[] {
     })
   );
 
+  DATA.bestPages.forEach((page) =>
+    idx.push({
+      kind: "best",
+      id: page.id,
+      slug: page.slug,
+      title: page.title,
+      subtitle: page.description,
+      tags: page.tags ?? [],
+      updatedAtISO: page.updatedAtISO,
+    })
+  );
+
   idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
   return idx;
 }
@@ -282,11 +295,16 @@ export function normalizeTag(s: string) {
     return String(s).trim().toLowerCase();
   }
 }
+
+function hasNormalizedTag(tags: string[] | undefined, tag: string) {
+  return tags?.some((x) => normalizeTag(x) === tag) ?? false;
+}
+
 export function getItemsByTag(tagRaw: string) {
   const tag = normalizeTag(tagRaw);
 
   const out: Array<{
-    kind: "tool" | "prompt" | "update" | "collection" | "comparison";
+    kind: "tool" | "prompt" | "update" | "collection" | "comparison" | "best";
     id: string;
     slug: string;
     title: string;
@@ -294,32 +312,44 @@ export function getItemsByTag(tagRaw: string) {
   }> = [];
 
   for (const t of DATA.tools) {
-    if (t.tags?.some((x) => normalizeTag(x) === tag)) {
+    if (hasNormalizedTag(t.tags, tag)) {
       out.push({ kind: "tool", id: t.id, slug: t.slug, title: t.name, subtitle: t.oneLiner });
     }
   }
 
   for (const p of DATA.prompts) {
-    if (p.tags?.some((x) => normalizeTag(x) === tag)) {
+    if (hasNormalizedTag(p.tags, tag)) {
       out.push({ kind: "prompt", id: p.id, slug: p.slug, title: p.title, subtitle: p.purpose });
     }
   }
 
   for (const u of DATA.updates) {
-    if (u.tags?.some((x) => normalizeTag(x) === tag)) {
+    if (hasNormalizedTag(u.tags, tag)) {
       out.push({ kind: "update", id: u.id, slug: u.slug, title: u.headline, subtitle: u.tldr });
     }
   }
 
   for (const c of DATA.collections) {
-    if (c.tags?.some((x) => normalizeTag(x) === tag)) {
+    if (hasNormalizedTag(c.tags, tag)) {
       out.push({ kind: "collection", id: c.id, slug: c.slug, title: c.title, subtitle: c.description });
     }
   }
 
   for (const cmp of DATA.comparisons) {
-    if (cmp.tags?.some((x) => normalizeTag(x) === tag)) {
+    if (hasNormalizedTag(cmp.tags, tag)) {
       out.push({ kind: "comparison", id: cmp.id, slug: cmp.slug, title: cmp.title, subtitle: cmp.description });
+    }
+  }
+
+  for (const page of DATA.bestPages) {
+    if (hasNormalizedTag(page.tags, tag)) {
+      out.push({
+        kind: "best",
+        id: page.id,
+        slug: page.slug,
+        title: page.title,
+        subtitle: page.description,
+      });
     }
   }
 
@@ -339,10 +369,71 @@ export function getAllTagsWithCounts() {
   for (const u of DATA.updates) u.tags?.forEach(add);
   for (const c of DATA.collections) c.tags?.forEach(add);
   for (const cmp of DATA.comparisons) cmp.tags?.forEach(add);
+  for (const page of DATA.bestPages) page.tags?.forEach(add);
 
   return Array.from(map.entries())
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => a.tag.localeCompare(b.tag));
+}
+
+export function getTagKindCounts(tagRaw: string) {
+  const counts = new Map<UnifiedKind, number>();
+
+  for (const item of getItemsByTag(tagRaw)) {
+    counts.set(item.kind, (counts.get(item.kind) ?? 0) + 1);
+  }
+
+  return Array.from(counts.entries())
+    .map(([kind, count]) => ({ kind, count }))
+    .sort((a, b) => b.count - a.count || a.kind.localeCompare(b.kind));
+}
+
+export function getRelatedTags(tagRaw: string, limit = 8) {
+  const tag = normalizeTag(tagRaw);
+  const counts = new Map<string, number>();
+
+  const bumpTags = (tags: string[] | undefined) => {
+    if (!hasNormalizedTag(tags, tag)) return;
+
+    for (const raw of tags ?? []) {
+      const related = normalizeTag(raw);
+      if (!related || related === tag) continue;
+      counts.set(related, (counts.get(related) ?? 0) + 1);
+    }
+  };
+
+  for (const item of DATA.tools) bumpTags(item.tags);
+  for (const item of DATA.prompts) bumpTags(item.tags);
+  for (const item of DATA.updates) bumpTags(item.tags);
+  for (const item of DATA.collections) bumpTags(item.tags);
+  for (const item of DATA.comparisons) bumpTags(item.tags);
+  for (const item of DATA.bestPages) bumpTags(item.tags);
+
+  return Array.from(counts.entries())
+    .map(([relatedTag, count]) => ({ tag: relatedTag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+    .slice(0, limit);
+}
+
+export function getLatestUpdatedForTag(tagRaw: string) {
+  const tag = normalizeTag(tagRaw);
+  let latest: string | null = null;
+
+  const consider = (updatedAtISO: string, tags: string[] | undefined) => {
+    if (!hasNormalizedTag(tags, tag)) return;
+    if (!latest || new Date(updatedAtISO).getTime() > new Date(latest).getTime()) {
+      latest = updatedAtISO;
+    }
+  };
+
+  for (const item of DATA.tools) consider(item.updatedAtISO, item.tags);
+  for (const item of DATA.prompts) consider(item.updatedAtISO, item.tags);
+  for (const item of DATA.updates) consider(item.updatedAtISO, item.tags);
+  for (const item of DATA.collections) consider(item.updatedAtISO, item.tags);
+  for (const item of DATA.comparisons) consider(item.updatedAtISO, item.tags);
+  for (const item of DATA.bestPages) consider(item.updatedAtISO, item.tags);
+
+  return latest;
 }
 
 export function getBestPageBySlug(slug: string) {
