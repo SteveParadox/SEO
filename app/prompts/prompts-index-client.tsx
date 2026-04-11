@@ -9,6 +9,21 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+const PAGE_SIZE = 15;
+
+function formatUpdated(iso: string) {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+}
+
+function getVariableCount(input: string) {
+  const matches = input.match(/{{\s*[\w.-]+\s*}}/g) ?? [];
+  return new Set(matches.map((match) => match.toLowerCase())).size;
+}
+
 function getTopPromptTags() {
   const counts = new Map<string, number>();
 
@@ -25,9 +40,14 @@ function getTopPromptTags() {
 }
 
 export default function PromptsIndexClient() {
+  const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("");
   const [model, setModel] = React.useState<"all" | "GPT" | "Claude" | "Gemini">("all");
   const [activeTag, setActiveTag] = React.useState<string>("all");
+  const [templateMode, setTemplateMode] = React.useState<
+    "all" | "with-variables" | "ready-to-run"
+  >("all");
+  const [sortBy, setSortBy] = React.useState<"recent" | "title" | "variables">("recent");
   const deferredQuery = React.useDeferredValue(query);
 
   const prompts = React.useMemo(
@@ -43,7 +63,8 @@ export default function PromptsIndexClient() {
   const filteredPrompts = React.useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase();
 
-    return prompts.filter((prompt) => {
+    const matches = prompts.filter((prompt) => {
+      const variableCount = getVariableCount(prompt.prompt);
       const matchesQuery =
         !normalizedQuery ||
         `${prompt.title} ${prompt.purpose} ${prompt.description ?? ""} ${prompt.tags.join(" ")}`
@@ -52,10 +73,32 @@ export default function PromptsIndexClient() {
 
       const matchesModel = model === "all" || prompt.modelCompatibility.includes(model);
       const matchesTag = activeTag === "all" || prompt.tags.includes(activeTag);
+      const matchesTemplateMode =
+        templateMode === "all" ||
+        (templateMode === "with-variables" ? variableCount > 0 : variableCount === 0);
 
-      return matchesQuery && matchesModel && matchesTag;
+      return matchesQuery && matchesModel && matchesTag && matchesTemplateMode;
     });
-  }, [activeTag, deferredQuery, model, prompts]);
+
+    return matches.sort((a, b) => {
+      if (sortBy === "title") {
+        return a.title.localeCompare(b.title);
+      }
+
+      if (sortBy === "variables") {
+        return getVariableCount(b.prompt) - getVariableCount(a.prompt) || a.title.localeCompare(b.title);
+      }
+
+      return new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime();
+    });
+  }, [activeTag, deferredQuery, model, prompts, sortBy, templateMode]);
+
+  React.useEffect(() => {
+    setPage(1);
+  }, [activeTag, deferredQuery, model, sortBy, templateMode]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPrompts.length / PAGE_SIZE));
+  const current = filteredPrompts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -80,6 +123,24 @@ export default function PromptsIndexClient() {
                 placeholder="Search by task, role, or output"
                 className="rounded-2xl pl-9"
               />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {(["recent", "title", "variables"] as const).map((value) => (
+                <Button
+                  key={value}
+                  type="button"
+                  variant={sortBy === value ? "default" : "outline"}
+                  className="rounded-full"
+                  onClick={() => setSortBy(value)}
+                >
+                  {value === "recent"
+                    ? "Newest first"
+                    : value === "title"
+                      ? "Title A-Z"
+                      : "Most variables"}
+                </Button>
+              ))}
             </div>
 
             <div className="flex flex-wrap gap-2">
@@ -118,6 +179,24 @@ export default function PromptsIndexClient() {
                 </Button>
               ))}
             </div>
+
+            <div className="flex flex-wrap gap-2">
+              {([
+                ["all", "All formats"],
+                ["with-variables", "With variables"],
+                ["ready-to-run", "Ready to run"],
+              ] as const).map(([value, label]) => (
+                <Button
+                  key={value}
+                  type="button"
+                  variant={templateMode === value ? "default" : "outline"}
+                  className="rounded-full"
+                  onClick={() => setTemplateMode(value)}
+                >
+                  {label}
+                </Button>
+              ))}
+            </div>
           </CardContent>
         </Card>
 
@@ -149,10 +228,11 @@ export default function PromptsIndexClient() {
 
       <div className="mt-6 flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
-          Showing {filteredPrompts.length} prompt{filteredPrompts.length === 1 ? "" : "s"}.
+          Showing {current.length} of {filteredPrompts.length} prompt
+          {filteredPrompts.length === 1 ? "" : "s"}.
         </p>
 
-        {(query || model !== "all" || activeTag !== "all") ? (
+        {query || model !== "all" || activeTag !== "all" || templateMode !== "all" || sortBy !== "recent" ? (
           <Button
             type="button"
             variant="outline"
@@ -161,6 +241,8 @@ export default function PromptsIndexClient() {
               setQuery("");
               setModel("all");
               setActiveTag("all");
+              setTemplateMode("all");
+              setSortBy("recent");
             }}
           >
             Clear filters
@@ -169,46 +251,73 @@ export default function PromptsIndexClient() {
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {filteredPrompts.map((prompt) => (
-          <Card
-            key={prompt.id}
-            className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition"
-          >
-            <Link
-              href={`/prompts/${prompt.slug}`}
-              aria-label={prompt.title}
-              className="absolute inset-0 z-10 rounded-2xl"
+        {current.map((prompt) => {
+          const variableCount = getVariableCount(prompt.prompt);
+
+          return (
+            <Card
+              key={prompt.id}
+              className="relative overflow-hidden rounded-2xl transition hover:bg-muted/40"
             >
-              <span className="sr-only">{prompt.title}</span>
-            </Link>
+              <Link
+                href={`/prompts/${prompt.slug}`}
+                aria-label={prompt.title}
+                className="absolute inset-0 z-10 rounded-2xl"
+              >
+                <span className="sr-only">{prompt.title}</span>
+              </Link>
 
-            <CardContent className="relative z-20 pointer-events-none p-5">
-              <div className="flex items-center gap-2 flex-wrap">
-                {prompt.tags.slice(0, 4).map((tag) => (
-                  <Badge key={tag} variant="secondary" className="rounded-full">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
+              <CardContent className="relative z-20 pointer-events-none p-5">
+                <div className="flex flex-wrap gap-2 pointer-events-auto">
+                  {prompt.tags.slice(0, 4).map((rawTag) => {
+                    const tag = rawTag.trim();
+                    const tagSlug = encodeURIComponent(tag.toLowerCase());
 
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                {prompt.modelCompatibility.map((value) => (
-                  <Badge key={value} variant="outline" className="rounded-full">
-                    {value}
-                  </Badge>
-                ))}
-              </div>
-
-              <div className="mt-3 font-semibold">{prompt.title}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{prompt.purpose}</div>
-              {prompt.description ? (
-                <div className="mt-3 text-sm text-muted-foreground line-clamp-3">
-                  {prompt.description}
+                    return (
+                      <Link
+                        key={`${prompt.id}-${tagSlug}`}
+                        href={`/tags/${tagSlug}`}
+                        onClick={(event) => event.stopPropagation()}
+                        className="inline-flex"
+                      >
+                        <Badge variant="secondary" className="rounded-full">
+                          {tag}
+                        </Badge>
+                      </Link>
+                    );
+                  })}
                 </div>
-              ) : null}
-            </CardContent>
-          </Card>
-        ))}
+
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                  {prompt.modelCompatibility.map((value) => (
+                    <Badge key={value} variant="outline" className="rounded-full">
+                      {value}
+                    </Badge>
+                  ))}
+                  <span>
+                    {prompt.variations.length} variation{prompt.variations.length === 1 ? "" : "s"}
+                  </span>
+                  <span>Updated {formatUpdated(prompt.updatedAtISO)}</span>
+                </div>
+
+                <div className="mt-3 font-semibold">{prompt.title}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{prompt.purpose}</div>
+
+                {prompt.description ? (
+                  <div className="mt-3 text-sm text-muted-foreground line-clamp-3">
+                    {prompt.description}
+                  </div>
+                ) : null}
+
+                <div className="mt-4 rounded-2xl border bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
+                  {variableCount > 0
+                    ? `${variableCount} variable placeholder${variableCount === 1 ? "" : "s"} to customize`
+                    : "Ready-to-run prompt with no variable placeholders"}
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       {filteredPrompts.length === 0 ? (
@@ -217,6 +326,32 @@ export default function PromptsIndexClient() {
             No prompts matched that combination yet. Try a broader tag or a different model.
           </CardContent>
         </Card>
+      ) : null}
+
+      {filteredPrompts.length > PAGE_SIZE ? (
+        <div className="mt-8 flex items-center justify-center gap-2">
+          <button
+            type="button"
+            disabled={page === 1}
+            onClick={() => setPage((value) => Math.max(1, value - 1))}
+            className="rounded-xl border px-3 py-1 text-sm disabled:opacity-40"
+          >
+            Prev
+          </button>
+
+          <span className="text-sm text-muted-foreground">
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            type="button"
+            disabled={page === totalPages}
+            onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+            className="rounded-xl border px-3 py-1 text-sm disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
       ) : null}
     </div>
   );

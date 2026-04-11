@@ -4,10 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { DATA } from "@/lib/data";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 const PAGE_SIZE = 15;
 
@@ -19,11 +19,11 @@ function formatUpdated(iso: string) {
   });
 }
 
-function getTopTags() {
+function getTopUpdateTags() {
   const counts = new Map<string, number>();
 
-  for (const tool of DATA.tools) {
-    for (const tag of tool.tags) {
+  for (const update of DATA.updates) {
+    for (const tag of update.tags) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
   }
@@ -34,81 +34,80 @@ function getTopTags() {
     .map(([tag]) => tag);
 }
 
-export default function ToolsIndexClient() {
+function getTopModels() {
+  const counts = new Map<string, number>();
+
+  for (const update of DATA.updates) {
+    counts.set(update.model, (counts.get(update.model) ?? 0) + 1);
+  }
+
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 6)
+    .map(([model]) => model);
+}
+
+export default function UpdatesIndexClient() {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("");
-  const [pricing, setPricing] = React.useState<"all" | "free" | "freemium" | "paid">("all");
+  const [activeModel, setActiveModel] = React.useState<string>("all");
   const [activeTag, setActiveTag] = React.useState<string>("all");
-  const [sortBy, setSortBy] = React.useState<"recent" | "rating" | "name">("recent");
+  const [sortBy, setSortBy] = React.useState<"recent" | "headline">("recent");
   const deferredQuery = React.useDeferredValue(query);
 
-  const sortedTools = React.useMemo(
-    () =>
-      [...DATA.tools].sort(
-        (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
-      ),
-    []
-  );
+  const topTags = React.useMemo(() => getTopUpdateTags(), []);
+  const topModels = React.useMemo(() => getTopModels(), []);
 
-  const featuredTags = React.useMemo(() => getTopTags(), []);
-
-  const filteredTools = React.useMemo(() => {
+  const filteredUpdates = React.useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase();
 
-    const matches = sortedTools.filter((tool) => {
-      const matchesQuery =
-        !normalizedQuery ||
-        [
-          tool.name,
-          tool.oneLiner,
-          tool.description,
-          tool.tags.join(" "),
-          tool.useCases.join(" "),
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(normalizedQuery);
+    const matches = DATA.updates.filter((update) => {
+      const haystack = [
+        update.model,
+        update.headline,
+        update.tldr,
+        update.context ?? "",
+        update.tags.join(" "),
+      ]
+        .join(" ")
+        .toLowerCase();
 
-      const matchesPricing = pricing === "all" || tool.pricing.tier === pricing;
-      const matchesTag = activeTag === "all" || tool.tags.includes(activeTag);
+      const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
+      const matchesModel = activeModel === "all" || update.model === activeModel;
+      const matchesTag = activeTag === "all" || update.tags.includes(activeTag);
 
-      return matchesQuery && matchesPricing && matchesTag;
+      return matchesQuery && matchesModel && matchesTag;
     });
 
     return matches.sort((a, b) => {
-      if (sortBy === "name") {
-        return a.name.localeCompare(b.name);
-      }
-
-      if (sortBy === "rating") {
-        return (b.rating ?? 0) - (a.rating ?? 0) || a.name.localeCompare(b.name);
+      if (sortBy === "headline") {
+        return a.headline.localeCompare(b.headline);
       }
 
       return new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime();
     });
-  }, [activeTag, deferredQuery, pricing, sortBy, sortedTools]);
+  }, [activeModel, activeTag, deferredQuery, sortBy]);
 
   React.useEffect(() => {
     setPage(1);
-  }, [activeTag, deferredQuery, pricing, sortBy]);
+  }, [activeModel, activeTag, deferredQuery, sortBy]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredTools.length / PAGE_SIZE));
-  const start = (page - 1) * PAGE_SIZE;
-  const current = filteredTools.slice(start, start + PAGE_SIZE);
+  const totalPages = Math.max(1, Math.ceil(filteredUpdates.length / PAGE_SIZE));
+  const current = filteredUpdates.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">AI Tools</h1>
+      <h1 className="text-3xl font-semibold">Model Updates</h1>
       <p className="mt-3 max-w-3xl text-muted-foreground">
-        Browse AI tools by real use case, pricing fit, and workflow tag. This page is built
-        to help people narrow options quickly instead of bouncing through generic directory
-        pages.
+        Track important model and ecosystem shifts without digging through vague release
+        notes. Filter by provider, theme, or search intent, then open the update pages for
+        plain-English breakdowns and next-step advice.
       </p>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_minmax(0,0.85fr)]">
         <Card className="rounded-2xl">
           <CardHeader>
-            <CardTitle className="text-base">Find the right tool faster</CardTitle>
+            <CardTitle className="text-base">Browse by provider or theme</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="relative">
@@ -116,13 +115,13 @@ export default function ToolsIndexClient() {
               <Input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search by tool, use case, or tag"
+                placeholder="Search by model, headline, or topic"
                 className="rounded-2xl pl-9"
               />
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {(["recent", "rating", "name"] as const).map((value) => (
+              {(["recent", "headline"] as const).map((value) => (
                 <Button
                   key={value}
                   type="button"
@@ -130,25 +129,30 @@ export default function ToolsIndexClient() {
                   className="rounded-full"
                   onClick={() => setSortBy(value)}
                 >
-                  {value === "recent"
-                    ? "Newest first"
-                    : value === "rating"
-                      ? "Top rated"
-                      : "Name A-Z"}
+                  {value === "recent" ? "Newest first" : "Headline A-Z"}
                 </Button>
               ))}
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {(["all", "free", "freemium", "paid"] as const).map((value) => (
+              <Button
+                type="button"
+                variant={activeModel === "all" ? "default" : "outline"}
+                className="rounded-full"
+                onClick={() => setActiveModel("all")}
+              >
+                All models
+              </Button>
+
+              {topModels.map((model) => (
                 <Button
-                  key={value}
+                  key={model}
                   type="button"
-                  variant={pricing === value ? "default" : "outline"}
+                  variant={activeModel === model ? "default" : "outline"}
                   className="rounded-full"
-                  onClick={() => setPricing(value)}
+                  onClick={() => setActiveModel(model)}
                 >
-                  {value === "all" ? "All pricing" : value}
+                  {model}
                 </Button>
               ))}
             </div>
@@ -160,10 +164,10 @@ export default function ToolsIndexClient() {
                 className="rounded-full"
                 onClick={() => setActiveTag("all")}
               >
-                All tags
+                All themes
               </Button>
 
-              {featuredTags.map((tag) => (
+              {topTags.map((tag) => (
                 <Button
                   key={tag}
                   type="button"
@@ -181,24 +185,22 @@ export default function ToolsIndexClient() {
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
           <Card className="rounded-2xl">
             <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Indexed tool pages</div>
-              <div className="mt-2 text-3xl font-semibold">{DATA.tools.length}</div>
+              <div className="text-sm text-muted-foreground">Updates published</div>
+              <div className="mt-2 text-3xl font-semibold">{DATA.updates.length}</div>
             </CardContent>
           </Card>
 
           <Card className="rounded-2xl">
             <CardContent className="p-5">
               <div className="text-sm text-muted-foreground">Current matches</div>
-              <div className="mt-2 text-3xl font-semibold">{filteredTools.length}</div>
+              <div className="mt-2 text-3xl font-semibold">{filteredUpdates.length}</div>
             </CardContent>
           </Card>
 
           <Card className="rounded-2xl">
             <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Suggested action</div>
-              <div className="mt-2 text-sm font-medium">
-                Start with a tool page, then branch into comparisons or best lists from it.
-              </div>
+              <div className="text-sm text-muted-foreground">Tracked models</div>
+              <div className="mt-2 text-3xl font-semibold">{topModels.length}</div>
             </CardContent>
           </Card>
         </div>
@@ -206,17 +208,17 @@ export default function ToolsIndexClient() {
 
       <div className="mt-6 flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
-          Showing {current.length} of {filteredTools.length} matching tools.
+          Showing {current.length} of {filteredUpdates.length} matching updates.
         </p>
 
-        {query || pricing !== "all" || activeTag !== "all" || sortBy !== "recent" ? (
+        {query || activeModel !== "all" || activeTag !== "all" || sortBy !== "recent" ? (
           <Button
             type="button"
             variant="outline"
             className="rounded-full"
             onClick={() => {
               setQuery("");
-              setPricing("all");
+              setActiveModel("all");
               setActiveTag("all");
               setSortBy("recent");
             }}
@@ -227,31 +229,40 @@ export default function ToolsIndexClient() {
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {current.map((tool) => (
+        {current.map((update) => (
           <Card
-            key={tool.id}
+            key={update.id}
             className="relative overflow-hidden rounded-2xl transition hover:bg-muted/40"
           >
             <Link
-              href={`/tools/${tool.slug}`}
-              aria-label={tool.name}
+              href={`/updates/${update.slug}`}
+              aria-label={update.headline}
               className="absolute inset-0 z-10 rounded-2xl"
             >
-              <span className="sr-only">{tool.name}</span>
+              <span className="sr-only">{update.headline}</span>
             </Link>
 
-            <CardContent className="relative z-20 pointer-events-none p-5">
-              <div className="flex flex-wrap gap-2 pointer-events-auto">
-                {tool.tags.slice(0, 4).map((rawTag) => {
+            <CardContent className="relative z-20 p-5">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="outline" className="rounded-full">
+                  {update.model}
+                </Badge>
+                <span className="text-xs text-muted-foreground">
+                  Updated {formatUpdated(update.updatedAtISO)}
+                </span>
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {update.tags.slice(0, 4).map((rawTag) => {
                   const tag = rawTag.trim();
                   const tagSlug = encodeURIComponent(tag.toLowerCase());
 
                   return (
                     <Link
-                      key={`${tool.id}-${tagSlug}`}
+                      key={`${update.id}-${tagSlug}`}
                       href={`/tags/${tagSlug}`}
                       onClick={(event) => event.stopPropagation()}
-                      className="inline-flex"
+                      className="relative z-30 inline-flex"
                     >
                       <Badge variant="secondary" className="rounded-full">
                         {tag}
@@ -261,44 +272,31 @@ export default function ToolsIndexClient() {
                 })}
               </div>
 
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                <Badge variant="outline" className="rounded-full capitalize">
-                  {tool.pricing.tier}
-                </Badge>
-                {tool.rating ? <span>{tool.rating}/5</span> : null}
-                {tool.users ? <span>{tool.users}</span> : null}
-                <span>Updated {formatUpdated(tool.updatedAtISO)}</span>
+              <div className="mt-3 font-semibold">{update.headline}</div>
+              <div className="mt-2 text-sm text-muted-foreground line-clamp-3">
+                {update.tldr}
               </div>
 
-              <div className="mt-3 font-semibold">{tool.name}</div>
-              <div className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                {tool.oneLiner}
-              </div>
-              <div className="mt-3 text-sm text-muted-foreground line-clamp-3">
-                {tool.description}
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {tool.useCases.slice(0, 3).map((useCase) => (
-                  <Badge key={`${tool.id}-${useCase}`} variant="outline" className="rounded-full">
-                    {useCase}
-                  </Badge>
-                ))}
-              </div>
+              {update.whatToDoNow[0] ? (
+                <div className="mt-4 rounded-2xl border bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
+                  Next move: {update.whatToDoNow[0]}
+                </div>
+              ) : null}
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {filteredTools.length === 0 ? (
+      {filteredUpdates.length === 0 ? (
         <Card className="mt-6 rounded-2xl">
           <CardContent className="p-8 text-center text-sm text-muted-foreground">
-            No tools matched that combination yet. Try removing a tag or switching pricing.
+            No updates matched that combination yet. Try removing a tag or switching the
+            model filter.
           </CardContent>
         </Card>
       ) : null}
 
-      {filteredTools.length > PAGE_SIZE ? (
+      {filteredUpdates.length > PAGE_SIZE ? (
         <div className="mt-8 flex items-center justify-center gap-2">
           <button
             type="button"
