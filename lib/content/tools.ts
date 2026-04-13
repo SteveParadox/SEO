@@ -3871,29 +3871,29 @@ export const tools: Tool[] = [
 },
 {
   id: "t119",
-  slug: "riverside",
-  name: "Riverside",
-  oneLiner: "Studio-style remote recording with local tracks, transcription, and clip-friendly creator workflows.",
+  slug: "podcastle",
+  name: "Podcastle",
+  oneLiner: "AI-assisted podcast recording and editing with fast cleanup and creator-friendly publishing workflows.",
   description:
-    "Riverside is a remote recording platform for podcasts, interviews, webinars, and talking-head video workflows. It is popular with creators who need local recording quality, browser-based convenience, and faster paths from recording to publishable clips and transcripts.",
+    "Podcastle is a creator tool for recording, editing, transcribing, and polishing podcast and spoken-word content. It is useful for teams who want a simpler path from raw conversation to publishable audio without depending on a heavier production stack for every episode.",
   useCases: [
-    "Remote recording",
+    "Podcast recording",
     "Podcast production",
-    "Video interviews",
+    "Audio editing",
     "Transcription",
-    "Short-form clips"
+    "Voice cleanup"
   ],
   pros: [
-    "Strong recording quality for remote guests",
-    "Separate local tracks improve editing flexibility",
-    "Useful transcript and clip workflow",
-    "Good fit for creator and interview teams",
-    "Less setup friction than traditional recording stacks"
+    "Good all-in-one workflow for spoken content",
+    "Helpful AI cleanup and transcript features",
+    "Lower friction than piecing together multiple tools",
+    "Useful for solo creators and lean teams",
+    "Good fit for podcast-first publishing"
   ],
   cons: [
-    "Editing depth is lighter than full post-production suites",
-    "Subscription cost rises with heavier usage",
-    "Browser-based recording still depends on participant setup"
+    "Less powerful than pro audio suites for deep edits",
+    "Advanced teams may outgrow the workflow",
+    "AI cleanup still needs review before final publish"
   ],
   pricing: {
     tier: "freemium",
@@ -3902,9 +3902,9 @@ export const tools: Tool[] = [
   alternatives: [
     { name: "SquadCast", slug: "squadcast" },
     { name: "Descript", slug: "descript" },
-    { name: "ElevenLabs", slug: "elevenlabs" }
+    { name: "Riverside", slug: "riverside" }
   ],
-  tags: ["audio", "video", "creator", "podcast", "recording"],
+  tags: ["audio", "creator", "podcast", "editing", "recording"],
   rating: 4.6,
   users: "Very Popular",
   updatedAtISO: "2026-04-10",
