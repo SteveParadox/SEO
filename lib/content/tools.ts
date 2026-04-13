@@ -3871,29 +3871,29 @@ export const tools: Tool[] = [
 },
 {
   id: "t119",
-  slug: "descript",
-  name: "Descript",
-  oneLiner: "Edit audio and video like a document with built-in transcription and creator workflows.",
+  slug: "riverside",
+  name: "Riverside",
+  oneLiner: "Studio-style remote recording with local tracks, transcription, and clip-friendly creator workflows.",
   description:
-    "Descript combines transcription, editing, screen recording, and podcast production in one workspace. It is popular with creators who want to move faster on spoken-word content without juggling multiple tools for every small change.",
+    "Riverside is a remote recording platform for podcasts, interviews, webinars, and talking-head video workflows. It is popular with creators who need local recording quality, browser-based convenience, and faster paths from recording to publishable clips and transcripts.",
   useCases: [
-    "Podcast editing",
-    "Video editing",
+    "Remote recording",
+    "Podcast production",
+    "Video interviews",
     "Transcription",
-    "Screen recordings",
-    "Creator workflows"
+    "Short-form clips"
   ],
   pros: [
-    "Transcript-based editing is fast to learn",
-    "Strong fit for podcast and talking-head content",
-    "Reduces tool switching for small teams",
-    "Useful AI cleanup features",
-    "Good workflow for repurposing spoken content"
+    "Strong recording quality for remote guests",
+    "Separate local tracks improve editing flexibility",
+    "Useful transcript and clip workflow",
+    "Good fit for creator and interview teams",
+    "Less setup friction than traditional recording stacks"
   ],
   cons: [
-    "Advanced edits can still require traditional editors",
-    "Subscription cost adds up for teams",
-    "Heavy projects may feel constrained compared with pro editing suites"
+    "Editing depth is lighter than full post-production suites",
+    "Subscription cost rises with heavier usage",
+    "Browser-based recording still depends on participant setup"
   ],
   pricing: {
     tier: "freemium",
@@ -3901,10 +3901,10 @@ export const tools: Tool[] = [
   },
   alternatives: [
     { name: "SquadCast", slug: "squadcast" },
-    { name: "ElevenLabs", slug: "elevenlabs" },
-    { name: "ChatGPT", slug: "chatgpt" }
+    { name: "Descript", slug: "descript" },
+    { name: "ElevenLabs", slug: "elevenlabs" }
   ],
-  tags: ["audio", "video", "editing", "creator", "podcast"],
+  tags: ["audio", "video", "creator", "podcast", "recording"],
   rating: 4.6,
   users: "Very Popular",
   updatedAtISO: "2026-04-10",
