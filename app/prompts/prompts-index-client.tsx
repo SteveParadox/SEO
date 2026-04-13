@@ -109,7 +109,7 @@ export default function PromptsIndexClient() {
         box.
       </p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_minmax(0,0.85fr)]">
+      <div className="mt-6">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-base">Filter by workflow</CardTitle>
@@ -199,31 +199,6 @@ export default function PromptsIndexClient() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Prompt pages</div>
-              <div className="mt-2 text-3xl font-semibold">{DATA.prompts.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Current matches</div>
-              <div className="mt-2 text-3xl font-semibold">{filteredPrompts.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Best next step</div>
-              <div className="mt-2 text-sm font-medium">
-                Open a prompt page to get usage notes, variables, and related prompts.
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-3">

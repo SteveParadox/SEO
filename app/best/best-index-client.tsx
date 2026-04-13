@@ -59,11 +59,6 @@ export default function BestIndexClient() {
 
   const topTags = React.useMemo(() => getTopBestTags(), []);
   const badgeOptions = React.useMemo(() => getBestBadges(), []);
-  const totalRecommendations = React.useMemo(
-    () => DATA.bestPages.reduce((total, bestPage) => total + bestPage.picks.length, 0),
-    []
-  );
-
   const filteredPages = React.useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase();
 
@@ -110,7 +105,7 @@ export default function BestIndexClient() {
         type, or keyword to find the lists that match the job you are actually trying to do.
       </p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_minmax(0,0.85fr)]">
+      <div className="mt-6">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-base">Find the right shortlist faster</CardTitle>
@@ -187,29 +182,6 @@ export default function BestIndexClient() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Best pages</div>
-              <div className="mt-2 text-3xl font-semibold">{DATA.bestPages.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Current matches</div>
-              <div className="mt-2 text-3xl font-semibold">{filteredPages.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Tool recommendations</div>
-              <div className="mt-2 text-3xl font-semibold">{totalRecommendations}</div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-3">

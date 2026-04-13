@@ -4567,5 +4567,142 @@ Output format:
   tags: ["seo", "faq", "schema", "content"],
   updatedAtISO: "2026-04-10",
 },
+{
+  id: "p52",
+  slug: "best-page-rewrite-brief",
+  title: "Best Page Rewrite Brief (Upgrade a Weak Money Page)",
+  purpose: "Turn a weak best-of page into a stronger decision page with clearer picks, tradeoffs, and user intent coverage.",
+  description: "This prompt creates a rewrite brief for thin best-of pages that need stronger recommendations, clearer evaluation logic, and less affiliate-style filler. It is designed for publishers who want best pages that feel editorial and useful.",
+  whenToUse: "Use this when a best-of page has impressions but weak clicks, when the page feels generic, or when the picks are listed without enough real decision support.",
+  decisionContext: "Best pages win when they help a user choose, not when they repeat vendor talking points. The best rewrite usually adds criteria, verdict logic, objections, FAQs, and internal links into related comparisons and tool pages.",
+  howItWorks: "The prompt takes the page topic, current picks, audience, and page weaknesses, then generates a stronger structure with intro positioning, pick framing, FAQ expansion, and content priorities.",
+  bestPractices: "Feed in the current page weaknesses honestly. Include whether the audience is beginner, team, or buyer-focused. Ask for a more opinionated rewrite when the page sounds too neutral.",
+  commonMistakes: "Keeping every pick equally recommended. Making the page long without making it useful. Forgetting to explain who each pick is actually for. Using generic intros that could fit any topic.",
+  expectedOutput: "A rewrite brief with stronger intro framing, evaluation criteria, pick sections, FAQ ideas, and internal-link recommendations.",
+  limitations: "This still needs real product research and editorial review. The prompt helps structure and deepen the page, but it cannot replace judgment.",
+  technicalRequirements: "Works well with all major models. Best results come when you provide the page topic, existing picks, and the page's biggest weaknesses.",
+  realWorldApplications: "Affiliate publishers use this to upgrade weak money pages. Tool directories use it to make ranking pages more useful and less templated. Content teams use it in refresh sprints.",
+  successMetrics: "Successful outputs produce clearer page roles, stronger pick framing, better question coverage, and more useful next-click paths into tool or comparison pages.",
+  relatedPrompts: "Use Comparison Page Outline Builder for versus pages that branch from the best page. Pair with FAQ + Schema Content Expander to deepen buyer questions.",
+  prompt: `Create a rewrite brief for this best-of page.
+
+PAGE TOPIC: {TOPIC}
+AUDIENCE: {AUDIENCE}
+CURRENT PICKS: {CURRENT_PICKS}
+KNOWN WEAKNESSES: {WEAKNESSES}
+
+Rules:
+- Focus on decision value, not filler
+- Make recommendations clearer
+- Show who each pick is best for
+- Suggest stronger FAQ and internal-link support
+
+Output format:
+1) Core diagnosis
+2) Better page angle
+3) Recommended section structure
+4) How to rewrite each pick
+5) FAQ ideas
+6) Internal links to add`,
+  variations: [
+    "Make the page more commercial and buyer-focused.",
+    "Make the page more editorial and trust-heavy.",
+    "Add a section for comparison-page spin-offs.",
+    "Focus on improving CTR from existing impressions."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "best-pages", "content", "money-pages"],
+  updatedAtISO: "2026-04-13",
+},
+{
+  id: "p53",
+  slug: "update-summary-to-action-plan",
+  title: "Update Summary to Action Plan",
+  purpose: "Convert a model or platform update into a practical action plan for content, product, or workflow teams.",
+  description: "This prompt turns vague updates and release notes into concrete implications, who-it-affects notes, and next actions. It is useful when update pages feel descriptive but not actionable enough.",
+  whenToUse: "Use this when reading provider announcements, product updates, or AI ecosystem changes and you want to turn them into a page or internal memo with practical value.",
+  decisionContext: "Readers care less about raw announcements than what changes for them. The best update pages do not just summarize; they explain impact, tradeoffs, and what to do next.",
+  howItWorks: "The prompt takes an update summary, target audience, and use case, then translates the change into implications, likely mistakes, action items, and follow-up questions.",
+  bestPractices: "Give it the target reader and whether the output should be for builders, marketers, publishers, or general users. Ask for one clear action list instead of generic possibilities.",
+  commonMistakes: "Repeating the release note language. Ignoring tradeoffs. Writing an update page with no action section. Treating every product change like a major shift.",
+  expectedOutput: "A practical brief with context, why it matters, who it affects, what changes, what to do now, and risks or caveats.",
+  limitations: "The model still depends on the source summary you provide and should not replace primary-source verification.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the original update summary and the intended audience.",
+  realWorldApplications: "Publishers use this for update pages. Internal teams use it for AI change tracking. Agencies use it to translate announcements into client-ready notes.",
+  successMetrics: "A strong output gives readers a reason to act, not just a reason to skim. It should make the update page more memorable and more useful.",
+  relatedPrompts: "Pair with Search Console Triage when an update affects search strategy. Use FAQ + Schema Content Expander to deepen the final page.",
+  prompt: `Turn this update into an action-focused content brief.
+
+UPDATE SUMMARY: {UPDATE}
+TARGET AUDIENCE: {AUDIENCE}
+USE CASE: {USE_CASE}
+
+Rules:
+- Explain practical impact
+- Include risks and caveats
+- Show what changed versus what actually matters
+- End with a short action list
+
+Output format:
+1) Plain-English summary
+2) Why it matters
+3) Who it affects
+4) Risks or caveats
+5) What to do now`,
+  variations: [
+    "Make it work for publishers and SEO teams.",
+    "Make it work for product and operations teams.",
+    "Add a section for likely misconceptions.",
+    "Write it in a more newsletter-ready tone."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["updates", "workflow", "content", "analysis"],
+  updatedAtISO: "2026-04-13",
+},
+{
+  id: "p54",
+  slug: "prompt-pack-structure-designer",
+  title: "Prompt Pack Structure Designer",
+  purpose: "Design a stronger prompt pack around a workflow instead of publishing one-off prompts with weak context.",
+  description: "This prompt creates a structured prompt pack with page roles, sequence logic, variables, examples, and related links. It is useful for prompt libraries that want deeper topical coverage and better internal navigation.",
+  whenToUse: "Use this when building a new prompt cluster, improving a prompt category, or turning a handful of isolated prompts into a more useful mini-library.",
+  decisionContext: "Prompt pages perform better when they feel like part of a system. A prompt pack gives users a starting point, a sequence, and related prompts instead of making every page feel isolated.",
+  howItWorks: "The prompt takes a workflow goal and target user, then suggests the pack structure, page roles, prompt sequence, and supporting sections that make the cluster more useful.",
+  bestPractices: "Choose a narrow workflow outcome instead of a huge vague topic. Ask for beginner versus advanced versions when the pack needs different entry points.",
+  commonMistakes: "Making the pack too broad. Publishing prompts without context. Forgetting related links. Treating prompt packs like tag pages with no editorial logic.",
+  expectedOutput: "A prompt-pack plan including anchor prompt, support prompts, ordering, page-level notes, variable ideas, and internal-link suggestions.",
+  limitations: "The plan still needs editorial review to avoid overlap and to keep the pack genuinely useful.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the workflow goal, audience, and desired outputs.",
+  realWorldApplications: "Prompt directories use this for cluster planning. Educators use it for learning paths. Productivity sites use it for outcome-based prompt packs.",
+  successMetrics: "A good output creates a more coherent prompt library, stronger related links, clearer page roles, and better user progression across the cluster.",
+  relatedPrompts: "Use Topical Authority Cluster Planner for a broader site plan. Use FAQ + Schema Content Expander on the anchor prompt page after drafting.",
+  prompt: `Design a prompt pack around this workflow.
+
+WORKFLOW GOAL: {GOAL}
+TARGET USER: {AUDIENCE}
+DESIRED OUTPUTS: {OUTPUTS}
+
+Rules:
+- Suggest an anchor prompt plus supporting prompts
+- Avoid overlapping pages
+- Include related-link logic
+- Make the pack practical, not theoretical
+
+Output format:
+1) Pack overview
+2) Anchor prompt
+3) Supporting prompts
+4) Sequence or usage order
+5) Related links and supporting sections`,
+  variations: [
+    "Make the pack specific for SEO teams.",
+    "Make the pack specific for students.",
+    "Create a short 5-page pack instead of a full cluster.",
+    "Focus on prompts that can become money pages."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["prompts", "strategy", "content", "workflow"],
+  updatedAtISO: "2026-04-13",
+},
 ];
 

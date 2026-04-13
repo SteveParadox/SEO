@@ -105,7 +105,7 @@ export default function ToolsIndexClient() {
         pages.
       </p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_minmax(0,0.85fr)]">
+      <div className="mt-6">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-base">Find the right tool faster</CardTitle>
@@ -177,31 +177,6 @@ export default function ToolsIndexClient() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Indexed tool pages</div>
-              <div className="mt-2 text-3xl font-semibold">{DATA.tools.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Current matches</div>
-              <div className="mt-2 text-3xl font-semibold">{filteredTools.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Suggested action</div>
-              <div className="mt-2 text-sm font-medium">
-                Start with a tool page, then branch into comparisons or best lists from it.
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-3">

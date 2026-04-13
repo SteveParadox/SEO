@@ -713,4 +713,85 @@ export const updates: ModelUpdate[] = [
     tags: ["seo", "content", "consolidation", "indexing"],
     updatedAtISO: "2026-04-10",
   },
+  {
+    id: "u26",
+    slug: "prompt-libraries-need-stronger-entry-pages-not-just-more-prompts",
+    model: "Content",
+    headline: "Prompt libraries need stronger entry pages, not just more prompts.",
+    context: "Many prompt sites have plenty of prompts but weak browse pages and weak editorial entry points. Users arrive with a workflow in mind, not with a desire to scroll an undifferentiated archive.",
+    why: "A stronger prompt library helps people start from a category, understand the workflow, and then branch into specific prompts. That creates better page value and more useful internal navigation than dumping isolated templates.",
+    commonMistakes: "Publishing more prompts without improving the hub pages. Treating tags as enough context. Using near-identical intros across prompt pages. Forgetting to connect prompts into packs or sequences.",
+    realWorldImpact: "Prompt publishers are moving toward workflow-led collections, entry pages, and deeper usage notes. Stronger prompt hubs improve both usability and the chance that prompt pages feel worth indexing.",
+    whenToIgnore: "If the library is tiny and still needs basic prompt coverage first. Entry pages help most once there is enough content to organize meaningfully.",
+    whatChanged: [
+      "Prompt libraries are becoming more workflow-driven and editorialized",
+      "Entry pages and related-link structure matter more than raw prompt count",
+      "Prompt packs often outperform isolated templates in perceived value"
+    ],
+    whoItAffects: ["Prompt sites", "Content publishers", "AI education projects"],
+    whatToDoNow: [
+      "Strengthen prompt category pages with clearer workflow framing",
+      "Group related prompts into packs or sequences",
+      "Improve related links between prompt pages and supporting hubs"
+    ],
+    relatedUpdates: ["u21", "u24"],
+    additionalResources: "Audit your prompt pages by user journey: how does someone go from broad need to exact prompt? If that path feels weak, the library likely needs better entry pages.",
+    tldr: "Prompt count alone is not enough. Libraries need stronger entry pages and workflow logic.",
+    tags: ["prompts", "content", "ux", "seo"],
+    updatedAtISO: "2026-04-13",
+  },
+  {
+    id: "u27",
+    slug: "best-pages-are-getting-more-opinionated-because-neutral-pages-underperform",
+    model: "Publishing",
+    headline: "Best pages are getting more opinionated because neutral pages underperform.",
+    context: "Publishers are learning that best-of pages without a real point of view struggle to stand out. Users want clearer recommendations, better fit guidance, and more honest tradeoffs.",
+    why: "A neutral best page is often just a dressed-up list. Searchers click best pages because they want help choosing. Without judgment, the page becomes easy to replace with a summary or competitor result.",
+    commonMistakes: "Making every product sound equally strong. Avoiding clear verdicts. Writing long intros that never commit to who the page is for. Hiding tradeoffs to stay 'safe.'",
+    realWorldImpact: "Editorial teams are rewriting best pages with stronger recommendations, clearer pick labels, and more use-case-specific framing. That often leads to better engagement and more useful money pages.",
+    whenToIgnore: "When the page topic is so early-stage that product categories are still unclear. Opinion helps most when the user is already trying to choose.",
+    whatChanged: [
+      "Best pages are becoming more verdict-driven",
+      "Clearer fit guidance matters more than feature dumping",
+      "Tradeoffs are becoming part of the page value, not a liability"
+    ],
+    whoItAffects: ["Affiliate sites", "Tool directories", "Review publishers", "SEO teams"],
+    whatToDoNow: [
+      "Rewrite weak best pages with stronger fit guidance",
+      "Label picks more clearly for audience or use case",
+      "Add honest watch-outs instead of only positive framing"
+    ],
+    relatedUpdates: ["u22"],
+    additionalResources: "Review your best pages and ask whether a reader could make a decision faster after reading them. If not, the page is probably too neutral.",
+    tldr: "Best pages work better when they help users decide, not when they avoid taking a position.",
+    tags: ["best-pages", "money-pages", "content", "seo"],
+    updatedAtISO: "2026-04-13",
+  },
+  {
+    id: "u28",
+    slug: "content-teams-are-prioritizing-template-upgrades-over-random-page-tweaks",
+    model: "Workflow",
+    headline: "Content teams are prioritizing template upgrades over random page tweaks.",
+    context: "More teams are improving page templates in batches instead of touching one URL at a time with small edits. The shift is strongest on directories, niche sites, and template-driven content libraries.",
+    why: "Template changes scale better. If ten weak pages share the same structural problem, fixing the template often beats micromanaging each page individually. It also creates more consistency across the library.",
+    commonMistakes: "Chasing individual URLs without spotting repeated weaknesses. Updating templates without checking whether the new sections actually add value. Over-standardizing pages until they lose differentiation.",
+    realWorldImpact: "Batch improvements make refresh work more efficient and easier to measure. Teams can upgrade FAQs, summaries, internal links, and recommendation sections across page types much faster.",
+    whenToIgnore: "If the site is very small or the page types are wildly inconsistent. Template-led improvements help most when structure already repeats.",
+    whatChanged: [
+      "Template-level fixes are becoming a more common publishing strategy",
+      "Structured page upgrades scale better than isolated tweaks",
+      "Consistency across page types is being treated as a quality asset"
+    ],
+    whoItAffects: ["Publishers", "Directory sites", "SEO teams", "Content operations teams"],
+    whatToDoNow: [
+      "Audit page weaknesses by template, not just by URL",
+      "Upgrade high-impact sections across a page type in batches",
+      "Keep space for page-specific differentiation after template improvements"
+    ],
+    relatedUpdates: ["u21", "u25"],
+    additionalResources: "Look at your site by page type: tools, prompts, best pages, updates, tags. If the same weakness appears repeatedly, that is usually a template issue first.",
+    tldr: "Template upgrades often beat one-off page edits when the site has repeated page types.",
+    tags: ["content", "workflow", "templates", "seo"],
+    updatedAtISO: "2026-04-13",
+  },
 ];

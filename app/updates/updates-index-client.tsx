@@ -104,7 +104,7 @@ export default function UpdatesIndexClient() {
         plain-English breakdowns and next-step advice.
       </p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_minmax(0,0.85fr)]">
+      <div className="mt-6">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle className="text-base">Browse by provider or theme</CardTitle>
@@ -181,29 +181,6 @@ export default function UpdatesIndexClient() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Updates published</div>
-              <div className="mt-2 text-3xl font-semibold">{DATA.updates.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Current matches</div>
-              <div className="mt-2 text-3xl font-semibold">{filteredUpdates.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl">
-            <CardContent className="p-5">
-              <div className="text-sm text-muted-foreground">Tracked models</div>
-              <div className="mt-2 text-3xl font-semibold">{topModels.length}</div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-3">
