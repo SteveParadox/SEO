@@ -659,4 +659,58 @@ export const updates: ModelUpdate[] = [
     tags: ["seo", "taxonomy", "indexing"],
     updatedAtISO: "2026-04-10",
   },
+  {
+    id: "u24",
+    slug: "answer-engine-optimization-is-becoming-a-real-layer",
+    model: "Search",
+    headline: "Answer-engine optimization is becoming a real content layer, not just SEO buzz.",
+    context: "Publishers are adapting to a search environment where users increasingly discover summaries, assistants, and answer surfaces before clicking a traditional result. That does not replace SEO, but it does change how content is framed, summarized, and structured.",
+    why: "When engines and assistants synthesize answers, content with clear structure, direct question coverage, and strong internal context becomes easier to extract and reuse. Pages that bury their value or answer nothing cleanly are easier to ignore.",
+    commonMistakes: "Treating answer-engine optimization like a brand-new discipline that replaces SEO. Optimizing only intros. Forgetting that shallow content is still shallow even if it sounds more concise.",
+    realWorldImpact: "Sites are investing more in strong summaries, cleaner question coverage, and pages that help users choose or act after the answer. It pushes teams to improve page usefulness rather than rely on clickbait framing.",
+    whenToIgnore: "If the site still lacks basic indexing, page quality, or topic coverage. This is not a shortcut around core SEO work.",
+    whatChanged: [
+      "Content teams are designing pages to be understood in answer surfaces, not only blue links",
+      "Clear question coverage and concise summaries are becoming more important",
+      "Decision-heavy pages still matter because users click when they need judgment"
+    ],
+    whoItAffects: ["Publishers", "SEO teams", "Directory sites", "Anyone relying on informational traffic"],
+    whatToDoNow: [
+      "Strengthen summaries and FAQ coverage on important pages",
+      "Make comparison and best pages more explicit and judgment-driven",
+      "Improve page structure so key takeaways are easy to extract"
+    ],
+    relatedUpdates: ["u21", "u22"],
+    additionalResources: "Review which pages on your site answer a question cleanly versus which pages only gesture at the topic. Prioritize structure and clarity before chasing new terminology.",
+    tldr: "Answer surfaces are changing content strategy, but the core win is still better page usefulness.",
+    tags: ["seo", "search", "content", "ai-overviews"],
+    updatedAtISO: "2026-04-10",
+  },
+  {
+    id: "u25",
+    slug: "sites-are-merging-overlapping-pages-instead-of-chasing-long-tail",
+    model: "Publishing",
+    headline: "More sites are merging overlapping pages instead of endlessly chasing long-tail variations.",
+    context: "A growing number of content teams are consolidating similar pages into stronger, more complete assets instead of maintaining clusters of near-duplicate intent. This is showing up across niche sites, SaaS blogs, and tool directories.",
+    why: "Overlapping pages confuse crawlers, split internal authority, and create libraries full of URLs that are individually too weak to stand out. A stronger merged page often performs better than three thin pages targeting the same user need.",
+    commonMistakes: "Keeping duplicate pages because each has a slightly different keyword. Merging URLs without preserving the best material. Redirecting pages before deciding what the new canonical asset should become.",
+    realWorldImpact: "Editorial teams are spending more time on consolidation, refreshes, and page upgrading. Search Console cleanup becomes easier when the site has fewer low-signal URLs competing with each other.",
+    whenToIgnore: "When two pages genuinely serve different intents or audiences. Consolidation only helps when overlap is real.",
+    whatChanged: [
+      "Consolidation is becoming a more common response to weak content libraries",
+      "Template-level overlap is being treated as a structural problem, not just a keyword problem",
+      "Stronger merged pages often outperform scattered long-tail posts"
+    ],
+    whoItAffects: ["Publishers", "SEO teams", "Affiliate sites", "Tool directories"],
+    whatToDoNow: [
+      "Audit overlapping pages by user intent, not just keyword string",
+      "Merge weak variants into one stronger page when the intent is effectively the same",
+      "Use redirects and internal-link cleanup after consolidation"
+    ],
+    relatedUpdates: ["u21", "u23"],
+    additionalResources: "Group pages by the job they do for the user. If multiple URLs solve the same problem weakly, that is often a merge opportunity rather than a publishing opportunity.",
+    tldr: "Fewer, stronger pages are often healthier than sprawling long-tail overlap.",
+    tags: ["seo", "content", "consolidation", "indexing"],
+    updatedAtISO: "2026-04-10",
+  },
 ];

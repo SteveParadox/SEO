@@ -4474,5 +4474,98 @@ Output format:
   tags: ["seo", "search-console", "triage", "indexing"],
   updatedAtISO: "2026-04-10",
 },
+{
+  id: "p50",
+  slug: "comparison-page-outline-builder",
+  title: "Comparison Page Outline Builder (Decision-Heavy SEO Pages)",
+  purpose: "Create stronger comparison-page outlines that help users choose instead of repeating vendor marketing copy.",
+  description: "This prompt builds a comparison-page structure around buyer questions, tradeoffs, verdicts, and real evaluation criteria. It is useful for sites that want more clicks from decision-stage searches and need pages that feel editorial rather than templated.",
+  whenToUse: "Use this when creating versus pages, alternative pages, or tool comparisons where the user is actively deciding between options. It works best when you already know the contenders and want a stronger page structure before drafting.",
+  decisionContext: "Comparison pages are valuable because they sit closer to action than broad informational content. The problem is that many comparison pages are shallow grids with no real verdict. This prompt is built to prevent that.",
+  howItWorks: "The prompt asks for the compared options, target audience, and decision scenario, then turns those into criteria, verdict framing, objections, FAQs, and a page structure that supports stronger internal links.",
+  bestPractices: "Feed in real constraints such as budget, team size, technical skill, or content workflow. Ask for explicit recommendation rules so each page has a clear point of view.",
+  commonMistakes: "Making every contender sound equally good. Comparing features without context. Ignoring switching costs. Writing only for keywords instead of the actual decision the reader is trying to make.",
+  expectedOutput: "A structured comparison-page brief with intro angle, decision criteria, who each option fits, verdict sections, FAQs, and internal-link opportunities.",
+  limitations: "The output is only as strong as the product understanding you provide. It still needs real evaluation and fact-checking before publication.",
+  technicalRequirements: "Works with all major models. Best results come when you provide product names, audience type, and the key reason people compare them.",
+  realWorldApplications: "Affiliate sites use this for money pages. SaaS marketing teams use it for competitor comparisons. Tool directories use it to turn broad topic traffic into higher-intent landing pages.",
+  successMetrics: "A successful output creates pages with clearer verdicts, better internal-link targets, and more decisive copy that supports commercial clicks.",
+  relatedPrompts: "Use Topical Authority Cluster Planner to find which comparisons deserve pages. Pair with SEO Content Refresh Brief to upgrade underperforming comparison pages.",
+  prompt: `Create a comparison-page outline that helps users choose between options.
+
+CONTENDERS: {CONTENDERS}
+AUDIENCE: {AUDIENCE}
+DECISION CONTEXT: {DECISION_CONTEXT}
+KEY CONSTRAINTS: {CONSTRAINTS}
+
+Rules:
+- Prioritize decision value over filler
+- Include clear criteria and verdict logic
+- Distinguish who each option is best for
+- Add FAQs and internal-link opportunities
+
+Output format:
+1) Search intent and page angle
+2) Comparison criteria
+3) Recommended page structure
+4) Verdict sections
+5) FAQ block
+6) Internal links to supporting pages`,
+  variations: [
+    "Make it specific for AI tool comparisons.",
+    "Create a softer tone for editorial review sites.",
+    "Add a section for switching costs and migration pain.",
+    "Make the outline better for affiliate content."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "comparisons", "content", "money-pages"],
+  updatedAtISO: "2026-04-10",
+},
+{
+  id: "p51",
+  slug: "faq-schema-content-expander",
+  title: "FAQ + Schema Content Expander",
+  purpose: "Turn thin pages into richer, more useful resources with better FAQ coverage and structured-answer planning.",
+  description: "This prompt expands a page with user-facing questions, concise answers, supporting angles, and schema-friendly FAQ ideas. It is especially helpful for tool pages, best pages, and category pages that feel too sparse.",
+  whenToUse: "Use this when a page covers the basic topic but still feels thin, lacks question coverage, or misses obvious supporting queries from users.",
+  decisionContext: "Many weak pages are not broken because of a technical issue. They are weak because they stop too early and fail to answer the practical questions a user still has before leaving.",
+  howItWorks: "The prompt takes a page topic plus page type, then expands likely user questions, answer angles, follow-up sections, and schema-friendly FAQ coverage that can be added without turning the page into fluff.",
+  bestPractices: "Ask for questions grouped by reader intent. Remove any FAQs that do not add value. Use the output to improve the page, not just to append filler at the bottom.",
+  commonMistakes: "Adding repetitive FAQs. Writing vague answers. Treating schema as the goal instead of page usefulness. Stuffing in questions that do not match the page's purpose.",
+  expectedOutput: "A prioritized list of FAQs, answer angles, supporting sub-sections, and notes on which items should be turned into visible content versus optional schema.",
+  limitations: "This does not replace first-hand expertise. The generated FAQs still need editorial review and factual validation.",
+  technicalRequirements: "Works with all major models. Best results come when you supply the page topic, reader type, and a short summary of the existing page.",
+  realWorldApplications: "SEO teams use this to strengthen underperforming pages. Publishers use it to deepen review pages. Tool directories use it to make item pages and best pages more complete.",
+  successMetrics: "Successful outputs lead to pages that cover more practical questions, feel less thin, and create stronger supporting signals for search and user satisfaction.",
+  relatedPrompts: "Use Search Console Triage to identify which pages need expansion first. Pair with SEO Content Refresh Brief for a full rewrite plan.",
+  prompt: `Expand this page with better FAQ and supporting-content coverage.
+
+PAGE TYPE: {PAGE_TYPE}
+PAGE TOPIC: {TOPIC}
+AUDIENCE: {AUDIENCE}
+CURRENT PAGE SUMMARY: {CURRENT_SUMMARY}
+
+Rules:
+- Focus on useful questions, not filler
+- Separate visible-page sections from optional schema items
+- Keep answers concise and practical
+- Suggest only sections that fit the page type
+
+Output format:
+1) Gaps in current coverage
+2) Priority FAQs
+3) Strong answer angles
+4) Supporting sections to add
+5) Schema-friendly FAQ shortlist`,
+  variations: [
+    "Make it specific for tool pages.",
+    "Make it specific for best-of list pages.",
+    "Focus on buyer objections and trust questions.",
+    "Create a version for taxonomy or tag pages."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["seo", "faq", "schema", "content"],
+  updatedAtISO: "2026-04-10",
+},
 ];
 

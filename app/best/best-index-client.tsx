@@ -238,8 +238,7 @@ export default function BestIndexClient() {
         {current.map((bestPage) => {
           const snippet = bestPage.intro[0] ?? bestPage.description;
           const visibleBadges = bestPage.picks
-            .map((pick) => pick.badge)
-            .filter((badge): badge is string => Boolean(badge))
+            .flatMap((pick) => (pick.badge ? [pick.badge] : []))
             .slice(0, 3);
 
           return (

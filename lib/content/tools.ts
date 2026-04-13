@@ -3829,5 +3829,85 @@ export const tools: Tool[] = [
   users: "Growing",
   updatedAtISO: "2026-01-28",
 },
+{
+  id: "t118",
+  slug: "frase",
+  name: "Frase",
+  oneLiner: "SEO research and content optimization built for briefs, refreshes, and competitive gaps.",
+  description:
+    "Frase helps content teams research search intent, generate optimization briefs, and improve existing pages with clearer topical coverage. It is especially useful when you want a tighter workflow for content refreshes instead of writing from a blank page every time.",
+  useCases: [
+    "SEO content briefs",
+    "Content refreshes",
+    "Competitive gap analysis",
+    "Outline generation",
+    "On-page optimization"
+  ],
+  pros: [
+    "Good fit for refresh workflows",
+    "Helps turn SERP research into usable briefs",
+    "Useful for teams managing many content updates",
+    "Cleaner SEO focus than general chat tools",
+    "Supports faster outline and FAQ creation"
+  ],
+  cons: [
+    "Still needs human editorial judgment",
+    "Can encourage over-optimization if used blindly",
+    "Less useful outside SEO-driven workflows"
+  ],
+  pricing: {
+    tier: "paid",
+    note: "Paid subscription with different usage tiers"
+  },
+  alternatives: [
+    { name: "Perplexity", slug: "perplexity" },
+    { name: "ChatGPT", slug: "chatgpt" },
+    { name: "Claude", slug: "claude" }
+  ],
+  tags: ["seo", "content", "research", "optimization"],
+  rating: 4.4,
+  users: "Established",
+  updatedAtISO: "2026-04-10",
+},
+{
+  id: "t119",
+  slug: "descript",
+  name: "Descript",
+  oneLiner: "Edit audio and video like a document with built-in transcription and creator workflows.",
+  description:
+    "Descript combines transcription, editing, screen recording, and podcast production in one workspace. It is popular with creators who want to move faster on spoken-word content without juggling multiple tools for every small change.",
+  useCases: [
+    "Podcast editing",
+    "Video editing",
+    "Transcription",
+    "Screen recordings",
+    "Creator workflows"
+  ],
+  pros: [
+    "Transcript-based editing is fast to learn",
+    "Strong fit for podcast and talking-head content",
+    "Reduces tool switching for small teams",
+    "Useful AI cleanup features",
+    "Good workflow for repurposing spoken content"
+  ],
+  cons: [
+    "Advanced edits can still require traditional editors",
+    "Subscription cost adds up for teams",
+    "Heavy projects may feel constrained compared with pro editing suites"
+  ],
+  pricing: {
+    tier: "freemium",
+    note: "Free plan available with paid creator and team tiers"
+  },
+  alternatives: [
+    { name: "SquadCast", slug: "squadcast" },
+    { name: "ElevenLabs", slug: "elevenlabs" },
+    { name: "ChatGPT", slug: "chatgpt" }
+  ],
+  tags: ["audio", "video", "editing", "creator", "podcast"],
+  rating: 4.6,
+  users: "Very Popular",
+  updatedAtISO: "2026-04-10",
+},
 
 ];
