@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!page) {
     return {
-      title: "Best list not found — Xavkit",
+      title: "Best list not found - Xavkit",
       robots: { index: false, follow: false },
     };
   }
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseDescription = page.description?.trim() || "Curated AI tool list";
 
   const url = absoluteUrl(`/best/${page.slug}`);
-  const title = `${baseTitle} — Xavkit`;
+  const title = `${baseTitle} - Xavkit`;
   const description = baseDescription.slice(0, 160);
 
   return {
@@ -58,10 +58,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function titleCase(s: string) {
-  return s
+function titleCase(input: string) {
+  return input
     .split("-")
-    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
     .join(" ");
 }
 
@@ -72,7 +72,6 @@ export default async function BestPage({ params }: PageProps) {
 
   const picks = resolveBestPicks(page);
   const related = getRelatedBestPages(page.id, 6);
-
   const pageUrl = absoluteUrl(`/best/${page.slug}`);
 
   const itemListSchema = {
@@ -94,21 +93,20 @@ export default async function BestPage({ params }: PageProps) {
     })),
   };
 
-  const faqSchema =
-    page.faqs?.length
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: page.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: f.a,
-            },
-          })),
-        }
-      : null;
+  const faqSchema = page.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: page.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.a,
+          },
+        })),
+      }
+    : null;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -124,9 +122,10 @@ export default async function BestPage({ params }: PageProps) {
 
       {page.tags?.length ? (
         <div className="mt-3 flex flex-wrap gap-2">
-          {page.tags.map((t) => {
-            const label = t.trim();
+          {page.tags.map((tag) => {
+            const label = tag.trim();
             const tagSlug = encodeURIComponent(label.toLowerCase());
+
             return (
               <Link key={tagSlug} href={`/tags/${tagSlug}`}>
                 <Badge variant="secondary" className="rounded-full">
@@ -138,61 +137,32 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       ) : null}
 
-      {/* Intro (updated per your change) */}
       <div className="mt-6 max-w-3xl space-y-4 text-muted-foreground">
-        {page.intro.map((p, i) => {
-          // First paragraph gets special styling (currently same classes, but kept for future tweaks)
-          if (i === 0) {
-            return (
-              <p
-                key={`${page.id}-intro-${i}`}
-                className="text-base leading-relaxed"
-              >
-                {p}
-              </p>
-            );
-          }
-          return (
-            <p key={`${page.id}-intro-${i}`} className="text-base leading-relaxed">
-              {p}
-            </p>
-          );
-        })}
+        {page.intro.map((paragraph, index) => (
+          <p
+            key={`${page.id}-intro-${index}`}
+            className="text-base leading-relaxed"
+          >
+            {paragraph}
+          </p>
+        ))}
       </div>
 
-      {/* How to use this guide (new) */}
-      <div className="mt-8 rounded-2xl border bg-muted/40 p-5">
-        <h2 className="text-base font-semibold">How to use this guide</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-          <li>Each tool is ranked with a badge showing its strongest use case</li>
-          <li>
-            <span className="font-medium text-foreground">Best for</span> shows what
-            this tool excels at
-          </li>
-          <li>
-            <span className="font-medium text-foreground">Watch out for</span>{" "}
-            highlights real limitations to consider
-          </li>
-          <li>Click any tool name to see detailed features, pricing, and full reviews</li>
-        </ul>
-      </div>
-
-      {/* Ranked picks section wrapper (updated per your change) */}
       <div className="mt-8 grid gap-4">
         <h2 className="text-2xl font-semibold">Ranked picks</h2>
 
         <div className="grid gap-4">
-          {picks.map(({ pick, tool }, idx) => (
-            <Card key={`${tool.id}-${idx}`} className="rounded-2xl">
+          {picks.map(({ pick, tool }, index) => (
+            <Card key={`${tool.id}-${index}`} className="rounded-2xl">
               <CardHeader className="pb-2">
-                <CardTitle className="text-base flex items-center gap-2 flex-wrap">
+                <CardTitle className="flex flex-wrap items-center gap-2 text-base">
                   {pick.badge ? (
                     <Badge variant="secondary" className="rounded-full">
                       {pick.badge}
                     </Badge>
                   ) : (
                     <Badge variant="outline" className="rounded-full">
-                      #{idx + 1}
+                      #{index + 1}
                     </Badge>
                   )}
 
@@ -209,8 +179,8 @@ export default async function BestPage({ params }: PageProps) {
                   <div>
                     <div className="text-sm font-medium">Best for</div>
                     <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                      {pick.bestFor.map((x) => (
-                        <li key={`${tool.id}-bestfor-${x}`}>{x}</li>
+                      {pick.bestFor.map((value) => (
+                        <li key={`${tool.id}-bestfor-${value}`}>{value}</li>
                       ))}
                     </ul>
                   </div>
@@ -219,8 +189,8 @@ export default async function BestPage({ params }: PageProps) {
                     <div>
                       <div className="text-sm font-medium">Watch out for</div>
                       <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">
-                        {pick.watchOutFor.map((x) => (
-                          <li key={`${tool.id}-watch-${x}`}>{x}</li>
+                        {pick.watchOutFor.map((value) => (
+                          <li key={`${tool.id}-watch-${value}`}>{value}</li>
                         ))}
                       </ul>
                     </div>
@@ -232,20 +202,21 @@ export default async function BestPage({ params }: PageProps) {
                     View {tool.name}
                   </Link>
 
-                  {tool.officialUrl && (
+                  {tool.officialUrl ? (
                     <a
                       href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
                       target="_blank"
                       rel="nofollow sponsored noopener"
                       className="underline underline-offset-4"
                     >
-                      Visit site →
+                      Visit site
                     </a>
-                  )}
+                  ) : null}
 
-                  {tool.tags?.slice(0, 2).map((t) => {
-                    const label = t.trim();
+                  {tool.tags?.slice(0, 2).map((tag) => {
+                    const label = tag.trim();
                     const tagSlug = encodeURIComponent(label.toLowerCase());
+
                     return (
                       <Link
                         key={`${tool.id}-tag-${tagSlug}`}
@@ -263,50 +234,17 @@ export default async function BestPage({ params }: PageProps) {
         </div>
       </div>
 
-      <Card className="mt-10 rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-base">Quick recommendation</CardTitle>
-        </CardHeader>
-        <CardContent className="text-sm text-muted-foreground space-y-3">
-          <p>
-            If you want the safest “works for most people” choice, start with the{" "}
-            <span className="font-medium">Best Overall</span>. If budget matters, pick
-            the <span className="font-medium">Best Budget</span> option. If you’re
-            buying for a team, prioritize collaboration and admin controls over random
-            flashy features.
-          </p>
-
-          <div className="flex flex-wrap gap-3">
-            {picks[0]?.tool ? (
-              <Link className="underline" href={`/tools/${picks[0].tool.slug}`}>
-                View top pick
-              </Link>
-            ) : null}
-
-            {picks[1]?.tool ? (
-              <Link className="underline" href={`/tools/${picks[1].tool.slug}`}>
-                View runner-up
-              </Link>
-            ) : null}
-
-            <Link className="underline" href="/tools">
-              Browse all tools
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
-
       {page.faqs?.length ? (
         <div className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold">FAQ</h2>
           <div className="mt-4 grid gap-3">
-            {page.faqs.map((f, i) => (
-              <Card key={`${page.id}-faq-${i}`} className="rounded-2xl">
+            {page.faqs.map((faq, index) => (
+              <Card key={`${page.id}-faq-${index}`} className="rounded-2xl">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base">{f.q}</CardTitle>
+                  <CardTitle className="text-base">{faq.q}</CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0 text-sm text-muted-foreground">
-                  {f.a}
+                  {faq.a}
                 </CardContent>
               </Card>
             ))}
@@ -318,15 +256,15 @@ export default async function BestPage({ params }: PageProps) {
         <div className="mt-10">
           <h2 className="text-xl font-semibold">Related best lists</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {related.map((r) => (
-              <Link key={r.id} href={`/best/${r.slug}`}>
-                <Card className="rounded-2xl hover:bg-muted/40 transition">
+            {related.map((item) => (
+              <Link key={item.id} href={`/best/${item.slug}`}>
+                <Card className="rounded-2xl transition hover:bg-muted/40">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base">{r.title}</CardTitle>
+                    <CardTitle className="text-base">{item.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <div className="text-sm text-muted-foreground line-clamp-2">
-                      {r.intro?.[0] ?? r.description}
+                    <div className="line-clamp-2 text-sm text-muted-foreground">
+                      {item.intro?.[0] ?? item.description}
                     </div>
                   </CardContent>
                 </Card>

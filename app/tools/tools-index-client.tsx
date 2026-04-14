@@ -99,11 +99,6 @@ export default function ToolsIndexClient() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">AI Tools</h1>
-      <p className="mt-3 max-w-3xl text-muted-foreground">
-        Browse AI tools by real use case, pricing fit, and workflow tag. This page is built
-        to help people narrow options quickly instead of bouncing through generic directory
-        pages.
-      </p>
 
       <div className="mt-6">
         <Card className="rounded-2xl">

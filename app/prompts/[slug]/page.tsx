@@ -245,7 +245,7 @@ export default async function PromptPage({ params }: PageProps) {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="mt-6">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Variations</CardTitle>
@@ -260,17 +260,6 @@ export default async function PromptPage({ params }: PageProps) {
                 <CopyButton text={variation} label="Copy" className="rounded-xl" />
               </div>
             ))}
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl">
-          <CardHeader>
-            <CardTitle>How to get better results</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <p>Fill in the placeholders with specifics instead of generic labels.</p>
-            <p>Tell the model what a strong answer looks like before you ask for the output.</p>
-            <p>After the first run, paste the response back in and ask for one focused revision.</p>
           </CardContent>
         </Card>
       </div>

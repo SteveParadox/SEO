@@ -29,12 +29,10 @@ const KIND_LABELS: Record<TagItem["kind"], string> = {
   best: "Best List",
 };
 
-const TAG_EDITORIAL: Record<string, { intro: string; guidance: string }> = {
+const TAG_EDITORIAL: Record<string, { intro: string }> = {
   diagrams: {
     intro:
       "Diagram tools on Xavkit cover a few different jobs: quick hand-drawn thinking, collaborative whiteboarding, and more structured visual planning. The useful distinction is not whether a tool can draw boxes and arrows, but whether it helps you think faster alone, explain systems clearly to a team, or run workshops without canvas chaos.",
-    guidance:
-      "If you want low-friction architecture sketches, start with the lighter tools first. If you need facilitation, templates, and multi-person sessions, open the more collaborative options next.",
   },
 };
 
@@ -180,11 +178,11 @@ export default async function TagPage({ params }: PageProps) {
       </div>
 
       <h1 className="mt-4 text-3xl font-semibold">{displayTag}</h1>
-      <p className="mt-3 max-w-3xl text-muted-foreground">
-        {editorial?.intro ?? buildTagIntro(displayTag, items.length)}
-      </p>
+      {editorial?.intro ? (
+        <p className="mt-3 max-w-3xl text-muted-foreground">{editorial.intro}</p>
+      ) : null}
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="rounded-2xl">
           <CardContent className="p-5">
             <div className="text-sm text-muted-foreground">Matched pages</div>
@@ -214,14 +212,6 @@ export default async function TagPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl">
-          <CardContent className="p-5">
-            <div className="text-sm text-muted-foreground">Best next step</div>
-            <div className="mt-2 text-sm font-medium">
-              {items.length > 1 ? `Compare related ${displayTag.toLowerCase()} pages` : "Jump to the matching page"}
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-[1.6fr_minmax(0,0.9fr)]">
@@ -285,25 +275,19 @@ export default async function TagPage({ params }: PageProps) {
             <CardHeader>
               <CardTitle className="text-base">Explore further</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                {editorial?.guidance ??
-                  "Use this tag as a shortcut into a more specific page, then branch into tools, prompts, or comparisons once you know your exact use case."}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Link href="/tags" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
-                  All tags
-                </Link>
-                <Link href="/tools" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
-                  Tools
-                </Link>
-                <Link href="/prompts" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
-                  Prompts
-                </Link>
-                <Link href="/best" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
-                  Best lists
-                </Link>
-              </div>
+            <CardContent className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+              <Link href="/tags" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
+                All tags
+              </Link>
+              <Link href="/tools" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
+                Tools
+              </Link>
+              <Link href="/prompts" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
+                Prompts
+              </Link>
+              <Link href="/best" className="rounded-full border px-3 py-1 hover:bg-muted/40 transition">
+                Best lists
+              </Link>
             </CardContent>
           </Card>
         </div>

@@ -98,11 +98,6 @@ export default function UpdatesIndexClient() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">Model Updates</h1>
-      <p className="mt-3 max-w-3xl text-muted-foreground">
-        Track important model and ecosystem shifts without digging through vague release
-        notes. Filter by provider, theme, or search intent, then open the update pages for
-        plain-English breakdowns and next-step advice.
-      </p>
 
       <div className="mt-6">
         <Card className="rounded-2xl">
