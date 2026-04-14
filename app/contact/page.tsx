@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact — Xavkit",
-  description: "Get in touch with Xavkit for questions, feedback, or corrections.",
+  title: "Contact | XavKit",
+  description: "Get in touch with XavKit for questions, feedback, or corrections.",
 };
 
 export default function ContactPage() {
@@ -10,14 +10,14 @@ export default function ContactPage() {
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-3xl font-semibold">Contact</h1>
       <p className="mt-3 text-muted-foreground">
-        Questions, corrections, or something genuinely useful to say.
+        Questions, corrections, or partnership inquiries.
       </p>
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed">
         <p>
-          Xavkit is a curated directory, not a support desk for every AI tool
-          on the internet. If something looks wrong or outdated, that’s fair.
-          If you want us to fix your code, less fair.
+          XavKit is a curated directory of AI tools, prompts, and related
+          resources. If you spot outdated information, broken links, or content
+          that needs a correction, we would like to hear about it.
         </p>
 
         <section>
@@ -26,32 +26,28 @@ export default function ContactPage() {
             <li>Incorrect or outdated tool information</li>
             <li>Broken links or page issues</li>
             <li>General feedback about the site</li>
-            <li>Legitimate partnership or listing requests</li>
+            <li>Partnership or listing requests</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="font-medium">What we don’t handle</h2>
+          <h2 className="font-medium">What we do not handle</h2>
           <ul className="mt-2 list-disc pl-5 text-muted-foreground">
             <li>Customer support for third-party tools</li>
             <li>Refunds, pricing disputes, or account issues</li>
-            <li>“Which AI should I use for everything?” questions</li>
+            <li>General consulting requests without project details</li>
           </ul>
         </section>
 
         <section>
           <h2 className="font-medium">How to reach us</h2>
+          <p className="mt-2 text-muted-foreground">Send an email to:</p>
+          <p className="mt-1 font-medium">contact@xavkit.com</p>
           <p className="mt-2 text-muted-foreground">
-            Send an email to:
-          </p>
-          <p className="mt-1 font-medium">
-            contact@tooldrop.ai
-          </p>
-          <p className="mt-2 text-muted-foreground">
-            We read messages. We reply when it makes sense.
+            We review every message and reply when a response is needed.
           </p>
         </section>
       </div>
     </div>
   );
-      }
+}

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — Xavkit",
-  description: "Rules, responsibilities, and limitations for using Xavkit.",
+  title: "Terms and Conditions | XavKit",
+  description: "Rules, responsibilities, and limitations for using XavKit.",
   alternates: { canonical: absoluteUrl("/terms") },
   robots: { index: true, follow: true },
 };
@@ -11,36 +11,39 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-3xl font-semibold">Terms & Conditions</h1>
+      <h1 className="text-3xl font-semibold">Terms and Conditions</h1>
       <p className="mt-4 text-muted-foreground">Last updated: January 2026</p>
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed">
         <p>
-          By using Xavkit, you agree to the following terms. If you do not agree,
-          please stop using the site. Simple.
+          By using XavKit, you agree to these terms. If you do not agree,
+          please do not use the site.
         </p>
 
         <section>
           <h2 className="font-medium">Purpose of the site</h2>
           <p className="mt-2 text-muted-foreground">
-            Xavkit provides curated information about AI tools, prompts, updates,
-            and comparisons for educational and informational purposes only.
+            XavKit provides curated information about AI tools, prompts,
+            updates, and comparisons for educational and informational
+            purposes only.
           </p>
         </section>
 
         <section>
           <h2 className="font-medium">No guarantees</h2>
           <p className="mt-2 text-muted-foreground">
-            We do not guarantee accuracy, completeness, or outcomes. AI tools change fast.
-            You are responsible for verifying anything important.
+            We do not guarantee accuracy, completeness, or outcomes. AI tools
+            change quickly, and you are responsible for verifying anything
+            important before acting on it.
           </p>
         </section>
 
         <section>
           <h2 className="font-medium">External links</h2>
           <p className="mt-2 text-muted-foreground">
-            ToolDrop AI links to third-party tools and services. We do not control them and
-            are not responsible for their behavior, pricing, or policies.
+            XavKit links to third-party tools and services. We do not control
+            them and are not responsible for their behavior, pricing, or
+            policies.
           </p>
         </section>
 
@@ -56,15 +59,15 @@ export default function TermsPage() {
         <section>
           <h2 className="font-medium">Changes to terms</h2>
           <p className="mt-2 text-muted-foreground">
-            These terms may change over time. Continued use of the site means you accept the
-            latest version.
+            These terms may change over time. Continued use of the site means
+            you accept the latest version.
           </p>
         </section>
 
         <section>
           <h2 className="font-medium">Contact</h2>
           <p className="mt-2 text-muted-foreground">
-            Questions about these terms can be sent via the contact page.
+            Questions about these terms can be sent through the contact page.
           </p>
         </section>
       </div>

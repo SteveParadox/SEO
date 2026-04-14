@@ -1,22 +1,22 @@
-import Link from "next/link";
-import { ArrowLeft, Search, Flame } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, Flame, Search } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "404 — ToolDrop AI",
+  title: "404 - Page not found | XavKit",
   robots: {
     index: false,
     follow: true,
   },
 };
 
-function MemeBlob() {
+function IllustrationBlob() {
   return (
     <div className="relative mx-auto w-full max-w-sm">
-      <div className="absolute inset-0 blur-2xl opacity-30 rounded-[2rem] bg-muted" />
+      <div className="absolute inset-0 rounded-[2rem] bg-muted opacity-30 blur-2xl" />
       <svg
         viewBox="0 0 420 260"
         className="relative w-full rounded-[2rem] border bg-background shadow-sm"
@@ -45,7 +45,7 @@ function MemeBlob() {
           opacity="0.12"
         />
         <text x="26" y="242" fill="currentColor" opacity="0.35" fontSize="14">
-          404: page went missing (like motivation on Monday)
+          404: page not found
         </text>
       </svg>
     </div>
@@ -56,54 +56,54 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="mx-auto max-w-6xl px-4 py-16">
-        <div className="grid gap-6 md:grid-cols-2 items-start">
+        <div className="grid items-start gap-6 md:grid-cols-2">
           <div>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               <Badge variant="secondary" className="rounded-full">
-                <Flame className="h-3.5 w-3.5 mr-1" /> Not trending
+                <Flame className="mr-1 h-3.5 w-3.5" /> Page unavailable
               </Badge>
               <Badge variant="outline" className="rounded-full">
                 404
               </Badge>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-              This page doesn’t exist.
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+              This page does not exist.
             </h1>
 
-            <p className="mt-4 text-muted-foreground max-w-xl">
-              Either the link is wrong, the content isn’t published yet, or the internet is doing what it does best:
-              wasting your time.
+            <p className="mt-4 max-w-xl text-muted-foreground">
+              The link may be outdated, the page may have moved, or the content
+              may no longer be available.
             </p>
 
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button className="rounded-2xl" asChild>
                 <Link href="/" className="inline-flex items-center">
-                  <ArrowLeft className="h-4 w-4 mr-2" /> Back to homepage
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to homepage
                 </Link>
               </Button>
 
               <Button variant="outline" className="rounded-2xl" asChild>
-                <Link href="/#trending" className="inline-flex items-center">
-                  <Search className="h-4 w-4 mr-2" /> Browse trending
+                <Link href="/search" className="inline-flex items-center">
+                  <Search className="mr-2 h-4 w-4" /> Search the site
                 </Link>
               </Button>
             </div>
 
             <Card className="mt-6 rounded-2xl shadow-sm">
               <CardHeader className="border-b">
-                <CardTitle className="text-base">Common causes</CardTitle>
+                <CardTitle className="text-base">Helpful next steps</CardTitle>
               </CardHeader>
-              <CardContent className="p-5 text-sm text-muted-foreground space-y-2">
-                <div>• You clicked a slug that isn’t in <code className="px-1 rounded bg-muted/40">DATA</code>.</div>
-                <div>• You haven’t created the route file for that page type yet.</div>
-                <div>• You renamed a slug and didn’t update links.</div>
+              <CardContent className="space-y-2 p-5 text-sm text-muted-foreground">
+                <div>- Browse the latest tools, prompts, and best-of pages.</div>
+                <div>- Use site search to find the topic or product you wanted.</div>
+                <div>- Head back to the homepage to continue exploring.</div>
               </CardContent>
             </Card>
           </div>
 
           <div className="md:pt-6">
-            <MemeBlob />
+            <IllustrationBlob />
           </div>
         </div>
       </main>
