@@ -28,6 +28,26 @@ export default function ComparisonsIndexClient() {
         Side-by-side comparisons highlighting strengths, limitations, and ideal use cases.
       </p>
 
+      <div className="mt-6 rounded-3xl border bg-muted/20 p-5">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-3xl">
+            <div className="text-lg font-semibold">Need a custom matchup?</div>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Use the comparison builder to put any two or three tools side by side, switch
+              the priority, and get a grounded recommendation without waiting for a custom
+              editorial page.
+            </p>
+          </div>
+
+          <Link
+            href="/compare-tools"
+            className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium transition hover:bg-background"
+          >
+            Open comparison builder
+          </Link>
+        </div>
+      </div>
+
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {current.map((c) => (
           <Card

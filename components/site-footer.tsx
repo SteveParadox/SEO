@@ -16,6 +16,12 @@ export function SiteFooter() {
             AI Stack Builder
           </Link>
           <Link
+            href="/compare-tools"
+            className="text-muted-foreground transition hover:text-foreground"
+          >
+            Compare Tools
+          </Link>
+          <Link
             href="/privacy"
             className="text-muted-foreground transition hover:text-foreground"
           >
