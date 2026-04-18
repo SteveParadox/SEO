@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ToolComparisonBuilder } from "@/components/tool-comparison-builder";
@@ -94,7 +95,9 @@ export default function CompareToolsPage() {
       </div>
 
       <div className="mt-10">
-        <ToolComparisonBuilder />
+        <Suspense fallback={<div className="text-muted-foreground">Loading comparison builder...</div>}>
+          <ToolComparisonBuilder />
+        </Suspense>
       </div>
 
       <section className="mt-14">
