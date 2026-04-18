@@ -44,7 +44,7 @@ export function TrendingNow({ limit = 4 }: { limit?: number }) {
           </p>
         </div>
         <Link href="/trending" className="text-sm text-muted-foreground hover:text-foreground">
-          Open full trending ->
+          Open full trending &gt;
         </Link>
       </div>
 
