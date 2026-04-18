@@ -29,6 +29,18 @@ const DEFAULT_FRESHNESS: SearchFreshness = "all";
 const DEFAULT_SORT: SearchSort = "relevance";
 const DEFAULT_TAG = "";
 
+type SearchUiState = {
+  query: string;
+  type: SearchContentType;
+  freshness: SearchFreshness;
+  tag: string;
+  sort: SearchSort;
+};
+
+type SearchParamReader = {
+  get(name: string): string | null;
+};
+
 function getParamValue(param: string | string[] | null | undefined) {
   if (Array.isArray(param)) return param[0] ?? "";
   return param ?? "";
@@ -36,6 +48,28 @@ function getParamValue(param: string | string[] | null | undefined) {
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function readSearchUiState(searchParams: SearchParamReader): SearchUiState {
+  return {
+    query: getParamValue(searchParams.get("q")),
+    type: (getParamValue(searchParams.get("type")) || DEFAULT_TYPE) as SearchContentType,
+    freshness: (getParamValue(searchParams.get("freshness")) || DEFAULT_FRESHNESS) as SearchFreshness,
+    tag: getParamValue(searchParams.get("tag")) || DEFAULT_TAG,
+    sort: (getParamValue(searchParams.get("sort")) || DEFAULT_SORT) as SearchSort,
+  };
+}
+
+function buildSearchQueryString(state: SearchUiState) {
+  const next = new URLSearchParams();
+
+  if (state.query.trim()) next.set("q", state.query.trim());
+  if (state.type !== DEFAULT_TYPE) next.set("type", state.type);
+  if (state.freshness !== DEFAULT_FRESHNESS) next.set("freshness", state.freshness);
+  if (state.tag) next.set("tag", state.tag);
+  if (state.sort !== DEFAULT_SORT) next.set("sort", state.sort);
+
+  return next.toString();
 }
 
 function HighlightText({
@@ -144,6 +178,7 @@ export function SearchClient() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = React.useTransition();
+  const searchParamsString = searchParams.toString();
 
   const documents = React.useMemo(() => getSearchDocuments(), []);
   const popularTags = React.useMemo(() => getPopularSearchTags(12), []);
@@ -151,16 +186,7 @@ export function SearchClient() {
   const freshnessOptions = React.useMemo(() => getFreshnessOptions(), []);
   const sortOptions = React.useMemo(() => getSortOptions(), []);
 
-  const urlState = React.useMemo(
-    () => ({
-      query: getParamValue(searchParams.get("q")),
-      type: (getParamValue(searchParams.get("type")) || DEFAULT_TYPE) as SearchContentType,
-      freshness: (getParamValue(searchParams.get("freshness")) || DEFAULT_FRESHNESS) as SearchFreshness,
-      tag: getParamValue(searchParams.get("tag")) || DEFAULT_TAG,
-      sort: (getParamValue(searchParams.get("sort")) || DEFAULT_SORT) as SearchSort,
-    }),
-    [searchParams]
-  );
+  const urlState = React.useMemo(() => readSearchUiState(searchParams), [searchParams]);
 
   const [query, setQuery] = React.useState(urlState.query);
   const [contentType, setContentType] = React.useState<SearchContentType>(urlState.type);
@@ -168,41 +194,38 @@ export function SearchClient() {
   const [tag, setTag] = React.useState(urlState.tag);
   const [sort, setSort] = React.useState<SearchSort>(urlState.sort);
   const deferredQuery = React.useDeferredValue(query);
+  const lastWrittenQueryStringRef = React.useRef(searchParamsString);
 
   React.useEffect(() => {
+    if (searchParamsString === lastWrittenQueryStringRef.current) return;
+
     setQuery(urlState.query);
     setContentType(urlState.type);
     setFreshness(urlState.freshness);
     setTag(urlState.tag);
     setSort(urlState.sort);
-  }, [urlState]);
+  }, [searchParamsString, urlState]);
 
   React.useEffect(() => {
-    const next = new URLSearchParams(searchParams.toString());
+    const nextQuery = buildSearchQueryString({
+      query: deferredQuery,
+      type: contentType,
+      freshness,
+      tag,
+      sort,
+    });
 
-    if (deferredQuery.trim()) next.set("q", deferredQuery.trim());
-    else next.delete("q");
+    if (searchParamsString === nextQuery) {
+      lastWrittenQueryStringRef.current = nextQuery;
+      return;
+    }
 
-    if (contentType !== DEFAULT_TYPE) next.set("type", contentType);
-    else next.delete("type");
-
-    if (freshness !== DEFAULT_FRESHNESS) next.set("freshness", freshness);
-    else next.delete("freshness");
-
-    if (tag) next.set("tag", tag);
-    else next.delete("tag");
-
-    if (sort !== DEFAULT_SORT) next.set("sort", sort);
-    else next.delete("sort");
-
-    const currentQuery = searchParams.toString();
-    const nextQuery = next.toString();
-    if (currentQuery === nextQuery) return;
+    lastWrittenQueryStringRef.current = nextQuery;
 
     startTransition(() => {
       router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
     });
-  }, [contentType, deferredQuery, freshness, pathname, router, searchParams, sort, tag]);
+  }, [contentType, deferredQuery, freshness, pathname, router, searchParamsString, sort, tag]);
 
   const matches = React.useMemo(
     () =>
