@@ -10,6 +10,12 @@ export function SiteFooter() {
 
         <nav className="flex items-center gap-4 text-sm">
           <Link
+            href="/ai-stack-builder"
+            className="text-muted-foreground transition hover:text-foreground"
+          >
+            AI Stack Builder
+          </Link>
+          <Link
             href="/privacy"
             className="text-muted-foreground transition hover:text-foreground"
           >
