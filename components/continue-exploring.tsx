@@ -38,7 +38,7 @@ export function ContinueExploring({ limit = 6 }: { limit?: number }) {
             <Compass className="h-5 w-5" /> Continue exploring
           </h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            Related picks connected to what you viewed most recently.
+            Related picks connected to the pages you opened most recently.
           </p>
         </div>
       </div>

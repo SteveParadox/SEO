@@ -38,7 +38,7 @@ export function RecommendedForYou({ limit = 6 }: { limit?: number }) {
             <Sparkles className="h-5 w-5" /> Recommended for you
           </h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            Picks shaped by what you saved and explored on this device.
+            Suggestions shaped by your recent activity and saved picks.
           </p>
         </div>
       </div>

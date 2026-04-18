@@ -182,7 +182,7 @@ function daysSinceContentUpdate(updatedAtISO: string) {
 }
 
 function buildReason(record: EngagementRecord | undefined, saved: boolean, recentRank: number | undefined) {
-  if (saved) return "Saved on this device";
+  if (saved) return "Saved";
   if (!record) return "Freshly updated";
   if (record.saveCount > 0) {
     return record.saveCount === 1 ? "Saved locally" : `${record.saveCount} save signals`;

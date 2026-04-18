@@ -94,14 +94,7 @@ export default function TrendingPage() {
         </div>
         <div>
           <h1 className="text-3xl font-semibold">Trending</h1>
-          <p className="mt-1 text-muted-foreground">
-            Ranked from local engagement on this device, with saves, views, outbound clicks, and recency decay.
-          </p>
         </div>
-      </div>
-
-      <div className="mt-4 rounded-2xl border bg-muted/20 p-4 text-sm text-muted-foreground">
-        This page is privacy-light and local-first. It does not call a backend. Trending reflects how you actually explore XavKit in this browser.
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">

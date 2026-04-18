@@ -75,16 +75,16 @@ export function NewsletterSignup() {
     setExisting(result.subscription);
 
     if (result.status === "created") {
-      setMessage("Subscription saved on this device.");
+      setMessage("You're subscribed.");
       return;
     }
 
     if (result.status === "updated") {
-      setMessage("Preferences updated on this device.");
+      setMessage("Preferences updated.");
       return;
     }
 
-    setMessage("This device is already subscribed with those settings.");
+    setMessage("You're already subscribed with those preferences.");
   };
 
   return (
@@ -96,7 +96,7 @@ export function NewsletterSignup() {
         Subscribe to weekly updates
       </h2>
       <p className="mb-6 text-sm text-background/60 sm:mb-8 sm:text-base">
-        Save your email and topics locally so the digest preferences on this device stay consistent.
+        Choose the topics you want and keep your digest preferences up to date.
       </p>
 
       <form onSubmit={onSubmit} className="space-y-4" noValidate>
@@ -145,7 +145,7 @@ export function NewsletterSignup() {
 
       {existing ? (
         <p className="mt-4 text-xs text-background/55">
-          Saved locally for {existing.email} since {formatDate(existing.subscribedAtISO)}.
+          Subscribed as {existing.email} since {formatDate(existing.subscribedAtISO)}.
         </p>
       ) : null}
 

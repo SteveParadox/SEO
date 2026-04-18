@@ -40,7 +40,7 @@ export function TrendingNow({ limit = 4 }: { limit?: number }) {
             <Flame className="h-5 w-5" /> Trending now
           </h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            Local momentum from what you save, open, and click through on this device.
+            Popular picks gaining momentum across tools, prompts, updates, and rankings.
           </p>
         </div>
         <Link href="/trending" className="text-sm text-muted-foreground hover:text-foreground">

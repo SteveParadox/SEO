@@ -187,18 +187,6 @@ export function SiteHeader() {
                 className="rounded-lg"
                 asChild
               >
-                <Link href="/trending" className="gap-2">
-                  <Flame className="h-4 w-4" />
-                  <span className="hidden xl:inline">Trending</span>
-                </Link>
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                className="rounded-lg relative"
-                asChild
-              >
                 <Link href="/saved" className="gap-2">
                   <Bookmark className="h-4 w-4" />
                   <SavedCountBadge />

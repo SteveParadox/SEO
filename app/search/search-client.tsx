@@ -139,7 +139,7 @@ function SearchResultRow({
   );
 }
 
-export function SearchClient({ initialQuery = "" }: { initialQuery?: string }) {
+export function SearchClient() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -153,13 +153,13 @@ export function SearchClient({ initialQuery = "" }: { initialQuery?: string }) {
 
   const urlState = React.useMemo(
     () => ({
-      query: getParamValue(searchParams.get("q")) || initialQuery,
+      query: getParamValue(searchParams.get("q")),
       type: (getParamValue(searchParams.get("type")) || DEFAULT_TYPE) as SearchContentType,
       freshness: (getParamValue(searchParams.get("freshness")) || DEFAULT_FRESHNESS) as SearchFreshness,
       tag: getParamValue(searchParams.get("tag")) || DEFAULT_TAG,
       sort: (getParamValue(searchParams.get("sort")) || DEFAULT_SORT) as SearchSort,
     }),
-    [initialQuery, searchParams]
+    [searchParams]
   );
 
   const [query, setQuery] = React.useState(urlState.query);
