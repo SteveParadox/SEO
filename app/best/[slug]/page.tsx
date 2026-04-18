@@ -11,6 +11,7 @@ import {
 } from "@/lib/data";
 import { JsonLd } from "@/components/json-ld";
 import { absoluteUrl } from "@/lib/seo";
+import { TrackedExternalLink } from "@/components/tracked-external-link";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -203,14 +204,19 @@ export default async function BestPage({ params }: PageProps) {
                   </Link>
 
                   {tool.officialUrl ? (
-                    <a
+                    <TrackedExternalLink
                       href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
+                      kind="tool"
+                      id={tool.id}
+                      slug={tool.slug}
+                      title={tool.name}
+                      subtitle={tool.oneLiner}
                       target="_blank"
                       rel="nofollow sponsored noopener"
                       className="underline underline-offset-4"
                     >
                       Visit site
-                    </a>
+                    </TrackedExternalLink>
                   ) : null}
 
                   {tool.tags?.slice(0, 2).map((tag) => {

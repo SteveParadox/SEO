@@ -13,6 +13,7 @@ function kindLabel(kind: RecentItem["kind"]) {
   if (kind === "prompt") return "Prompt";
   if (kind === "update") return "Update";
   if (kind === "collection") return "Collection";
+  if (kind === "best") return "Best List";
   return "Comparison";
 }
 

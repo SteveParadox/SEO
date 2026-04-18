@@ -1,76 +1,64 @@
 "use client";
 
-import React, { useMemo } from "react";
+import * as React from "react";
 import Link from "next/link";
-import { Flame, Timer, ArrowRight, Copy, Wrench, TrendingUp, BadgeCheck, Trophy } from "lucide-react";
-import { Scale } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, Flame, Timer } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { DATA } from "@/lib/data";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ENGAGEMENT_EVENT, getTrendingItems } from "@/lib/engagement";
+import { RECENT_EVENT } from "@/lib/recent";
+import { SAVED_EVENT } from "@/lib/saved";
+import { hrefFor } from "@/lib/data";
+import { getFreshnessBucket } from "@/lib/search-utils";
 
-const itemTypeMeta = {
-  tool: { label: "Tool", icon: Wrench },
-  prompt: { label: "Prompt", icon: Copy },
-  update: { label: "Update", icon: TrendingUp },
-  collection: { label: "Collection", icon: BadgeCheck },
-  comparison: { label: "Comparison", icon: Scale },
-  best: { label: "Best List", icon: Trophy },
-} as const;
-
-type Kind = keyof typeof itemTypeMeta;
-
-function daysAgo(iso: string) {
-  const ms = Date.now() - new Date(iso + "T00:00:00").getTime();
-  return Math.max(0, Math.floor(ms / (1000 * 60 * 60 * 24)));
-}
-function freshnessLabel(iso: string) {
-  const d = daysAgo(iso);
-  if (d <= 1) return "New";
-  if (d <= 7) return "This week";
-  if (d <= 21) return "Recent";
+function freshnessLabel(updatedAtISO: string) {
+  const bucket = getFreshnessBucket(updatedAtISO);
+  if (bucket === "new") return "New";
+  if (bucket === "week") return "This week";
+  if (bucket === "recent") return "Recent";
   return "Evergreen";
 }
-function hrefFor(kind: Kind, slug: string) {
-  if (kind === "tool") return `/tools/${slug}`;
-  if (kind === "prompt") return `/prompts/${slug}`;
-  if (kind === "update") return `/updates/${slug}`;
-  if (kind === "collection") return `/collections/${slug}`;
-  if (kind === "best") return `/best/${slug}`;
-  return `/comparisons/${slug}`;
-}
 
-type IndexItem = {
-  kind: Kind;
-  id: string;
-  slug: string;
-  title: string;
-  subtitle: string;
-  minutes: number;
-  updatedAtISO: string;
-};
-
-function TrendingCard({ item }: { item: IndexItem }) {
-  const meta = itemTypeMeta[item.kind];
-
+function TrendingCard({
+  item,
+}: {
+  item: ReturnType<typeof getTrendingItems>[number];
+}) {
   return (
-    <Card className="relative overflow-hidden rounded-2xl hover:bg-muted/40 transition">
-      <Link href={hrefFor(item.kind, item.slug)} aria-label={item.title} className="absolute inset-0 z-10 rounded-2xl">
+    <Card className="relative overflow-hidden rounded-2xl transition hover:bg-muted/40">
+      <Link
+        href={hrefFor(item.kind, item.slug)}
+        aria-label={item.title}
+        className="absolute inset-0 z-10 rounded-2xl"
+      >
         <span className="sr-only">{item.title}</span>
       </Link>
 
-      <CardContent className="relative z-20 pointer-events-none p-5">
-        <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="outline" className="rounded-full">{meta.label}</Badge>
-          <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
-            <Timer className="h-3.5 w-3.5" /> {item.minutes} min
+      <CardContent className="relative z-20 p-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge variant="outline" className="rounded-full">
+            {item.kind === "best" ? "Best List" : item.kind}
+          </Badge>
+          <Badge variant="secondary" className="rounded-full">
+            {freshnessLabel(item.updatedAtISO)}
+          </Badge>
+          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+            <Timer className="h-3.5 w-3.5" /> {item.kind === "update" ? 4 : item.kind === "prompt" ? 5 : item.kind === "collection" ? 7 : item.kind === "best" ? 8 : 6} min
           </span>
-          <Badge variant="secondary" className="rounded-full">{freshnessLabel(item.updatedAtISO)}</Badge>
         </div>
 
-        <div className="mt-2 text-lg font-semibold leading-snug">{item.title}</div>
-        <div className="mt-2 text-sm text-muted-foreground line-clamp-2">{item.subtitle}</div>
+        <div className="mt-3 text-lg font-semibold leading-snug">{item.title}</div>
+        <div className="mt-2 line-clamp-2 text-sm text-muted-foreground">{item.subtitle}</div>
 
-        <div className="mt-3 text-sm text-muted-foreground inline-flex items-center gap-1">
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <span>{item.reason}</span>
+          <span>Views {item.signals.views}</span>
+          <span>Saves {item.signals.saves}</span>
+          <span>Clicks {item.signals.outbounds}</span>
+        </div>
+
+        <div className="mt-4 inline-flex items-center gap-1 text-sm text-muted-foreground">
           Open <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </div>
       </CardContent>
@@ -79,39 +67,56 @@ function TrendingCard({ item }: { item: IndexItem }) {
 }
 
 export default function TrendingPage() {
-  const trending = useMemo<IndexItem[]>(() => {
-    const idx: IndexItem[] = [];
+  const [items, setItems] = React.useState(() => getTrendingItems(30));
 
-    DATA.tools.forEach((t) => idx.push({ kind: "tool", id: t.id, slug: t.slug, title: t.name, subtitle: t.oneLiner, minutes: 6, updatedAtISO: t.updatedAtISO }));
-    DATA.prompts.forEach((p) => idx.push({ kind: "prompt", id: p.id, slug: p.slug, title: p.title, subtitle: p.purpose, minutes: 5, updatedAtISO: p.updatedAtISO }));
-    DATA.updates.forEach((u) => idx.push({ kind: "update", id: u.id, slug: u.slug, title: u.headline, subtitle: u.tldr, minutes: 4, updatedAtISO: u.updatedAtISO }));
-    DATA.collections.forEach((c) => idx.push({ kind: "collection", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, minutes: 7, updatedAtISO: c.updatedAtISO }));
-    DATA.comparisons.forEach((c) => idx.push({ kind: "comparison", id: c.id, slug: c.slug, title: c.title, subtitle: c.description, minutes: 6, updatedAtISO: c.updatedAtISO }));
-    DATA.bestPages?.forEach?.((b: any) => idx.push({ kind: "best", id: b.id, slug: b.slug, title: b.title, subtitle: b.description, minutes: 8, updatedAtISO: b.updatedAtISO }));
+  React.useEffect(() => {
+    const refresh = () => setItems(getTrendingItems(30));
 
-    // For now "trending" = newest. Later replace with analytics.
-    idx.sort((a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime());
-    return idx.slice(0, 30);
+    refresh();
+    window.addEventListener(ENGAGEMENT_EVENT, refresh as EventListener);
+    window.addEventListener(RECENT_EVENT, refresh as EventListener);
+    window.addEventListener(SAVED_EVENT, refresh as EventListener);
+    window.addEventListener("storage", refresh);
+
+    return () => {
+      window.removeEventListener(ENGAGEMENT_EVENT, refresh as EventListener);
+      window.removeEventListener(RECENT_EVENT, refresh as EventListener);
+      window.removeEventListener(SAVED_EVENT, refresh as EventListener);
+      window.removeEventListener("storage", refresh);
+    };
   }, []);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex items-center gap-2">
-        <div className="h-10 w-10 rounded-2xl border flex items-center justify-center">
+        <div className="flex h-10 w-10 items-center justify-center rounded-2xl border">
           <Flame className="h-5 w-5" />
         </div>
         <div>
           <h1 className="text-3xl font-semibold">Trending</h1>
           <p className="mt-1 text-muted-foreground">
-            Popular and fresh resources. Today it’s “newest”, later it can be real engagement.
+            Ranked from local engagement on this device, with saves, views, outbound clicks, and recency decay.
           </p>
         </div>
       </div>
 
+      <div className="mt-4 rounded-2xl border bg-muted/20 p-4 text-sm text-muted-foreground">
+        This page is privacy-light and local-first. It does not call a backend. Trending reflects how you actually explore XavKit in this browser.
+      </div>
+
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {trending.map((it) => (
-          <TrendingCard key={`${it.kind}-${it.id}`} item={it} />
+        {items.map((item) => (
+          <TrendingCard key={`${item.kind}-${item.id}`} item={item} />
         ))}
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Button variant="outline" className="rounded-full" asChild>
+          <Link href="/search">Search everything</Link>
+        </Button>
+        <Button variant="outline" className="rounded-full" asChild>
+          <Link href="/saved">Open saved items</Link>
+        </Button>
       </div>
     </div>
   );

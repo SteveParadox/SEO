@@ -2,8 +2,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Sparkles, Menu, X, Search, Flame, Bookmark, Clock } from "lucide-react";
+import { useState, useEffect, type ComponentType } from "react";
+import { usePathname } from "next/navigation";
+import {
+  Sparkles,
+  Menu,
+  X,
+  Search,
+  Flame,
+  Bookmark,
+  Clock,
+  Tag,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SavedCountBadge } from "@/components/saved-count-badge";
@@ -12,20 +22,35 @@ import { RecentCountBadge } from "@/components/recent-count-badge";
 interface NavItem {
   href: string;
   label: string;
-  showOnMobile?: boolean;
+  description: string;
+}
+
+interface UtilityItem {
+  href: string;
+  label: string;
+  icon: ComponentType<{ className?: string }>;
 }
 
 const PRIMARY_NAV: NavItem[] = [
-  { href: "/tools", label: "Tools", showOnMobile: true },
-  { href: "/prompts", label: "Prompts", showOnMobile: true },
-  { href: "/updates", label: "Updates", showOnMobile: true },
-  { href: "/collections", label: "Collections", showOnMobile: false },
-  { href: "/comparisons", label: "Comparisons", showOnMobile: false },
-  { href: "/tags", label: "Tags", showOnMobile: false },
-  { href: "/best", label: "Best", showOnMobile: true },
+  { href: "/tools", label: "Tools", description: "Browse vetted AI products by use case." },
+  { href: "/prompts", label: "Prompts", description: "Find reusable prompts with real guidance." },
+  { href: "/best", label: "Best", description: "Open ranked shortlists for decision-heavy searches." },
+  { href: "/updates", label: "Updates", description: "Track meaningful model and ecosystem changes." },
+  { href: "/comparisons", label: "Comparisons", description: "See side-by-side picks and tradeoffs." },
+  { href: "/collections", label: "Collections", description: "Explore grouped workflows and resources." },
 ];
 
+const SECONDARY_NAV: UtilityItem[] = [
+  { href: "/tags", label: "Tags", icon: Tag },
+  { href: "/trending", label: "Trending", icon: Flame },
+];
+
+function isActivePath(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -76,7 +101,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex min-h-16 items-center justify-between gap-4 py-3">
             {/* Logo & Brand */}
             <Link
               href="/"
@@ -96,18 +121,51 @@ export function SiteHeader() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 flex-1 justify-center max-w-2xl">
-              {PRIMARY_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted/50 transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <div className="hidden min-w-0 flex-1 flex-col gap-2 lg:flex">
+              <nav className="flex items-center gap-1">
+                {PRIMARY_NAV.map((item) => {
+                  const active = isActivePath(pathname, item.href);
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                        active
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                      }`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <nav className="flex items-center gap-1">
+                {SECONDARY_NAV.map((item) => {
+                  const active = isActivePath(pathname, item.href);
+                  const Icon = item.icon;
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs transition-colors ${
+                        active
+                          ? "bg-muted text-foreground"
+                          : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                      }`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center gap-2">
@@ -131,7 +189,7 @@ export function SiteHeader() {
               >
                 <Link href="/trending" className="gap-2">
                   <Flame className="h-4 w-4" />
-                  <span className="hidden lg:inline">Trending</span>
+                  <span className="hidden xl:inline">Trending</span>
                 </Link>
               </Button>
 
@@ -211,35 +269,63 @@ export function SiteHeader() {
       >
         <nav className="flex flex-col h-full overflow-y-auto">
           <div className="p-4 space-y-1 flex-1">
-            {/* Primary Navigation */}
-            <div className="space-y-1">
-              {PRIMARY_NAV.filter((item) => item.showOnMobile !== false).map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeMobileMenu}
-                  className="flex items-center px-4 py-3 text-base font-medium rounded-lg hover:bg-muted transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <div className="pb-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Browse
+              </div>
             </div>
 
-            {/* Divider */}
-            <div className="py-2">
+            <div className="space-y-1">
+              {PRIMARY_NAV.map((item) => {
+                const active = isActivePath(pathname, item.href);
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={closeMobileMenu}
+                    className={`block rounded-xl px-4 py-3 transition-colors ${
+                      active ? "bg-muted" : "hover:bg-muted"
+                    }`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    <div className="text-base font-medium">{item.label}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">{item.description}</div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="py-4">
               <div className="border-t" />
             </div>
 
-            {/* Secondary Navigation */}
+            <div className="pb-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Utilities
+              </div>
+            </div>
+
             <div className="space-y-1">
-              <Link
-                href="/trending"
-                onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg hover:bg-muted transition-colors"
-              >
-                <Flame className="h-5 w-5 text-orange-500" />
-                <span>Trending</span>
-              </Link>
+              {SECONDARY_NAV.map((item) => {
+                const active = isActivePath(pathname, item.href);
+                const Icon = item.icon;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={closeMobileMenu}
+                    className={`flex items-center gap-3 rounded-lg px-4 py-3 transition-colors ${
+                      active ? "bg-muted" : "hover:bg-muted"
+                    }`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="text-base font-medium">{item.label}</span>
+                  </Link>
+                );
+              })}
 
               <Link
                 href="/saved"
@@ -264,18 +350,6 @@ export function SiteHeader() {
                 </div>
                 <RecentCountBadge />
               </Link>
-
-              {/* Additional Mobile Items */}
-              {PRIMARY_NAV.filter((item) => item.showOnMobile === false).map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeMobileMenu}
-                  className="flex items-center px-4 py-3 text-base rounded-lg hover:bg-muted transition-colors text-muted-foreground"
-                >
-                  {item.label}
-                </Link>
-              ))}
             </div>
           </div>
 

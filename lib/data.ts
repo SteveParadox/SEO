@@ -286,6 +286,14 @@ export function getUnifiedIndex(): UnifiedItem[] {
   return idx;
 }
 
+export function getUnifiedItem(kind: UnifiedKind, id: string) {
+  return getUnifiedIndex().find((item) => item.kind === kind && item.id === id) ?? null;
+}
+
+export function getUnifiedItemBySlug(kind: UnifiedKind, slug: string) {
+  return getUnifiedIndex().find((item) => item.kind === kind && item.slug === slug) ?? null;
+}
+
 
 
 export function normalizeTag(s: string) {

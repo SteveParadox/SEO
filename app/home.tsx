@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -37,10 +37,13 @@ import { Scale } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { RecentlyViewed } from "@/components/recently-viewed";
+import { ContinueExploring } from "@/components/continue-exploring";
+import { NewsletterSignup } from "@/components/newsletter-signup";
+import { RecommendedForYou } from "@/components/recommended-for-you";
+import { TrendingNow } from "@/components/trending-now";
 import { DATA } from "@/lib/data";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -496,8 +499,6 @@ function LogoStrip() {
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function ToolDropAI() {
-  const [email, setEmail] = useState("");
-  const [toast, setToast] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("tools");
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -608,21 +609,6 @@ export default function ToolDropAI() {
       a: "Builders, students, and working humans who want signal, not a 40-tab research session.",
     },
   ];
-
-  const subscribe = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!/.+@.+\..+/.test(email)) {
-        setToast("Please enter a valid email address.");
-        setTimeout(() => setToast(null), 2500);
-        return;
-      }
-      setToast("Subscribed! Check your inbox.");
-      setEmail("");
-      setTimeout(() => setToast(null), 2500);
-    },
-    [email]
-  );
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
@@ -1057,6 +1043,9 @@ export default function ToolDropAI() {
       </section>
 
       <RecentlyViewed limit={6} />
+      <TrendingNow limit={4} />
+      <ContinueExploring limit={6} />
+      <RecommendedForYou limit={6} />
 
       {/* Best Lists (Money Pages) */}
 <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
@@ -1215,50 +1204,7 @@ export default function ToolDropAI() {
             </span>
           </div>
 
-          <div className="relative p-8 sm:p-12 max-w-2xl mx-auto text-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-background/50 block mb-3">
-              Weekly digest
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3">
-              Subscribe to weekly updates
-            </h2>
-            <p className="text-background/60 text-sm sm:text-base mb-6 sm:mb-8">
-              Get the week's best AI tools, prompts, and updates delivered to your inbox.
-            </p>
-            <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-2 sm:gap-3" noValidate>
-              <Input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="rounded-2xl flex-1 h-12 bg-background/10 border-background/20 placeholder:text-background/40 text-background focus:border-background/60"
-                autoComplete="email"
-                inputMode="email"
-                aria-label="Email address"
-                required
-              />
-              <Button
-                type="submit"
-                className="rounded-2xl h-12 bg-background text-foreground hover:bg-background/90 font-medium px-6 sm:px-8"
-              >
-                Subscribe
-              </Button>
-            </form>
-            <AnimatePresence>
-              {toast && (
-                <motion.div
-                  role="status"
-                  aria-live="polite"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="mt-4 rounded-xl bg-background/10 border border-background/20 p-3 text-sm text-background/80"
-                >
-                  {toast}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <NewsletterSignup />
         </div>
       </section>
 

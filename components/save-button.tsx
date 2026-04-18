@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Bookmark, BookmarkCheck } from "lucide-react";
 
 import { isSaved, toggleSaved, SAVED_EVENT, type SavedKind } from "@/lib/saved";
+import { getUnifiedItem } from "@/lib/data";
+import { trackEngagement } from "@/lib/engagement";
 
 export function SaveButton({
   kind,
@@ -51,6 +53,19 @@ export function SaveButton({
       className={className}
       onClick={() => {
         const next = toggleSaved({ kind, id });
+        if (next) {
+          const item = getUnifiedItem(kind, id);
+          trackEngagement(
+            {
+              kind,
+              id,
+              slug: item?.slug,
+              title: item?.title,
+              subtitle: item?.subtitle,
+            },
+            "save"
+          );
+        }
         setSaved(next);
       }}
       aria-label={saved ? "Remove from saved" : "Save this item"}

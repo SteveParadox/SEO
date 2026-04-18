@@ -4704,5 +4704,466 @@ Output format:
   tags: ["prompts", "strategy", "content", "workflow"],
   updatedAtISO: "2026-04-13",
 },
+{
+  id: "p55",
+  slug: "whatsapp-reply-helper",
+  title: "WhatsApp Reply Helper",
+  purpose: "Reply quickly in a way that sounds natural, warm, and appropriate to the situation.",
+  description: "This prompt helps you turn a messy, emotional, or rushed situation into a message that sounds like a real person and fits the relationship. It is useful when you know what you want to say but not how to phrase it without sounding dry, too formal, or accidentally rude.",
+  whenToUse: "Use this when replying to friends, family, classmates, coworkers, group chats, or casual professional contacts on WhatsApp. It works especially well when tone matters more than word count and you want to avoid overthinking a small message for too long.",
+  howItWorks: "The prompt takes the incoming message, your relationship to the person, your intent, and your preferred tone. It then writes a few concise reply options, each calibrated for warmth, clarity, and the level of closeness you want to show.",
+  bestPractices: "Give the actual incoming message or a close summary, plus the context behind it. Mention whether you want to sound playful, calm, grateful, firm, or brief. If there is cultural or family context that changes tone, include that too.",
+  commonMistakes: "Being too vague about what happened. Asking for a reply without saying whether you want to accept, decline, delay, apologize, or keep things light. Using this for serious legal or crisis conversations where a custom human response is better than a quick text template.",
+  expectedOutput: "You will get two to four short reply options, a recommended version, and a brief note on why the tone works. The best outputs sound sendable without needing heavy edits.",
+  limitations: "The prompt cannot know the full history between you and the other person unless you provide it. It also should not replace direct, thoughtful communication for high-stakes relationship conflicts or emergencies.",
+  technicalRequirements: "Works well with all major models. Best results come when you include the incoming message, who the person is to you, and the vibe you want the reply to have.",
+  realWorldApplications: "People use this for replying to invitations, checking in after a delay, reacting to good news, saying no without sounding cold, or smoothing out awkward chat moments. It is especially practical for busy people who want better replies without spending ten minutes drafting one sentence.",
+  successMetrics: "The output should sound like something you would actually send, not like an AI wrote it. A successful reply feels natural, fits the relationship, and reduces the need for multiple rewrites.",
+  relatedPrompts: "Pairs well with Difficult Text Reply for more sensitive situations. Use Apology Message Writer when the reply needs accountability instead of simple tone help.",
+  prompt: `Write a WhatsApp reply that sounds natural and human.
+
+INCOMING MESSAGE: {MESSAGE}
+WHO THIS PERSON IS TO ME: {RELATIONSHIP}
+WHAT I WANT TO DO: {INTENT}
+TONE I WANT: {TONE}
+OPTIONAL CONTEXT: {CONTEXT}
+
+Rules:
+- Keep it realistic and sendable
+- Do not sound robotic, overpolished, or dramatic
+- Match the relationship and level of closeness
+- If context is missing, make 1 reasonable assumption and state it briefly
+
+Output format:
+1) Best reply
+2) Two alternate replies
+3) Why the tone works`,
+  variations: [
+    "Make it shorter and more casual.",
+    "Make it warmer without sounding clingy.",
+    "Give one playful version and one more neutral version.",
+    "Rewrite it as if I took too long to respond."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["messaging", "communication", "social"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p56",
+  slug: "difficult-text-reply",
+  title: "Difficult Text Reply",
+  purpose: "Write a calm, respectful reply for tense, awkward, or emotionally loaded text conversations.",
+  description: "This prompt is for messages where the stakes are not huge on paper but the wording can still make things worse fast. It helps you respond with clarity, boundaries, and emotional steadiness instead of reacting from frustration, guilt, or panic.",
+  whenToUse: "Use this when someone sends a passive-aggressive message, pushes for an answer you are not ready to give, blames you unfairly, or raises a sensitive issue over text. It is best for everyday relationship or work-adjacent friction, not emergencies or legal disputes.",
+  howItWorks: "The prompt asks for the message, what happened, your goal, and what tone you want to hold. It then produces a reply that acknowledges the issue, keeps the temperature low, and protects your main point from getting buried under defensiveness.",
+  bestPractices: "Be honest about the outcome you want. Say whether you want to de-escalate, set a boundary, ask for time, clarify a misunderstanding, or end the conversation politely. Include what you definitely do not want to say so the reply avoids your usual mistakes.",
+  commonMistakes: "Trying to win the argument in one text. Over-explaining when a simple boundary would do. Hiding your real goal, which leads to replies that sound polite but still feel unclear or slippery.",
+  expectedOutput: "You will receive a recommended response, a softer version, a firmer version, and short guidance on when to use each one. The language should feel measured and emotionally controlled, not cold.",
+  limitations: "This prompt cannot repair a broken relationship by itself. If the situation is abusive, legally sensitive, or dangerous, a text draft is not enough and outside support may be more appropriate.",
+  technicalRequirements: "Compatible with all major models. It performs best when you share the exact incoming text, the key context, and the outcome you want from the conversation.",
+  realWorldApplications: "Useful for roommate disagreements, family friction, friendship tension, awkward dating messages, scheduling conflict disputes, and workplace texts where tone matters but you still need to be direct.",
+  successMetrics: "A strong output makes your point without escalating the conflict unnecessarily. It should help you send a reply you feel steady about even an hour later.",
+  relatedPrompts: "Use WhatsApp Reply Helper for lower-stakes chats. Pair with Apology Message Writer if part of the reply needs sincere accountability.",
+  prompt: `Help me reply to a difficult text calmly and clearly.
+
+INCOMING TEXT: {MESSAGE}
+WHAT HAPPENED: {CONTEXT}
+MY GOAL: {GOAL}
+HOW FIRM I WANT TO BE: {FIRMNESS}
+WHAT I MUST AVOID SAYING: {AVOID}
+
+Rules:
+- Keep the temperature low
+- Be respectful but not weak or vague
+- Do not psychoanalyze the other person
+- Protect the core point of the message
+
+Output format:
+1) Best reply
+2) Softer version
+3) Firmer version
+4) Quick note on when to use each`,
+  variations: [
+    "Make it suitable for a coworker or professional contact.",
+    "Make it shorter so it works as one text bubble.",
+    "Add a version that asks to continue the conversation later.",
+    "Make it warmer while keeping the same boundary."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["communication", "boundaries", "messaging"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p57",
+  slug: "apology-message-writer",
+  title: "Apology Message Writer",
+  purpose: "Write a sincere apology that feels specific, accountable, and not performative.",
+  description: "This prompt helps you apologize in a way that names what happened, takes responsibility, and respects the other person's experience. It avoids the usual traps of vague regret, self-centered overexplaining, or overly dramatic language that shifts attention away from the actual harm.",
+  whenToUse: "Use this when you need to apologize for being late, missing something important, speaking harshly, forgetting a commitment, mishandling a conversation, or making a mistake that affected trust. It is for real-life everyday accountability, not crisis PR or legal admissions.",
+  howItWorks: "The prompt asks what you did, what impact it had, your relationship to the person, and what repair step you can honestly offer. It then builds a message that combines responsibility, empathy, and a realistic next step without sounding rehearsed.",
+  bestPractices: "Be concrete about the mistake and avoid editing the facts to protect yourself. Include what you can reasonably do next, even if it is only listening, making it right, or changing behavior going forward.",
+  commonMistakes: "Apologizing for the other person's reaction instead of your action. Explaining so much that the apology turns into a defense speech. Promising fixes you will not actually follow through on.",
+  expectedOutput: "You will get a main apology message, a shorter version, and a slightly warmer variation if the relationship calls for it. The message should feel grounded, accountable, and believable.",
+  limitations: "The prompt cannot guarantee forgiveness or fix repeated patterns of behavior. For serious harm, a message may not be enough without real change and a more direct conversation.",
+  technicalRequirements: "Works with all major models. Strongest results come when you include what happened, why it mattered, and what kind of relationship you have with the person.",
+  realWorldApplications: "Useful for friendships, family situations, dating, group project mistakes, client follow-ups, missed deadlines, and moments where a face-to-face apology is not possible right away.",
+  successMetrics: "A successful message owns the action clearly, avoids centering your guilt, and offers a believable repair step. It should sound like a real apology, not a polished speech.",
+  relatedPrompts: "Use Difficult Text Reply when the apology also needs a boundary or clarification. Pair with Follow-Up Message Writer if you need to reconnect thoughtfully after the apology.",
+  prompt: `Write a sincere apology message.
+
+WHAT I DID: {ACTION}
+WHY IT HURT OR CAUSED A PROBLEM: {IMPACT}
+WHO THIS PERSON IS TO ME: {RELATIONSHIP}
+WHAT I WANT TO TAKE RESPONSIBILITY FOR: {RESPONSIBILITY}
+WHAT REPAIR I CAN HONESTLY OFFER: {REPAIR}
+
+Rules:
+- Be specific
+- Do not overdramatize
+- Do not make excuses
+- Keep the focus on accountability and repair
+
+Output format:
+1) Best apology message
+2) Short version
+3) Warmer version
+4) One sentence explaining why it feels sincere`,
+  variations: [
+    "Make it appropriate for a work or client setting.",
+    "Make it more concise and text-friendly.",
+    "Write it for someone I care about deeply.",
+    "Add a version that asks for a conversation later."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["communication", "relationships", "accountability"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p58",
+  slug: "budget-reset-planner",
+  title: "Budget Reset Planner",
+  purpose: "Turn financial stress or spending drift into a practical monthly reset plan.",
+  description: "This prompt helps you rebuild a personal budget after an expensive month, a life change, or a stretch of sloppy spending. Instead of pushing generic finance advice, it focuses on simple categories, realistic tradeoffs, and a plan you can actually follow next week.",
+  whenToUse: "Use this at the start of a new month, after overspending, before a tighter season, or when you want to stop guessing where your money went. It is especially useful when you need a reset, not a perfect long-term financial system.",
+  howItWorks: "The prompt takes income, recurring bills, debt or savings priorities, lifestyle constraints, and spending pain points. It then creates a practical monthly plan with category targets, cuts that matter most, and a short list of actions for the next seven days.",
+  bestPractices: "Use rough numbers if exact numbers slow you down, but be honest. Include fixed obligations, irregular costs coming up soon, and one or two spending areas that usually derail you.",
+  commonMistakes: "Trying to fix everything in one month. Making categories so strict they become fake. Ignoring upcoming expenses like travel, school costs, or annual renewals.",
+  expectedOutput: "You will get a monthly budget sketch, priority order, cut-back ideas, guardrails for risky categories, and a one-week reset checklist. The output should feel realistic rather than extreme.",
+  limitations: "This is not tax, legal, debt-settlement, or investment advice. It also cannot replace a full financial plan if your situation includes major debt, business finances, or severe hardship.",
+  technicalRequirements: "Works with all major models. Best results come when you provide income, bills, your top financial goal, and the categories where money tends to leak.",
+  realWorldApplications: "People use this after holiday overspending, moving apartments, starting a new job, getting paid irregularly, or trying to save for travel, emergency funds, or a purchase without feeling deprived immediately.",
+  successMetrics: "A good output gives you a clear next-month plan you can explain in under two minutes. It should help you make better choices this week, not just produce a pretty budget table.",
+  relatedPrompts: "Pair with Grocery + Meal Planner to reduce food spending without chaos. Use Decision Helper if you are weighing two major spending choices.",
+  prompt: `Create a practical monthly budget reset plan.
+
+MONTHLY TAKE-HOME INCOME: {INCOME}
+FIXED EXPENSES: {FIXED_EXPENSES}
+CURRENT FINANCIAL PRIORITY: {PRIORITY}
+WHERE I OVERSPEND: {SPENDING_ISSUES}
+UPCOMING EXPENSES: {UPCOMING}
+CONSTRAINTS OR REALITY CHECKS: {CONSTRAINTS}
+
+Rules:
+- Be realistic, not extreme
+- Prioritize what matters most first
+- Show where to cut with the least pain
+- Include a 7-day reset checklist
+
+Output format:
+1) Budget reset summary
+2) Recommended category targets
+3) Biggest changes to make this month
+4) Watch-out areas
+5) 7-day reset checklist`,
+  variations: [
+    "Make it suitable for irregular freelance income.",
+    "Make it for a couple combining finances lightly.",
+    "Focus on debt payoff while still leaving room for essentials.",
+    "Make it ultra simple with only five budget buckets."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["money", "planning", "budgeting"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p59",
+  slug: "grocery-meal-planner",
+  title: "Grocery + Meal Planner",
+  purpose: "Plan a week of meals and groceries that fits your budget, schedule, and actual energy level.",
+  description: "This prompt helps you turn the vague question of what to eat this week into a realistic meal plan with a shopping list. It is designed for normal households, not idealized meal-prep lifestyles, so it accounts for busy days, leftovers, costs, and ingredients you will genuinely use.",
+  whenToUse: "Use this before a weekly grocery trip, after wasting too much food, when trying to cut takeout spending, or when you need a simple plan that reduces daily decision fatigue.",
+  howItWorks: "The prompt gathers your budget, number of people, dietary needs, cooking time, pantry basics, and weeknight constraints. It then creates a meal plan with repeatable ingredients, a grouped shopping list, and a preparation strategy that reduces waste.",
+  bestPractices: "Mention whether you want leftovers for lunch, how often you are realistically willing to cook, and which ingredients you already have. If someone in the household is picky, say so early so the plan does not become unusable.",
+  commonMistakes: "Planning seven ambitious dinners for a week with no time. Ignoring what is already in the kitchen. Choosing meals with completely unrelated ingredients that increase waste and spending.",
+  expectedOutput: "You will get a weekly meal outline, a grocery list grouped by section, cost-aware substitutions, and a few prep notes for easier weeknight execution.",
+  limitations: "The prompt cannot see store inventory, local prices, or exact nutrition labels. Any plan involving medical dietary needs should still be reviewed with appropriate care.",
+  technicalRequirements: "Works with all major models. Best results come when you provide a rough budget, number of people, available cooking time, and any non-negotiable dietary preferences.",
+  realWorldApplications: "Useful for students, families, roommates, meal-prep beginners, and anyone trying to reduce waste, spend less on food, or stop deciding dinner at 7 p.m. every night.",
+  successMetrics: "A strong output should lower grocery stress, reduce food waste, and give you a plan that still feels doable by Thursday. The shopping list should be reusable with only light edits.",
+  relatedPrompts: "Use Budget Reset Planner to fit the meal plan into a broader monthly money reset. Pair with Daily Schedule Fixer if meal prep needs to work around a chaotic week.",
+  prompt: `Build a weekly grocery and meal plan.
+
+NUMBER OF PEOPLE: {PEOPLE}
+TOTAL GROCERY BUDGET: {BUDGET}
+DIETARY NEEDS OR PREFERENCES: {DIET}
+HOW MUCH TIME I CAN COOK: {TIME}
+WHAT I ALREADY HAVE: {PANTRY}
+REAL-LIFE CONSTRAINTS: {CONSTRAINTS}
+
+Rules:
+- Keep it realistic for busy people
+- Reuse ingredients to reduce waste
+- Balance easy meals with a few better meals
+- Include leftovers if useful
+
+Output format:
+1) Weekly meal plan
+2) Grocery list by section
+3) Low-cost swaps
+4) Prep notes for the week`,
+  variations: [
+    "Make it high-protein and budget-aware.",
+    "Make it vegetarian without getting expensive.",
+    "Make it for one person who wants leftovers.",
+    "Give a version for almost no cooking skill."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["food", "planning", "budgeting", "home"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p60",
+  slug: "packing-list-builder",
+  title: "Packing List Builder",
+  purpose: "Create a realistic packing list based on the trip, weather, and how people actually travel.",
+  description: "This prompt helps you avoid both overpacking and forgetting the annoying essentials that matter once you arrive. It produces a trip-specific list that accounts for weather, activities, laundry access, transportation, and the difference between nice-to-have items and must-bring items.",
+  whenToUse: "Use this before weekend trips, work travel, family visits, short vacations, road trips, or international travel when you want a checklist that matches the actual trip instead of a generic template.",
+  howItWorks: "The prompt takes destination, trip length, forecast, itinerary type, baggage limits, and personal preferences. It then creates a categorized packing list, flags anything important to buy or check beforehand, and separates essentials from optional items.",
+  bestPractices: "Mention whether you will do laundry, whether you need formal clothes, and what kind of bag you are using. Include anything you always forget, like chargers, medication, documents, or adapters.",
+  commonMistakes: "Only giving the destination and number of days. Ignoring weather swings, special events, or baggage restrictions. Treating every trip like it needs a full wardrobe.",
+  expectedOutput: "You will receive a categorized checklist covering clothing, toiletries, tech, travel documents, health items, and trip-specific extras, plus a short pre-departure reminder list.",
+  limitations: "The prompt cannot verify airline rules, visa requirements, or destination-specific restrictions, so travel documentation should still be double-checked separately.",
+  technicalRequirements: "Works with all major models. Best results come when you provide destination, dates, expected weather, trip purpose, and whether you are packing carry-on only.",
+  realWorldApplications: "People use this for fast business trips, weddings out of town, beach travel, city breaks, conferences, and family travel where missing one item causes outsized hassle.",
+  successMetrics: "A strong packing list should reduce stress, fit the trip, and stop last-minute repacking. It should feel like a personal checklist, not a blog post.",
+  relatedPrompts: "Use Daily Schedule Fixer for travel days that need better structure. Pair with Event Invitation Writer if you are planning the trip around an event you are hosting.",
+  prompt: `Create a trip-specific packing list.
+
+DESTINATION: {DESTINATION}
+TRIP LENGTH: {DAYS}
+WEATHER OR SEASON: {WEATHER}
+TRIP PURPOSE: {PURPOSE}
+ACTIVITIES OR DRESS NEEDS: {ACTIVITIES}
+BAGGAGE LIMITS: {LUGGAGE}
+PERSONAL NOTES: {NOTES}
+
+Rules:
+- Prioritize realistic essentials
+- Separate must-pack from optional items
+- Adjust for weather and trip purpose
+- Add a short before-you-leave checklist
+
+Output format:
+1) Must-pack items
+2) Clothing plan
+3) Toiletries and health items
+4) Tech and documents
+5) Optional extras
+6) Before-you-leave checklist`,
+  variations: [
+    "Make it carry-on only.",
+    "Make it for a business trip with one nicer outfit.",
+    "Make it family-friendly with kids in mind.",
+    "Add a version optimized for minimal packing."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["travel", "planning", "checklists"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p61",
+  slug: "daily-schedule-fixer",
+  title: "Daily Schedule Fixer",
+  purpose: "Rescue a messy day by turning too many loose tasks into a workable plan.",
+  description: "This prompt is for the days that already feel off before lunch. It helps you sort urgent from non-urgent, rebuild momentum, and create a plan that fits your actual energy and time instead of pretending the day can still hold twelve perfect tasks.",
+  whenToUse: "Use this when you woke up late, lost time, got derailed by meetings, feel mentally scattered, or have too many competing tasks and do not know what to do first.",
+  howItWorks: "The prompt takes your remaining time, energy level, obligations, and task list, then restructures the day into a practical sequence. It protects the highest-value tasks, builds in buffers, and trims the plan before it becomes fake.",
+  bestPractices: "List the must-do items, not just everything on your mind. Mention energy realistically. Say what time the day effectively starts and any fixed events you cannot move.",
+  commonMistakes: "Calling every task urgent. Ignoring your mental energy. Keeping too many optional tasks in the rescue plan and then feeling worse when you inevitably do not finish them.",
+  expectedOutput: "You will get a salvage plan for the rest of the day, including what to do first, what to defer, suggested work blocks, and a short reset routine to regain traction.",
+  limitations: "The prompt does not add hours to the day. It is best for triage and momentum, not long-term productivity system design.",
+  technicalRequirements: "Works well with all major models. Best outputs come when you provide the time left in the day, your fixed obligations, and a clear list of candidate tasks.",
+  realWorldApplications: "Useful for students, freelancers, parents, remote workers, and anyone juggling mixed personal and work tasks after their day starts to slide.",
+  successMetrics: "A strong output should make the rest of the day feel clearer within minutes. It succeeds when the plan feels honest enough that you can actually follow it.",
+  relatedPrompts: "Pair with Study Session Starter when one of the rescued blocks needs focused study. Use Budget Reset Planner or Grocery + Meal Planner if the day reset also needs home-life planning.",
+  prompt: `Fix my day and make it workable again.
+
+CURRENT TIME: {TIME}
+ENERGY LEVEL: {ENERGY}
+FIXED OBLIGATIONS LEFT TODAY: {OBLIGATIONS}
+TASKS ON MY MIND: {TASKS}
+WHAT ABSOLUTELY MUST HAPPEN: {NON_NEGOTIABLES}
+WHAT IS MAKING THE DAY MESSY: {CONTEXT}
+
+Rules:
+- Be realistic
+- Cut or defer low-value tasks
+- Protect the highest-impact tasks first
+- Include short buffers and a reset step
+
+Output format:
+1) Quick diagnosis
+2) Best plan for the rest of today
+3) What to defer
+4) Reset routine for the next 10 minutes`,
+  variations: [
+    "Make it suitable for ADHD-style overwhelm.",
+    "Make it more structured with time blocks.",
+    "Make it gentler for a low-energy day.",
+    "Add a version for a workday with many interruptions."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["productivity", "planning", "focus"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p62",
+  slug: "event-invitation-writer",
+  title: "Event Invitation Writer",
+  purpose: "Write clear, warm invitations that tell people what they need to know without sounding stiff.",
+  description: "This prompt helps you write invitations that are easy to understand and pleasant to receive. It balances warmth with logistics so people know the tone, timing, and expectations without having to ask three follow-up questions.",
+  whenToUse: "Use this for birthdays, dinners, study sessions, casual hangouts, work socials, virtual events, small celebrations, and community gatherings where you want a clean invite message fast.",
+  howItWorks: "The prompt takes the event type, audience, tone, date details, and RSVP needs. It then creates a primary invitation draft plus alternate versions that can fit text, WhatsApp, email, or a social caption.",
+  bestPractices: "Include the exact event purpose, who is invited, what the vibe is, and whether guests need to bring anything. If you care about turnout, specify what kind of RSVP you actually need.",
+  commonMistakes: "Leaving out key details. Making the message too vague and then patching it with extra texts later. Writing an invitation that sounds too formal for a casual event or too casual for a structured one.",
+  expectedOutput: "You will get a polished invitation message, a shorter version, and an RSVP-friendly version that makes it easy for people to respond clearly.",
+  limitations: "The prompt cannot manage guest lists or calendar logistics for you. It also cannot predict social dynamics, so sensitive guest decisions still need personal judgment.",
+  technicalRequirements: "Works with all major models. Best results come when you provide event details, audience type, desired tone, and how you want people to respond.",
+  realWorldApplications: "Useful for personal gatherings, alumni meetups, office lunches, online workshops, game nights, study groups, baby showers, and other events where clarity improves turnout.",
+  successMetrics: "A successful invitation reduces confusion, sounds like you, and gets clean RSVPs without a long back-and-forth.",
+  relatedPrompts: "Use WhatsApp Reply Helper for quick invite follow-ups. Pair with Follow-Up Message Writer when you need a reminder or check-in after sending the first invite.",
+  prompt: `Write an invitation message for an event.
+
+EVENT: {EVENT}
+WHO IS INVITED: {AUDIENCE}
+DATE / TIME / LOCATION: {DETAILS}
+TONE: {TONE}
+ANYTHING GUESTS SHOULD KNOW: {NOTES}
+HOW I WANT PEOPLE TO RSVP: {RSVP}
+
+Rules:
+- Be clear and warm
+- Include essential logistics without clutter
+- Match the tone to the event
+- Make it easy to respond
+
+Output format:
+1) Best invitation message
+2) Shorter version
+3) RSVP-focused version
+4) Subject line or opener if useful`,
+  variations: [
+    "Make it suitable for WhatsApp.",
+    "Make it appropriate for a work or team event.",
+    "Make it more playful and casual.",
+    "Add a reminder follow-up message."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["events", "communication", "writing"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p63",
+  slug: "follow-up-message-writer",
+  title: "Follow-Up Message Writer",
+  purpose: "Write thoughtful follow-ups after meetings, interviews, favors, introductions, or unanswered messages.",
+  description: "This prompt helps you follow up without sounding needy, vague, or overly formal. It is built for moments where timing and tone matter and you want to move the conversation forward while still sounding respectful and human.",
+  whenToUse: "Use this after a job interview, networking chat, helpful favor, sales conversation, project meeting, introduction, or a message that has gone unanswered longer than expected.",
+  howItWorks: "The prompt asks what happened, what you are following up on, how long it has been, and what action you want next. It then drafts a concise message that reminds the person of context and makes the next step easy.",
+  bestPractices: "Be explicit about whether this is a thank-you, reminder, nudge, or second attempt. Mention the last meaningful interaction so the follow-up does not feel like it came out of nowhere.",
+  commonMistakes: "Following up too aggressively. Writing a message with no clear ask. Sounding apologetic for simply sending a reasonable reminder.",
+  expectedOutput: "You will get a recommended follow-up, a shorter version, and a more assertive version when needed, along with timing guidance if the situation calls for patience.",
+  limitations: "The prompt cannot make someone respond. If the relationship or context is sensitive, timing and channel still matter as much as wording.",
+  technicalRequirements: "Works with all major models. Best results come when you share what the original interaction was, when it happened, and what response or action you want now.",
+  realWorldApplications: "Useful for hiring, sales, freelance work, project coordination, referrals, mentorship outreach, event planning, and everyday situations where you need a gentle but clear next touchpoint.",
+  successMetrics: "A strong output feels easy to send, includes enough context, and gives the other person a clean next step. It should sound confident without pressure.",
+  relatedPrompts: "Use Event Invitation Writer when the follow-up is really a reminder for an event. Pair with Rewrite for Clarity if you already have a draft that feels awkward.",
+  prompt: `Write a follow-up message.
+
+WHAT I AM FOLLOWING UP ON: {TOPIC}
+WHO THIS PERSON IS: {RELATIONSHIP}
+WHAT HAPPENED BEFORE: {CONTEXT}
+HOW LONG IT HAS BEEN: {TIMING}
+WHAT I WANT NOW: {ASK}
+TONE: {TONE}
+
+Rules:
+- Be concise and respectful
+- Include enough context to be useful
+- Make the next step obvious
+- Do not sound needy or passive-aggressive
+
+Output format:
+1) Best follow-up message
+2) Shorter version
+3) Firmer version if no reply continues
+4) Quick note on timing`,
+  variations: [
+    "Make it right for a job interview follow-up.",
+    "Make it suitable for someone who has ignored two earlier messages.",
+    "Make it friendlier for a warm contact.",
+    "Add a thank-you-first version."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["communication", "networking", "professional"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p64",
+  slug: "decision-helper",
+  title: "Decision Helper",
+  purpose: "Compare two life options in a way that surfaces tradeoffs instead of hiding them behind vague pros and cons.",
+  description: "This prompt helps you think through a decision with structure, realism, and clarity. It is especially useful when both options have real upside and the problem is not information alone, but how to weigh uncertainty, timing, stress, money, or personal values.",
+  whenToUse: "Use this when choosing between jobs, apartments, purchases, plans, study paths, side projects, travel options, or any two realistic paths where the right answer depends on your actual priorities.",
+  howItWorks: "The prompt takes the two options, your priorities, constraints, fears, and time horizon. It then compares the options across a small set of practical decision criteria, highlights hidden tradeoffs, and gives a recommendation with clear reasoning.",
+  bestPractices: "Be honest about what matters most to you, even if it sounds unglamorous. If one option is emotionally attractive but practically risky, say that directly so the output reflects the real tension.",
+  commonMistakes: "Pretending both options matter equally when they do not. Listing too many criteria. Using the prompt to avoid making a choice when you already know your real preference.",
+  expectedOutput: "You will get a side-by-side comparison, tradeoff analysis, likely regrets, a recommendation, and a short next step for testing or deciding with more confidence.",
+  limitations: "The prompt cannot predict the future or remove uncertainty. It can improve clarity, but judgment, values, and risk tolerance still belong to you.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the two options, your priorities, constraints, and what makes the decision feel hard.",
+  realWorldApplications: "People use this for job offers, moving decisions, school choices, product purchases, schedule tradeoffs, and other everyday forks where a structured outside view helps.",
+  successMetrics: "A strong output should make the real tradeoffs easier to see and reduce mental looping. Even if the answer stays hard, the next step should feel clearer.",
+  relatedPrompts: "Use Budget Reset Planner when the decision has a strong money angle. Pair with Daily Schedule Fixer if one option affects day-to-day workload and energy.",
+  prompt: `Help me compare two options and decide more clearly.
+
+OPTION A: {OPTION_A}
+OPTION B: {OPTION_B}
+WHAT MATTERS MOST TO ME: {PRIORITIES}
+CONSTRAINTS: {CONSTRAINTS}
+WHAT I AM AFRAID OF: {FEARS}
+DECISION DEADLINE OR TIMEFRAME: {TIMELINE}
+
+Rules:
+- Focus on practical tradeoffs
+- Avoid fake certainty
+- Surface likely regrets and hidden costs
+- End with a recommendation and one next step
+
+Output format:
+1) Quick framing of the decision
+2) Side-by-side comparison
+3) Hidden tradeoffs
+4) Recommendation
+5) Next step`,
+  variations: [
+    "Make it more values-driven and less spreadsheet-like.",
+    "Add a weighted scoring version.",
+    "Make it suitable for a career decision.",
+    "Add a short version for a fast personal decision."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["decisions", "planning", "clarity"],
+  updatedAtISO: "2026-04-18",
+},
 ];
 

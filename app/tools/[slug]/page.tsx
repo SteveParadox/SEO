@@ -15,6 +15,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
+import { TrackedExternalLink } from "@/components/tracked-external-link";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -262,14 +263,19 @@ export default async function ToolPage({ params }: PageProps) {
               setup details.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
+              <TrackedExternalLink
                 href={tool.isAffiliate && tool.affiliateUrl ? tool.affiliateUrl : tool.officialUrl}
+                kind="tool"
+                id={tool.id}
+                slug={tool.slug}
+                title={tool.name}
+                subtitle={tool.oneLiner}
                 target="_blank"
                 rel="nofollow sponsored noopener"
                 className="inline-flex items-center justify-center rounded-xl bg-foreground px-5 py-2 text-sm font-medium text-background transition hover:opacity-90"
               >
                 Visit official site
-              </a>
+              </TrackedExternalLink>
               <Link
                 href="/tools"
                 className="inline-flex items-center justify-center rounded-xl border px-5 py-2 text-sm font-medium transition hover:bg-muted/40"
