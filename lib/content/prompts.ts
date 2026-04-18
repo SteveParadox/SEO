@@ -5165,5 +5165,466 @@ Output format:
   tags: ["decisions", "planning", "clarity"],
   updatedAtISO: "2026-04-18",
 },
+{
+  id: "p65",
+  slug: "instagram-caption-writer",
+  title: "Instagram Caption Writer",
+  purpose: "Write Instagram captions that sound natural, fit the post, and give people a reason to care.",
+  description: "This prompt helps turn a photo, reel, product shot, personal update, or behind-the-scenes moment into a caption that feels human instead of generic. It is built for the kind of everyday posting where the right tone matters more than sounding clever for its own sake.",
+  whenToUse: "Use this when you have a post ready but do not know what to write under it, when your draft sounds flat, or when you want a caption that matches a specific mood such as casual, polished, funny, thoughtful, or lightly promotional.",
+  howItWorks: "The prompt takes the post context, audience, tone, and the one takeaway you want people to feel or do. It then generates a clean caption, shorter alternatives, and optional CTA lines that fit Instagram rather than sounding like email copy.",
+  bestPractices: "Mention what is actually in the post, who it is for, and whether the goal is engagement, storytelling, promotion, or simple sharing. If you have a brand voice or phrases you avoid, include that so the caption sounds more like you.",
+  commonMistakes: "Trying to say too much in one caption. Writing generic filler about growth or gratitude that could fit any post. Adding a CTA that feels too salesy for the kind of content you are posting.",
+  expectedOutput: "You will get one strong primary caption, two alternate versions, and optional closing lines such as a question, CTA, or softer sign-off depending on the post type.",
+  limitations: "The prompt cannot know your visual style or audience history unless you provide context. It also cannot guarantee performance because caption quality is only one part of how social posts land.",
+  technicalRequirements: "Works with all major models. Best results come when you provide what the post shows, the audience, the tone, and whether you want comments, clicks, or simple connection.",
+  realWorldApplications: "Creators use this for everyday posts, brands use it for product and campaign content, freelancers use it for personal-brand updates, and normal users use it when they want better captions without overthinking every line.",
+  successMetrics: "A strong output sounds like something you would actually post, fits the visual, and needs only light edits. It should feel specific enough that it does not read like a template.",
+  relatedPrompts: "Use Reel Hook Generator for short-form video openings, Social Bio Rewriter for profile refreshes, and Hashtag + Keyword Picker for a cleaner discovery layer.",
+  prompt: `Write an Instagram caption for this post.
+
+POST TYPE: {POST_TYPE}
+WHAT THE POST SHOWS: {POST_CONTEXT}
+WHO IT IS FOR: {AUDIENCE}
+TONE: {TONE}
+MAIN POINT OR FEELING: {ANGLE}
+OPTIONAL CTA: {CTA}
+
+Rules:
+- Sound natural, not generic
+- Match Instagram tone, not blog tone
+- Keep it specific to the post
+- Avoid fake inspiration language unless requested
+
+Output format:
+1) Best caption
+2) Shorter version
+3) More casual version
+4) Optional CTA or question line`,
+  variations: [
+    "Make it suitable for a personal account.",
+    "Make it suitable for a small business post.",
+    "Write it for a reel instead of a static post.",
+    "Keep it under 120 words."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "instagram", "captions", "creator"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p66",
+  slug: "linkedin-post-writer",
+  title: "LinkedIn Post Writer",
+  purpose: "Turn an idea, lesson, win, or opinion into a LinkedIn post that sounds useful instead of performative.",
+  description: "This prompt helps you write LinkedIn posts that feel credible, readable, and specific to your experience. It is designed for everyday professional posting, whether you are sharing a lesson learned, a career update, a project takeaway, or a thoughtful industry point.",
+  whenToUse: "Use this when you want to post on LinkedIn but your draft sounds too stiff, too braggy, or too vague. It is especially helpful when you know the point you want to make but not the structure or tone.",
+  howItWorks: "The prompt takes your topic, audience, professional context, and the action or reflection you want readers to leave with. It then produces a post with a stronger opening, a useful middle, and a closing that fits LinkedIn without sounding forced.",
+  bestPractices: "Use a real experience, concrete lesson, or specific opinion. Mention the reader you want to reach such as hiring managers, peers, founders, marketers, or people in your field. If you want comments, make the closing prompt relevant instead of generic.",
+  commonMistakes: "Writing in vague self-help language. Turning every post into self-promotion. Hiding the useful part of the post under too much setup or storytelling.",
+  expectedOutput: "You will get a polished LinkedIn post, a shorter version, and a stronger opening-line option, plus an optional closing question if engagement matters.",
+  limitations: "The prompt cannot supply credibility you do not have, and it should not be used to fake experience or expertise. The final result still works best when grounded in something real.",
+  technicalRequirements: "Works well with all major models. Best results come when you provide the topic, your real perspective, the audience, and whether the post should educate, reflect, or announce something.",
+  realWorldApplications: "Professionals use this for career updates, project lessons, launch posts, hiring posts, thought leadership, and reflections that help them stay visible without sounding overly polished.",
+  successMetrics: "A strong post reads like a real person in your field wrote it, gets to the point quickly, and creates a believable reason for someone to keep reading or respond.",
+  relatedPrompts: "Use Follow-Up Message Writer for connection follow-ups after people engage. Pair with Product Launch Social Post Pack when the LinkedIn post is part of a broader announcement.",
+  prompt: `Write a LinkedIn post.
+
+TOPIC: {TOPIC}
+WHO I AM OR MY CONTEXT: {CONTEXT}
+WHO I WANT TO REACH: {AUDIENCE}
+WHAT I WANT THE POST TO DO: {GOAL}
+TONE: {TONE}
+OPTIONAL CTA OR QUESTION: {CTA}
+
+Rules:
+- Make it useful and credible
+- Avoid empty motivation language
+- Do not sound fake-humble or overly braggy
+- Keep the structure easy to scan
+
+Output format:
+1) Best LinkedIn post
+2) Shorter version
+3) Alternative opening lines
+4) Optional closing question`,
+  variations: [
+    "Make it more founder-style and direct.",
+    "Make it stronger for job-seeking visibility.",
+    "Make it more educational and less personal.",
+    "Keep it concise and easy to skim on mobile."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "linkedin", "professional", "writing"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p67",
+  slug: "x-thread-writer",
+  title: "X Thread Writer",
+  purpose: "Turn one useful idea into a thread that is structured, readable, and worth following to the end.",
+  description: "This prompt helps you expand a topic into a concise thread without repeating yourself or padding the middle. It is useful for educational, opinion, breakdown, and story-led posts where the first line needs to pull people in and the later posts need to stay tight.",
+  whenToUse: "Use this when you want to explain a framework, share lessons, summarize an experience, break down a workflow, or post a multi-part take on X without rambling.",
+  howItWorks: "The prompt takes the topic, audience, point of view, and intended length, then turns them into a thread with a strong opener, clean progression, and a close that feels earned rather than tacked on.",
+  bestPractices: "Give it one central idea, not five. Say whether the thread is educational, opinionated, story-based, or tactical. If you want replies or reposts, mention what response would actually be useful.",
+  commonMistakes: "Writing tweets that all say the same thing. Using a hook that overpromises compared to the actual thread. Adding filler posts just to make the thread feel longer.",
+  expectedOutput: "You will get a numbered thread with a strong opening post, a clear arc across the middle posts, and a closing line that fits the thread goal.",
+  limitations: "The prompt cannot guarantee reach, and it cannot fully mimic your posting voice without examples. It works best when the topic is focused enough to fit a thread cleanly.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the topic, who the thread is for, the tone, and whether you want educational, personal, or opinion-led structure.",
+  realWorldApplications: "Useful for creators, operators, founders, marketers, and professionals who use X to share ideas, lessons, process breakdowns, or mini thought-leadership threads.",
+  successMetrics: "A strong result feels easy to post as-is, flows tweet to tweet, and avoids filler. Each post should add something instead of simply rephrasing the last one.",
+  relatedPrompts: "Use LinkedIn Post Writer if the same topic needs a more professional single-post version. Pair with Social Content Repurposer to turn longer content into thread format.",
+  prompt: `Write an X thread.
+
+TOPIC: {TOPIC}
+WHO IT IS FOR: {AUDIENCE}
+POINT OF VIEW OR LESSON: {ANGLE}
+DESIRED LENGTH: {LENGTH}
+TONE: {TONE}
+OPTIONAL CTA: {CTA}
+
+Rules:
+- Keep each post tight and readable
+- Make the opening line worth clicking
+- Ensure every post adds something new
+- Do not use empty hype
+
+Output format:
+1) Hook tweet
+2) Full numbered thread
+3) Best closing post
+4) Optional alternate hook`,
+  variations: [
+    "Make it more educational and tactical.",
+    "Make it more personal and story-led.",
+    "Keep it to 5 posts max.",
+    "Write it as a concise founder thread."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "x", "threads", "creator"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p68",
+  slug: "reel-hook-generator",
+  title: "Reel Hook Generator",
+  purpose: "Generate stronger opening lines for Reels, TikToks, and Shorts without sounding like generic internet bait.",
+  description: "This prompt focuses on the first seconds of short-form video, where clarity and curiosity matter more than clever wording alone. It is built for creators who need hooks that match the content, not random attention-grabbing lines that feel disconnected from the video.",
+  whenToUse: "Use this when planning short-form videos, rewriting weak openings, testing multiple hook angles, or trying to make your idea land faster on Reels, TikTok, or Shorts.",
+  howItWorks: "The prompt takes the topic, audience, format, and specific payoff of the video, then generates a set of opening lines and first-scene angles designed for short-form attention patterns.",
+  bestPractices: "Be clear about what the viewer gets by staying. Mention whether the video is educational, opinion-based, storytelling, product-driven, or behind-the-scenes. Ask for hooks that match your voice, not just your niche.",
+  commonMistakes: "Using vague hooks that say nothing. Writing hooks that promise more than the video delivers. Overusing dramatic phrasing that feels interchangeable across every niche.",
+  expectedOutput: "You will get multiple hook options, grouped by style, plus notes on which hook fits education, storytelling, relatability, or direct CTA best.",
+  limitations: "A good hook cannot rescue weak video structure or bad pacing. The prompt also cannot know your visual style unless you include what the opening shot or scene looks like.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the topic, the payoff, the platform, and whether you want the hook spoken on camera or used as text on screen.",
+  realWorldApplications: "Creators use this for tutorials, commentary, lifestyle reels, product demos, mini explainers, and short educational clips where the first line determines whether people keep watching.",
+  successMetrics: "A strong output gives you several openings that feel usable immediately and clearly connect to the content that follows. The hook should make the video easier to film, not harder.",
+  relatedPrompts: "Use Instagram Caption Writer for the supporting caption and Carousel Post Outline if the same idea also deserves a swipe post.",
+  prompt: `Generate short-form video hooks.
+
+TOPIC: {TOPIC}
+PLATFORM: {PLATFORM}
+WHO IT IS FOR: {AUDIENCE}
+WHAT THE VIDEO DELIVERS: {PAYOFF}
+TONE: {TONE}
+OPENING SHOT OR CONTEXT: {VISUAL_CONTEXT}
+
+Rules:
+- Hooks must match the actual video
+- Avoid generic bait language
+- Make the first line easy to speak or put on screen
+- Group hooks by angle if useful
+
+Output format:
+1) Best hook options
+2) Hook angles by style
+3) Strongest first 2 lines if spoken
+4) Best text-on-screen versions`,
+  variations: [
+    "Make the hooks work for Instagram Reels.",
+    "Make the hooks work for TikTok storytelling.",
+    "Make them sound more educational and less hypey.",
+    "Add a version optimized for talking-head videos."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "reels", "short-form-video", "hooks"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p69",
+  slug: "carousel-post-outline",
+  title: "Carousel Post Outline",
+  purpose: "Turn one idea into a clear carousel structure that feels worth swiping through.",
+  description: "This prompt helps you organize a social-media carousel into slides that build interest and deliver value without overcrowding each frame. It works well for educational content, list posts, process breakdowns, mini case studies, and before-and-after style posts.",
+  whenToUse: "Use this when you want to post a carousel on Instagram or LinkedIn but do not know how to split the idea into strong slides. It is especially helpful when your topic feels too big or messy for a single caption.",
+  howItWorks: "The prompt takes your topic, audience, core message, and desired number of slides, then creates a slide-by-slide outline with hook, sequence, and close. It keeps the content paced for swiping instead of reading like a blog post chopped into boxes.",
+  bestPractices: "Choose one useful takeaway and build around it. Mention whether the carousel should teach, persuade, explain, or summarize. If you want saves or shares, say that so the structure leans into practical value.",
+  commonMistakes: "Trying to fit too much text onto every slide. Using a weak cover that does not earn the swipe. Ending without a clear summary, next step, or reason to save the post.",
+  expectedOutput: "You will get a clear slide map with a cover idea, key point for each slide, a closing CTA or summary slide, and optional text suggestions for the highest-leverage slides.",
+  limitations: "The prompt cannot design the visual layout for you. It works best when the topic is focused enough that the slide sequence feels purposeful rather than bloated.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the topic, audience, desired tone, and approximate slide count.",
+  realWorldApplications: "Creators and brands use this for educational posts, process explainers, list-based content, mini tutorials, service breakdowns, customer lessons, and repurposed long-form insights.",
+  successMetrics: "A strong output makes the carousel easier to design, not more complex. Each slide should have a job, and the overall sequence should feel worth swiping to the end.",
+  relatedPrompts: "Use Instagram Caption Writer for the caption, LinkedIn Post Writer for a single-post version, and Social Content Repurposer if you are adapting from longer content.",
+  prompt: `Create a social-media carousel outline.
+
+TOPIC: {TOPIC}
+WHO IT IS FOR: {AUDIENCE}
+MAIN TAKEAWAY: {ANGLE}
+PLATFORM: {PLATFORM}
+TARGET SLIDE COUNT: {SLIDE_COUNT}
+TONE: {TONE}
+
+Rules:
+- Make each slide earn the next swipe
+- Keep one core idea per slide
+- Start strong and end clearly
+- Do not turn it into a blog post broken into slides
+
+Output format:
+1) Cover slide
+2) Slide-by-slide outline
+3) Best closing slide
+4) Optional CTA or save/share line`,
+  variations: [
+    "Make it better for Instagram carousels.",
+    "Make it better for LinkedIn swipe posts.",
+    "Use a mini case-study structure.",
+    "Make it concise enough for 6 slides."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "carousel", "instagram", "linkedin"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p70",
+  slug: "social-bio-rewriter",
+  title: "Social Bio Rewriter",
+  purpose: "Rewrite a social profile bio so it is clearer, more memorable, and easier to understand fast.",
+  description: "This prompt helps improve bios for Instagram, TikTok, X, LinkedIn, and creator or small-business profiles. It focuses on clarity, positioning, and tone so people quickly understand who you are, what you do, and why they should care.",
+  whenToUse: "Use this when your current bio feels vague, crowded, outdated, or forgettable. It is especially helpful when you are changing direction, refining a personal brand, or trying to sound more clear without becoming stiff.",
+  howItWorks: "The prompt takes your role, audience, personality, focus areas, and any hard limits such as character count or platform style. It then creates multiple bio options with different positioning angles.",
+  bestPractices: "Say whether the bio is for a creator account, personal brand, founder profile, freelancer page, or niche business. Mention any non-negotiables such as a link CTA, credentials, or tone constraints.",
+  commonMistakes: "Trying to explain your whole life in one bio. Using jargon nobody outside your niche understands. Writing a bio that sounds impressive but says nothing concrete.",
+  expectedOutput: "You will get several bio options, a tighter version for strict character limits, and optional CTA lines or profile taglines if relevant.",
+  limitations: "The prompt cannot fully position you without real context. It also cannot guarantee conversions from profile visits because the bio is only one part of the overall profile.",
+  technicalRequirements: "Works with all major models. Best results come when you provide your role, audience, tone, platform, and anything you must include or avoid.",
+  realWorldApplications: "Useful for creators, freelancers, coaches, small businesses, job seekers, founders, and anyone refreshing an account that acts like a landing page for their identity or work.",
+  successMetrics: "A strong output makes it obvious who the profile is for and what kind of content or value to expect. It should feel sharper than the original without sounding generic.",
+  relatedPrompts: "Use Instagram Caption Writer for post-level content and LinkedIn Post Writer if you want your profile voice to carry into your posts.",
+  prompt: `Rewrite my social bio.
+
+PLATFORM: {PLATFORM}
+WHO I AM: {ROLE}
+WHO I WANT TO ATTRACT: {AUDIENCE}
+WHAT I TALK ABOUT OR OFFER: {FOCUS}
+TONE: {TONE}
+MUST INCLUDE OR AVOID: {CONSTRAINTS}
+
+Rules:
+- Make it clear fast
+- Avoid jargon and vague buzzwords
+- Fit the platform tone
+- Give distinct positioning angles
+
+Output format:
+1) Best bio option
+2) 3 alternate bios
+3) Short bio version
+4) Optional CTA line`,
+  variations: [
+    "Make it better for Instagram.",
+    "Make it better for LinkedIn.",
+    "Make it more creator-focused.",
+    "Make it cleaner and more minimal."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "bio", "profile", "branding"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p71",
+  slug: "comment-reply-writer",
+  title: "Comment Reply Writer",
+  purpose: "Write better replies to comments so engagement feels real, warm, and on-brand.",
+  description: "This prompt helps you respond to social comments without sounding repetitive, overly polished, or awkwardly promotional. It is useful when you want to stay active in the comments without defaulting to the same flat one-liners every time.",
+  whenToUse: "Use this when replying to compliments, questions, objections, thank-yous, jokes, curious comments, mild criticism, or audience reactions on Instagram, LinkedIn, TikTok, X, or YouTube.",
+  howItWorks: "The prompt takes the original post context, the comment, your relationship to the audience, and the tone you want to hold. It then drafts a reply that feels appropriate to the comment and the platform.",
+  bestPractices: "Include the actual comment and what the original post was about. Say whether you want the reply to deepen engagement, answer a question, stay light, or move the conversation toward a link or next step.",
+  commonMistakes: "Replying with the same short phrases over and over. Sounding too defensive when a comment is only mildly critical. Turning every reply into an awkward sales message.",
+  expectedOutput: "You will get a best reply, alternate versions for different tones, and a note on which version best fits the situation.",
+  limitations: "The prompt cannot read community context perfectly without enough detail. For hostile or high-risk comments, moderation decisions still matter more than wording alone.",
+  technicalRequirements: "Works with all major models. Best results come when you include the post topic, the exact comment, the platform, and the reply goal.",
+  realWorldApplications: "Useful for creators, brands, community managers, freelancers, and small teams trying to keep comment sections active without sounding robotic.",
+  successMetrics: "A strong reply should sound like a real human response, match the platform, and help the interaction move in the direction you want.",
+  relatedPrompts: "Use Instagram Caption Writer for the main post copy and Product Launch Social Post Pack if the comments are part of a launch thread or announcement series.",
+  prompt: `Write a reply to this social comment.
+
+PLATFORM: {PLATFORM}
+ORIGINAL POST CONTEXT: {POST_CONTEXT}
+COMMENT: {COMMENT}
+WHO I AM TO THIS AUDIENCE: {RELATIONSHIP}
+GOAL OF THE REPLY: {GOAL}
+TONE: {TONE}
+
+Rules:
+- Sound human and specific
+- Match the tone of the comment
+- Do not overdo the sales angle
+- Keep the reply platform-appropriate
+
+Output format:
+1) Best reply
+2) Friendlier version
+3) More concise version
+4) Best use case for each`,
+  variations: [
+    "Make it better for Instagram comments.",
+    "Make it suitable for LinkedIn comments.",
+    "Handle a mildly negative comment calmly.",
+    "Add a version that invites a follow-up question."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "comments", "community", "engagement"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p72",
+  slug: "social-content-repurposer",
+  title: "Social Content Repurposer",
+  purpose: "Turn one longer piece of content into multiple social-ready formats without making them all sound identical.",
+  description: "This prompt helps you repurpose a source asset such as a blog post, podcast, newsletter, video, note dump, or webinar into platform-specific social content. It is designed to preserve the strongest ideas while adjusting tone and format for different channels.",
+  whenToUse: "Use this when you already have good source material and want faster social content without copy-pasting the same wording everywhere. It is especially useful for creators, small teams, and solo operators trying to post consistently.",
+  howItWorks: "The prompt takes the source content, audience, platforms, and output types you want, then extracts the most portable ideas and turns them into format-specific drafts such as captions, hooks, carousels, threads, and post summaries.",
+  bestPractices: "Use a clear source asset with one or two strong angles. Mention where you want the content to go and what tone each platform should have. Ask for fewer, better outputs instead of too many weak ones.",
+  commonMistakes: "Trying to repurpose weak source material. Posting identical copy across every platform. Asking for too many outputs from one asset and ending up with generic filler.",
+  expectedOutput: "You will get a repurposing pack with platform-specific draft ideas, angle suggestions, and content pieces that feel related but not copy-pasted.",
+  limitations: "The prompt cannot fully replace editorial judgment about what is worth repurposing. It also cannot verify whether a source asset is factually current or strategically strong.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the source content, audience, target platforms, and the formats you want generated.",
+  realWorldApplications: "Useful for turning one video into reels and captions, one blog into LinkedIn and X posts, one webinar into a carousel sequence, or one newsletter into multiple social snippets.",
+  successMetrics: "A strong output saves time while still making each platform version feel native. It should reduce blank-page friction without producing obvious duplicates.",
+  relatedPrompts: "Use LinkedIn Post Writer, X Thread Writer, Instagram Caption Writer, and Carousel Post Outline to deepen any one output that performs well.",
+  prompt: `Repurpose this source content into social-ready outputs.
+
+SOURCE CONTENT: {SOURCE}
+WHO IT IS FOR: {AUDIENCE}
+TARGET PLATFORMS: {PLATFORMS}
+OUTPUT TYPES NEEDED: {OUTPUTS}
+TONE: {TONE}
+MAIN ANGLE TO EMPHASIZE: {ANGLE}
+
+Rules:
+- Make each format feel native to its platform
+- Reuse ideas, not identical wording
+- Pull out the strongest insights first
+- Keep the outputs practical and postable
+
+Output format:
+1) Best angles to reuse
+2) Platform-by-platform content drafts
+3) Hook or opener options
+4) Best next format to expand`,
+  variations: [
+    "Repurpose a blog post into LinkedIn, X, and Instagram.",
+    "Repurpose a podcast into clips, captions, and a thread.",
+    "Keep the tone more expert and less hypey.",
+    "Make the outputs leaner and easier to post quickly."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "repurposing", "content", "creator"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p73",
+  slug: "product-launch-social-post-pack",
+  title: "Product Launch Social Post Pack",
+  purpose: "Create a practical set of social posts for launches, updates, features, and announcements.",
+  description: "This prompt helps you turn a launch or announcement into a cleaner cross-platform post pack instead of improvising every post from scratch. It works well for product updates, new offers, events, creator launches, and feature rollouts where clarity matters more than hype.",
+  whenToUse: "Use this when launching a new product, feature, service, workshop, lead magnet, offer, or campaign and you need social posts that feel coordinated without sounding repetitive.",
+  howItWorks: "The prompt takes what is launching, who it is for, what matters most, and the platforms you need. It then creates a pack of differentiated post drafts with stronger angles, CTAs, and platform fit.",
+  bestPractices: "Be clear about what is new, who benefits, and why it matters now. Mention whether the tone should be warm, founder-led, brand-led, educational, or more direct. Say whether the goal is clicks, awareness, waitlist signups, or comments.",
+  commonMistakes: "Writing launch posts that talk only about you instead of the audience. Repeating the exact same announcement copy across every platform. Using hype language that hides the practical value.",
+  expectedOutput: "You will get a launch pack with platform-specific post drafts, opening options, CTA lines, and an optional follow-up post angle for the next day or week.",
+  limitations: "The prompt cannot create launch strategy by itself or guarantee results. The strongest outputs still depend on having a clear offer and a believable reason for people to care.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the launch details, audience, core benefit, timing, and desired platforms.",
+  realWorldApplications: "Useful for SaaS launches, service updates, creator drops, workshops, newsletters, templates, ecommerce releases, and internal announcements adapted into public-facing social posts.",
+  successMetrics: "A strong pack makes the launch feel coherent across channels without sounding duplicated. The posts should clearly explain what changed and what people should do next.",
+  relatedPrompts: "Use Instagram Caption Writer, LinkedIn Post Writer, and Hashtag + Keyword Picker for platform-specific polish after the pack is created.",
+  prompt: `Create a social post pack for a launch or announcement.
+
+WHAT IS LAUNCHING: {LAUNCH}
+WHO IT IS FOR: {AUDIENCE}
+WHY IT MATTERS: {BENEFIT}
+PLATFORMS NEEDED: {PLATFORMS}
+MAIN GOAL: {GOAL}
+TONE: {TONE}
+OPTIONAL CTA: {CTA}
+
+Rules:
+- Be clear, not overhyped
+- Adapt each post to the platform
+- Focus on audience value, not just announcement energy
+- Include a follow-up angle if useful
+
+Output format:
+1) Launch message angle
+2) Platform-specific post drafts
+3) CTA options
+4) Follow-up post idea`,
+  variations: [
+    "Make it suitable for a feature launch.",
+    "Make it suitable for a creator product drop.",
+    "Make the launch tone more educational than salesy.",
+    "Add a soft-launch version for an early audience."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "launch", "marketing", "announcements"],
+  updatedAtISO: "2026-04-18",
+},
+{
+  id: "p74",
+  slug: "hashtag-keyword-picker",
+  title: "Hashtag + Keyword Picker",
+  purpose: "Choose cleaner social hashtags and support keywords without stuffing or guesswork.",
+  description: "This prompt helps you identify a tighter set of hashtags, support phrases, and language cues that match the post topic and audience. It is built for modern posting where discoverability matters, but dumping a giant hashtag block under every post usually makes the content worse.",
+  whenToUse: "Use this when finishing a post, reel, carousel, or announcement and you want a smaller, more intentional set of discovery terms. It is especially helpful when you know the topic but not which phrases actually fit the content.",
+  howItWorks: "The prompt takes the post topic, audience, platform, content format, and tone, then suggests a focused set of hashtags and related keywords grouped by broad, niche, and intent-based relevance.",
+  bestPractices: "Tell it what the content actually is, not just the niche. Mention whether the post is educational, promotional, personal, or entertainment-led. Use the output as a shortlist, not a requirement to paste every suggestion.",
+  commonMistakes: "Using irrelevant trending tags. Adding too many hashtags. Treating hashtags as a substitute for clear captions, clean hooks, or good post structure.",
+  expectedOutput: "You will get a prioritized hashtag set, supporting keywords and phrases, and brief notes on which terms are broad versus niche or best left out.",
+  limitations: "This prompt cannot see platform trend data in real time. It should guide selection and phrasing, not replace actual judgment about relevance and audience fit.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the platform, post type, topic, audience, and tone.",
+  realWorldApplications: "Useful for creators, small brands, social managers, educators, and freelancers who want cleaner discovery support for posts without defaulting to spammy tag lists.",
+  successMetrics: "A strong output gives you a smaller, better shortlist that actually matches the content. It should make the post feel more intentional, not more cluttered.",
+  relatedPrompts: "Use Instagram Caption Writer or Product Launch Social Post Pack first, then use this prompt to sharpen the discovery layer after the core post is written.",
+  prompt: `Pick hashtags and support keywords for this social post.
+
+PLATFORM: {PLATFORM}
+POST TYPE: {POST_TYPE}
+TOPIC: {TOPIC}
+WHO IT IS FOR: {AUDIENCE}
+TONE: {TONE}
+GOAL: {GOAL}
+
+Rules:
+- Keep the set focused
+- Avoid irrelevant trend-chasing
+- Separate broad from niche terms
+- Suggest only terms that actually fit the post
+
+Output format:
+1) Best hashtag shortlist
+2) Broad vs niche terms
+3) Support keywords or phrases to weave into the caption
+4) Terms to avoid`,
+  variations: [
+    "Make it better for Instagram.",
+    "Make it better for LinkedIn keywords rather than hashtags.",
+    "Keep the list very short and intentional.",
+    "Focus on educational creator content."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["social-media", "hashtags", "keywords", "discovery"],
+  updatedAtISO: "2026-04-18",
+},
 ];
 
