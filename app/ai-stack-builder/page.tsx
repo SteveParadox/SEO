@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Layers3, Link2, Target } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AiStackBuilder } from "@/components/ai-stack-builder";
 import { JsonLd } from "@/components/json-ld";
 import { Badge } from "@/components/ui/badge";
@@ -276,60 +276,6 @@ export default function AiStackBuilderPage() {
               </Card>
             );
           })}
-        </div>
-      </section>
-
-      <section className="mt-14">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight">How this fits an SEO workflow</h2>
-          <p className="mt-3 text-base leading-7 text-muted-foreground">
-            This route is designed to support higher-intent searches like "best AI tools for
-            writing," "AI stack for research," "beginner AI stack," and "free AI stack for
-            marketing" without turning into a thin widget page. The static copy explains the logic,
-            the builder creates stickier engagement, and the surrounding links push users into
-            stronger decision pages throughout the site.
-          </p>
-        </div>
-
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <Card className="rounded-2xl border-border/70">
-            <CardHeader className="border-b">
-              <div className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-primary" />
-                <CardTitle className="text-lg">Intent coverage</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-6 text-sm leading-6 text-muted-foreground">
-              The page targets decision-heavy intent naturally through the builder inputs, the
-              supporting copy, and the related goal hubs linked below the fold.
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl border-border/70">
-            <CardHeader className="border-b">
-              <div className="flex items-center gap-2">
-                <Layers3 className="h-5 w-5 text-primary" />
-                <CardTitle className="text-lg">Internal linking</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-6 text-sm leading-6 text-muted-foreground">
-              Every stack includes crawlable links into tools, prompts, comparisons, and best
-              pages, creating a more intentional bridge between discovery pages and money pages.
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl border-border/70">
-            <CardHeader className="border-b">
-              <div className="flex items-center gap-2">
-                <Link2 className="h-5 w-5 text-primary" />
-                <CardTitle className="text-lg">Shareable state</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-6 text-sm leading-6 text-muted-foreground">
-              The builder writes the chosen filters into the URL, which makes stack setups easy to
-              revisit and more useful when shared across a team.
-            </CardContent>
-          </Card>
         </div>
       </section>
 
