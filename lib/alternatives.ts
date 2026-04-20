@@ -374,7 +374,7 @@ function buildRelatedComparisons(source: Tool, alternatives: RankedAlternative[]
   return DATA.comparisons
     .map((comparison) => {
       const contenders = resolveComparisonContenders(comparison).flatMap((entry) =>
-        entry.kind === "tool" ? [entry.item] : []
+        entry.kind === "tool" && entry.item ? [entry.item] : []
       );
 
       const overlapCount = contenders.reduce(
@@ -564,7 +564,7 @@ export function getAlternativePageDataBySlug(slug: string): AlternativePageData 
 
   for (const comparison of findComparisonsContainingTool(source.id)) {
     const contenders = resolveComparisonContenders(comparison).flatMap((entry) =>
-      entry.kind === "tool" && entry.item.id !== source.id ? [entry.item] : []
+      entry.kind === "tool" && entry.item && entry.item.id !== source.id ? [entry.item] : []
     );
 
     for (const contender of contenders) {
