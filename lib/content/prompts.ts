@@ -5626,5 +5626,504 @@ Output format:
   tags: ["social-media", "hashtags", "keywords", "discovery"],
   updatedAtISO: "2026-04-18",
 },
+{
+  id: "p75",
+  slug: "good-morning-text-writer",
+  title: "Good Morning Text Writer",
+  purpose: "Write sweet, natural good-morning texts that feel thoughtful without sounding cheesy or copy-pasted.",
+  description: "This prompt helps with one of the most common relationship habits: sending a message that feels warm and personal without overthinking it. It works well when you want to sound affectionate, playful, calm, or reassuring depending on the relationship.",
+  whenToUse: "Use this when texting a partner, crush, spouse, or someone you are dating and you want a better morning message than a dry 'good morning' or an overly dramatic paragraph.",
+  howItWorks: "The prompt takes the relationship stage, your tone, what happened recently, and the feeling you want to leave them with. It then writes a few text options that match the vibe and level of closeness.",
+  bestPractices: "Mention whether the message should be cute, flirty, grounding, reassuring, or simple. Include any real context like an exam, a busy day, travel, or something important happening that day.",
+  commonMistakes: "Trying too hard to sound poetic. Writing a message so generic it could be sent to anyone. Making it too intense for the stage of the relationship.",
+  expectedOutput: "You will get a best-text option, a shorter version, and a sweeter variation that still feels natural to send.",
+  limitations: "The prompt cannot replace actual closeness or timing. It works best as support for real communication, not as a substitute for care or consistency.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the relationship context, tone, and anything meaningful about the day ahead.",
+  realWorldApplications: "People use this for long-distance relationships, new dating situations, marriages, busy work mornings, and moments when they want to sound more thoughtful without overwriting the text.",
+  successMetrics: "A strong output sounds like something you would send without cringing, fits the relationship, and feels warm rather than performative.",
+  relatedPrompts: "Use Anniversary Message Writer for bigger moments and WhatsApp Reply Helper when the conversation continues and you want the tone to stay smooth.",
+  prompt: `Write a good-morning text.
+
+WHO IT IS FOR: {PERSON}
+RELATIONSHIP STAGE: {STAGE}
+TONE: {TONE}
+ANYTHING IMPORTANT HAPPENING TODAY: {CONTEXT}
+WHAT I WANT THEM TO FEEL: {FEELING}
+
+Rules:
+- Keep it natural and sendable
+- Match the relationship stage
+- Be warm without sounding fake
+- Avoid generic romance lines unless requested
+
+Output format:
+1) Best text
+2) Shorter version
+3) Sweeter version
+4) Why the tone works`,
+  variations: [
+    "Make it more flirty.",
+    "Make it more comforting for a stressful day.",
+    "Keep it short and casual.",
+    "Make it suitable for a long-distance relationship."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["relationships", "texting", "romance", "communication"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p76",
+  slug: "date-night-planner",
+  title: "Date Night Planner",
+  purpose: "Plan a date that feels thoughtful, realistic, and matched to your budget, energy, and relationship stage.",
+  description: "This prompt helps people move past vague 'let's hang out' planning and create a date that actually works. It is useful for new dating, long-term relationships, low-budget plans, birthdays, or simply making a regular evening feel more intentional.",
+  whenToUse: "Use this when you want date ideas, when you are tired of repeating the same plan, or when you want something that feels more personal than a generic list of date-night suggestions.",
+  howItWorks: "The prompt takes your city or setup, budget, time window, relationship stage, and mood, then turns that into date concepts, a suggested plan, and backup options if the main idea feels too much.",
+  bestPractices: "Be honest about budget, travel time, and how much energy you both realistically have. Mention whether the goal is romantic, playful, calming, low-pressure, or more special than usual.",
+  commonMistakes: "Choosing plans that sound impressive but are logistically annoying. Ignoring the other person's preferences. Forgetting weather, travel, or how long the date should realistically last.",
+  expectedOutput: "You will get a primary date plan, two backup ideas, and a simple message you can send to propose the plan.",
+  limitations: "The prompt cannot check venue availability or local events in real time. It works best as a planning helper, not a booking engine.",
+  technicalRequirements: "Works with all major models. Best results come when you provide location context, budget, relationship stage, and whether this is a first date, regular date, or special occasion.",
+  realWorldApplications: "Useful for couples, new daters, busy partners, long-distance reunions, home-date planning, and people who want more intentional plans without spending half the night deciding.",
+  successMetrics: "A strong output gives you a plan that feels both thoughtful and realistic, plus a message or next step that makes the plan easier to act on.",
+  relatedPrompts: "Use Event Invitation Writer if the date needs a polished invite text and Gift Idea Picker for birthdays or anniversaries tied to the plan.",
+  prompt: `Plan a date night.
+
+CITY OR SETTING: {LOCATION}
+BUDGET: {BUDGET}
+RELATIONSHIP STAGE: {STAGE}
+TIME AVAILABLE: {TIME}
+MOOD OR VIBE: {VIBE}
+ANYTHING TO CONSIDER: {CONSTRAINTS}
+
+Rules:
+- Make it realistic
+- Match the relationship stage and vibe
+- Respect the budget and time window
+- Include one easy backup idea
+
+Output format:
+1) Best date plan
+2) 2 backup ideas
+3) What makes it work
+4) A text to suggest it`,
+  variations: [
+    "Make it a low-budget home date.",
+    "Make it better for a first date.",
+    "Make it more romantic and special.",
+    "Make it work for a weekday evening."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["relationships", "dating", "planning", "romance"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p77",
+  slug: "anniversary-message-writer",
+  title: "Anniversary Message Writer",
+  purpose: "Write anniversary messages that feel sincere and personal instead of generic or overdone.",
+  description: "This prompt helps with relationship milestones where tone matters and the usual internet lines feel flat. It works for dating anniversaries, wedding anniversaries, and heartfelt notes that need warmth without sounding performative.",
+  whenToUse: "Use this when writing an anniversary text, card note, Instagram caption, or message to a partner or spouse and you want it to feel personal and grounded.",
+  howItWorks: "The prompt takes your relationship context, how long you have been together, what you appreciate most, and the tone you want. It then writes messages with different levels of depth and emotion.",
+  bestPractices: "Include real details such as a memory, quality, or way the person shows up for you. Even one specific detail helps the message feel much more genuine.",
+  commonMistakes: "Using generic lines that could fit anyone. Writing a message that sounds bigger than what you really feel. Overloading the message with too much abstract sentiment and no real detail.",
+  expectedOutput: "You will get a main anniversary message, a shorter version, and a caption-style variation if needed.",
+  limitations: "The prompt can improve phrasing, but it cannot create emotional truth that is not there. Specificity matters more than polish.",
+  technicalRequirements: "Works with all major models. Best results come when you provide how long you have been together, what you appreciate, and whether the message is private or public.",
+  realWorldApplications: "People use this for text messages, handwritten cards, captions, gifts, and small milestone notes when they want the message to feel more thoughtful.",
+  successMetrics: "A strong output feels believable, specific, and warm. It should sound like your relationship, not like an internet quote page.",
+  relatedPrompts: "Use Good Morning Text Writer for everyday affection and Apology Message Writer when the milestone message also needs repair or accountability.",
+  prompt: `Write an anniversary message.
+
+WHO IT IS FOR: {PERSON}
+HOW LONG WE HAVE BEEN TOGETHER: {TIME_TOGETHER}
+WHAT I APPRECIATE MOST: {APPRECIATION}
+OPTIONAL MEMORY OR DETAIL: {DETAIL}
+TONE: {TONE}
+FORMAT: {FORMAT}
+
+Rules:
+- Make it sincere and specific
+- Avoid generic romance clichés
+- Match the relationship tone
+- Keep it suitable for the format
+
+Output format:
+1) Best message
+2) Shorter version
+3) Caption-style version
+4) One line that makes it feel personal`,
+  variations: [
+    "Make it more romantic.",
+    "Make it more simple and grounded.",
+    "Write it like a card note.",
+    "Write it for a public caption."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["relationships", "anniversary", "writing", "romance"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p78",
+  slug: "soft-boundary-text-writer",
+  title: "Soft Boundary Text Writer",
+  purpose: "Write kind but firm texts that protect your time, energy, or comfort without sounding harsher than you mean.",
+  description: "This prompt helps with the everyday tension between being polite and being clear. It is useful for friends, family, dating, coworkers, and group situations where you want to say no, slow something down, or set a limit without unnecessary drama.",
+  whenToUse: "Use this when you need to decline, delay, redirect, or set a boundary around time, availability, emotional labor, plans, money, or communication habits.",
+  howItWorks: "The prompt takes the situation, your relationship to the person, how firm you want to be, and what you want to protect. It then drafts messages that are calm, respectful, and unambiguous.",
+  bestPractices: "Be clear about what you are actually saying no to and what you are willing to offer instead, if anything. Mention whether the relationship needs warmth, distance, or strict clarity.",
+  commonMistakes: "Over-explaining because you feel guilty. Writing a polite message that is still too vague. Trying to make the other person feel okay before you state the boundary.",
+  expectedOutput: "You will get a best version, a warmer version, and a firmer version so you can choose the tone that fits the moment.",
+  limitations: "The prompt cannot control how someone reacts. In recurring or unsafe situations, wording alone may not solve the underlying issue.",
+  technicalRequirements: "Works with all major models. Best results come when you share the relationship, what the issue is, and how direct you want the message to be.",
+  realWorldApplications: "Useful for saying no to plans, declining unpaid requests, slowing a dating situation down, protecting study or rest time, or stepping back from draining conversations.",
+  successMetrics: "A strong result sounds like you, makes the limit clear, and avoids both unnecessary harshness and confusing softness.",
+  relatedPrompts: "Use Difficult Text Reply when the exchange is already tense and Polite Decline Writer for more formal or socially delicate situations.",
+  prompt: `Write a soft but clear boundary text.
+
+WHO THIS PERSON IS TO ME: {RELATIONSHIP}
+WHAT IS HAPPENING: {SITUATION}
+WHAT I NEED TO SAY OR PROTECT: {BOUNDARY}
+HOW FIRM I WANT TO BE: {FIRMNESS}
+TONE: {TONE}
+
+Rules:
+- Be kind but clear
+- Do not over-explain
+- Avoid guilt-heavy language
+- Make the actual boundary easy to understand
+
+Output format:
+1) Best message
+2) Warmer version
+3) Firmer version
+4) Why the boundary stays clear`,
+  variations: [
+    "Make it suitable for a friend.",
+    "Make it suitable for someone I am dating.",
+    "Make it more direct without sounding mean.",
+    "Make it gentle for a family situation."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["boundaries", "texting", "communication", "relationships"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p79",
+  slug: "no-motivation-study-starter",
+  title: "No-Motivation Study Starter",
+  purpose: "Start studying when you feel lazy, behind, tired, or mentally resistant.",
+  description: "This prompt is for the specific student problem where the work is not impossible, but the activation energy feels too high. It helps turn vague pressure into a first study block you can actually begin.",
+  whenToUse: "Use this when you know you need to study but keep delaying, doom-scrolling, cleaning your room, or telling yourself you will start in ten minutes.",
+  howItWorks: "The prompt takes what you need to study, how much time you have, how low your energy is, and what is blocking you. It then builds a small, realistic start plan that lowers friction and gets you moving.",
+  bestPractices: "Be honest about how much time and energy you actually have. Mention if you are avoiding a hard subject, feeling guilty, or overwhelmed by how much is left.",
+  commonMistakes: "Pretending you will suddenly become highly motivated. Making the first task too big. Trying to solve the whole semester in one sitting.",
+  expectedOutput: "You will get a short startup routine, a first study block, a fallback version for low energy, and a next-step cue so you do not stall after starting.",
+  limitations: "The prompt cannot create motivation from nowhere, but it can reduce resistance and make starting easier. Long-term academic problems may still need deeper planning and support.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the subject, how much time you have, your current energy, and what you are avoiding.",
+  realWorldApplications: "Students use this before homework, revision, reading, problem sets, and catch-up sessions when they need a push that feels realistic instead of preachy.",
+  successMetrics: "A strong result gets you started within minutes and gives you a first block that feels possible instead of fake.",
+  relatedPrompts: "Use Assignment Breakdown Planner for larger tasks and Exam Cram Rescue Plan when the deadline pressure is much higher.",
+  prompt: `Help me start studying even though I do not feel like it.
+
+SUBJECT OR TASK: {SUBJECT}
+TIME I HAVE: {TIME}
+ENERGY LEVEL: {ENERGY}
+WHAT IS BLOCKING ME: {BLOCK}
+WHAT I MOST NEED TO FINISH: {PRIORITY}
+
+Rules:
+- Keep the starting step very realistic
+- Reduce friction, not just give motivation
+- Break the first block into simple actions
+- Include a low-energy fallback
+
+Output format:
+1) 5-minute startup routine
+2) First study block
+3) Low-energy fallback
+4) What to do next if I finish`,
+  variations: [
+    "Make it suitable for extreme procrastination.",
+    "Make it gentler for burnout.",
+    "Make it more structured for exam prep.",
+    "Keep it under 45 minutes total."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["students", "study", "focus", "motivation"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p80",
+  slug: "assignment-breakdown-planner",
+  title: "Assignment Breakdown Planner",
+  purpose: "Break a big assignment into smaller pieces so it stops feeling impossible to begin.",
+  description: "This prompt helps students turn a vague or intimidating assignment into a realistic plan. It works well for essays, presentations, projects, reports, readings, and tasks where the hardest part is figuring out where to start.",
+  whenToUse: "Use this when an assignment feels too big, too unclear, or too late to handle casually. It is especially useful when you have the task but no workable plan.",
+  howItWorks: "The prompt takes the assignment type, deadline, current progress, and available time. It then divides the work into smaller steps, gives an order, and suggests what to do first.",
+  bestPractices: "Include the real deadline, the deliverable, and how much time you honestly have. Mention what part feels confusing so the plan can lower that specific friction.",
+  commonMistakes: "Only focusing on the final deadline. Skipping setup work like understanding the prompt or gathering materials. Creating a plan that ignores other obligations.",
+  expectedOutput: "You will get a step-by-step breakdown, a recommended order, quick wins, and a plan for the next work session.",
+  limitations: "The prompt can structure the work but not complete the assignment for you. If instructions are unclear, you may still need clarification from the class or instructor.",
+  technicalRequirements: "Works with all major models. Best results come when you include the assignment type, deadline, required output, and how far behind or ahead you are.",
+  realWorldApplications: "Students use this for essays, final projects, decks, case studies, discussion posts, research assignments, and catch-up work that feels bigger than it should.",
+  successMetrics: "A strong output should make the task feel smaller and give you a first session you can actually do today.",
+  relatedPrompts: "Use No-Motivation Study Starter when you still cannot begin, and Professor Email Writer if the assignment details are unclear and you need help fast.",
+  prompt: `Break this assignment into a realistic plan.
+
+ASSIGNMENT: {ASSIGNMENT}
+DEADLINE: {DEADLINE}
+CURRENT PROGRESS: {PROGRESS}
+TIME I CAN WORK: {TIME}
+WHAT FEELS HARD ABOUT IT: {BLOCK}
+
+Rules:
+- Make the steps concrete
+- Show what to do first
+- Keep the plan realistic for the deadline
+- Include one version for if I am already behind
+
+Output format:
+1) Quick breakdown
+2) Recommended order
+3) First work session
+4) If I am behind, do this instead`,
+  variations: [
+    "Make it for a research paper.",
+    "Make it for a group project.",
+    "Make it for a presentation.",
+    "Make it for someone who only has short study windows."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["students", "assignments", "planning", "study"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p81",
+  slug: "professor-email-writer",
+  title: "Professor Email Writer",
+  purpose: "Write clearer, respectful emails to professors, lecturers, and teaching staff.",
+  description: "This prompt helps students write messages that are polite, direct, and easier to take seriously. It is useful for extension requests, clarification questions, missed-class follow-ups, office-hours requests, and general academic communication.",
+  whenToUse: "Use this when you need to email a professor or TA and want the message to sound respectful without becoming stiff or rambling.",
+  howItWorks: "The prompt takes the situation, how formal the relationship is, what you need, and the tone you want. It then drafts an email that is concise, courteous, and clear about the ask.",
+  bestPractices: "Mention the class, the issue, and the actual ask. Keep the facts honest. If you need flexibility, state it directly instead of hiding it behind vague wording.",
+  commonMistakes: "Writing overly casual messages. Writing emotional paragraphs with no clear ask. Sending an email that sounds apologetic but does not explain what you need.",
+  expectedOutput: "You will get a polished email, a shorter version, and a subject line that fits the situation.",
+  limitations: "The prompt cannot guarantee a favorable reply. It also should not be used to fabricate excuses or manipulate academic staff.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the class, the issue, your ask, and the level of formality you want.",
+  realWorldApplications: "Students use this for deadline questions, extension requests, clarification emails, meeting requests, absence explanations, and follow-ups after class.",
+  successMetrics: "A strong output sounds respectful, gets to the point, and makes it easy for the professor to understand what you need.",
+  relatedPrompts: "Use Follow-Up Message Writer for later check-ins and Assignment Breakdown Planner if the email is part of getting back on track academically.",
+  prompt: `Write an email to a professor or TA.
+
+CLASS OR COURSE: {CLASS}
+SITUATION: {SITUATION}
+WHAT I NEED OR WANT TO ASK: {ASK}
+HOW FORMAL IT SHOULD BE: {FORMALITY}
+ANY IMPORTANT CONTEXT: {CONTEXT}
+
+Rules:
+- Be respectful and concise
+- Make the ask easy to understand
+- Avoid sounding careless or overly dramatic
+- Keep the tone appropriate for academic email
+
+Output format:
+1) Subject line
+2) Best email
+3) Shorter version
+4) Why the wording works`,
+  variations: [
+    "Make it appropriate for an extension request.",
+    "Make it appropriate for asking a clarification question.",
+    "Make it suitable after missing class.",
+    "Make it more formal."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["students", "email", "school", "communication"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p82",
+  slug: "exam-cram-rescue-plan",
+  title: "Exam Cram Rescue Plan",
+  purpose: "Create a last-minute study rescue plan when the exam is too close for a normal schedule.",
+  description: "This prompt is for the very common student situation where the exam is close, preparation is incomplete, and the usual ideal study plan is no longer realistic. It helps prioritize what actually matters now.",
+  whenToUse: "Use this when the exam is tomorrow, in two days, or too close for a calm long-term study plan and you need a high-clarity rescue approach.",
+  howItWorks: "The prompt takes the subject, exam date, current level, strongest and weakest areas, and time left. It then creates a cram plan that focuses on triage, active recall, and highest-value coverage first.",
+  bestPractices: "Be honest about what you do and do not know. Mention the exam format if possible. If you have past questions or likely high-weight topics, include them.",
+  commonMistakes: "Trying to cover everything equally. Spending too much time rereading instead of testing yourself. Building a heroic plan you cannot realistically follow while tired.",
+  expectedOutput: "You will get a cram sequence, topic priority list, active-recall blocks, and a final review routine for the remaining time.",
+  limitations: "This prompt is for damage control, not ideal learning. It can improve outcomes, but it cannot fully replace earlier preparation or fix major knowledge gaps overnight.",
+  technicalRequirements: "Works with all major models. Best results come when you provide the subject, exam timing, current preparation level, and known weak spots.",
+  realWorldApplications: "Students use this for finals, quizzes, midterms, certification exams, and last-minute revision when panic is rising and time is tight.",
+  successMetrics: "A strong output helps you stop spiraling, focus on the highest-value work, and use the time left more intelligently.",
+  relatedPrompts: "Use No-Motivation Study Starter if you still cannot begin and Explain Like a Patient Tutor for a topic you need simplified fast.",
+  prompt: `Create an exam cram rescue plan.
+
+SUBJECT: {SUBJECT}
+EXAM TIMEFRAME: {TIMEFRAME}
+CURRENT PREP LEVEL: {LEVEL}
+STRONG AREAS: {STRONG}
+WEAK AREAS: {WEAK}
+TIME LEFT TO STUDY: {TIME}
+EXAM FORMAT IF KNOWN: {FORMAT}
+
+Rules:
+- Prioritize highest-value topics first
+- Use active recall, not just rereading
+- Be realistic about fatigue and time
+- Include a short final review routine
+
+Output format:
+1) Priority order
+2) Cram schedule
+3) Active-recall focus
+4) Last review before the exam`,
+  variations: [
+    "Make it for a multiple-choice exam.",
+    "Make it for a writing-heavy exam.",
+    "Make it suitable for very low confidence.",
+    "Keep it realistic for one evening only."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["students", "exams", "study", "cram"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p83",
+  slug: "period-week-planner",
+  title: "Period Week Planner",
+  purpose: "Adjust your week more realistically around low energy, discomfort, or heavier mental load during your period.",
+  description: "This prompt helps with a very practical life problem: planning a week when energy, focus, and comfort may shift. It is designed to be supportive and realistic, not medical or preachy, and works best for routine planning rather than health advice.",
+  whenToUse: "Use this when you want to adapt work, study, chores, meals, rest, and social plans around a period week or a lower-energy stretch that needs gentler planning.",
+  howItWorks: "The prompt takes your schedule, symptoms or limitations, non-negotiables, and energy level, then creates a more realistic version of the week with adjusted priorities, buffers, and lower-friction tasks.",
+  bestPractices: "Mention what your week already contains and what tends to feel harder. Include what absolutely cannot move, what can shift, and where you usually overestimate yourself.",
+  commonMistakes: "Treating the week exactly like a high-energy week. Leaving no buffer. Planning everything around guilt instead of comfort, recovery, and minimum effective effort.",
+  expectedOutput: "You will get an adjusted week plan, priority shifts, low-energy task options, and small care reminders that help the week feel more manageable.",
+  limitations: "This prompt is not medical advice and should not be used for diagnosis or symptom management decisions. It is a planning aid only.",
+  technicalRequirements: "Works with all major models. Best results come when you provide your non-negotiables, how your energy usually changes, and what kind of week you are trying to get through.",
+  realWorldApplications: "Useful for students, professionals, caregivers, and busy women who want practical week planning that respects their actual capacity instead of pretending nothing changes.",
+  successMetrics: "A strong output makes the week feel kinder and more doable, while still protecting the most important responsibilities.",
+  relatedPrompts: "Use Daily Schedule Fixer for rough individual days and Household Reset Plan if home tasks are part of the pressure that week.",
+  prompt: `Plan my week more realistically around period-week energy.
+
+CURRENT WEEK OBLIGATIONS: {OBLIGATIONS}
+WHAT CANNOT MOVE: {NON_NEGOTIABLES}
+ENERGY OR COMFORT LIMITS: {LIMITS}
+TASKS THAT FEEL HEAVY THIS WEEK: {HEAVY}
+WHAT I STILL WANT TO GET DONE: {GOALS}
+
+Rules:
+- Be supportive and realistic
+- Lower friction where possible
+- Protect the most important responsibilities first
+- Include lighter-task alternatives
+
+Output format:
+1) Adjusted week plan
+2) What to keep, shrink, or move
+3) Low-energy task swaps
+4) Small care reminders`,
+  variations: [
+    "Make it work for a work-heavy week.",
+    "Make it work for a student schedule.",
+    "Make it gentler and lower-pressure.",
+    "Focus on reducing overwhelm rather than productivity."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["women", "planning", "self-care", "productivity"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p84",
+  slug: "household-reset-plan",
+  title: "Household Reset Plan",
+  purpose: "Turn home chaos into a realistic reset plan when the house feels mentally loud and you are too tired for a deep clean.",
+  description: "This prompt helps with the everyday mental load of a messy home, shared space, or overwhelming pileup of small tasks. It focuses on practical resets, not perfection, and is useful for solo living, shared spaces, and family homes.",
+  whenToUse: "Use this when your space feels out of control, you have limited energy, and you need a realistic plan to make things feel livable again without turning the day into a cleaning marathon.",
+  howItWorks: "The prompt takes the state of the home, your energy, time available, and biggest stress points. It then creates a reset order that lowers visual and mental chaos first, with optional follow-up tasks if energy remains.",
+  bestPractices: "Be honest about time and energy. Mention whether you are dealing with laundry, dishes, clutter, shared spaces, or prep for guests. Say what would make the biggest emotional difference if improved first.",
+  commonMistakes: "Starting with low-impact tasks. Trying to deep-clean everything. Making a plan that assumes high energy when the real need is a basic reset.",
+  expectedOutput: "You will get a practical reset sequence, a time-based version, and a low-energy minimum version for days when you can only do the essentials.",
+  limitations: "This prompt cannot replace shared responsibility in a home where the load is uneven. It is a reset helper, not a long-term fairness solution.",
+  technicalRequirements: "Works with all major models. Best results come when you describe the state of the home, what is stressing you out most, and how much time and energy you have.",
+  realWorldApplications: "Useful for busy women, students, roommates, parents, and anyone trying to make a home feel calmer without turning recovery time into another punishing task list.",
+  successMetrics: "A strong output should make the space feel noticeably calmer within the time you have, not leave you with a more overwhelming plan.",
+  relatedPrompts: "Use Period Week Planner for lower-energy weeks and Grocery + Meal Planner if food prep and kitchen overload are part of the home stress.",
+  prompt: `Create a realistic household reset plan.
+
+WHAT FEELS MESSIEST OR LOUDEST: {MESS}
+TIME I HAVE: {TIME}
+ENERGY LEVEL: {ENERGY}
+WHO LIVES HERE OR SHARES THE SPACE: {HOUSEHOLD}
+WHAT WOULD HELP MOST FAST: {PRIORITY}
+
+Rules:
+- Focus on practical impact first
+- Do not turn this into a deep-clean fantasy
+- Include a minimum version for low energy
+- Make the order easy to follow
+
+Output format:
+1) Best reset order
+2) 30-minute version
+3) Low-energy minimum version
+4) What to leave for later`,
+  variations: [
+    "Make it suitable for a small apartment.",
+    "Make it suitable for a shared home.",
+    "Make it guest-ready.",
+    "Keep it very gentle for a tired day."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["home", "women", "reset", "planning"],
+  updatedAtISO: "2026-04-20",
+},
+{
+  id: "p85",
+  slug: "polite-decline-writer",
+  title: "Polite Decline Writer",
+  purpose: "Say no more gracefully when you want to protect your time, money, or energy without sounding harsh.",
+  description: "This prompt helps with the everyday social and professional situations where you need to decline something cleanly. It works for invitations, unpaid requests, family asks, awkward favors, work extras, and situations where you want a softer tone than a strict boundary text.",
+  whenToUse: "Use this when you need to say no to a plan, favor, collaboration, invite, extra work, or emotional ask and you want the message to feel respectful but clear.",
+  howItWorks: "The prompt takes the situation, relationship, tone, and how final your no needs to be. It then writes a concise decline that feels polite, self-respecting, and hard to misunderstand.",
+  bestPractices: "Decide first whether you are declining fully or leaving the door open. Mention if you want to sound especially warm, especially brief, or more formal.",
+  commonMistakes: "Over-apologizing. Leaving too much room for renegotiation when you mean no. Writing a polite message that still sounds resentful underneath.",
+  expectedOutput: "You will get a best version, a warmer version, and a more direct version so you can choose based on the relationship.",
+  limitations: "The prompt cannot manage the other person's reaction. Repeated pressure may require a firmer boundary rather than a softer decline.",
+  technicalRequirements: "Works with all major models. Best results come when you share the relationship, what you are declining, and how gentle or final the reply should be.",
+  realWorldApplications: "Useful for plans, favors, work asks, social invitations, unpaid requests, group travel ideas, family obligations, and other situations where a clean no protects your bandwidth.",
+  successMetrics: "A strong output sounds respectful, states the decline clearly, and avoids creating a bigger emotional mess than necessary.",
+  relatedPrompts: "Use Soft Boundary Text Writer when the issue is recurring and Difficult Text Reply when the conversation is already emotionally charged.",
+  prompt: `Write a polite decline message.
+
+WHO THIS PERSON IS TO ME: {RELATIONSHIP}
+WHAT I AM DECLINING: {REQUEST}
+HOW FINAL THE NO IS: {FINALITY}
+TONE I WANT: {TONE}
+OPTIONAL CONTEXT: {CONTEXT}
+
+Rules:
+- Be polite and clear
+- Do not over-apologize
+- Do not leave false hope if the answer is no
+- Match the relationship tone
+
+Output format:
+1) Best decline
+2) Warmer version
+3) More direct version
+4) Why it stays respectful`,
+  variations: [
+    "Make it suitable for a friend.",
+    "Make it suitable for work.",
+    "Make it suitable for family.",
+    "Keep it very short."
+  ],
+  modelCompatibility: ["GPT", "Claude", "Gemini"],
+  tags: ["boundaries", "communication", "texting", "women"],
+  updatedAtISO: "2026-04-20",
+},
 ];
 
