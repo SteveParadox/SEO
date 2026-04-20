@@ -16,6 +16,7 @@ import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
 import { TrackedExternalLink } from "@/components/tracked-external-link";
+import { hasAlternativePageForTool } from "@/lib/alternatives";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -113,6 +114,7 @@ export default async function ToolPage({ params }: PageProps) {
   const decisionSections = buildDecisionSections(tool);
   const faq = buildFaq(tool);
   const toolUrl = absoluteUrl(`/tools/${tool.slug}`);
+  const hasAlternativesPage = hasAlternativePageForTool(tool.slug);
 
   const toolSchema = {
     "@context": "https://schema.org",
@@ -297,7 +299,19 @@ export default async function ToolPage({ params }: PageProps) {
           <CardHeader>
             <CardTitle>Alternatives</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-3">
+            {hasAlternativesPage ? (
+              <Link
+                href={`/alternatives/${tool.slug}`}
+                className="block rounded-xl border p-3 text-sm transition hover:bg-muted/40"
+              >
+                <div className="font-medium">See the full alternatives shortlist</div>
+                <div className="mt-1 text-muted-foreground">
+                  Compare the best substitutes for {tool.name}, including who should switch and
+                  which option fits different budgets.
+                </div>
+              </Link>
+            ) : null}
             {tool.alternatives.map((alternative) => (
               <Link
                 key={alternative.slug}

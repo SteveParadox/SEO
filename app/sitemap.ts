@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { DATA, getAllTagsWithCounts, getLatestUpdatedForTag } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
+import { getAlternativePageStaticSlugs } from "@/lib/alternatives";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -55,6 +56,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  const alternatives = getAlternativePageStaticSlugs().map((slug) => {
+    const tool = DATA.tools.find((entry) => entry.slug === slug);
+
+    return {
+      url: absoluteUrl(`/alternatives/${slug}`),
+      lastModified: new Date(tool?.updatedAtISO ?? now),
+      changeFrequency: "weekly" as const,
+      priority: 0.82,
+    };
+  });
+
   const bestPages = DATA.bestPages.map((b) => ({
     url: absoluteUrl(`/best/${b.slug}`),
     lastModified: new Date(b.updatedAtISO),
@@ -82,6 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...bestPages,
     ...collections,
     ...comparisons,
+    ...alternatives,
     ...tools,
     ...prompts,
     ...updates,
