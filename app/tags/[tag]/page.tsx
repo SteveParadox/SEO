@@ -12,7 +12,12 @@ import {
   hrefFor,
   getLatestUpdatedForTag,
 } from "@/lib/data";
-import { absoluteUrl } from "@/lib/seo";
+import {
+  INDEXABLE_ROBOTS,
+  NOINDEX_FOLLOW_ROBOTS,
+  NOINDEX_NOFOLLOW_ROBOTS,
+  absoluteUrl,
+} from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ tag: string }>;
@@ -90,7 +95,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!tag) {
     return {
       title: "Tag not found - Xavkit",
-      robots: { index: false, follow: false },
+      robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
@@ -98,7 +103,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!items.length) {
     return {
       title: "Tag not found - Xavkit",
-      robots: { index: false, follow: false },
+      robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
@@ -112,7 +117,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: url },
-    robots: shouldIndex ? { index: true, follow: true } : { index: false, follow: true },
+    robots: shouldIndex ? INDEXABLE_ROBOTS : NOINDEX_FOLLOW_ROBOTS,
     openGraph: {
       title,
       description,

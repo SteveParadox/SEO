@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { INDEXABLE_ROBOTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact | XavKit",
   description: "Get in touch with XavKit for questions, feedback, or corrections.",
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function ContactPage() {

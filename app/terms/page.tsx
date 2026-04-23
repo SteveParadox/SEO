@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions | XavKit",
   description: "Rules, responsibilities, and limitations for using XavKit.",
   alternates: { canonical: absoluteUrl("/terms") },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function TermsPage() {

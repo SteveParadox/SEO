@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ToolsIndexClient from "./tools-index-client";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Tools — Xavkit",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: absoluteUrl("/tools"),
   },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function Page() {

@@ -1,4 +1,20 @@
 // lib/seo.ts
+import type { Metadata } from "next";
+
+export const INDEXABLE_ROBOTS = {
+  index: true,
+  follow: true,
+} satisfies Metadata["robots"];
+
+export const NOINDEX_FOLLOW_ROBOTS = {
+  index: false,
+  follow: true,
+} satisfies Metadata["robots"];
+
+export const NOINDEX_NOFOLLOW_ROBOTS = {
+  index: false,
+  follow: false,
+} satisfies Metadata["robots"];
 
 function normalizeBaseUrl(raw: string) {
   const trimmed = raw.trim().replace(/\/+$/, ""); // remove ALL trailing slashes

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { INDEXABLE_ROBOTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Xavkit",
   description: "How Xavkit collects, uses, and protects your information.",
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function PrivacyPage() {
@@ -74,4 +76,4 @@ export default function PrivacyPage() {
       </div>
     </div>
   );
-          }
+}

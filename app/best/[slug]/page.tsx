@@ -10,7 +10,7 @@ import {
   getRelatedBestPages,
 } from "@/lib/data";
 import { JsonLd } from "@/components/json-ld";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { TrackedExternalLink } from "@/components/tracked-external-link";
 
 type PageProps = {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!page) {
     return {
       title: "Best list not found - Xavkit",
-      robots: { index: false, follow: false },
+      robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: url },
-    robots: { index: true, follow: true },
+    robots: INDEXABLE_ROBOTS,
     openGraph: {
       title,
       description,

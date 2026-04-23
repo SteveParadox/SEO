@@ -3,14 +3,14 @@ import Link from "next/link";
 import { getAllTagsWithCounts } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Tags - Xavkit",
   description:
     "Browse Xavkit topics by tag to discover related tools, prompts, comparisons, and best lists.",
   alternates: { canonical: absoluteUrl("/tags") },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     title: "Tags - Xavkit",
     description:

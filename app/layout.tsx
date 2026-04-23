@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { siteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
 const geistSans = Geist({
@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   },
   description:
     "Discover vetted AI tools, effective prompts, and significant model updates. Curated daily to help you stay informed.",
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     siteName: "Xavkit",
     type: "website",

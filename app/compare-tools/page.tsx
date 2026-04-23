@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ToolComparisonBuilder } from "@/components/tool-comparison-builder";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 const PAGE_TITLE = "Compare AI Tools Side by Side | Interactive Comparison Builder | XavKit";
 const PAGE_DESCRIPTION =
@@ -40,6 +40,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: PAGE_URL,
   },
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,

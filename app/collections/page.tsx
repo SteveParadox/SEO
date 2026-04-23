@@ -3,13 +3,13 @@ import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Collections — Xavkit",
   description: "Browse curated collections: ranked picks for specific goals and audiences.",
   alternates: { canonical: absoluteUrl("/collections") },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function CollectionsIndexPage() {

@@ -11,7 +11,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!c) {
     return {
       title: "Collection not found — Xavkit",
-      robots: { index: false, follow: false },
+      robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: url },
-    robots: { index: true, follow: true },
+    robots: INDEXABLE_ROBOTS,
     openGraph: {
       title,
       description,

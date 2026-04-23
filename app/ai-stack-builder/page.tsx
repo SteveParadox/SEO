@@ -5,7 +5,7 @@ import { AiStackBuilder } from "@/components/ai-stack-builder";
 import { JsonLd } from "@/components/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { STACK_GOALS, getGoalSpotlights } from "@/lib/stack-builder";
 
 const PAGE_URL = absoluteUrl("/ai-stack-builder");
@@ -76,10 +76,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: PAGE_URL,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     title: "Personal AI Stack Builder",
     description:

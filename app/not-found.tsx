@@ -4,13 +4,11 @@ import { ArrowLeft, Flame, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { NOINDEX_FOLLOW_ROBOTS } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "404 - Page not found | XavKit",
-  robots: {
-    index: false,
-    follow: true,
-  },
+  robots: NOINDEX_FOLLOW_ROBOTS,
 };
 
 function IllustrationBlob() {

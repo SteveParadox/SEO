@@ -8,7 +8,7 @@ import {
   getAlternativePageStaticSlugs,
 } from "@/lib/alternatives";
 import type { AlternativePageData } from "@/lib/alternatives";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Best AI Tool Alternatives - Xavkit",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: absoluteUrl("/alternatives"),
   },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
   openGraph: {
     title: "Best AI Tool Alternatives - Xavkit",
     description:

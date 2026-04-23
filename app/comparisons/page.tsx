@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 import ComparisonsIndexClient from "./comparisons-index-client";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Side-by-side comparisons highlighting strengths, limitations, and ideal use cases.",
   alternates: { canonical: absoluteUrl("/comparisons") },
-  robots: { index: true, follow: true },
+  robots: INDEXABLE_ROBOTS,
 };
 
 export default function Page() {

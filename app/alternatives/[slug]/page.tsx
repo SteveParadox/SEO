@@ -8,7 +8,7 @@ import {
   getAlternativePageDataBySlug,
   getAlternativePageStaticSlugs,
 } from "@/lib/alternatives";
-import { absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!page) {
     return {
       title: "Alternatives page not found - Xavkit",
-      robots: { index: false, follow: false },
+      robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description: description.slice(0, 160),
     alternates: { canonical: url },
-    robots: { index: true, follow: true },
+    robots: INDEXABLE_ROBOTS,
     openGraph: {
       title,
       description,
