@@ -114,6 +114,8 @@ if (!hasIndexableRobots(tagPage) || !hasNoindexFollowRobots(tagPage) || !hasNoin
   errors.push("app/tags/[tag]/page.tsx must handle indexable tags, weak tags, and missing tags explicitly.");
 }
 
+
+
 const nextConfig = read("next.config.ts");
 if (/x-robots-tag/i.test(nextConfig)) {
   errors.push("next.config.ts must not add an X-Robots-Tag header globally.");
