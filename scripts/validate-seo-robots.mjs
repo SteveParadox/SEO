@@ -119,9 +119,16 @@ if (/x-robots-tag/i.test(nextConfig)) {
   errors.push("next.config.ts must not add an X-Robots-Tag header globally.");
 }
 
-const robotsRoute = read("app/robots.ts");
-if (/disallow:\s*["']\/["']/i.test(robotsRoute)) {
-  errors.push("app/robots.ts must not disallow the whole site.");
+if (existsSync(path.join(root, "app", "robots.ts"))) {
+  errors.push("Use app/robots.txt/route.ts instead of app/robots.ts to avoid metadata-route conflicts.");
+}
+
+const robotsRoute = read("app/robots.txt/route.ts");
+if (/Disallow:\s*\/["'`]/i.test(robotsRoute) || /disallow:\s*["']\/["']/i.test(robotsRoute)) {
+  errors.push("app/robots.txt/route.ts must not disallow the whole site.");
+}
+if (!robotsRoute.includes("Sitemap:")) {
+  errors.push("app/robots.txt/route.ts must include the sitemap URL when a site URL is configured.");
 }
 
 const sitemapRoute = read("app/sitemap.ts");
