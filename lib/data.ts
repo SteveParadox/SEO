@@ -13,6 +13,7 @@ export type {
 import { tools } from "@/lib/content/tools";
 import { prompts } from "@/lib/content/prompts";
 import { updates } from "@/lib/content/updates";
+import { recentUpdates } from "@/lib/content/recent-updates-2026";
 import { collections } from "@/lib/content/collections";
 import { comparisons } from "@/lib/content/comparisons";
 import { BEST_PAGES, type BestPage } from "@/lib/content/best-pages";
@@ -20,7 +21,7 @@ import { BEST_PAGES, type BestPage } from "@/lib/content/best-pages";
 export const DATA: DataBundle & { bestPages: BestPage[] } = {
   tools,
   prompts,
-  updates,
+  updates: [...recentUpdates, ...updates],
   collections,
   comparisons,
   bestPages: BEST_PAGES,
