@@ -1,0 +1,36 @@
+name: Propose AI release candidates
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 7 * * 1"
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run discover-content
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Open candidate review PR (never auto-publish)
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/release-candidates
+          commit-message: "chore(content): refresh source release candidates"
+          title: "Editorial review: verified-source AI release candidates"
+          body: |
+            Automated discovery of metadata from official GitHub Releases.
+            These are unpublished candidates. Editors must verify the linked
+            sources and manually write substantive original articles.
+            No article content is published by this workflow.
+          add-paths: content-review/github-releases.json
+          draft: true

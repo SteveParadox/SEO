@@ -49,6 +49,17 @@ DATA.prompts.forEach((p) => {
 console.log("Validating updates...");
 DATA.updates.forEach((u) => {
   validateItem(u, "update", ["id", "slug", "model", "headline", "whatChanged", "whoItAffects", "whatToDoNow"]);
+  if (u.publishedAtISO && (!u.announcedAtISO || !u.sources?.length)) {
+    errors.push({ type: "update", item: `update:${u.id}`, message: "A published news item needs a dated announcement and source" });
+  }
+  for (const source of u.sources ?? []) {
+    try {
+      const parsed = new URL(source.url);
+      if (parsed.protocol !== "https:" || !source.label.trim()) throw new Error("Invalid source");
+    } catch {
+      errors.push({ type: "update", item: `update:${u.id}`, message: "Invalid HTTPS source: " + source.url });
+    }
+  }
   if (!Array.isArray(u.whatChanged) || u.whatChanged.length === 0) {
     errors.push({ type: "update", item: `update:${u.id}`, message: "whatChanged must be a non-empty array" });
   }

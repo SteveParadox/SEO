@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+const scriptSourcePolicy =
+  process.env.NODE_ENV === "production"
+    ? "script-src 'self' 'unsafe-inline'"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+
 const nextConfig: NextConfig = {
   // Enable React strict mode for development to catch bugs early
   reactStrictMode: true,
@@ -39,14 +44,17 @@ const nextConfig: NextConfig = {
         // Content Security Policy (adjust if needed for external resources)
         {
           key: "Content-Security-Policy",
-          value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;",
+          value: `default-src 'self'; ${scriptSourcePolicy}; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'self';`,
         },
       ],
     },
   ],
 
   // Redirects for old URLs (add as needed)
-  redirects: async () => [],
+  redirects: async () => [
+    { source: "/prompts/prompts", destination: "/prompts", permanent: true },
+    { source: "/prompts/prompts/:slug", destination: "/prompts/:slug", permanent: true },
+  ],
 
   // Rewrites for internal routing (add as needed)
   rewrites: async () => [],

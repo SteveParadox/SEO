@@ -138,6 +138,9 @@ export type ModelUpdate = BaseContent & {
   // You showed these too
   tldr: string;
   relatedUpdates?: string[];
+  announcedAtISO?: ISODateString;
+  publishedAtISO?: ISODateString;
+  sources?: { label: string; url: string }[];
 };
 
 // ---------- Collections ----------

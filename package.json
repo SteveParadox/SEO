@@ -9,7 +9,10 @@
     "validate-seo:built": "node scripts/validate-seo-robots.mjs --built",
     "validate-data": "tsx scripts/validate-data.ts",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/content.test.ts",
+    "discover-content": "tsx scripts/discover-content.ts"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.8",

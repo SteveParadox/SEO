@@ -104,7 +104,39 @@ export default async function UpdatePage({ params }: PageProps) {
         <SaveButton kind="update" id={u.id} className="rounded-xl" />
       </div>
 
+      {u.announcedAtISO ? (
+        <p className="mt-4 text-sm text-muted-foreground">
+          Announced: {u.announcedAtISO} · Published on Xavkit: {u.publishedAtISO ?? "Not recorded"} · Last editorial update: {u.updatedAtISO}
+        </p>
+      ) : null}
+
       <div className="mt-6 grid gap-4">
+        {u.context ? (
+          <Card className="rounded-2xl">
+            <CardHeader><CardTitle>What happened</CardTitle></CardHeader>
+            <CardContent className="text-sm leading-relaxed">{u.context}</CardContent>
+          </Card>
+        ) : null}
+        {u.why ? (
+          <Card className="rounded-2xl">
+            <CardHeader><CardTitle>Why it matters</CardTitle></CardHeader>
+            <CardContent className="text-sm leading-relaxed">{u.why}</CardContent>
+          </Card>
+        ) : null}
+        {u.sources?.length ? (
+          <Card className="rounded-2xl">
+            <CardHeader><CardTitle>Official sources</CardTitle></CardHeader>
+            <CardContent className="space-y-2">
+              {u.sources.map((source) => (
+                <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer"
+                  className="block text-sm underline underline-offset-4 hover:text-primary">
+                  {source.label}
+                </a>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
+
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>What changed</CardTitle>

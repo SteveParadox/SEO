@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s — Xavkit",
   },
   description:
-    "Discover vetted AI tools, effective prompts, and significant model updates. Curated daily to help you stay informed.",
+    "Discover vetted AI tools, effective prompts, and significant model updates. Updated when new information has been verified.",
   robots: INDEXABLE_ROBOTS,
   openGraph: {
     siteName: "Xavkit",
