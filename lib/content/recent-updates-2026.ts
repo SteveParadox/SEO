@@ -123,7 +123,7 @@ export const recentUpdates: ModelUpdate[] = [
     "announcedAtISO": "2026-10-07",
     "publishedAtISO": "2026-10-16",
     "updatedAtISO": "2026-10-16",
-    "tldr": "Anthropic introduced Claude Haiku 5.",
+    "tldr": "Anthropic launched Claude Haiku 5.5 for fast, high-volume AI workflows.",
     "context": "Anthropic introduced Claude Haiku 5.5 for repetitive, high-volume tasks such as summarization, classification, and support. The announcement emphasizes low latency and cost, including distinct prices for prompts above 100,000 tokens. Anthropic also lists availability across its platform and selected clouds.",
     "why": "Small models can reduce cost when tasks are bounded and checked. For complex or consequential cases, a routed workflow with escalation can be safer than relying on one model for every step.",
     "whatChanged": [
@@ -161,7 +161,7 @@ export const recentUpdates: ModelUpdate[] = [
     "announcedAtISO": "2026-09-28",
     "publishedAtISO": "2026-10-16",
     "updatedAtISO": "2026-10-16",
-    "tldr": "Anthropic released Claude Sonnet 5.",
+    "tldr": "Anthropic launched Claude Sonnet 5.5 with a focus on everyday coding and professional work.",
     "context": "Anthropic released Claude Sonnet 5.5 as a lower-cost and faster option for coding, documents, and routine professional work. The provider describes improvements compared with Sonnet 5; reported speed and cost figures are vendor claims and may not match every real deployment.",
     "why": "A good model migration must measure the quality of accepted outputs, tool error handling, latency, and total usage. Raw benchmark results or per-token prices are insufficient by themselves.",
     "whatChanged": [
@@ -199,7 +199,7 @@ export const recentUpdates: ModelUpdate[] = [
     "announcedAtISO": "2026-09-22",
     "publishedAtISO": "2026-10-16",
     "updatedAtISO": "2026-10-16",
-    "tldr": "Anthropic introduced Claude Opus 5.",
+    "tldr": "Anthropic introduced Claude Opus 5.5 for demanding agents, coding, and professional work.",
     "context": "Anthropic introduced Claude Opus 5.5 as a higher-capability option for demanding coding, long-running agents, and professional judgment-intensive work. It reported improved efficiency compared with Opus 5, although actual spending depends on token counts and workload patterns.",
     "why": "Teams can reserve a powerful model for planning, exception handling, or tricky reasoning while routing predictable sub-tasks to less expensive models. Reliability testing remains necessary, especially for tool execution.",
     "whatChanged": [
@@ -237,7 +237,7 @@ export const recentUpdates: ModelUpdate[] = [
     "announcedAtISO": "2026-09-29",
     "publishedAtISO": "2026-10-16",
     "updatedAtISO": "2026-10-16",
-    "tldr": "OpenAI's September 29 safety addendum and product listings identify GPT-6.",
+    "tldr": "OpenAI announced GPT-6.1 Sol as a new model option for coding and professional workflows.",
     "context": "OpenAI's September 29 safety addendum and product listings identify GPT-6.1 Sol as a GPT-6-series model for coding, computer use, and professional tasks. The company positions it as a more affordable alternative for certain demanding workflows. Access and exact costs depend on the model service and product.",
     "why": "Computer-use agents require permission boundaries and auditable actions, regardless of model strength. Deployment teams should compare task completion, unsafe action prevention, latency, and actual spend.",
     "whatChanged": [

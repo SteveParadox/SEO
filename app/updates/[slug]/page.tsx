@@ -111,6 +111,18 @@ export default async function UpdatePage({ params }: PageProps) {
       ) : null}
 
       <div className="mt-6 grid gap-4">
+        {u.context ? (
+          <Card className="rounded-2xl">
+            <CardHeader><CardTitle>What happened</CardTitle></CardHeader>
+            <CardContent className="text-sm leading-relaxed">{u.context}</CardContent>
+          </Card>
+        ) : null}
+        {u.why ? (
+          <Card className="rounded-2xl">
+            <CardHeader><CardTitle>Why it matters</CardTitle></CardHeader>
+            <CardContent className="text-sm leading-relaxed">{u.why}</CardContent>
+          </Card>
+        ) : null}
         {u.sources?.length ? (
           <Card className="rounded-2xl">
             <CardHeader><CardTitle>Official sources</CardTitle></CardHeader>

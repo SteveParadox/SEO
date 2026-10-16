@@ -30,7 +30,12 @@ export const DATA: DataBundle & { bestPages: BestPage[] } = {
 // ---- Slug lookups ----
 function normalizeSlug(slug: string) {
   // decode URL encoding, trim junk, and normalize casing
-  return decodeURIComponent(slug).trim().toLowerCase();
+  try {
+    return decodeURIComponent(slug).trim().toLowerCase();
+  } catch {
+    // Malformed percent escapes are not a reason to crash a public route.
+    return slug.trim().toLowerCase();
+  }
 }
 
 // ---- Slug lookups ----
