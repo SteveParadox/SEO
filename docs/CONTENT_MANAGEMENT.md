@@ -8,3 +8,7 @@
 - Verify referenced tool and prompt IDs. Run `npm run validate-data` and `npm test` before publishing.
 - Source ingestion should propose pull requests for editorial review rather than auto-publish.
 - Do not copy press releases or other copyrighted content. Write original interpretation and practical implications.
+
+## Official release candidate discovery
+
+The repository ships `scripts/discover-content.ts` with three initial provider repositories: OpenAI Agents Python, Anthropic Claude Code, and Google Gemini CLI. It reads the public GitHub Releases API, ignores drafts and prereleases, deduplicates stable releases by repository and tag, and keeps a bounded review queue. No release body or copyrighted prose is republished. Run `npm run discover-content` locally with network access. The weekly workflow can propose a PR for review if GitHub Actions token permissions allow it. An editor must follow the original release page, verify claims, and hand-author a Xavkit update before publishing. Scheduled workflows must first be merged into the default branch and currently cannot be confirmed to have run.

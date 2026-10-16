@@ -14,7 +14,7 @@ Scope: Static inspection of the public `main` branch, content catalog, and the c
 | P1 | No visible automated CI/tests | Added initial content tests and pull-request validation workflow | Pending CI execution |
 | P1 | `app/home.tsx` and content modules are large | Component and content migration audit required | Open |
 | P1 | CSP includes `unsafe-eval` and `unsafe-inline` | Validate production behavior before tightening | Open |
-| P2 | No operational editorial discovery pipeline | Need verified feeds, review queue and scheduled proposals | Open |
+| P2 | No operational editorial discovery pipeline | Added bounded GitHub Releases candidate collection and draft-PR workflow; broader feeds, human review and execution validation remain | Partial, CI-dependent |
 | P2 | Pricing/benchmark claims in older entries lack systematic provenance | Audit all historical tool profiles and comparisons | Open |
 
 No claims are made about successful builds, browser tests, or a deployed production site until the CI and deployment checks are actually completed.

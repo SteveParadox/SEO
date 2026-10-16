@@ -40,3 +40,7 @@ The intended deployment target is Vercel. Verify `/robots.txt`, `/sitemap.xml`, 
 ## Ownership and licensing
 
 The GitHub repository is publicly visible, but this does not by itself grant permission to reuse its source code. No license is declared; do not assume an open-source license without the owner's explicit decision.
+
+## Content discovery
+
+Run `npm run discover-content` to read stable releases from selected official GitHub repositories into `content-review/github-releases.json`. Only candidate metadata and publisher URLs are recorded. The scheduled review workflow can open a draft content-candidate pull request once merged into the default branch; it **never publishes articles automatically**. The repository's Actions settings must allow pull-request creation for this workflow to work.
