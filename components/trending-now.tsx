@@ -33,18 +33,18 @@ export function TrendingNow({ limit = 4 }: { limit?: number }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10" aria-label="Trending now">
+    <section className="mx-auto max-w-6xl px-4 py-10" aria-label="Recommended based on device activity">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="flex items-center gap-2 text-2xl font-semibold tracking-tight md:text-3xl">
-            <Flame className="h-5 w-5" /> Trending now
+            <Flame className="h-5 w-5" /> For you on this device
           </h2>
           <p className="mt-2 max-w-2xl text-muted-foreground">
-            Popular picks gaining momentum across tools, prompts, updates, and rankings.
+            Recommendations based on this browser's activity, not site-wide popularity.
           </p>
         </div>
         <Link href="/trending" className="text-sm text-muted-foreground hover:text-foreground">
-          Open full trending &gt;
+          More from this device &gt;
         </Link>
       </div>
 
@@ -63,7 +63,7 @@ export function TrendingNow({ limit = 4 }: { limit?: number }) {
               <CardContent className="pt-0">
                 <div className="line-clamp-2 text-sm text-muted-foreground">{item.subtitle}</div>
                 <div className="mt-3 text-xs text-muted-foreground">
-                  {item.reason} | Views {item.signals.views} | Saves {item.signals.saves}
+                  {item.reason} | Local views {item.signals.views} | Local saves {item.signals.saves}
                 </div>
               </CardContent>
             </Card>

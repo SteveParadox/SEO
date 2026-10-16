@@ -46,7 +46,10 @@ const nextConfig: NextConfig = {
   ],
 
   // Redirects for old URLs (add as needed)
-  redirects: async () => [],
+  redirects: async () => [
+    { source: "/prompts/prompts", destination: "/prompts", permanent: true },
+    { source: "/prompts/prompts/:slug", destination: "/prompts/:slug", permanent: true },
+  ],
 
   // Rewrites for internal routing (add as needed)
   rewrites: async () => [],

@@ -53,9 +53,9 @@ function TrendingCard({
 
         <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>{item.reason}</span>
-          <span>Views {item.signals.views}</span>
-          <span>Saves {item.signals.saves}</span>
-          <span>Clicks {item.signals.outbounds}</span>
+          <span>Local views {item.signals.views}</span>
+          <span>Local saves {item.signals.saves}</span>
+          <span>Local clicks {item.signals.outbounds}</span>
         </div>
 
         <div className="mt-4 inline-flex items-center gap-1 text-sm text-muted-foreground">
@@ -93,10 +93,11 @@ export default function TrendingPage() {
           <Flame className="h-5 w-5" />
         </div>
         <div>
-          <h1 className="text-3xl font-semibold">Trending</h1>
+          <h1 className="text-3xl font-semibold">Your activity picks</h1>
         </div>
       </div>
 
+      <p className="mt-3 text-muted-foreground">Ranked using activity saved in this browser only. These are not site-wide popularity statistics.</p>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {items.map((item) => (
           <TrendingCard key={`${item.kind}-${item.id}`} item={item} />

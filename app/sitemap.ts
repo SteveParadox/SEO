@@ -4,22 +4,21 @@ import { absoluteUrl } from "@/lib/seo";
 import { getAlternativePageStaticSlugs } from "@/lib/alternatives";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
+    { url: absoluteUrl("/"), changeFrequency: "daily", priority: 1 },
 
-    { url: absoluteUrl("/tools"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    { url: absoluteUrl("/alternatives"), lastModified: now, changeFrequency: "weekly", priority: 0.88 },
-    { url: absoluteUrl("/prompts"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
-    { url: absoluteUrl("/ai-stack-builder"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: absoluteUrl("/compare-tools"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: absoluteUrl("/updates"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
-    { url: absoluteUrl("/collections"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/comparisons"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: absoluteUrl("/tools"), changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/alternatives"), changeFrequency: "weekly", priority: 0.88 },
+    { url: absoluteUrl("/prompts"), changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/ai-stack-builder"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/compare-tools"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/updates"), changeFrequency: "daily", priority: 0.7 },
+    { url: absoluteUrl("/collections"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/comparisons"), changeFrequency: "weekly", priority: 0.7 },
 
-    { url: absoluteUrl("/best"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: absoluteUrl("/tags"), lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: absoluteUrl("/best"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/tags"), changeFrequency: "weekly", priority: 0.6 },
   ];
 
   const tools = DATA.tools.map((t) => ({
@@ -62,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return {
       url: absoluteUrl(`/alternatives/${slug}`),
-      lastModified: new Date(tool?.updatedAtISO ?? now),
+      lastModified: tool ? new Date(tool.updatedAtISO) : undefined,
       changeFrequency: "weekly" as const,
       priority: 0.82,
     };
@@ -84,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const slug = encodeURIComponent(tag.trim().toLowerCase());
     return {
       url: absoluteUrl(`/tags/${slug}`),
-      lastModified: lastModified ? new Date(lastModified) : now,
+      lastModified: lastModified ? new Date(lastModified) : undefined,
       changeFrequency: "weekly" as const,
       priority: 0.6,
     };

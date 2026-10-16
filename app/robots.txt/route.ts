@@ -1,22 +1,18 @@
-function configuredSiteUrl() {
-  return (
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "")
-  ).replace(/\/+$/, "");
-}
+import { siteUrl } from "@/lib/seo";
 
+// Use the same canonical origin as metadata and the sitemap.
 export function GET() {
-  const site = configuredSiteUrl();
-  const lines = [
-    "User-Agent: *",
+  const origin = siteUrl();
+  const body = [
+    "User-agent: *",
     "Allow: /",
     "Disallow: /api/",
     "",
-    ...(site ? [`Sitemap: ${site}/sitemap.xml`] : []),
-  ];
+    `Sitemap: ${origin}/sitemap.xml`,
+    "",
+  ].join("\n");
 
-  return new Response(`${lines.join("\n")}\n`, {
+  return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400",
