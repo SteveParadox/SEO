@@ -10,7 +10,7 @@ Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, shadcn-style UI com
 
 1. Install the Node.js version supported by Next.js 16 (Node 20.9 or later is required).
 2. Run `npm ci`.
-3. Copy `.env.example` to `.env.local` and configure `NEXT_PUBLIC_SITE_URL` when testing production metadata.
+3. Copy `.env.example` to `.env.local` and replace its sample `NEXT_PUBLIC_SITE_URL` with your actual canonical origin.
 4. Run `npm run dev` and visit `http://localhost:3000`.
 
 ## Validation

@@ -18,3 +18,7 @@ Scope: Static inspection of the public `main` branch, content catalog, and the c
 | P2 | Pricing/benchmark claims in older entries lack systematic provenance | Audit all historical tool profiles and comparisons | Open |
 
 No claims are made about successful builds, browser tests, or a deployed production site until the CI and deployment checks are actually completed.
+
+Additional hygiene: `.env.example` was Markdown rather than a valid dotenv file and was repaired; unused browser-only newsletter persistence was removed. Production CSP now omits `unsafe-eval` while development retains it for compatibility. Requires deployed-header verification.
+
+GitHub Actions validation on draft PR #7 failed before any job steps appeared, with no downloadable job log. This is an execution blocker of unknown cause, not evidence that lint/build passed or failed. See the PR Actions tab for account-level Actions status and GitHub-hosted runner eligibility.
