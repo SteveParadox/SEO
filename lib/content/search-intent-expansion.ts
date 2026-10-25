@@ -288,6 +288,7 @@ export const searchIntentBestPages: BestPage[] = [
     primaryKeyword: "best AI tools for content research",
     intro: [
       "Content research is not the same as asking a chatbot to write an article. A reliable workflow needs source discovery, claim verification, outlining, collaboration, and a final human review. The right tool depends on which of those tasks currently slows you down.",
+      "Research assistants help discover starting points, workspace tools organize briefs, and writing assistants help polish the draft after facts have been checked.",
       "Selection note: this is a use-case shortlist based on each product’s described role and fit with the workflows above, not a controlled hands-on benchmark or a claim that one tool wins every task. Verify current features and pricing on vendor sites, and test candidates with the same research task before purchasing.",
       "This shortlist focuses on complementary roles rather than pretending one product is the best at everything. Research assistants can help discover starting points, workspace tools can organize briefs, and coding assistants can help maintain content systems or automate repeatable technical tasks. None removes the need to check original sources.",
       "Features, pricing, and usage limits change. Treat the picks as starting points, confirm current plan details on official product pages, and test the same task before committing to a paid subscription."
@@ -308,11 +309,10 @@ export const searchIntentBestPages: BestPage[] = [
         watchOutFor: ["Workspace AI access and limits vary by plan", "Keep source links attached to factual claims"]
       },
       {
-        toolId: "t1",
-        badge: "Best for Pros",
-        why: "A code-oriented option for teams that also maintain content-heavy websites, documentation, or SEO automation.",
-        bestFor: ["Maintaining content tooling and scripts", "Reviewing code for content pipelines", "Working on a site's technical implementation"],
-        watchOutFor: ["Not a replacement for dedicated keyword data", "Review generated code and protect credentials"]
+        toolId: "t25",
+        why: "A useful final-pass writing assistant for checking grammar, clarity, and tone after research is complete.",
+        bestFor: ["Copy editing and clarity", "Tone consistency", "Polishing a reviewed draft"],
+        watchOutFor: ["Writing suggestions do not fact-check claims", "Keep citations and evidence attached to factual statements"]
       }
     ],
     faqs: [
