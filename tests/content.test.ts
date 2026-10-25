@@ -29,7 +29,7 @@ test("expanded editorial prompts are substantive and structurally complete", () 
     assert.ok(prompt.tags.length >= 3, `${slug}: insufficient topical metadata`);
     assert.ok(prompt.limitations && prompt.limitations.length >= 40, `${slug}: limitations are missing`);
     assert.ok(prompt.successMetrics && prompt.successMetrics.length >= 40, `${slug}: success criteria are missing`);
-    assert.match(prompt.updatedAtISO, /^\\d{4}-\\d{2}-\\d{2}$/);
+    assert.match(prompt.updatedAtISO, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(Number.isFinite(Date.parse(prompt.updatedAtISO)), `${slug}: invalid update date`);
   }
 });
@@ -58,8 +58,8 @@ test("published recent updates have verifiable source URLs and real dates", () =
   const recent = DATA.updates.filter((update) => update.publishedAtISO);
   assert.ok(recent.length >= 9);
   for (const update of recent) {
-    assert.match(update.announcedAtISO ?? "", /^\\d{4}-\\d{2}-\\d{2}$/);
-    assert.match(update.publishedAtISO ?? "", /^\\d{4}-\\d{2}-\\d{2}$/);
+    assert.match(update.announcedAtISO ?? "", /^\d{4}-\d{2}-\d{2}$/);
+    assert.match(update.publishedAtISO ?? "", /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(Date.parse(update.announcedAtISO!) <= Date.parse(update.publishedAtISO!));
     assert.ok(update.sources?.length);
     for (const source of update.sources ?? []) {
@@ -78,6 +78,6 @@ test("content lookup handles URL-encoded slugs and malformed escapes", () => {
 
 test("canonical URL builder uses the configured site origin", () => {
   const actual = absoluteUrl("/updates");
-  assert.match(actual, /^https?:\\/\\/[^/]+\\/updates$/);
+  assert.match(actual, /^https?:\/\/[^/]+\/updates$/);
   assert.ok(!actual.includes("undefined"));
 });
