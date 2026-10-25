@@ -18,14 +18,15 @@ import { recentUpdates } from "@/lib/content/recent-updates-2026";
 import { collections } from "@/lib/content/collections";
 import { comparisons } from "@/lib/content/comparisons";
 import { BEST_PAGES, type BestPage } from "@/lib/content/best-pages";
+import { searchIntentPrompts, searchIntentUpdates, searchIntentBestPages } from "@/lib/content/search-intent-expansion";
 
 export const DATA: DataBundle & { bestPages: BestPage[] } = {
   tools,
-  prompts: [...prompts, ...expandedPrompts],
-  updates: [...recentUpdates, ...updates],
+  prompts: [...prompts, ...expandedPrompts, ...searchIntentPrompts],
+  updates: [...recentUpdates, ...searchIntentUpdates, ...updates],
   collections: [...collections, ...expandedCollections],
   comparisons,
-  bestPages: BEST_PAGES,
+  bestPages: [...BEST_PAGES, ...searchIntentBestPages],
 } as const;
 
 // ---- Slug lookups ----

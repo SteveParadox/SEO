@@ -35,7 +35,7 @@ const PRIMARY_NAV: NavItem[] = [
   { href: "/tools", label: "Tools", description: "Browse vetted AI products by use case." },
   { href: "/alternatives", label: "Alternatives", description: "Compare substitute tools for high-intent searches." },
   { href: "/prompts", label: "Prompts", description: "Find reusable prompts with real guidance." },
-  { href: "/best", label: "Best", description: "Open ranked shortlists for decision-heavy searches." },
+  { href: "/best", label: "Tool Rankings", description: "Compare AI tools by use case, budget, and skill level." },
   { href: "/ai-stack-builder", label: "Builder", description: "Generate a practical AI stack by goal, budget, and skill level." },
   { href: "/updates", label: "Updates", description: "Track meaningful model and ecosystem changes." },
   { href: "/comparisons", label: "Comparisons", description: "See side-by-side picks and tradeoffs." },
