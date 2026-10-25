@@ -54,6 +54,22 @@ test("expanded collections reference existing prompts and have distinct editoria
   }
 });
 
+test("search-intent expansion is integrated across prompts, updates, and ranked guides", () => {
+  for (const slug of ["keyword-research-and-search-intent-mapper", "free-seo-tools-workflow-builder", "ai-seo-content-brief-and-human-review", "seo-competitor-content-gap-audit"]) {
+    const prompt = DATA.prompts.find((item) => item.slug === slug);
+    assert.ok(prompt, `missing search-intent prompt: ${slug}`);
+    assert.ok(prompt.prompt.length >= 500, `${slug}: prompt lacks operational detail`);
+    assert.ok(prompt.variations.length >= 3, `${slug}: variations missing`);
+    assert.ok(prompt.tags.includes("seo") || prompt.tags.some((tag) => tag.includes("seo")), `${slug}: SEO metadata missing`);
+  }
+  const update = DATA.updates.find((item) => item.slug === "google-ai-search-links-and-source-context-oct-2026");
+  assert.ok(update, "missing sourced Google AI Search update");
+  assert.ok(update.sources?.some((source) => source.url.includes("blog.google")));
+  const bestPage = DATA.bestPages.find((item) => item.slug === "best-ai-tools-for-content-research");
+  assert.ok(bestPage, "missing AI content research ranking guide");
+  for (const pick of bestPage.picks) assert.ok(DATA.tools.some((tool) => tool.id === pick.toolId), `unresolved tool pick: ${pick.toolId}`);
+});
+
 test("published recent updates have verifiable source URLs and real dates", () => {
   const recent = DATA.updates.filter((update) => update.publishedAtISO);
   assert.ok(recent.length >= 9);
