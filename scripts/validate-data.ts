@@ -131,7 +131,7 @@ DATA.bestPages.forEach((page) => {
   if (!Array.isArray(page.faqs) || page.faqs.some((faq) => !faq.q?.trim() || !faq.a?.trim())) {
     errors.push({ type: "best page", item: `best:${page.id}`, message: "Every FAQ must have a question and answer" });
   }
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(page.updatedAtISO) || !Number.isFinite(Date.parse(page.updatedAtISO))) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(page.updatedAtISO) || !Number.isFinite(Date.parse(page.updatedAtISO))) {
     errors.push({ type: "best page", item: `best:${page.id}`, message: "updatedAtISO must be a valid YYYY-MM-DD date" });
   }
 });
