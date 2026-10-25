@@ -273,8 +273,7 @@ export const searchIntentUpdates: ModelUpdate[] = [
         url: "https://developers.google.com/search/docs/appearance/ai-features"
       }
     ],
-    tags: ["google-search", "ai-search", "seo", "content-quality"],
-    updatedAtISO: "2026-10-25"
+    tags: ["google-search", "ai-search", "seo", "content-quality"]
   }
 ];
 
