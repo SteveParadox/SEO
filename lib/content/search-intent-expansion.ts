@@ -244,7 +244,7 @@ export const searchIntentUpdates: ModelUpdate[] = [
 
 export const searchIntentBestPages: BestPage[] = [
   {
-    id: "b9",
+    id: "b20",
     slug: "best-ai-tools-for-content-research",
     title: "Best AI Tools for Content Research (2026)",
     description: "Compare AI research and writing-workflow tools for source discovery, outlining, collaboration, and content review, with practical limitations.",
