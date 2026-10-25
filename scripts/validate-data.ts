@@ -105,6 +105,37 @@ DATA.comparisons.forEach((c) => {
   });
 });
 
+// Validate ranked guides, which are rendered as indexable pages.
+console.log("Validating ranked guides...");
+DATA.bestPages.forEach((page) => {
+  validateItem(page, "best page", ["id", "slug", "title", "description", "primaryKeyword", "intro", "picks", "faqs", "updatedAtISO", "tags"]);
+  if (!Array.isArray(page.intro) || page.intro.length < 2 || page.intro.some((paragraph) => typeof paragraph !== "string" || paragraph.trim().length < 40)) {
+    errors.push({ type: "best page", item: `best:${page.id}`, message: "intro must contain at least two substantive paragraphs" });
+  }
+  if (!Array.isArray(page.picks) || page.picks.length < 2) {
+    errors.push({ type: "best page", item: `best:${page.id}`, message: "ranked guide must have at least two picks" });
+  }
+  const seenToolIds = new Set<string>();
+  for (const pick of page.picks ?? []) {
+    if (!DATA.tools.some((tool) => tool.id === pick.toolId)) {
+      errors.push({ type: "best page", item: `best:${page.id}`, message: `Unknown tool reference: ${pick.toolId}` });
+    }
+    if (seenToolIds.has(pick.toolId)) {
+      errors.push({ type: "best page", item: `best:${page.id}`, message: `Duplicate tool pick: ${pick.toolId}` });
+    }
+    seenToolIds.add(pick.toolId);
+    if (!pick.why?.trim() || !Array.isArray(pick.bestFor) || pick.bestFor.length === 0) {
+      errors.push({ type: "best page", item: `best:${page.id}`, message: `Pick ${pick.toolId} needs a reason and at least one use case` });
+    }
+  }
+  if (!Array.isArray(page.faqs) || page.faqs.some((faq) => !faq.q?.trim() || !faq.a?.trim())) {
+    errors.push({ type: "best page", item: `best:${page.id}`, message: "Every FAQ must have a question and answer" });
+  }
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(page.updatedAtISO) || !Number.isFinite(Date.parse(page.updatedAtISO))) {
+    errors.push({ type: "best page", item: `best:${page.id}`, message: "updatedAtISO must be a valid YYYY-MM-DD date" });
+  }
+});
+
 // Check for slug collisions
 console.log("Checking for slug collisions...");
 const slugs = new Map<string, string>();
@@ -114,6 +145,7 @@ const allItems = [
   ...DATA.updates.map((u) => ({ slug: u.slug, type: "update", id: u.id })),
   ...DATA.collections.map((c) => ({ slug: c.slug, type: "collection", id: c.id })),
   ...DATA.comparisons.map((c) => ({ slug: c.slug, type: "comparison", id: c.id })),
+  ...DATA.bestPages.map((p) => ({ slug: p.slug, type: "best", id: p.id })),
 ];
 
 allItems.forEach(({ slug, type, id }) => {
