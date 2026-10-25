@@ -85,7 +85,7 @@ test("search-intent content has valid dates, sourced claims, and complete ranked
     assert.ok(prompt.successMetrics && prompt.successMetrics.length >= 40, `${slug}: success criteria missing`);
     assert.ok(prompt.prompt.includes("{"), `${slug}: expected explicit input placeholders`);
     assert.ok(prompt.variations.every((variation) => variation.trim().length >= 20), `${slug}: empty variation`);
-    assert.match(prompt.updatedAtISO, /^\\d{4}-\\d{2}-\\d{2}$/);
+    assert.match(prompt.updatedAtISO, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(new Date(prompt.updatedAtISO).toISOString().slice(0, 10), prompt.updatedAtISO);
   }
 
