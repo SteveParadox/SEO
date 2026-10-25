@@ -118,7 +118,7 @@ Website: {WEBSITE_TYPE}`,
     technicalRequirements: "Supply the topic, audience, existing URLs, authoritative source links, and any original tests or examples available.",
     realWorldApplications: "Editorial teams, SaaS blogs, developer documentation, AI-tool directories, and small businesses producing search-focused resources.",
     successMetrics: "The article answers a real task, contains verified claims and a distinct contribution, and passes a human review before publication.",
-    relatedPrompts: "Combine with the source-grounded research brief and content quality audit.",
+    relatedPrompts: "Combine with the research brief that requires source checks and the content quality audit.",
     prompt: `Create a human-reviewed SEO content brief for {TOPIC}.
 
 Audience and intended task: {AUDIENCE_AND_TASK}
@@ -211,9 +211,9 @@ export const searchIntentUpdates: ModelUpdate[] = [
     announcedAtISO: "2026-10-15",
     publishedAtISO: "2026-10-25",
     updatedAtISO: "2026-10-25",
-    tldr: "Google announced changes to inline links and source context in AI Mode and AI Overviews. The announcement describes interface changes; it does not establish how much traffic any publisher will gain.",
+    tldr: "Google announced changes to inline links and source context in AI Mode and AI Overviews on October 15, 2026.",
     description: "Summary of Google's October 15, 2026 announcement about links and context in AI search.",
-    context: "Google's announcement describes more prominent inline links, clearer context around sources, and additional ways to discover relevant pages in AI Mode and AI Overviews. These are product changes, not a promise that any particular page will be cited or receive more traffic.",
+    context: "The announcement describes more prominent inline links, extra context around selected sources, and additional ways to discover pages from AI Mode and AI Overviews. It is a change to the search interface; the announcement does not report traffic results for individual sites.",
     why: "Review whether important pages answer the query, support factual claims, and make source links easy to follow. Track referral and search performance after the interface change; do not assume it will increase traffic.",
     whatChanged: [
       "Google announced updates that make inline links in AI responses easier to discover.",
@@ -226,7 +226,7 @@ export const searchIntentUpdates: ModelUpdate[] = [
       "Check that key pages answer the query, cite evidence for factual claims, and help readers find related material.",
       "Compare Search Console and analytics data before and after rollout, accounting for seasonality and other changes."
     ],
-    limitations: "This update summarizes Google's published announcement. It does not establish ranking changes, guaranteed citations, or traffic impact for an individual site. Availability and search presentation can vary.",
+    limitations: "The announcement does not report ranking changes or traffic impact for individual sites. Features and availability may differ by market and rollout stage.",
     sources: [
       {
         label: "Google official announcement, October 15, 2026",
@@ -297,7 +297,7 @@ export const searchIntentBestPages: BestPage[] = [
       {
         toolId: "t2",
         badge: "Best Overall",
-        why: "Useful for exploring a topic and finding source links to verify before drafting.",
+        why: "Helps researchers explore a topic and find source links to check before drafting.",
         bestFor: ["Early research and question discovery", "Building a list of sources to verify", "Comparing viewpoints before drafting"],
         watchOutFor: ["Open and verify cited sources directly", "Do not assume a generated summary captures every caveat"]
       },
