@@ -672,52 +672,6 @@ export const BEST_PAGES: BestPage[] = [
   },
 
   {
-    id: "b15",
-    slug: "best-ai-tools-for-seo",
-    title: "Best AI Tools for SEO (2026)",
-    description:
-      "Top AI SEO tools for keyword research, content optimization, and technical SEO. Tools that improve rankings without spamming search engines.",
-    primaryKeyword: "best ai tools for seo",
-    intro: [
-      "SEO AI tools help with content creation and optimization, but good SEO still requires understanding search intent and user needs.",
-      "The best SEO tools speed up keyword research and content production while maintaining quality that actually ranks.",
-      "These picks focus on tools that help create genuinely useful content, not AI spam that Google penalizes.",
-    ],
-    picks: [
-      {
-        toolId: "t18",
-        badge: "Best Overall",
-        why: "Versatile for content outlines, meta descriptions, and content optimization.",
-        bestFor: ["Content outlines", "Meta descriptions", "FAQ sections"],
-        watchOutFor: ["Generic content doesn't rank", "Needs heavy editing"],
-      },
-      {
-        toolId: "t2",
-        badge: "Best for Teams",
-        why: "Research tool for understanding what's ranking and finding content gaps.",
-        bestFor: ["Competitor research", "Topic exploration", "Content gap analysis"],
-        watchOutFor: ["Verify all data", "Summaries miss nuance"],
-      },
-      {
-        toolId: "t19",
-        badge: "Best Budget",
-        why: "High-quality content generation that reads naturally when edited properly.",
-        bestFor: ["Long-form content", "Comprehensive guides", "Natural writing"],
-        watchOutFor: ["Still needs SEO optimization", "Can be verbose"],
-      },
-    ],
-    faqs: [
-      { q: "Can AI content rank in Google?", a: "Yes, if it's high quality, useful, and written for humans. Google penalizes thin AI content but rewards helpful content regardless of how it's created." },
-      { q: "Should I disclose AI-generated content?", a: "Google doesn't require it, but focus on quality over disclosure. If the content helps users, it can rank." },
-      { q: "What's the biggest SEO mistake with AI?", a: "Publishing AI content without editing for accuracy, depth, and originality. Generic AI content doesn't rank well." },
-      { q: "How do I make AI content rank?", a: "Add unique insights, examples, data, and original analysis. Use AI for structure and research, then add value that AI can't provide." },
-      { q: "What about AI content penalties?", a: "Google targets low-quality content, not AI content specifically. Make it genuinely helpful and comprehensive." },
-    ],
-    tags: ["seo", "content", "marketing", "search"],
-    updatedAtISO: "2026-01-25",
-  },
-
-  {
     id: "b16",
     slug: "best-ai-tools-for-video-editing",
     title: "Best AI Tools for Video Editing (2026)",
