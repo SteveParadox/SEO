@@ -288,6 +288,7 @@ export const searchIntentBestPages: BestPage[] = [
     primaryKeyword: "best AI tools for content research",
     intro: [
       "Content research is not the same as asking a chatbot to write an article. A reliable workflow needs source discovery, claim verification, outlining, collaboration, and a final human review. The right tool depends on which of those tasks currently slows you down.",
+      "Selection note: this is a use-case shortlist based on each product’s described role and fit with the workflows above, not a controlled hands-on benchmark or a claim that one tool wins every task. Verify current features and pricing on vendor sites, and test candidates with the same research task before purchasing.",
       "This shortlist focuses on complementary roles rather than pretending one product is the best at everything. Research assistants can help discover starting points, workspace tools can organize briefs, and coding assistants can help maintain content systems or automate repeatable technical tasks. None removes the need to check original sources.",
       "Features, pricing, and usage limits change. Treat the picks as starting points, confirm current plan details on official product pages, and test the same task before committing to a paid subscription."
     ],
