@@ -11,7 +11,7 @@ export const searchIntentPrompts: Prompt[] = [
     slug: "keyword-research-and-search-intent-mapper",
     title: "SEO Keyword Research and Search Intent Mapper",
     purpose: "Turn seed topics and verified keyword data into a focused content plan.",
-    description: "A practical keyword research workflow that groups related queries by intent, page type, business relevance, and evidence quality instead of treating every phrase as a separate article opportunity.",
+    description: "Groups related queries by intent and page purpose, then checks them against business priorities, existing URLs, and available keyword evidence.",
     whenToUse: "Use when planning a new site section, building a topical cluster, refreshing a content calendar, or deciding which query deserves a guide, comparison, landing page, or no new page at all.",
     decisionContext: "This prompt organizes keyword evidence supplied by the user. It does not have inherent access to live search volume, keyword difficulty, or SERP results. Validate candidates in Google Search Console, Google Trends, Bing Webmaster Tools, or a keyword platform before committing resources.",
     howItWorks: "It normalizes seed terms, groups close variants, identifies informational, commercial, transactional, and navigational intent, then maps clusters to existing URLs or proposed pages. It flags cannibalization risk and separates observed data from hypotheses.",
@@ -23,7 +23,7 @@ export const searchIntentPrompts: Prompt[] = [
     realWorldApplications: "Editorial planning, content-cluster design, site migrations, product-led SEO, and prioritizing pages from Search Console opportunities.",
     successMetrics: "Every proposed page has a distinct purpose, existing URLs are considered first, priority decisions are traceable to evidence, and the plan avoids unnecessary near-duplicate pages.",
     relatedPrompts: "Use with the SEO content brief, content quality audit, and technical article refresh prompts.",
-    prompt: `Act as an evidence-led SEO strategist. Build a keyword and search-intent map for {SITE_OR_TOPIC}.
+    prompt: `Act as an SEO analyst. Build a keyword and search-intent map for {SITE_OR_TOPIC}.
 
 Target audience and geography: {AUDIENCE_AND_REGION}
 Business or site goal: {BUSINESS_GOAL}
@@ -33,7 +33,7 @@ Competitor pages actually reviewed: {REVIEWED_COMPETITORS}
 Available performance data: {SEARCH_CONSOLE_DATA}
 
 For each cluster:
-- Group genuinely equivalent queries without collapsing different intents.
+- Group equivalent queries without merging terms that serve different intents.
 - Label intent as informational, commercial investigation, transactional, or navigational; explain ambiguous cases.
 - Record the evidence source and date for any supplied volume, trend, difficulty, impression, click, or ranking metric.
 - Recommend an existing URL to improve, a new page to consider, a merge, or no action.
@@ -57,18 +57,18 @@ Site/topic: {SITE_OR_TOPIC}`,
     id: "xp2002",
     slug: "free-seo-tools-workflow-builder",
     title: "Free SEO Tools Workflow Builder",
-    purpose: "Design a useful SEO workflow around free tools and known limits.",
-    description: "Creates a step-by-step workflow for technical checks, keyword discovery, performance monitoring, and content decisions using free or free-tier tools, with clear notes about data limits and when a paid tool may be justified.",
+    purpose: "Build an SEO workflow around free tools, their limits, and the tasks they can support.",
+    description: "Maps technical checks, keyword discovery, performance monitoring, and content decisions to free or free-tier tools. It records data limits and the conditions that would justify paying for a tool.",
     whenToUse: "Use when starting SEO on a small site, working with a limited budget, teaching SEO basics, or deciding whether a paid subscription solves a real problem.",
-    decisionContext: "Free tiers change, and some products restrict history, exports, tracked keywords, or crawl size. The workflow must verify current plan details instead of promising that every feature is free.",
+    decisionContext: "Free tiers change, and some products restrict history, exports, tracked keywords, or crawl size. Check each vendor’s current plan before describing a feature as free.",
     howItWorks: "The prompt maps each SEO task to an appropriate tool category, defines the input and expected output, and specifies a manual fallback where available. It separates first-party performance data from third-party estimates.",
     bestPractices: "Start with Search Console and analytics access where appropriate, verify the site's ownership, and document tool limits. Use official product pages for current pricing and feature claims.",
-    commonMistakes: "Do not label a limited trial as permanently free, confuse estimated third-party metrics with Google data, or recommend buying a suite before the workflow has a clear requirement.",
+    commonMistakes: "Do not describe a trial as a permanent free plan, present third-party estimates as Google measurements, or recommend a paid suite without identifying the task it would solve.",
     expectedOutput: "A workflow table with task, tool, cost tier, setup, steps, output, limitation, validation method, and upgrade trigger.",
     limitations: "Free-plan availability and quotas change. Tool recommendations must be rechecked against current official plan pages before publication.",
     technicalRequirements: "Provide site size, CMS, technical access, geography, budget, and which SEO tasks matter most.",
     realWorldApplications: "Small-business SEO, creator sites, early-stage products, student projects, and agency onboarding.",
-    successMetrics: "The workflow can be followed without undocumented paid features, each tool has a clear purpose, and upgrade decisions are tied to a measurable limitation.",
+    successMetrics: "Every step works with the stated access level, each tool has a defined job, and upgrade decisions cite a specific limit or unmet requirement.",
     relatedPrompts: "Pair with the SEO content brief and technical SEO audit checklist.",
     prompt: `Build a realistic SEO workflow using free and free-tier tools for {WEBSITE_TYPE}.
 
@@ -106,10 +106,10 @@ Website: {WEBSITE_TYPE}`,
     id: "xp2003",
     slug: "ai-seo-content-brief-and-human-review",
     title: "AI SEO Content Brief with Human Review Gates",
-    purpose: "Plan useful AI-assisted content without publishing generic, unverified pages.",
+    purpose: "Plan AI-assisted content that answers a specific reader question and passes editorial review.",
     description: "Produces an intent-led brief with a distinct reader benefit, primary-source requirements, original contribution, and explicit editorial checks. It is designed to prevent keyword stuffing and scaled low-value content.",
     whenToUse: "Use before drafting tutorials, software explainers, AI tool guides, product comparisons, and pages that depend on changing product features or prices.",
-    decisionContext: "AI can help with research organization and structure, but publishing many lightly edited pages is not a substitute for expertise. Google's published guidance emphasizes accuracy, relevance, originality, and people-first value.",
+    decisionContext: "AI can help organize research and draft structure. It cannot supply first-hand experience or verify claims by itself. Google's guidance emphasizes helpful content and established SEO practices.",
     howItWorks: "The prompt defines the user's task, reviews existing pages, proposes evidence requirements, and asks for original examples or analysis before suggesting an outline. It adds fact-check and editorial approval gates.",
     bestPractices: "Provide first-party documentation, tested examples, the site's existing content, and the reviewer responsible for approval. Mark untested claims and disclose AI use when it is relevant to readers.",
     commonMistakes: "Do not generate hundreds of city or keyword variants, fabricate expert experience, claim hands-on tests that did not happen, or publish unsupported comparisons.",
@@ -128,7 +128,7 @@ Primary sources and evidence: {SOURCES}
 Original experience, data, or examples available: {ORIGINAL_INPUTS}
 
 Deliver:
-- The exact reader problem and a clear page promise.
+- The reader’s problem and the question the page will answer.
 - Search intent and the evidence that supports this interpretation.
 - A proposed title, outline, and concise answer to the core question.
 - Claims requiring first-party sources, testing, dates, or caveats.
@@ -158,11 +158,11 @@ Topic: {TOPIC}`,
     id: "xp2004",
     slug: "seo-competitor-content-gap-audit",
     title: "SEO Competitor Content Gap and Differentiation Audit",
-    purpose: "Find meaningful gaps without copying competing pages.",
+    purpose: "Find content gaps worth addressing without copying competitors.",
     description: "Audits a supplied set of competitor URLs and existing site pages to identify unanswered questions, missing evidence, weak task coverage, and realistic opportunities for original content.",
     whenToUse: "Use before launching a content cluster, refreshing pages that lost relevance, or deciding whether a competitor topic is worth covering.",
-    decisionContext: "A competitor ranking for a query does not prove that your site should create the same page. The opportunity depends on audience fit, existing coverage, evidence, and whether you can add something useful.",
-    howItWorks: "It compares page purpose, audience, evidence, examples, structure, freshness, and next-step usefulness. It reports observed differences separately from assumptions about traffic or ranking.",
+    decisionContext: "A competitor ranking for a query does not prove that your site should create the same page. The opportunity depends on audience fit, existing coverage, and whether you can add original evidence, analysis, or a better answer.",
+    howItWorks: "It compares page purpose, audience, supporting evidence, examples, structure, freshness, and actionable next steps. It separates page observations from assumptions about traffic or rankings.",
     bestPractices: "Supply URLs or page text actually reviewed and include your own pages. Record review dates for changing subjects and validate demand separately.",
     commonMistakes: "Do not copy competitor wording, assume a page's traffic from its ranking alone, or describe a missing section as a proven ranking opportunity without evidence.",
     expectedOutput: "A gap matrix, existing-URL mapping, original-angle options, source needs, consolidation recommendations, and a prioritized test plan.",
@@ -182,7 +182,7 @@ Compare:
 - Reader task and search intent
 - Questions answered and questions left unresolved
 - Evidence quality, original examples, and first-party experience
-- Clarity, accessibility, freshness, and practical next steps
+- Readability, accessibility, freshness, and actionable next steps
 - Claims that need independent verification
 - Overlap with our existing pages and consolidation options
 
@@ -207,24 +207,24 @@ export const searchIntentUpdates: ModelUpdate[] = [
     id: "u50",
     slug: "google-ai-search-links-and-source-context-oct-2026",
     model: "Google Search",
-    headline: "Google updates AI Mode and AI Overviews with clearer source links",
+    headline: "Google changes how links appear in AI Mode and AI Overviews",
     announcedAtISO: "2026-10-15",
     publishedAtISO: "2026-10-25",
     updatedAtISO: "2026-10-25",
-    tldr: "Google announced changes to inline links and source context in AI Mode and AI Overviews, making it more important for publishers to provide useful, trustworthy pages worth visiting.",
-    description: "A source-grounded summary of Google's October 15, 2026 announcement about links and context in AI search experiences.",
+    tldr: "Google announced changes to inline links and source context in AI Mode and AI Overviews. The announcement describes interface changes; it does not establish how much traffic any publisher will gain.",
+    description: "Summary of Google's October 15, 2026 announcement about links and context in AI search.",
     context: "Google's announcement describes more prominent inline links, clearer context around sources, and additional ways to discover relevant pages in AI Mode and AI Overviews. These are product changes, not a promise that any particular page will be cited or receive more traffic.",
-    why: "Publishers should make their pages genuinely useful, easy to navigate, and supported by evidence. A change to search presentation is a reason to monitor referral and search performance, not to chase speculative AI-search hacks.",
+    why: "Review whether important pages answer the query, support factual claims, and make source links easy to follow. Track referral and search performance after the interface change; do not assume it will increase traffic.",
     whatChanged: [
       "Google announced updates that make inline links in AI responses easier to discover.",
-      "The announcement describes clearer context for selected source links.",
+      "The announcement describes additional context for selected source links.",
       "Google continues to adjust how people explore websites from AI search experiences."
     ],
     whoItAffects: ["Website owners and publishers", "SEO and content teams", "People researching through Google AI search"],
     whatToDoNow: [
       "Read the official announcement and check the current availability for your market.",
-      "Review important pages for clear answers, source quality, useful navigation, and original value.",
-      "Monitor Search Console and analytics over time instead of assuming the interface change guarantees traffic gains."
+      "Check that key pages answer the query, cite evidence for factual claims, and help readers find related material.",
+      "Compare Search Console and analytics data before and after rollout, accounting for seasonality and other changes."
     ],
     limitations: "This update summarizes Google's published announcement. It does not establish ranking changes, guaranteed citations, or traffic impact for an individual site. Availability and search presentation can vary.",
     sources: [
@@ -248,10 +248,10 @@ export const searchIntentUpdates: ModelUpdate[] = [
     announcedAtISO: "2026-05-15",
     publishedAtISO: "2026-05-15",
     updatedAtISO: "2026-10-25",
-    tldr: "Google's guidance says foundational SEO remains relevant to AI Overviews and AI Mode, and recommends useful, original, people-first content rather than special AI-search hacks.",
-    description: "A practical summary of Google's official guidance for website owners seeking visibility in generative AI features in Search.",
+    tldr: "Google says standard SEO practices remain relevant to AI Overviews and AI Mode. Its guidance does not require special schema just for these features.",
+    description: "Summary of Google's guidance for websites appearing in AI Overviews and AI Mode.",
     context: "Google Search Central published a guide for website owners, SEOs, and developers on generative AI features in Search. The guidance emphasizes technical eligibility, crawlability, internal linking, accessible text, accurate structured data, and content that offers value beyond common knowledge. It says there are no additional technical requirements or special schema markup just for AI Overviews or AI Mode.",
-    why: "This helps content teams avoid wasting time on unsupported optimization folklore. The practical path is to maintain sound technical SEO, create genuinely useful pages, and measure actual performance instead of assuming a tactic guarantees AI citations.",
+    why: "The guidance does not describe a separate set of ranking tricks for AI search. Check crawlability, indexing, internal links, and page quality, then measure performance in Search Console. Inclusion in AI responses is not guaranteed.",
     whatChanged: [
       "Google published a dedicated guide to generative AI features in Search.",
       "The guide reiterates that core SEO practices remain foundational.",
@@ -260,7 +260,7 @@ export const searchIntentUpdates: ModelUpdate[] = [
     whoItAffects: ["SEO practitioners", "Publishers and content teams", "Web developers and site owners"],
     whatToDoNow: [
       "Check crawlability, indexing eligibility, internal links, and whether important information is available as text.",
-      "Improve original evidence, expert context, and task completion rather than adding generic AI-generated pages.",
+      "Add first-hand examples or supporting evidence where available; do not publish pages that only rephrase existing search results.",
       "Use Search Console to monitor performance and validate technical issues."
     ],
     limitations: "Eligibility does not guarantee crawling, indexing, ranking, or inclusion in an AI-generated response. This summary reflects Google's published guidance and should not be interpreted as a ranking guarantee.",
@@ -284,42 +284,42 @@ export const searchIntentBestPages: BestPage[] = [
     id: "b30",
     slug: "best-ai-tools-for-content-research",
     title: "Best AI Tools for Content Research (2026)",
-    description: "Compare AI research and writing-workflow tools for source discovery, outlining, collaboration, and content review, with practical limitations.",
+    description: "Compare tools for research, team documentation, and copy editing, including where each fits and where it falls short.",
     primaryKeyword: "best AI tools for content research",
     intro: [
       "Content research is not the same as asking a chatbot to write an article. A reliable workflow needs source discovery, claim verification, outlining, collaboration, and a final human review. The right tool depends on which of those tasks currently slows you down.",
-      "Research assistants help discover starting points, workspace tools organize briefs, and writing assistants help polish the draft after facts have been checked.",
+      "Perplexity is suited to source discovery, Notion AI to organizing work in a shared workspace, and Grammarly to editing a draft. None replaces checking the original sources.",
       "Selection note: this is a use-case shortlist based on each product’s described role and fit with the workflows above, not a controlled hands-on benchmark or a claim that one tool wins every task. Verify current features and pricing on vendor sites, and test candidates with the same research task before purchasing.",
       "The picks are organized by workflow fit: source discovery, team organization, and editorial polish. This guide does not score keyword volume, backlink metrics, or SERP performance, so use dedicated SEO data tools when those measurements are part of the decision.",
-      "Features, pricing, and usage limits change. Treat the picks as starting points, confirm current plan details on official product pages, and test the same task before committing to a paid subscription."
+      "Check current plan limits and pricing on each vendor’s site. Before paying, test the candidates against the same research brief and compare source quality, editing time, and team fit."
     ],
     picks: [
       {
         toolId: "t2",
         badge: "Best Overall",
-        why: "A practical starting point for exploring a topic and discovering sources to inspect.",
+        why: "Useful for exploring a topic and finding source links to verify before drafting.",
         bestFor: ["Early research and question discovery", "Building a list of sources to verify", "Comparing viewpoints before drafting"],
         watchOutFor: ["Open and verify cited sources directly", "Do not assume a generated summary captures every caveat"]
       },
       {
         toolId: "t3",
         badge: "Best for Teams",
-        why: "Useful when briefs, shared notes, editorial tasks, and drafts already live in a shared workspace.",
+        why: "Fits teams that already keep briefs, notes, editorial tasks, and drafts in Notion.",
         bestFor: ["Organizing research notes", "Collaborative briefs and drafts", "Turning meeting notes into editorial tasks"],
         watchOutFor: ["Workspace AI access and limits vary by plan", "Keep source links attached to factual claims"]
       },
       {
         toolId: "t25",
-        why: "A useful final-pass writing assistant for checking grammar, clarity, and tone after research is complete.",
+        why: "Helps catch grammar, wording, and tone issues after the facts and citations have been checked.",
         bestFor: ["Copy editing and clarity", "Tone consistency", "Polishing a reviewed draft"],
         watchOutFor: ["Writing suggestions do not fact-check claims", "Keep citations and evidence attached to factual statements"]
       }
     ],
     faqs: [
       { q: "Can AI tools do SEO keyword research by themselves?", a: "They can help organize ideas and classify intent, but current search demand should be validated with keyword data, Search Console, Google Trends, or another source that exposes the relevant metrics." },
-      { q: "Should I publish AI-written articles without editing?", a: "No. Verify material claims, add useful original experience or analysis, remove generic filler, and ensure the article actually solves the reader's problem." },
+      { q: "Should I publish AI-written articles without editing?", a: "No. Check factual claims against original sources, add first-hand examples or analysis where possible, remove sections that repeat existing pages, and make sure the article answers the query." },
       { q: "Are these tools all free?", a: "No universal free-status claim is made here. Plans and limits change, so check each vendor's current official pricing and feature pages." },
-      { q: "What is the best workflow for research-heavy SEO content?", a: "Use a research tool to find leads, verify claims against primary sources, organize the evidence in a brief, draft for a clear reader task, then complete a human fact-check and quality audit." }
+      { q: "What is the best workflow for research-heavy SEO content?", a: "Use a research tool to find candidate sources, check each important claim against the originals, organize the evidence in a brief, draft to answer the query, and have an editor review the finished page." }
     ],
     updatedAtISO: "2026-10-25",
     tags: ["ai-tools", "content-research", "writing", "seo", "research"]
