@@ -204,7 +204,7 @@ Site/topic: {SITE_OR_TOPIC}`,
 
 export const searchIntentUpdates: ModelUpdate[] = [
   {
-    id: "u45",
+    id: "u50",
     slug: "google-ai-search-links-and-source-context-oct-2026",
     model: "Google Search",
     headline: "Google updates AI Mode and AI Overviews with clearer source links",
@@ -244,7 +244,7 @@ export const searchIntentUpdates: ModelUpdate[] = [
 
 export const searchIntentBestPages: BestPage[] = [
   {
-    id: "b20",
+    id: "b30",
     slug: "best-ai-tools-for-content-research",
     title: "Best AI Tools for Content Research (2026)",
     description: "Compare AI research and writing-workflow tools for source discovery, outlining, collaboration, and content review, with practical limitations.",
