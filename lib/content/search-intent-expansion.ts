@@ -239,6 +239,43 @@ export const searchIntentUpdates: ModelUpdate[] = [
     ],
     tags: ["google-search", "ai-search", "seo", "publishers"],
     updatedAtISO: "2026-10-25"
+  },
+  {
+    id: "u51",
+    slug: "google-generative-ai-search-seo-guidance-may-2026",
+    model: "Google Search Central",
+    headline: "Google publishes guidance for visibility in generative AI search",
+    announcedAtISO: "2026-05-15",
+    publishedAtISO: "2026-05-15",
+    updatedAtISO: "2026-10-25",
+    tldr: "Google's guidance says foundational SEO remains relevant to AI Overviews and AI Mode, and recommends useful, original, people-first content rather than special AI-search hacks.",
+    description: "A practical summary of Google's official guidance for website owners seeking visibility in generative AI features in Search.",
+    context: "Google Search Central published a guide for website owners, SEOs, and developers on generative AI features in Search. The guidance emphasizes technical eligibility, crawlability, internal linking, accessible text, accurate structured data, and content that offers value beyond common knowledge. It says there are no additional technical requirements or special schema markup just for AI Overviews or AI Mode.",
+    why: "This helps content teams avoid wasting time on unsupported optimization folklore. The practical path is to maintain sound technical SEO, create genuinely useful pages, and measure actual performance instead of assuming a tactic guarantees AI citations.",
+    whatChanged: [
+      "Google published a dedicated guide to generative AI features in Search.",
+      "The guide reiterates that core SEO practices remain foundational.",
+      "Google cautions against treating special AI files or schema as a requirement for appearing in AI search."
+    ],
+    whoItAffects: ["SEO practitioners", "Publishers and content teams", "Web developers and site owners"],
+    whatToDoNow: [
+      "Check crawlability, indexing eligibility, internal links, and whether important information is available as text.",
+      "Improve original evidence, expert context, and task completion rather than adding generic AI-generated pages.",
+      "Use Search Console to monitor performance and validate technical issues."
+    ],
+    limitations: "Eligibility does not guarantee crawling, indexing, ranking, or inclusion in an AI-generated response. This summary reflects Google's published guidance and should not be interpreted as a ranking guarantee.",
+    sources: [
+      {
+        label: "Google Search Central announcement, May 15, 2026",
+        url: "https://developers.google.com/search/blog/2026/05/a-new-resource-for-optimizing"
+      },
+      {
+        label: "Google Search Central: AI features and your website",
+        url: "https://developers.google.com/search/docs/appearance/ai-features"
+      }
+    ],
+    tags: ["google-search", "ai-search", "seo", "content-quality"],
+    updatedAtISO: "2026-10-25"
   }
 ];
 
