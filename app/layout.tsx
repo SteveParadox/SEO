@@ -7,6 +7,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { INDEXABLE_ROBOTS, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
+const ADSENSE_CLIENT_ID = "ca-pub-7847727460275515";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -69,6 +71,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script
+          id="google-adsense"
+          async
+          crossOrigin="anonymous"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+        />
         <JsonLd data={websiteSchema} />
         <div className="min-h-screen flex flex-col">
           <SiteHeader />

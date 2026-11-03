@@ -1,9 +1,44 @@
 import type { NextConfig } from "next";
 
-const scriptSourcePolicy =
-  process.env.NODE_ENV === "production"
-    ? "script-src 'self' 'unsafe-inline'"
-    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+const adSenseOrigins = [
+  "https://pagead2.googlesyndication.com",
+  "https://tpc.googlesyndication.com",
+  "https://securepubads.g.doubleclick.net",
+  "https://googleads.g.doubleclick.net",
+  "https://www.googletagservices.com",
+  "https://adservice.google.com",
+  "https://www.google.com",
+  "https://www.gstatic.com",
+  "https://ep1.adtrafficquality.google",
+  "https://ep2.adtrafficquality.google",
+  "https://fundingchoicesmessages.google.com",
+];
+
+const adSenseFrameOrigins = [
+  "https://googleads.g.doubleclick.net",
+  "https://tpc.googlesyndication.com",
+  "https://www.google.com",
+  "https://fundingchoicesmessages.google.com",
+  "https://ep1.adtrafficquality.google",
+  "https://ep2.adtrafficquality.google",
+];
+
+const scriptSourcePolicy = `script-src 'self' 'unsafe-inline'${
+  process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"
+} ${adSenseOrigins.join(" ")}`;
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  scriptSourcePolicy,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  `connect-src 'self' ${adSenseOrigins.join(" ")}`,
+  `frame-src 'self' ${adSenseFrameOrigins.join(" ")}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "frame-ancestors 'self'",
+].join("; ");
 
 const nextConfig: NextConfig = {
   // Enable React strict mode for development to catch bugs early
@@ -44,7 +79,7 @@ const nextConfig: NextConfig = {
         // Content Security Policy (adjust if needed for external resources)
         {
           key: "Content-Security-Policy",
-          value: `default-src 'self'; ${scriptSourcePolicy}; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'self';`,
+          value: `${contentSecurityPolicy};`,
         },
       ],
     },
