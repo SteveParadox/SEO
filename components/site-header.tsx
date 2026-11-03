@@ -105,33 +105,9 @@ export function SiteHeader() {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex min-h-16 items-center justify-between gap-4 py-3">
             {/* Logo & Brand */}
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 shrink-0 group"
-              onClick={closeMobileMenu}
-              aria-label="XavKit Home"
-            >
-              <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 flex items-center justify-center shadow-sm transition-all group-hover:shadow-md group-hover:scale-105">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5 text-primary"
-                  aria-hidden="true"
-                >
-                  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-                </svg>
-              </div>
-
-              <div className="hidden sm:block">
-                <div className="font-semibold text-base leading-tight">XavKit</div>
-                <div className="text-xs text-muted-foreground">
-                  AI tools & updates
-                </div>
-              </div>
-            </Link>
+            <a className="flex items-center gap-2.5 shrink-0 group" aria-label="XavKit Home" href="/">
+              <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
+              <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 flex items-center justify-center shadow-sm transition-all group-hover:shadow-md group-hover:scale-105"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles h-5 w-5 text-primary" aria-hidden="true"><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></div><div className="hidden sm:block"><div className="font-semibold text-base leading-tight">XavKit</div><div className="text-xs text-muted-foreground">AI tools &amp; updates</div></div></a>
 
             <div className="hidden min-w-0 flex-1 flex-col gap-2 lg:flex">
               <nav className="flex items-center gap-1">
