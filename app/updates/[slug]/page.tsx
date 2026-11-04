@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseHeadline = u.headline?.trim() || "Model Update";
   const baseTldr = u.tldr?.trim() || "AI model update";
   
-  const title = `${baseHeadline}`;
+  const title = baseHeadline;
   const socialTitle = `${title} | Xavkit`;
   const description = baseTldr.slice(0, 160);
   const url = absoluteUrl(`/updates/${u.slug}`);
@@ -53,9 +53,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: "Xavkit",
       type: "article",
-    ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
-    ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
-    tags: u.tags,
+
+      ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
+
+      ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
+
+      tags: u.tags,
     },
     twitter: {
       card: "summary_large_image",
