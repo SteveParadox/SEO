@@ -121,6 +121,21 @@ test("search-intent content has valid dates, sourced claims, and complete ranked
   }
 });
 
+test("OWASP 2026 GenAI security update is dated and linked to primary sources", () => {
+  const update = DATA.updates.find((item) => item.slug === "owasp-genai-llm-top-10-2026-agent-control-standard");
+  assert.ok(update, "missing OWASP GenAI security update");
+  assert.equal(update.id, "u46");
+  assert.equal(update.announcedAtISO, "2026-09-01");
+  assert.equal(update.publishedAtISO, "2026-11-04");
+  assert.ok(update.context.includes("Agent Control Standard"));
+  assert.ok(update.context.includes("Top 10 for Agentic Applications"));
+  assert.ok(update.whatToDoNow.some((step) => step.includes("do not describe a framework mapping as certification")));
+  assert.deepEqual(
+    update.sources?.map((source) => new URL(source.url).hostname),
+    ["genai.owasp.org", "genai.owasp.org", "genai.owasp.org"]
+  );
+});
+
 test("published recent updates have verifiable source URLs and real dates", () => {
   const recent = DATA.updates.filter((update) => update.publishedAtISO);
   assert.ok(recent.length >= 9);
