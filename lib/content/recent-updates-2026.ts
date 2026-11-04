@@ -342,5 +342,55 @@ export const recentUpdates: ModelUpdate[] = [
       }
     ],
     "additionalResources": "See the original publisher material below for up-to-date details and access limitations."
+  },
+  {
+    "id": "u46",
+    "slug": "owasp-genai-llm-top-10-2026-agent-control-standard",
+    "model": "OWASP GenAI Security Project",
+    "headline": "OWASP expands its 2026 guidance for GenAI and agent security",
+    "announcedAtISO": "2026-09-01",
+    "publishedAtISO": "2026-11-04",
+    "updatedAtISO": "2026-11-04",
+    "tldr": "OWASP's 2026 LLM Top 10 and Agent Control Standard give teams updated references for reviewing GenAI and agentic application risks.",
+    "context": "The OWASP GenAI Security Project published its 2026 Top 10 for LLM Applications on August 3, 2026. In a September 1 announcement, the project also described the Agent Control Standard being donated to the project and highlighted a new framework crosswalk. These resources complement the separate OWASP Top 10 for Agentic Applications 2026, which focuses on autonomous systems that plan, use tools, and act across workflows.",
+    "why": "A model-powered feature and a tool-using agent do not have identical failure surfaces. A model-focused review can miss delegated permissions, tool misuse, identity boundaries, memory and context poisoning, or failures that cascade across agents. Teams should map the actual architecture and controls to the relevant guidance rather than treating a checklist as proof of security.",
+    "whatChanged": [
+      "OWASP published the 2026 Top 10 for LLM Applications as an updated risk reference",
+      "The Agent Control Standard was donated to the OWASP GenAI Security Project",
+      "The project highlighted a framework crosswalk for relating GenAI risks to established security and governance frameworks"
+    ],
+    "whoItAffects": [
+      "Developers building LLM-powered applications",
+      "Teams deploying tool-using or multi-agent workflows",
+      "Security, risk, and AI governance teams"
+    ],
+    "whatToDoNow": [
+      "Inventory which models can call tools, access sensitive data, or trigger external actions",
+      "Use the LLM Top 10 for model-application risks and the Agentic Applications Top 10 for autonomous workflows",
+      "Test controls with representative prompt-injection, tool-authorization, identity, and failure-recovery scenarios",
+      "Record residual risks, owners, and test evidence; do not describe a framework mapping as certification"
+    ],
+    "tags": [
+      "owasp",
+      "security",
+      "agents",
+      "governance",
+      "llm"
+    ],
+    "sources": [
+      {
+        "label": "OWASP GenAI LLM Top 10 2026",
+        "url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/"
+      },
+      {
+        "label": "OWASP September 2026 announcement",
+        "url": "https://genai.owasp.org/2026/09/01/owasp-genai-security-project-unveils-2026-top-10-for-llm-applications-new-agent-control-standard-and-sponsors-as-community-tops-30000-members/"
+      },
+      {
+        "label": "OWASP Top 10 for Agentic Applications 2026",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/"
+      }
+    ],
+    "additionalResources": "Read each source directly and keep the scope and version of each framework explicit. The LLM and Agentic Applications lists address related but different risk surfaces."
   }
 ];
