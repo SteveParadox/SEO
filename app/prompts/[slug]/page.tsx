@@ -60,14 +60,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!prompt) {
     return {
-      title: "Prompt not found - Xavkit",
+      title: "Prompt not found",
       robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
   const baseTitle = prompt.title?.trim() || "Unnamed Prompt";
   const baseDescription = (prompt.description || prompt.purpose)?.trim() || "AI prompt template";
-  const title = `${baseTitle} - Xavkit`;
+  const title = `${baseTitle}`;
+  const socialTitle = `${title} | Xavkit`;
   const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/prompts/${prompt.slug}`);
 
@@ -77,7 +78,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: url },
     robots: INDEXABLE_ROBOTS,
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       siteName: "Xavkit",
@@ -85,7 +86,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
     },
   };
