@@ -1,6 +1,6 @@
 # Content freshness report
 
-Date: October 16, 2026.
+Date: November 4, 2026.
 
 The existing catalog contained 119 tools, 85 prompts, 36 updates, 41 collections, 26 comparisons, and 27 best pages at inspection. Content dates stopped in April 2026.
 
@@ -17,6 +17,10 @@ Nine source-linked releases were added in `lib/content/recent-updates-2026.ts` w
 | GPT-6.1 Sol | 2026-09-29 | https://deploymentsafety.openai.com/gpt-6-1-sol/healthbench/tbl-7 |
 | GPT-6 Sol and Luna | 2026-09-22 | https://openai.com/index/introducing-gpt-6-sol-and-luna/ |
 | GPT-Live-1 API | 2026-09-10 | https://openai.com/index/introducing-gpt-live-1-in-the-api/ |
+
+## November 4, 2026 update
+
+Added source-linked entry `u46`, “OWASP expands its 2026 guidance for GenAI and agent security.” The entry distinguishes the OWASP GenAI LLM Top 10 2026 (published August 3, 2026), the September 1, 2026 announcement about the Agent Control Standard and framework crosswalk, and the separate OWASP Top 10 for Agentic Applications 2026. The article links to all three primary OWASP resources and avoids presenting framework mapping as certification.
 
 ## Outstanding editorial work
 
