@@ -53,9 +53,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: "Xavkit",
       type: "article",
-      ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
-      ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
-      tags: u.tags,
+    ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
+    ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
+    tags: u.tags,
     },
     twitter: {
       card: "summary_large_image",
