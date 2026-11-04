@@ -1,5 +1,5 @@
-// Editorially verified announcements published on October 16, 2026.
-// The announcement date is intentionally distinct from publication/refresh dates.
+// Editorially verified, source-linked announcements and ecosystem updates.
+// Announcement, first-publication, and meaningful editorial-refresh dates are recorded separately.
 import type { ModelUpdate } from "@/lib/data-types";
 export const recentUpdates: ModelUpdate[] = [
   {
