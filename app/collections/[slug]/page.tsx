@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseTitle = c.title?.trim() || "Unnamed Collection";
   const baseDescription = c.description?.trim() || "AI tool collection";
   
-  const title = `${baseTitle}`;
+  const title = baseTitle;
   const socialTitle = `${title} | Xavkit`;
   const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/collections/${c.slug}`);
