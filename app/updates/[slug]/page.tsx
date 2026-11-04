@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
+import { JsonLd } from "@/components/json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!u) {
     return {
-      title: "Update not found — Xavkit",
+      title: "Update not found",
       robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
@@ -36,7 +37,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseHeadline = u.headline?.trim() || "Model Update";
   const baseTldr = u.tldr?.trim() || "AI model update";
   
-  const title = `${baseHeadline} — Xavkit`;
+  const title = `${baseHeadline}`;
+  const socialTitle = `${title} | Xavkit`;
   const description = baseTldr.slice(0, 160);
   const url = absoluteUrl(`/updates/${u.slug}`);
 
@@ -46,15 +48,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: url },
     robots: INDEXABLE_ROBOTS,
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       siteName: "Xavkit",
       type: "article",
+      ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
+      ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
+      tags: u.tags,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
     },
   };
@@ -68,9 +73,25 @@ export default async function UpdatePage({ params }: PageProps) {
 
   const related = getRelatedUpdates(u.id, 6);
   const inCollections = findCollectionsContaining({ kind: "update", id: u.id });
+  const pageUrl = absoluteUrl(`/updates/${u.slug}`);
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: u.headline,
+    description: u.tldr,
+    ...(u.publishedAtISO || u.announcedAtISO ? { datePublished: u.publishedAtISO ?? u.announcedAtISO } : {}),
+    ...(u.updatedAtISO ? { dateModified: u.updatedAtISO } : {}),
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    publisher: { "@type": "Organization", name: "Xavkit" },
+    keywords: u.tags.join(", "),
+    about: { "@type": "Thing", name: u.model },
+    inLanguage: "en",
+  };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+      <JsonLd data={articleSchema} />
       <TrackRecent
         kind="update"
         id={u.id}
