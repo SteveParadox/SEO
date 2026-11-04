@@ -28,13 +28,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!page) {
     return {
-      title: "Alternatives page not found - Xavkit",
+      title: "Alternatives page not found",
       robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
   const topNames = page.alternatives.slice(0, 3).map((item) => item.tool.name).join(", ");
-  const title = `Best alternatives to ${page.source.name} (2026) - Xavkit`;
+  const title = `Best alternatives to ${page.source.name} (2026)`;
+  const socialTitle = `${title} | Xavkit`;
   const description = `Compare the best ${page.source.name} alternatives, including ${topNames}. See who should switch, who should stay, and which option fits your workflow.`;
   const url = absoluteUrl(`/alternatives/${page.source.slug}`);
 
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: url },
     robots: INDEXABLE_ROBOTS,
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       siteName: "Xavkit",
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
     },
   };
