@@ -122,25 +122,10 @@ export default async function ToolPage({ params }: PageProps) {
     "@type": "SoftwareApplication",
     name: tool.name,
     description: tool.description ?? tool.oneLiner,
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Web",
     url: toolUrl,
     keywords: tool.tags?.join(", "),
-    offers: {
-      "@type": "Offer",
-      category: tool.pricing?.tier ?? "paid",
-      price: tool.pricing?.tier === "free" ? "0" : undefined,
-      priceCurrency: tool.pricing?.tier === "free" ? "USD" : undefined,
-    },
-    aggregateRating: tool.rating
-      ? {
-          "@type": "AggregateRating",
-          ratingValue: tool.rating,
-          bestRating: 5,
-          worstRating: 1,
-          ratingCount: 1,
-        }
-      : undefined,
+    // Ratings require verified review-count provenance. Editorial scores are
+    // not a substitute for actual user reviews in AggregateRating schema.
   };
 
   const faqSchema = {
