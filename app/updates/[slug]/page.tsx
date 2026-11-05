@@ -13,6 +13,7 @@ import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/se
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
+import { buildUpdateArticleSchema, buildUpdateOpenGraphDates } from "@/lib/update-article-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -53,8 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: "Xavkit",
       type: "article",
-      ...(u.publishedAtISO || u.announcedAtISO ? { publishedTime: u.publishedAtISO ?? u.announcedAtISO } : {}),
-      ...(u.updatedAtISO ? { modifiedTime: u.updatedAtISO } : {}),
+      ...buildUpdateOpenGraphDates(u),
+      
       tags: u.tags,
     },
     twitter: {
@@ -74,20 +75,7 @@ export default async function UpdatePage({ params }: PageProps) {
   const related = getRelatedUpdates(u.id, 6);
   const inCollections = findCollectionsContaining({ kind: "update", id: u.id });
   const pageUrl = absoluteUrl(`/updates/${u.slug}`);
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "@id": `${pageUrl}#article`,
-    headline: u.headline,
-    description: u.tldr,
-    ...(u.publishedAtISO || u.announcedAtISO ? { datePublished: u.publishedAtISO ?? u.announcedAtISO } : {}),
-    ...(u.updatedAtISO ? { dateModified: u.updatedAtISO } : {}),
-    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-    publisher: { "@type": "Organization", name: "Xavkit" },
-    keywords: u.tags.join(", "),
-    about: { "@type": "Thing", name: u.model },
-    inLanguage: "en",
-  };
+  const articleSchema = buildUpdateArticleSchema(u, pageUrl);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
