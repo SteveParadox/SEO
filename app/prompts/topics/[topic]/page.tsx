@@ -59,15 +59,8 @@ export default async function PromptTopicPage({ params }: Props) {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-10">
       <JsonLd data={schema} />
-      <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
-        <Link className="hover:underline" href="/">Home</Link>
-        <span aria-hidden="true"> / </span>
-        <Link className="hover:underline" href="/prompts">AI prompts</Link>
-        <span aria-hidden="true"> / </span>
-        <span>{topic.title}</span>
-      </nav>
       <h1 className="mt-5 max-w-4xl text-3xl font-semibold sm:text-4xl">{topic.title}</h1>
       <p className="mt-4 max-w-3xl text-lg text-muted-foreground">{topic.summary}</p>
       <div className="mt-8 max-w-4xl space-y-4 leading-relaxed">
@@ -117,6 +110,6 @@ export default async function PromptTopicPage({ params }: Props) {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }
