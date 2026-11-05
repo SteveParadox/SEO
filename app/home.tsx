@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -44,10 +44,10 @@ import { ContinueExploring } from "@/components/continue-exploring";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { RecommendedForYou } from "@/components/recommended-for-you";
 import { TrendingNow } from "@/components/trending-now";
-import { DATA } from "@/lib/data";
+
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const { tools, prompts, updates, collections, comparisons } = DATA;
+
 
 const KIND_META = {
   tool: {
@@ -90,7 +90,7 @@ const KIND_META = {
 
 type Kind = keyof typeof KIND_META;
 
-type IndexItem = {
+export type IndexItem = {
   kind: Kind;
   id: string;
   slug: string;
@@ -101,7 +101,7 @@ type IndexItem = {
   updatedAtISO: string;
 };
 
-type CategoryKey = "tools" | "prompts" | "updates" | "compare";
+export type CategoryKey = "tools" | "prompts" | "updates" | "compare";
 
 function daysAgo(iso: string) {
   return Math.max(
@@ -498,7 +498,25 @@ function LogoStrip() {
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
-export default function ToolDropAI() {
+export type FeaturedCollection = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  updatedAtISO: string;
+};
+
+export type HomePageData = {
+  latestFeed: IndexItem[];
+  featuredCols: FeaturedCollection[];
+  categoryItemsByKey: Record<CategoryKey, { cards: IndexItem[]; rows: IndexItem[] }>;
+};
+
+export default function ToolDropAI({
+  latestFeed,
+  featuredCols,
+  categoryItemsByKey,
+}: HomePageData) {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("tools");
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -512,88 +530,8 @@ export default function ToolDropAI() {
     el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
   }, [activeCategory]);
 
-  const unifiedIndex = useMemo<IndexItem[]>(() => {
-    const idx: IndexItem[] = [];
-    tools.forEach((t) =>
-      idx.push({
-        kind: "tool",
-        id: t.id,
-        slug: t.slug,
-        title: t.name,
-        subtitle: t.oneLiner,
-        typeTag: (t.tags[0] || "tool").toUpperCase(),
-        minutes: 6,
-        updatedAtISO: t.updatedAtISO,
-      })
-    );
-    prompts.forEach((p) =>
-      idx.push({
-        kind: "prompt",
-        id: p.id,
-        slug: p.slug,
-        title: p.title,
-        subtitle: p.purpose,
-        typeTag: (p.tags[0] || "prompt").toUpperCase(),
-        minutes: 5,
-        updatedAtISO: p.updatedAtISO,
-      })
-    );
-    updates.forEach((u) =>
-      idx.push({
-        kind: "update",
-        id: u.id,
-        slug: u.slug,
-        title: u.headline,
-        subtitle: u.tldr,
-        typeTag: u.model.toUpperCase(),
-        minutes: 4,
-        updatedAtISO: u.updatedAtISO,
-      })
-    );
-    collections.forEach((c) =>
-      idx.push({
-        kind: "collection",
-        id: c.id,
-        slug: c.slug,
-        title: c.title,
-        subtitle: c.description,
-        typeTag: "COLLECTION",
-        minutes: 7,
-        updatedAtISO: c.updatedAtISO,
-      })
-    );
-    comparisons.forEach((c) =>
-      idx.push({
-        kind: "comparison",
-        id: c.id,
-        slug: c.slug,
-        title: c.title,
-        subtitle: c.description,
-        typeTag: "VS",
-        minutes: 6,
-        updatedAtISO: c.updatedAtISO,
-      })
-    );
-    return idx.sort(
-      (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
-    );
-  }, []);
-
-  const latestFeed = useMemo(() => unifiedIndex.slice(0, 9), [unifiedIndex]);
-  const featuredCols = useMemo(() => collections.slice(0, 4), []);
-
   const active = CATEGORIES.find((c) => c.key === activeCategory)!;
-  const categoryItems = useMemo(() => {
-    const base =
-      activeCategory === "tools"
-        ? unifiedIndex.filter((x) => x.kind === "tool")
-        : activeCategory === "prompts"
-        ? unifiedIndex.filter((x) => x.kind === "prompt")
-        : activeCategory === "updates"
-        ? unifiedIndex.filter((x) => x.kind === "update")
-        : unifiedIndex.filter((x) => x.kind === "comparison");
-    return { cards: base.slice(0, 3), rows: base.slice(3, 9) };
-  }, [activeCategory, unifiedIndex]);
+  const categoryItems = categoryItemsByKey[activeCategory];
 
   const faqs = [
     {
