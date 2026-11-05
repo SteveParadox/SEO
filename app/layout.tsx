@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   description:
     "Discover vetted AI tools, effective prompts, and significant model updates. Updated when new information has been verified.",
   robots: INDEXABLE_ROBOTS,
+  // Optional: enter the verification token in Vercel to prove site ownership
+  // to Google Search Console without changing any public page content.
+  verification: process.env.GOOGLE_SITE_VERIFICATION?.trim()
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION.trim() }
+    : undefined,
   openGraph: {
     siteName: "Xavkit",
     type: "website",
