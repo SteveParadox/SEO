@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { DATA, getToolBySlug, getUpdateBySlug } from "../lib/data";
 import { absoluteUrl } from "../lib/seo";
+import { buildUpdateArticleSchema, buildUpdateOpenGraphDates } from "../lib/update-article-seo";
+import { serializeJsonLd } from "../components/json-ld";
 
 test("all published content has unique IDs and slugs within its collection", () => {
   for (const [kind, items] of Object.entries(DATA)) {
@@ -162,4 +164,36 @@ test("canonical URL builder uses the configured site origin", () => {
   const actual = absoluteUrl("/updates");
   assert.match(actual, /^https?:\/\/[^/]+\/updates$/);
   assert.ok(!actual.includes("undefined"));
+});
+
+
+test("Article metadata uses website publication dates, not announcement dates", () => {
+  const update = DATA.updates.find(
+    (item) => item.slug === "owasp-genai-llm-top-10-2026-agent-control-standard"
+  );
+  assert.ok(update);
+
+  const socialDates = buildUpdateOpenGraphDates(update);
+  const schema = buildUpdateArticleSchema(update, absoluteUrl("/updates/" + update.slug));
+
+  assert.equal(socialDates.publishedTime, update.publishedAtISO);
+  assert.equal(schema.datePublished, update.publishedAtISO);
+  assert.equal(schema.dateModified, update.updatedAtISO);
+  assert.notEqual(schema.datePublished, update.announcedAtISO);
+
+  const unpublished = { ...update, publishedAtISO: undefined };
+  assert.equal("publishedTime" in buildUpdateOpenGraphDates(unpublished), false);
+  assert.equal("datePublished" in buildUpdateArticleSchema(unpublished, "https://xavkit.com/example"), false);
+});
+
+test("JSON-LD escapes script closers without changing decoded content", () => {
+  const data = {
+    headline: '</script><script>alert("unsafe")</script>',
+    description: 'Literal <, > and "quotes" should round-trip',
+  };
+  const encoded = serializeJsonLd(data);
+
+  assert.ok(encoded.includes("\\u003c/script>"), "angle bracket must be escaped");
+  assert.equal(encoded.includes("</script>"), false, "must not terminate the script element");
+  assert.deepEqual(JSON.parse(encoded), data);
 });
