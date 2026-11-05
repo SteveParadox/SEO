@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { DATA, getAllTagsWithCounts, getLatestUpdatedForTag } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 import { getAlternativePageStaticSlugs } from "@/lib/alternatives";
+import { PROMPT_TOPICS } from "@/lib/prompt-topics";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
@@ -33,6 +34,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(p.updatedAtISO),
     changeFrequency: "weekly" as const,
     priority: 0.7,
+  }));
+
+  // Curated, crawlable topic hubs make important prompt families easy to discover.
+  const promptTopics = PROMPT_TOPICS.map((topic) => ({
+    url: absoluteUrl(`/prompts/topics/${topic.slug}`),
+    lastModified: new Date("2026-11-05"),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
   }));
 
   const updates = DATA.updates.map((u) => ({
@@ -97,6 +106,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...alternatives,
     ...tools,
     ...prompts,
+    ...promptTopics,
     ...updates,
     ...tags,
   ];
