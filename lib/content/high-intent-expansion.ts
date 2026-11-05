@@ -208,6 +208,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "development",
       "nextjs",
       "debugging",
       "react",
@@ -243,6 +244,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "development",
       "react",
       "typescript",
       "accessibility",
@@ -278,6 +280,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "development",
       "api",
       "rest",
       "typescript",
@@ -313,6 +316,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "development",
       "docker",
       "docker-compose",
       "devops",
@@ -348,6 +352,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "development",
       "github-actions",
       "ci-cd",
       "devops",
@@ -383,6 +388,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "spreadsheets",
       "xlookup",
       "vlookup",
       "excel",
@@ -418,6 +424,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "spreadsheets",
       "pivot-table",
       "excel",
       "data-analysis",
@@ -453,6 +460,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "spreadsheets",
       "google-sheets",
       "dashboard",
       "kpi",
@@ -488,6 +496,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "spreadsheets",
       "csv",
       "data-analysis",
       "statistics",
@@ -523,6 +532,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "spreadsheets",
       "excel",
       "budget",
       "personal-finance",
@@ -663,6 +673,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "seo",
       "local-seo",
       "google-business-profile",
       "small-business",
@@ -768,6 +779,7 @@ export const highIntentExpansionPrompts: Prompt[] = [
       "Gemini"
     ],
     "tags": [
+      "copywriting",
       "proposal",
       "email",
       "follow-up",
