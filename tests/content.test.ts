@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { DATA, getToolBySlug, getUpdateBySlug } from "../lib/data";
+import { DATA, getToolBySlug, getUpdateBySlug, getPromptBySlug } from "../lib/data";
 import { absoluteUrl } from "../lib/seo";
 import { buildUpdateArticleSchema, buildUpdateOpenGraphDates } from "../lib/update-article-seo";
 import { serializeJsonLd } from "../components/json-ld";
@@ -196,4 +196,75 @@ test("JSON-LD escapes script closers without changing decoded content", () => {
   assert.ok(encoded.includes("\\u003c/script>"), "angle bracket must be escaped");
   assert.equal(encoded.includes("</script>"), false, "must not terminate the script element");
   assert.deepEqual(JSON.parse(encoded), data);
+});
+
+test("high-intent prompt pages have unique task-specific copy and indexable metadata inputs", () => {
+  const slugs = [
+    "ats-resume-optimizer",
+    "tailored-cover-letter-generator",
+    "resume-bullet-point-rewriter",
+    "star-interview-answer-generator",
+    "linkedin-headline-and-about-generator",
+    "ai-image-prompt-generator",
+    "excel-formula-generator",
+    "google-sheets-data-cleaning-prompt",
+    "youtube-seo-title-description-generator",
+    "ecommerce-product-description-generator",
+    "cold-email-outreach-generator",
+    "landing-page-copywriter",
+    "google-ads-copy-generator",
+    "blog-post-outline-generator",
+    "python-automation-script-prompt",
+    "chatbot-system-prompt-generator",
+    "anki-flashcard-generator-from-notes",
+  ];
+  const found = slugs.map((slug) => {
+    const prompt = DATA.prompts.find((item) => item.slug === slug);
+    assert.ok(prompt, `missing high-intent prompt: ${slug}`);
+    assert.equal(getPromptBySlug(slug)?.id, prompt.id, `${slug}: slug lookup failed`);
+    assert.ok(prompt.title.length >= 12, `${slug}: title too short`);
+    assert.ok(prompt.description && prompt.description.length >= 80, `${slug}: thin page description`);
+    assert.ok(prompt.prompt.length >= 500, `${slug}: prompt lacks operational detail`);
+    assert.match(prompt.prompt, /\{[A-Z_]+\}/, `${slug}: missing input placeholders`);
+    assert.ok(prompt.variations.length >= 3, `${slug}: too few variations`);
+    assert.ok(prompt.variations.every((variation) => variation.length >= 20), `${slug}: vague variation`);
+    assert.ok(prompt.tags.length >= 3, `${slug}: missing discovery tags`);
+    assert.ok(prompt.limitations && prompt.limitations.length >= 40, `${slug}: missing limitations`);
+    assert.ok(prompt.successMetrics && prompt.successMetrics.length >= 40, `${slug}: missing success guidance`);
+    assert.ok(prompt.modelCompatibility.length > 0, `${slug}: missing model metadata`);
+    assert.equal(prompt.updatedAtISO, "2026-11-05", `${slug}: incorrect content date`);
+    return prompt;
+  });
+  assert.equal(found.length, 17);
+  assert.equal(new Set(found.map((prompt) => prompt.id)).size, found.length);
+  assert.equal(new Set(found.map((prompt) => prompt.title.toLowerCase())).size, found.length);
+});
+
+
+test("second high-intent expansion contains 30 unique, complete and useful searchable prompts", () => {
+  const expansion = DATA.prompts.filter((item) => /^xp31\d{2}$/.test(item.id));
+  assert.equal(expansion.length, 30, "all new prompt pages should be registered in DATA");
+  assert.equal(new Set(expansion.map((item) => item.slug.toLowerCase())).size, 30, "all new slugs must be unique");
+  assert.equal(new Set(expansion.map((item) => item.title.toLowerCase())).size, 30, "all new page titles must be unique");
+
+  for (const category of ["career", "development", "spreadsheets", "seo", "copywriting", "education"]) {
+    const entries = expansion.filter((item) => item.tags.includes(category));
+    assert.equal(entries.length, 5, `${category} must include five distinct prompts`);
+  }
+  for (const item of expansion) {
+    assert.equal(getPromptBySlug(item.slug)?.id, item.id, `${item.slug}: not accessible via slug lookup`);
+    assert.ok(item.title.length >= 15, `${item.slug}: short title`);
+    assert.ok(item.description && item.description.length >= 100, `${item.slug}: thin description`);
+    assert.ok(item.whenToUse && item.whenToUse.length >= 90, `${item.slug}: thin use guidance`);
+    assert.ok(item.howItWorks && item.howItWorks.length >= 120, `${item.slug}: missing task workflow`);
+    assert.ok(item.prompt.length >= 900, `${item.slug}: prompt is too short`);
+    assert.match(item.prompt, /\{[A-Z_]+\}/, `${item.slug}: no editable input fields`);
+    assert.ok(item.variations.length >= 3, `${item.slug}: needs variations`);
+    assert.ok(item.variations.every((variant) => variant.length >= 30), `${item.slug}: variation lacks detail`);
+    assert.ok(item.tags.length >= 3, `${item.slug}: not discoverable by topic`);
+    assert.ok(item.limitations && item.limitations.length >= 90, `${item.slug}: missing limitations`);
+    assert.ok(item.successMetrics && item.successMetrics.length >= 90, `${item.slug}: missing success criteria`);
+    assert.deepEqual(item.modelCompatibility, ["GPT", "Claude", "Gemini"]);
+    assert.equal(item.updatedAtISO, "2026-11-05");
+  }
 });
