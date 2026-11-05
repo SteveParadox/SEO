@@ -5,10 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const PersonalizedHomeSections = dynamic(
-  () => import("@/components/personalized-home-sections"),
-  { ssr: false }
-);
+
 import {
   motion,
   AnimatePresence,
@@ -45,12 +42,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-
-
 import { NewsletterSignup } from "@/components/newsletter-signup";
 
 
 
+
+const PersonalizedHomeSections = dynamic(
+  () => import("@/components/personalized-home-sections"),
+  { ssr: false }
+);
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
