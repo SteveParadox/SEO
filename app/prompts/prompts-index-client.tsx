@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { DATA } from "@/lib/data";
+import type { PromptListing } from "@/lib/prompt-listing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -19,15 +19,10 @@ function formatUpdated(iso: string) {
   });
 }
 
-function getVariableCount(input: string) {
-  const matches = input.match(/{{\s*[\w.-]+\s*}}/g) ?? [];
-  return new Set(matches.map((match) => match.toLowerCase())).size;
-}
-
-function getTopPromptTags() {
+function getTopPromptTags(prompts: PromptListing[]) {
   const counts = new Map<string, number>();
 
-  for (const prompt of DATA.prompts) {
+  for (const prompt of prompts) {
     for (const tag of prompt.tags) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
@@ -39,7 +34,7 @@ function getTopPromptTags() {
     .map(([tag]) => tag);
 }
 
-export default function PromptsIndexClient() {
+export default function PromptsIndexClient({ items }: { items: PromptListing[] }) {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("");
   const [model, setModel] = React.useState<"all" | "GPT" | "Claude" | "Gemini">("all");
@@ -50,21 +45,21 @@ export default function PromptsIndexClient() {
   const [sortBy, setSortBy] = React.useState<"recent" | "title" | "variables">("recent");
   const deferredQuery = React.useDeferredValue(query);
 
-  const prompts = React.useMemo(
+  const sortedPrompts = React.useMemo(
     () =>
-      [...DATA.prompts].sort(
+      [...items].sort(
         (a, b) => new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime()
       ),
-    []
+    [items]
   );
 
-  const topTags = React.useMemo(() => getTopPromptTags(), []);
+  const topTags = React.useMemo(() => getTopPromptTags(items), [items]);
 
   const filteredPrompts = React.useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase();
 
-    const matches = prompts.filter((prompt) => {
-      const variableCount = getVariableCount(prompt.prompt);
+    const matches = sortedPrompts.filter((prompt) => {
+      const variableCount = prompt.variableCount;
       const matchesQuery =
         !normalizedQuery ||
         `${prompt.title} ${prompt.purpose} ${prompt.description ?? ""} ${prompt.tags.join(" ")}`
@@ -86,12 +81,12 @@ export default function PromptsIndexClient() {
       }
 
       if (sortBy === "variables") {
-        return getVariableCount(b.prompt) - getVariableCount(a.prompt) || a.title.localeCompare(b.title);
+        return b.variableCount - a.variableCount || a.title.localeCompare(b.title);
       }
 
       return new Date(b.updatedAtISO).getTime() - new Date(a.updatedAtISO).getTime();
     });
-  }, [activeTag, deferredQuery, model, prompts, sortBy, templateMode]);
+  }, [activeTag, deferredQuery, model, sortedPrompts, sortBy, templateMode]);
 
   React.useEffect(() => {
     setPage(1);
@@ -102,7 +97,7 @@ export default function PromptsIndexClient() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">AI Prompts</h1>
+      <h2 className="text-2xl font-semibold">Search the complete prompt library</h2>
 
       <div className="mt-6">
         <Card className="rounded-2xl">
@@ -222,7 +217,7 @@ export default function PromptsIndexClient() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {current.map((prompt) => {
-          const variableCount = getVariableCount(prompt.prompt);
+          const variableCount = prompt.variableCount;
 
           return (
             <Card
@@ -265,7 +260,7 @@ export default function PromptsIndexClient() {
                     </Badge>
                   ))}
                   <span>
-                    {prompt.variations.length} variation{prompt.variations.length === 1 ? "" : "s"}
+                    {prompt.variationCount} variation{prompt.variationCount === 1 ? "" : "s"}
                   </span>
                   <span>Updated {formatUpdated(prompt.updatedAtISO)}</span>
                 </div>

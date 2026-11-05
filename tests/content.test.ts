@@ -4,6 +4,8 @@ import { DATA, getToolBySlug, getUpdateBySlug, getPromptBySlug } from "../lib/da
 import { absoluteUrl } from "../lib/seo";
 import { buildUpdateArticleSchema, buildUpdateOpenGraphDates } from "../lib/update-article-seo";
 import { serializeJsonLd } from "../components/json-ld";
+import { PROMPT_TOPICS, getPromptTopic, promptsForTopic } from "../lib/prompt-topics";
+import { getPromptVariableCount, toPromptListing } from "../lib/prompt-listing";
 
 test("all published content has unique IDs and slugs within its collection", () => {
   for (const [kind, items] of Object.entries(DATA)) {
@@ -267,4 +269,52 @@ test("second high-intent expansion contains 30 unique, complete and useful searc
     assert.deepEqual(item.modelCompatibility, ["GPT", "Claude", "Gemini"]);
     assert.equal(item.updatedAtISO, "2026-11-05");
   }
+});
+
+
+test("prompt directory summaries exclude full templates and count real placeholders", () => {
+  assert.equal(getPromptVariableCount("Topic: {TOPIC}, user: {USER}, repeated {TOPIC}"), 2);
+  assert.equal(getPromptVariableCount("A plain prompt without variables"), 0);
+  assert.equal(getPromptVariableCount("Use {{TOPIC}} and {USER_1}"), 2);
+
+  const example = DATA.prompts[0];
+  assert.ok(example, "expected prompt data");
+  const summary = toPromptListing(example);
+  assert.equal(summary.id, example.id);
+  assert.equal(summary.slug, example.slug);
+  assert.equal(summary.variationCount, example.variations.length);
+  assert.equal(summary.variableCount, getPromptVariableCount(example.prompt));
+  assert.equal(Object.hasOwn(summary, "prompt"), false, "do not serialize complete prompt to client");
+  assert.equal(Object.hasOwn(summary, "bestPractices"), false, "do not serialize editorial body to client");
+});
+
+test("all editorial prompt topic hubs have unique purpose and populated crawlable listings", () => {
+  assert.equal(PROMPT_TOPICS.length, 6);
+  assert.equal(new Set(PROMPT_TOPICS.map((topic) => topic.slug)).size, PROMPT_TOPICS.length);
+  assert.equal(new Set(PROMPT_TOPICS.map((topic) => topic.title)).size, PROMPT_TOPICS.length);
+
+  for (const topic of PROMPT_TOPICS) {
+    assert.equal(getPromptTopic(topic.slug)?.title, topic.title);
+    assert.ok(topic.summary.length >= 70, topic.slug + ": missing search description");
+    assert.equal(topic.intro.length, 2, topic.slug + ": needs unique editorial explanation");
+    assert.ok(topic.intro.every((paragraph) => paragraph.length >= 180), topic.slug + ": thin editorial paragraphs");
+    assert.equal(topic.whatYouWillFind.length, 3, topic.slug + ": missing use cases");
+    assert.ok(topic.practicalAdvice.length >= 100, topic.slug + ": missing actionable guidance");
+
+    const matched = promptsForTopic(topic, DATA.prompts);
+    assert.ok(matched.length >= 5, topic.slug + ": needs at least five relevant prompts");
+    assert.equal(new Set(matched.map((prompt) => prompt.slug)).size, matched.length);
+    assert.ok(
+      matched.every((prompt) =>
+        prompt.tags.some((tag) => topic.tags.some((alias) => alias.toLowerCase() === tag.toLowerCase()))
+      ),
+      topic.slug + ": includes unrelated prompt"
+    );
+    assert.ok(
+      matched.every((prompt) => DATA.prompts.some((entry) => entry.id === prompt.id)),
+      topic.slug + ": unresolved prompt link"
+    );
+  }
+
+  assert.equal(getPromptTopic("not-a-real-topic"), undefined);
 });

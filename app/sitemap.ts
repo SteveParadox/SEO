@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { DATA, getAllTagsWithCounts, getLatestUpdatedForTag } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 import { getAlternativePageStaticSlugs } from "@/lib/alternatives";
+import { PROMPT_TOPICS } from "@/lib/prompt-topics";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
@@ -11,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/tools"), changeFrequency: "daily", priority: 0.9 },
     { url: absoluteUrl("/alternatives"), changeFrequency: "weekly", priority: 0.88 },
     { url: absoluteUrl("/prompts"), changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/prompts/topics"), changeFrequency: "monthly", priority: 0.85 },
     { url: absoluteUrl("/ai-stack-builder"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare-tools"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/updates"), changeFrequency: "daily", priority: 0.7 },
@@ -33,6 +35,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(p.updatedAtISO),
     changeFrequency: "weekly" as const,
     priority: 0.7,
+  }));
+
+  // Curated, crawlable topic hubs make important prompt families easy to discover.
+  const promptTopics = PROMPT_TOPICS.map((topic) => ({
+    url: absoluteUrl(`/prompts/topics/${topic.slug}`),
+    lastModified: new Date("2026-11-05"),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
   }));
 
   const updates = DATA.updates.map((u) => ({
@@ -97,6 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...alternatives,
     ...tools,
     ...prompts,
+    ...promptTopics,
     ...updates,
     ...tags,
   ];

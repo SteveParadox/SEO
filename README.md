@@ -33,6 +33,16 @@ Updates should include publisher announcements or other primary sources and prec
 
 The site has historically used browser storage for saves, recent items, and engagement signals. Trending scores derived from browser storage are **device-specific**, not global metrics. A previous newsletter UI stored contact details locally without registering an actual mailing-list subscription; the interface has been changed to avoid implying email delivery.
 
+## Organic growth measurement and indexing
+
+1. Verify the production domain in **Google Search Console** (DNS verification is preferred), or set `GOOGLE_SITE_VERIFICATION` to the HTML-tag verification token in Vercel, then redeploy.
+2. Submit `https://xavkit.com/sitemap.xml` in Search Console. Test a few representative URLs with URL Inspection and ensure the canonical URL and robots directives are correct.
+3. Use Vercel Analytics to measure visitors and referral channels. To prioritize SEO work, also inspect Google Search Console's page and query reports; use actual clicks, impressions, CTR, and indexing status rather than guessed keyword volumes.
+4. Run the existing quality gates (`npm run lint`, `npm run typecheck`, `npm run validate-data`, `npm run validate-seo`, `npm test`, `npm run build`) before deployment. Verify the deployed `/prompts`, `/prompts/topics`, `/robots.txt` and `/sitemap.xml` endpoints after deployment.
+5. For each monthly content review, prioritize refreshing useful pages with existing impressions, then publish original, sourced comparisons and examples where people have unmet questions. Do not mass-generate near-duplicate pages or manufacture backlinks.
+
+Growth depends on real users and search demand; this implementation does not guarantee rankings or traffic.
+
 ## Deployment
 
 The intended deployment target is Vercel. Verify `/robots.txt`, `/sitemap.xml`, canonical tags, redirects, content links, and representative detail pages on the deployed host.

@@ -8,6 +8,7 @@ import { INDEXABLE_ROBOTS, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
 const ADSENSE_CLIENT_ID = "ca-pub-7847727460275515";
+const googleVerificationToken = process.env.GOOGLE_SITE_VERIFICATION?.trim();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,9 @@ export const metadata: Metadata = {
   description:
     "Discover vetted AI tools, effective prompts, and significant model updates. Updated when new information has been verified.",
   robots: INDEXABLE_ROBOTS,
+  // Optional: enter the verification token in Vercel to prove site ownership
+  // to Google Search Console without changing any public page content.
+  verification: googleVerificationToken ? { google: googleVerificationToken } : undefined,
   openGraph: {
     siteName: "Xavkit",
     type: "website",
