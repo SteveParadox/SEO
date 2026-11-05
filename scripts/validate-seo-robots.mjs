@@ -72,6 +72,7 @@ const publicRouteFiles = [
   "app/page.tsx",
   "app/tools/page.tsx",
   "app/prompts/page.tsx",
+  "app/prompts/topics/page.tsx",
   "app/updates/page.tsx",
   "app/collections/page.tsx",
   "app/comparisons/page.tsx",
@@ -88,6 +89,7 @@ const publicRouteFiles = [
 const dynamicPublicRouteFiles = [
   "app/tools/[slug]/page.tsx",
   "app/prompts/[slug]/page.tsx",
+  "app/prompts/topics/[topic]/page.tsx",
   "app/updates/[slug]/page.tsx",
   "app/collections/[slug]/page.tsx",
   "app/comparisons/[slug]/page.tsx",
@@ -145,6 +147,7 @@ if (process.argv.includes("--built")) {
     ["app/index.html", "/"],
     ["app/tools.html", "/tools"],
     ["app/prompts.html", "/prompts"],
+    ["app/prompts/topics.html", "/prompts/topics"],
     ["app/updates.html", "/updates"],
     ["app/collections.html", "/collections"],
     ["app/comparisons.html", "/comparisons"],
