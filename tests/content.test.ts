@@ -239,3 +239,32 @@ test("high-intent prompt pages have unique task-specific copy and indexable meta
   assert.equal(new Set(found.map((prompt) => prompt.id)).size, found.length);
   assert.equal(new Set(found.map((prompt) => prompt.title.toLowerCase())).size, found.length);
 });
+
+
+test("second high-intent expansion contains 30 unique, complete and useful searchable prompts", () => {
+  const expansion = DATA.prompts.filter((item) => /^xp31\d{2}$/.test(item.id));
+  assert.equal(expansion.length, 30, "all new prompt pages should be registered in DATA");
+  assert.equal(new Set(expansion.map((item) => item.slug.toLowerCase())).size, 30, "all new slugs must be unique");
+  assert.equal(new Set(expansion.map((item) => item.title.toLowerCase())).size, 30, "all new page titles must be unique");
+
+  for (const category of ["career", "development", "spreadsheets", "seo", "copywriting", "education"]) {
+    const entries = expansion.filter((item) => item.tags.includes(category));
+    assert.equal(entries.length, 5, `${category} must include five distinct prompts`);
+  }
+  for (const item of expansion) {
+    assert.equal(getPromptBySlug(item.slug)?.id, item.id, `${item.slug}: not accessible via slug lookup`);
+    assert.ok(item.title.length >= 15, `${item.slug}: short title`);
+    assert.ok(item.description && item.description.length >= 100, `${item.slug}: thin description`);
+    assert.ok(item.whenToUse && item.whenToUse.length >= 90, `${item.slug}: thin use guidance`);
+    assert.ok(item.howItWorks && item.howItWorks.length >= 120, `${item.slug}: missing task workflow`);
+    assert.ok(item.prompt.length >= 900, `${item.slug}: prompt is too short`);
+    assert.match(item.prompt, /\{[A-Z_]+\}/, `${item.slug}: no editable input fields`);
+    assert.ok(item.variations.length >= 3, `${item.slug}: needs variations`);
+    assert.ok(item.variations.every((variant) => variant.length >= 30), `${item.slug}: variation lacks detail`);
+    assert.ok(item.tags.length >= 3, `${item.slug}: not discoverable by topic`);
+    assert.ok(item.limitations && item.limitations.length >= 90, `${item.slug}: missing limitations`);
+    assert.ok(item.successMetrics && item.successMetrics.length >= 90, `${item.slug}: missing success criteria`);
+    assert.deepEqual(item.modelCompatibility, ["GPT", "Claude", "Gemini"]);
+    assert.equal(item.updatedAtISO, "2026-11-05");
+  }
+});
