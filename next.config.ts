@@ -23,9 +23,11 @@ const adSenseFrameOrigins = [
   "https://ep2.adtrafficquality.google",
 ];
 
+const thirdPartyAdScriptOrigins = ["https://quge5.com"];
+
 const scriptSourcePolicy = `script-src 'self' 'unsafe-inline'${
   process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"
-} ${adSenseOrigins.join(" ")}`;
+} ${[...adSenseOrigins, ...thirdPartyAdScriptOrigins].join(" ")}`;
 
 const contentSecurityPolicy = [
   "default-src 'self'",
