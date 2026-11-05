@@ -225,7 +225,7 @@ test("high-intent prompt pages have unique task-specific copy and indexable meta
     assert.ok(prompt.title.length >= 12, `${slug}: title too short`);
     assert.ok(prompt.description && prompt.description.length >= 80, `${slug}: thin page description`);
     assert.ok(prompt.prompt.length >= 500, `${slug}: prompt lacks operational detail`);
-    assert.match(prompt.prompt, /\\{[A-Z_]+\\}/, `${slug}: missing input placeholders`);
+    assert.match(prompt.prompt, /\{[A-Z_]+\}/, `${slug}: missing input placeholders`);
     assert.ok(prompt.variations.length >= 3, `${slug}: too few variations`);
     assert.ok(prompt.variations.every((variation) => variation.length >= 20), `${slug}: vague variation`);
     assert.ok(prompt.tags.length >= 3, `${slug}: missing discovery tags`);
