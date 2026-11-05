@@ -3,6 +3,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const PersonalizedHomeSections = dynamic(
+  () => import("@/components/personalized-home-sections"),
+  { ssr: false }
+);
 import {
   motion,
   AnimatePresence,
@@ -39,11 +45,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { RecentlyViewed } from "@/components/recently-viewed";
-import { ContinueExploring } from "@/components/continue-exploring";
+
+
 import { NewsletterSignup } from "@/components/newsletter-signup";
-import { RecommendedForYou } from "@/components/recommended-for-you";
-import { TrendingNow } from "@/components/trending-now";
+
+
 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -522,6 +528,8 @@ export default function ToolDropAI({
   const tabsRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const heroInView = useInView(heroRef, { once: true });
+  const personalizedRef = useRef<HTMLDivElement>(null);
+  const personalizedInView = useInView(personalizedRef, { once: true, margin: "200px" });
 
   useEffect(() => {
     const el = tabsRef.current?.querySelector(
@@ -980,10 +988,9 @@ export default function ToolDropAI({
         </div>
       </section>
 
-      <RecentlyViewed limit={6} />
-      <TrendingNow limit={4} />
-      <ContinueExploring limit={6} />
-      <RecommendedForYou limit={6} />
+      <div ref={personalizedRef}>
+        {personalizedInView ? <PersonalizedHomeSections /> : null}
+      </div>
 
       {/* Best Lists (Money Pages) */}
 <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-14">
