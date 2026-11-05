@@ -83,6 +83,8 @@ export default function PromptsIndexPage() {
           accurate details before using the output.
         </p>
 
+        <p className="mt-4 text-sm"><Link className="font-medium text-primary underline underline-offset-4" href="/prompts/topics">Browse all prompt topics</Link></p>
+
         <h2 className="mt-10 text-2xl font-semibold">Explore by task</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {workflows.map((group) => (
