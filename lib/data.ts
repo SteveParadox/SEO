@@ -20,10 +20,11 @@ import { comparisons } from "@/lib/content/comparisons";
 import { BEST_PAGES, type BestPage } from "@/lib/content/best-pages";
 import { searchIntentPrompts, searchIntentUpdates, searchIntentBestPages } from "@/lib/content/search-intent-expansion";
 import { highIntentPrompts } from "@/lib/content/high-intent-prompts";
+import { highIntentExpansionPrompts } from "@/lib/content/high-intent-expansion";
 
 export const DATA: DataBundle & { bestPages: BestPage[] } = {
   tools,
-  prompts: [...prompts, ...expandedPrompts, ...searchIntentPrompts, ...highIntentPrompts],
+  prompts: [...prompts, ...expandedPrompts, ...searchIntentPrompts, ...highIntentPrompts, ...highIntentExpansionPrompts],
   updates: [...recentUpdates, ...searchIntentUpdates, ...updates],
   collections: [...collections, ...expandedCollections],
   comparisons,
