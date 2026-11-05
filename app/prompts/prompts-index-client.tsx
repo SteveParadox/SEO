@@ -97,7 +97,7 @@ export default function PromptsIndexClient({ items }: { items: PromptListing[] }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">AI Prompts</h1>
+      <h2 className="text-2xl font-semibold">Search the complete prompt library</h2>
 
       <div className="mt-6">
         <Card className="rounded-2xl">
