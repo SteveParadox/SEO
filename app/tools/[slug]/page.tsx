@@ -71,14 +71,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!tool) {
     return {
-      title: "Tool not found - Xavkit",
+      title: "Tool not found",
       robots: NOINDEX_NOFOLLOW_ROBOTS,
     };
   }
 
   const baseName = tool.name?.trim() || "Unnamed Tool";
   const baseDescription = (tool.description || tool.oneLiner)?.trim() || "AI tool information";
-  const title = `${baseName} review - Xavkit`;
+  const title = `${baseName} review`;
+  const socialTitle = `${title} | Xavkit`;
   const description = baseDescription.slice(0, 160);
   const url = absoluteUrl(`/tools/${tool.slug}`);
 
@@ -88,7 +89,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: { canonical: url },
     robots: INDEXABLE_ROBOTS,
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       siteName: "Xavkit",
@@ -96,7 +97,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
     },
   };

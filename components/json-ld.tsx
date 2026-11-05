@@ -1,10 +1,14 @@
-// components/json-ld.tsx
+// Safely embed JSON-LD in an HTML script tag. Raw "<" can terminate the
+// element via a string containing "</script>".
+export function serializeJsonLd(data: unknown): string {
+  return (JSON.stringify(data) ?? "null").replace(/</g, "\\u003c");
+}
+
 export function JsonLd({ data }: { data: unknown }) {
   return (
     <script
       type="application/ld+json"
-      // next-safe: JSON.stringify is what Google expects
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }
