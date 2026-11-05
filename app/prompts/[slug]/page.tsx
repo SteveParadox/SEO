@@ -14,6 +14,7 @@ import { CopyButton } from "@/components/copy-button";
 import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
+import { PROMPT_TOPICS } from "@/lib/prompt-topics";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -103,6 +104,9 @@ export default async function PromptPage({ params }: PageProps) {
   const placeholders = extractPlaceholders(prompt.prompt);
   const sections = buildSections(prompt);
   const pageUrl = absoluteUrl(`/prompts/${prompt.slug}`);
+  const topics = PROMPT_TOPICS.filter((topic) =>
+    prompt.tags.some((tag) => topic.tags.includes(tag.trim().toLowerCase()))
+  ).slice(0, 3);
 
   const promptSchema = {
     "@context": "https://schema.org",
@@ -165,6 +169,21 @@ export default async function PromptPage({ params }: PageProps) {
           );
         })}
       </div>
+
+      {topics.length > 0 ? (
+        <nav className="mt-4 flex flex-wrap items-center gap-2 text-sm" aria-label="Explore related prompt workflows">
+          <span className="text-muted-foreground">Browse related workflows:</span>
+          {topics.map((topic) => (
+            <Link
+              key={topic.slug}
+              className="rounded-full border px-3 py-1 hover:bg-muted"
+              href={`/prompts/topics/${topic.slug}`}
+            >
+              {topic.title}
+            </Link>
+          ))}
+        </nav>
+      ) : null}
 
       <h1 className="mt-4 text-3xl font-semibold">{prompt.title}</h1>
       <p className="mt-3 max-w-3xl text-muted-foreground">{prompt.description || prompt.purpose}</p>
