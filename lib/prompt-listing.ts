@@ -13,9 +13,10 @@ export type PromptListing = Pick<
 };
 
 export function getPromptVariableCount(promptText: string): number {
-  // The catalog uses {VARIABLE}, not only {{variable}} syntax.
-  const placeholders = promptText.match(/\{[A-Z][A-Z0-9_]*\}/g) ?? [];
-  return new Set(placeholders).size;
+  // Support {VARIABLE} and {{variable.name}} formats without mistaking
+  // arbitrary JSON punctuation for editable prompt inputs.
+  const matches = promptText.matchAll(/\{\{\s*([\w.-]+)\s*\}\}|\{([A-Z][A-Z0-9_]*)\}/g);
+  return new Set(Array.from(matches, (match) => (match[1] ?? match[2]).toUpperCase())).size;
 }
 
 export function toPromptListing(prompt: Prompt): PromptListing {
