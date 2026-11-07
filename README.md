@@ -25,6 +25,9 @@ Before deploying, use [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md). Produc
 
 ## Content
 
+Search-demand-driven how-to guides live in `lib/content/search-demand-guides.ts` and render at `/guides` and `/guides/[slug]`. Each article has a distinct task, dated editorial review, answer-first steps, primary references, and links to existing content. The opportunity backlog and its evidence limits are in `research/search-demand/2026-11-07/`.
+
+
 Content currently lives under `lib/content/`; the central `lib/data.ts` provides typed access to tools, prompts, updates, collections, comparisons, and best pages. Preserve published slugs and IDs when editing existing entries. The `app/` directory owns routes and SEO metadata.
 
 Updates should include publisher announcements or other primary sources and precise event dates where possible. An editorial update date must represent a meaningful revision rather than an automated crawl.

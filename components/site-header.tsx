@@ -13,6 +13,7 @@ import {
   Bookmark,
   Clock,
   Tag,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -43,6 +44,7 @@ const PRIMARY_NAV: NavItem[] = [
 ];
 
 const SECONDARY_NAV: UtilityItem[] = [
+  { href: "/guides", label: "Guides", icon: BookOpen },
   { href: "/tags", label: "Tags", icon: Tag },
   { href: "/trending", label: "Trending", icon: Flame },
 ];
