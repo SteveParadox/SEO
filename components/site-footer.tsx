@@ -8,7 +8,8 @@ export function SiteFooter() {
           Copyright {new Date().getFullYear()} XavKit. All rights reserved.
         </div>
 
-        <nav className="flex items-center gap-4 text-sm">
+        <nav className="flex flex-wrap items-center gap-4 text-sm">
+          <Link href="/guides" className="text-muted-foreground transition hover:text-foreground">Guides</Link>
           <Link
             href="/ai-stack-builder"
             className="text-muted-foreground transition hover:text-foreground"

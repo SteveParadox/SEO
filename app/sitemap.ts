@@ -3,6 +3,7 @@ import { DATA, getAllTagsWithCounts, getLatestUpdatedForTag } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 import { getAlternativePageStaticSlugs } from "@/lib/alternatives";
 import { PROMPT_TOPICS } from "@/lib/prompt-topics";
+import { SEARCH_DEMAND_GUIDES } from "@/lib/content/search-demand-guides";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
@@ -13,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/alternatives"), changeFrequency: "weekly", priority: 0.88 },
     { url: absoluteUrl("/prompts"), changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/prompts/topics"), changeFrequency: "monthly", priority: 0.85 },
+    { url: absoluteUrl("/guides"), changeFrequency: "monthly", priority: 0.86 },
     { url: absoluteUrl("/ai-stack-builder"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare-tools"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/updates"), changeFrequency: "daily", priority: 0.7 },
@@ -43,6 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date("2026-11-05"),
     changeFrequency: "monthly" as const,
     priority: 0.85,
+  }));
+
+  const guides = SEARCH_DEMAND_GUIDES.map((guide) => ({
+    url: absoluteUrl("/guides/" + guide.slug),
+    lastModified: new Date(guide.updatedAtISO),
+    changeFrequency: "monthly" as const,
+    priority: 0.78,
   }));
 
   const updates = DATA.updates.map((u) => ({
@@ -108,6 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...tools,
     ...prompts,
     ...promptTopics,
+    ...guides,
     ...updates,
     ...tags,
   ];

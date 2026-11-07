@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/content.test.ts",
+    "test": "tsx --test tests/content.test.ts tests/search-demand-guides.test.ts",
     "discover-content": "tsx scripts/discover-content.ts"
   },
   "dependencies": {
