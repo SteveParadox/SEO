@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Tags - Xavkit",
+  title: "Browse AI Topics",
   description:
     "Browse Xavkit topics by tag to discover related tools, prompts, comparisons, and best lists.",
   alternates: { canonical: absoluteUrl("/tags") },

@@ -31,6 +31,7 @@ export default async function GuideDetailPage({ params }: Props) {
   const guide = getSearchDemandGuide(slug);
   if (!guide) return notFound();
   const url = absoluteUrl("/guides/" + guide.slug);
+  const primaryPrompt = guide.relatedLinks.find((link) => link.href.startsWith("/prompts/"));
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -58,6 +59,11 @@ export default async function GuideDetailPage({ params }: Props) {
       <section className="mt-9 rounded-2xl border p-6" aria-labelledby="quick-answer">
         <h2 className="text-lg font-semibold" id="quick-answer">Quick answer</h2>
         <p className="mt-3 leading-relaxed">{guide.answer}</p>
+        {primaryPrompt ? (
+          <Link className="mt-4 inline-block text-sm font-medium text-primary underline underline-offset-4" href={primaryPrompt.href}>
+            {primaryPrompt.label}
+          </Link>
+        ) : null}
       </section>
       <div className="mt-9 space-y-4 leading-relaxed">
         {guide.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -96,7 +102,7 @@ export default async function GuideDetailPage({ params }: Props) {
       <section className="mt-10" aria-labelledby="more-heading">
         <h2 id="more-heading" className="text-xl font-semibold">Continue with related resources</h2>
         <ul className="mt-4 list-disc space-y-3 pl-5">
-          {guide.relatedLinks.map((link) => (
+          {guide.relatedLinks.filter((link) => link !== primaryPrompt).map((link) => (
             <li key={link.href}><Link className="text-primary hover:underline" href={link.href}>{link.label}</Link></li>
           ))}
         </ul>

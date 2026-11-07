@@ -3,7 +3,7 @@ import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 import UpdatesIndexClient from "./updates-index-client";
 
 export const metadata: Metadata = {
-  title: "Model Updates - Xavkit",
+  title: "AI Model Updates",
   description: "Browse model and ecosystem updates translated into plain English.",
   alternates: { canonical: absoluteUrl("/updates") },
   robots: INDEXABLE_ROBOTS,

@@ -87,8 +87,14 @@ const nextConfig: NextConfig = {
     },
   ],
 
-  // Redirects for old URLs (add as needed)
+  // Consolidate the public hostname and preserve legacy URL redirects.
   redirects: async () => [
+    {
+      source: "/:path*",
+      has: [{ type: "host", value: "www\\.xavkit\\.com" }],
+      destination: "https://xavkit.com/:path*",
+      permanent: true,
+    },
     { source: "/prompts/prompts", destination: "/prompts", permanent: true },
     { source: "/prompts/prompts/:slug", destination: "/prompts/:slug", permanent: true },
   ],

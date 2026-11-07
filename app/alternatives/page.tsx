@@ -11,7 +11,7 @@ import type { AlternativePageData } from "@/lib/alternatives";
 import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Best AI Tool Alternatives - Xavkit",
+  title: "Best AI Tool Alternatives",
   description:
     "Browse indexable alternatives pages for major AI tools. Compare substitutes, pricing tradeoffs, and the best picks for different workflows.",
   alternates: {

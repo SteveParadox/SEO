@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { track } from "@vercel/analytics";
 import { trackEngagement } from "@/lib/engagement";
 import type { UnifiedKind } from "@/lib/data";
 
@@ -26,8 +27,10 @@ export function TrackedExternalLink({
     <a
       {...props}
       onClick={(event) => {
-        trackEngagement({ kind, id, slug, title, subtitle }, "outbound");
         onClick?.(event);
+        if (event.defaultPrevented) return;
+        trackEngagement({ kind, id, slug, title, subtitle }, "outbound");
+        if (kind === "tool") track("tool_outbound_click");
       }}
     >
       {children}

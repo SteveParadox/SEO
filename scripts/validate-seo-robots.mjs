@@ -103,6 +103,7 @@ const intentionallyNoindexedRouteFiles = [
   "app/search/page.tsx",
   "app/recent/page.tsx",
   "app/saved/page.tsx",
+  "app/trending/layout.tsx",
   "app/not-found.tsx",
 ];
 
@@ -141,45 +142,71 @@ const sitemapRoute = read("app/sitemap.ts");
 if (!sitemapRoute.includes('absoluteUrl("/guides")') || !sitemapRoute.includes("...guides,")) {
   errors.push("app/sitemap.ts must include the guide hub and detail URLs.");
 }
-for (const route of ["/search", "/recent", "/saved"]) {
+const utilityRoutes = ["/search", "/recent", "/saved", "/trending"];
+for (const route of utilityRoutes) {
   if (sitemapRoute.includes(`absoluteUrl("${route}")`) || sitemapRoute.includes(`absoluteUrl('${route}')`)) {
     errors.push(`app/sitemap.ts must not include intentionally noindexed route ${route}.`);
   }
 }
 
 if (process.argv.includes("--built")) {
-  const builtPublicRoutes = [
-    ["app/index.html", "/"],
-    ["app/tools.html", "/tools"],
-    ["app/prompts.html", "/prompts"],
-    ["app/prompts/topics.html", "/prompts/topics"],
-    ["app/guides.html", "/guides"],
-    ["app/updates.html", "/updates"],
-    ["app/collections.html", "/collections"],
-    ["app/comparisons.html", "/comparisons"],
-    ["app/best.html", "/best"],
-    ["app/tags.html", "/tags"],
-    ["app/alternatives.html", "/alternatives"],
-    ["app/ai-stack-builder.html", "/ai-stack-builder"],
-    ["app/compare-tools.html", "/compare-tools"],
-  ];
+  const origin = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "");
+  const expectedOrigin = origin && (/^https?:\/\//i.test(origin) ? origin : `https://${origin}`);
+  const robots = read(".next/server/app/robots.txt.body");
+  const sitemap = read(".next/server/app/sitemap.xml.body");
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url);
+  const routes = new Set();
 
-  for (const [relativePath, route] of builtPublicRoutes) {
-    // Preview guide routes deliberately emit noindex; production checks apply on release.
-    if (route === "/guides" && process.env.VERCEL_ENV === "preview") continue;
-    const builtFile = path.join(root, ".next", "server", relativePath);
-    if (!existsSync(builtFile)) {
-      errors.push(`Built output missing ${route}: .next/server/${relativePath}`);
+  if (!expectedOrigin) {
+    errors.push("Set NEXT_PUBLIC_SITE_URL to validate built crawl files.");
+  } else if (!robots.split(/\r?\n/).includes(`Sitemap: ${expectedOrigin}/sitemap.xml`)) {
+    errors.push("Built robots.txt must advertise the canonical sitemap URL.");
+  }
+  if (!/^User-agent: \*$/m.test(robots) || /^Disallow:\s*\/\s*$/m.test(robots)) {
+    errors.push("Built robots.txt must allow crawlers to access public pages.");
+  }
+  if (!sitemapUrls.length || new Set(sitemapUrls).size !== sitemapUrls.length) {
+    errors.push("Built sitemap must contain unique URLs.");
+  }
+
+  for (const url of new Set(sitemapUrls)) {
+    let parsed;
+    try {
+      parsed = new URL(url);
+    } catch {
+      errors.push(`Invalid sitemap URL: ${url}`);
+      continue;
+    }
+    if (parsed.origin !== expectedOrigin || parsed.search || parsed.hash) {
+      errors.push(`Noncanonical sitemap URL: ${url}`);
       continue;
     }
 
-    const html = readFileSync(builtFile, "utf8");
-    if (/<meta\s+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)) {
-      errors.push(`Built public route ${route} emits a noindex robots meta tag.`);
+    const route = parsed.pathname;
+    routes.add(route);
+    const html = read(`.next/server/app${route === "/" ? "/index" : route}.html`);
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    if (canonical !== url && !(route === "/" && canonical === expectedOrigin)) {
+      errors.push(`Built sitemap page ${route} must declare its sitemap URL as canonical.`);
     }
-    if (/x-robots-tag[^>]+noindex/i.test(html)) {
-      errors.push(`Built public route ${route} contains an X-Robots-Tag noindex marker.`);
+    const isPreviewGuide = process.env.VERCEL_ENV === "preview" &&
+      (route === "/guides" || route.startsWith("/guides/"));
+    if (!isPreviewGuide && /<meta name="robots" content="[^"]*noindex/i.test(html)) {
+      errors.push(`Built sitemap page ${route} emits a noindex robots meta tag.`);
     }
+  }
+
+  for (const route of utilityRoutes) {
+    const html = read(`.next/server/app${route}.html`);
+    if (routes.has(route) || !/<meta name="robots" content="[^"]*noindex/i.test(html)) {
+      errors.push(`Built utility page ${route} must be noindex and omitted from the sitemap.`);
+    }
+  }
+
+  for (const route of ["/", "/tools", "/alternatives", "/prompts", "/prompts/topics",
+    "/guides", "/updates", "/collections", "/comparisons", "/best", "/tags",
+    "/ai-stack-builder", "/compare-tools"]) {
+    if (!routes.has(route)) errors.push(`Built sitemap omits ${route}.`);
   }
 }
 

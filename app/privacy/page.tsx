@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             This may include:
           </p>
           <ul className="mt-2 list-disc pl-5 text-muted-foreground">
-            <li>Basic analytics data (pages visited, device type)</li>
+            <li>Basic analytics data (pages visited, device type, prompt-copy and tool-link activity)</li>
             <li>Saved items or preferences (stored locally or anonymously)</li>
             <li>Contact information if you explicitly choose to provide it</li>
           </ul>
