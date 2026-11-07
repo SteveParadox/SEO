@@ -73,6 +73,7 @@ const publicRouteFiles = [
   "app/tools/page.tsx",
   "app/prompts/page.tsx",
   "app/prompts/topics/page.tsx",
+  "app/guides/page.tsx",
   "app/updates/page.tsx",
   "app/collections/page.tsx",
   "app/comparisons/page.tsx",
@@ -90,6 +91,7 @@ const dynamicPublicRouteFiles = [
   "app/tools/[slug]/page.tsx",
   "app/prompts/[slug]/page.tsx",
   "app/prompts/topics/[topic]/page.tsx",
+  "app/guides/[slug]/page.tsx",
   "app/updates/[slug]/page.tsx",
   "app/collections/[slug]/page.tsx",
   "app/comparisons/[slug]/page.tsx",
@@ -136,6 +138,9 @@ if (!robotsRoute.includes("Sitemap:")) {
 }
 
 const sitemapRoute = read("app/sitemap.ts");
+if (!sitemapRoute.includes('absoluteUrl("/guides")') || !sitemapRoute.includes("...guides,")) {
+  errors.push("app/sitemap.ts must include the guide hub and detail URLs.");
+}
 for (const route of ["/search", "/recent", "/saved"]) {
   if (sitemapRoute.includes(`absoluteUrl("${route}")`) || sitemapRoute.includes(`absoluteUrl('${route}')`)) {
     errors.push(`app/sitemap.ts must not include intentionally noindexed route ${route}.`);
@@ -148,6 +153,7 @@ if (process.argv.includes("--built")) {
     ["app/tools.html", "/tools"],
     ["app/prompts.html", "/prompts"],
     ["app/prompts/topics.html", "/prompts/topics"],
+    ["app/guides.html", "/guides"],
     ["app/updates.html", "/updates"],
     ["app/collections.html", "/collections"],
     ["app/comparisons.html", "/comparisons"],
@@ -159,6 +165,8 @@ if (process.argv.includes("--built")) {
   ];
 
   for (const [relativePath, route] of builtPublicRoutes) {
+    // Preview guide routes deliberately emit noindex; production checks apply on release.
+    if (route === "/guides" && process.env.VERCEL_ENV === "preview") continue;
     const builtFile = path.join(root, ".next", "server", relativePath);
     if (!existsSync(builtFile)) {
       errors.push(`Built output missing ${route}: .next/server/${relativePath}`);

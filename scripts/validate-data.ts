@@ -5,6 +5,7 @@
  */
 
 import { DATA } from "@/lib/data";
+import { SEARCH_DEMAND_GUIDES } from "@/lib/content/search-demand-guides";
 
 interface ValidationError {
   type: string;
@@ -136,6 +137,59 @@ DATA.bestPages.forEach((page) => {
   }
 });
 
+
+// Guides are outside DATA, so validate them explicitly in the build pipeline.
+console.log("Validating task guides...");
+const guideIds = new Set<string>();
+const guideSlugs = new Set<string>();
+for (const guide of SEARCH_DEMAND_GUIDES) {
+  validateItem(guide, "guide", ["id", "slug", "title", "description", "primaryQuery", "updatedAtISO", "answer", "steps", "faqs", "sources"]);
+  if (guideIds.has(guide.id)) errors.push({ type: "guide", item: guide.id, message: "Duplicate ID" });
+  if (guideSlugs.has(guide.slug.toLowerCase())) errors.push({ type: "guide", item: guide.id, message: "Duplicate slug" });
+  guideIds.add(guide.id);
+  guideSlugs.add(guide.slug.toLowerCase());
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(guide.slug)) {
+    errors.push({ type: "guide", item: guide.id, message: "Invalid URL slug" });
+  }
+  if (guide.description.length < 100 || guide.description.length > 160) {
+    errors.push({ type: "guide", item: guide.id, message: "Meta description should be 100-160 characters" });
+  }
+  if (!Array.isArray(guide.steps) || guide.steps.length < 4 ||
+      guide.steps.some((step) => step.body.trim().length < 90 || step.example.trim().length < 50)) {
+    errors.push({ type: "guide", item: guide.id, message: "Steps and examples must be substantive" });
+  }
+  if (!Array.isArray(guide.faqs) || guide.faqs.length < 3 ||
+      guide.faqs.some((faq) => !faq.q.endsWith("?") || faq.a.trim().length < 70)) {
+    errors.push({ type: "guide", item: guide.id, message: "FAQs must be substantive" });
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(guide.updatedAtISO) ||
+      !Number.isFinite(Date.parse(guide.updatedAtISO))) {
+    errors.push({ type: "guide", item: guide.id, message: "Invalid content version date" });
+  }
+  if (guide.publishedAtISO && (!/^\d{4}-\d{2}-\d{2}$/.test(guide.publishedAtISO) ||
+      guide.publishedAtISO > guide.updatedAtISO)) {
+    errors.push({ type: "guide", item: guide.id, message: "Invalid or future publication date" });
+  }
+  const pools: Record<string, readonly { slug: string }[]> = {
+    tools: DATA.tools, prompts: DATA.prompts, best: DATA.bestPages,
+    collections: DATA.collections, comparisons: DATA.comparisons,
+  };
+  for (const link of guide.relatedLinks) {
+    const segments = link.href.split("/").filter(Boolean);
+    if (!link.href.startsWith("/") || segments.length !== 2 ||
+        !pools[segments[0]]?.some((item) => item.slug === segments[1])) {
+      errors.push({ type: "guide", item: guide.id, message: "Broken internal link: " + link.href });
+    }
+  }
+  for (const source of guide.sources) {
+    try {
+      if (new URL(source.url).protocol !== "https:" || !source.label.trim()) throw new Error("Invalid source");
+    } catch {
+      errors.push({ type: "guide", item: guide.id, message: "Invalid source URL: " + source.url });
+    }
+  }
+}
+
 // Check for slug collisions
 console.log("Checking for slug collisions...");
 const slugs = new Map<string, string>();
@@ -146,6 +200,7 @@ const allItems = [
   ...DATA.collections.map((c) => ({ slug: c.slug, type: "collection", id: c.id })),
   ...DATA.comparisons.map((c) => ({ slug: c.slug, type: "comparison", id: c.id })),
   ...DATA.bestPages.map((p) => ({ slug: p.slug, type: "best", id: p.id })),
+  ...SEARCH_DEMAND_GUIDES.map((g) => ({ slug: g.slug, type: "guide", id: g.id })),
 ];
 
 allItems.forEach(({ slug, type, id }) => {
