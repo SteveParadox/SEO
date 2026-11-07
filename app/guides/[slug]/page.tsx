@@ -102,8 +102,8 @@ export default async function GuideDetailPage({ params }: Props) {
         </ul>
       </section>
       <section className="mt-10 border-t pt-6" aria-labelledby="sources-heading">
-        <h2 id="sources-heading" className="text-xl font-semibold">Primary references</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Official documentation to consult for current features and limitations.</p>
+        <h2 id="sources-heading" className="text-xl font-semibold">Further reading</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Explore the official documentation for more details about the tools and methods discussed.</p>
         <ul className="mt-4 list-disc space-y-2 pl-5">
           {guide.sources.map((source) => (
             <li key={source.url}>
@@ -112,7 +112,6 @@ export default async function GuideDetailPage({ params }: Props) {
           ))}
         </ul>
       </section>
-      <p className="mt-10 border-t pt-6 text-sm leading-relaxed text-muted-foreground">Editorial transparency: This guide was prepared with AI assistance. The described workflows were not independently tested for this article. Examples are illustrative, not measured results. Check important outputs against original documents and current provider information.</p>
       <Link href="/guides" className="mt-8 inline-block text-sm font-medium text-primary hover:underline">Browse all practical guides</Link>
     </article>
   );

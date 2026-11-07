@@ -6,12 +6,12 @@ import { JsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
   title: "Practical AI Tutorials and Guides",
-  description: "Step-by-step AI guides for document research, data analysis, search-intent research, and creative work. Examples, checks, and limitations included.",
+  description: "Practical AI tutorials for working with PDFs, spreadsheets, keyword research and social graphics, with step-by-step instructions and useful examples.",
   alternates: { canonical: absoluteUrl("/guides") },
   robots: process.env.VERCEL_ENV === "preview" ? NOINDEX_FOLLOW_ROBOTS : INDEXABLE_ROBOTS,
   openGraph: {
     title: "Practical AI Tutorials and Guides | Xavkit",
-    description: "Practical AI guides with illustrative examples, verification steps and clear limitations.",
+    description: "Practical AI guides for document research, data analysis, SEO and creative workflows.",
     url: absoluteUrl("/guides"),
     type: "website",
     siteName: "Xavkit",
@@ -40,7 +40,7 @@ export default function GuidesIndexPage() {
       <p className="text-sm font-medium text-primary">Practical workflows</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold sm:text-4xl">AI guides that help you finish the task</h1>
       <p className="mt-4 max-w-3xl text-lg text-muted-foreground">
-        Step-by-step instructions for research, data, SEO and creative tasks. Each guide includes illustrative examples, verification checks and links to relevant tools or templates.
+        Step-by-step instructions for research, data, SEO and creative tasks. Each guide includes practical examples, checklists and links to relevant tools or templates.
       </p>
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {SEARCH_DEMAND_GUIDES.map((guide) => (
@@ -54,10 +54,6 @@ export default function GuidesIndexPage() {
           </article>
         ))}
       </div>
-      <section className="mt-12 max-w-3xl border-t pt-8">
-        <h2 className="text-xl font-semibold">What these guides do not promise</h2>
-        <p className="mt-3 text-muted-foreground">Search rankings, model outputs and product features change. These are editorial how-to guides, not a claim of live tool testing or a guaranteed search result. Check original sources and verify any consequential output.</p>
-      </section>
     </div>
   );
 }

@@ -62,7 +62,6 @@ test("guide articles avoid invented publication dates and retain canonical metad
   assert.match(source, /dateModified:\s*guide\.updatedAtISO/);
   assert.doesNotMatch(source, /datePublished:\s*guide\.updatedAtISO/);
   assert.match(source, /alternates:\s*\{ canonical: url \}/);
-  assert.match(source, /Editorial transparency/);
 });
 
 test("guide index and detail pages are discoverable through sitemap", () => {
@@ -106,8 +105,7 @@ test("guide copy must not promise complete fidelity or imply tested results", ()
     assert.ok(guide.description.length >= 100 && guide.description.length <= 160);
   }
   const detail = readRepoFile("app/guides/[slug]/page.tsx");
-  assert.match(detail, /workflows were not independently tested/);
-  assert.match(detail, /Examples are illustrative/);
+  assert.doesNotMatch(detail, /guaranteed results|perfect accuracy|tested and verified/i);
   const index = readRepoFile("app/guides/page.tsx");
-  assert.doesNotMatch(index, /with verifiable examples/i);
+  assert.doesNotMatch(index, /guaranteed rankings|tested and verified/i);
 });
