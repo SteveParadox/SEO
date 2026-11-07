@@ -7,6 +7,8 @@ export type SearchDemandGuide = {
   category: string;
   intent: "informational";
   updatedAtISO: string;
+  /** Set only when the actual production publication date is confirmed. */
+  publishedAtISO?: string;
   answer: string;
   intro: string[];
   steps: { title: string; body: string; example: string }[];
@@ -16,8 +18,9 @@ export type SearchDemandGuide = {
   sources: { url: string; label: string }[];
 };
 
-/** Editorial, manually curated answers to research-supported search-intent families.
- * Query-level volumes are deliberately not asserted. Do not refresh dates without a review.
+/** AI-assisted editorial drafts covering plausible search-intent families.
+ * These are hypotheses, NOT verified high-volume keywords or first-hand product tests.
+ * Query-level search volumes are unmeasured. Dates change only for substantive revisions.
  */
 export const SEARCH_DEMAND_GUIDES: readonly SearchDemandGuide[] = [
   {
@@ -352,4 +355,9 @@ export const SEARCH_DEMAND_GUIDES: readonly SearchDemandGuide[] = [
 
 export function getSearchDemandGuide(slug: string) {
   return SEARCH_DEMAND_GUIDES.find((guide) => guide.slug === slug);
+}
+
+/** Return only tutorials intentionally linked to a related index, ranking or prompt. */
+export function getGuidesRelatedToUrl(href: string): readonly SearchDemandGuide[] {
+  return SEARCH_DEMAND_GUIDES.filter((guide) => guide.relatedLinks.some((link) => link.href === href));
 }

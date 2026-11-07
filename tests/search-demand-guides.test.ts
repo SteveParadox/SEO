@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { SEARCH_DEMAND_GUIDES, getSearchDemandGuide } from "../lib/content/search-demand-guides";
+import { SEARCH_DEMAND_GUIDES, getSearchDemandGuide, getGuidesRelatedToUrl } from "../lib/content/search-demand-guides";
 import { DATA } from "../lib/data";
+import { readFileSync } from "node:fs";
 
 test("search-demand guides are original, complete and have unique URL slugs", () => {
-  assert.equal(SEARCH_DEMAND_GUIDES.length, 4);
+  assert.ok(SEARCH_DEMAND_GUIDES.length >= 4);
   assert.equal(new Set(SEARCH_DEMAND_GUIDES.map((g) => g.id)).size, SEARCH_DEMAND_GUIDES.length);
   assert.equal(new Set(SEARCH_DEMAND_GUIDES.map((g) => g.slug)).size, SEARCH_DEMAND_GUIDES.length);
+  assert.equal(new Set(SEARCH_DEMAND_GUIDES.map((g) => g.primaryQuery.trim().toLowerCase())).size, SEARCH_DEMAND_GUIDES.length, "duplicate primary search intents");
   for (const guide of SEARCH_DEMAND_GUIDES) {
     assert.match(guide.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.equal(getSearchDemandGuide(guide.slug)?.id, guide.id);
@@ -21,6 +23,11 @@ test("search-demand guides are original, complete and have unique URL slugs", ()
     assert.ok(guide.sources.length > 0 && guide.sources.every((source) => new URL(source.url).protocol === "https:"));
     assert.match(guide.updatedAtISO, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(new Date(guide.updatedAtISO).toISOString().slice(0, 10), guide.updatedAtISO);
+    if (guide.publishedAtISO) {
+      assert.match(guide.publishedAtISO, /^\d{4}-\d{2}-\d{2}$/);
+      assert.equal(new Date(guide.publishedAtISO).toISOString().slice(0, 10), guide.publishedAtISO);
+      assert.ok(guide.publishedAtISO <= guide.updatedAtISO, "publication must not follow revision");
+    }
     for (const link of guide.relatedLinks) {
       assert.ok(link.href.startsWith("/"), "Only internal links are allowed");
       const parts = link.href.split("/").filter(Boolean);
@@ -30,5 +37,58 @@ test("search-demand guides are original, complete and have unique URL slugs", ()
       };
       assert.ok(pools[parts[0]]?.some((item) => item.slug === parts[1]), "Broken internal link: " + link.href);
     }
+  }
+});
+
+// The root layout already wraps all page content in <main>. Nested main
+// landmarks are invalid HTML and create confusing accessibility navigation.
+test("guide routes never nest a second main landmark", () => {
+  for (const path of ["../app/guides/page.tsx", "../app/guides/[slug]/page.tsx"]) {
+    const source = readFileSync(new URL(path, import.meta.url), "utf8");
+    assert.doesNotMatch(source, /<main(?:\s|>)/, path + ": nested main landmark");
+    assert.match(source, /<h1(?:\s|>)/, path + ": expected visible primary heading");
+  }
+});
+
+test("guide articles avoid invented publication dates and retain canonical metadata", () => {
+  const source = readFileSync(new URL("../app/guides/[slug]/page.tsx", import.meta.url), "utf8");
+  assert.match(source, /guide\.publishedAtISO\s*\?/);
+  assert.match(source, /dateModified:\s*guide\.updatedAtISO/);
+  assert.doesNotMatch(source, /datePublished:\s*guide\.updatedAtISO/);
+  assert.match(source, /alternates:\s*\{ canonical: url \}/);
+  assert.match(source, /Editorial transparency/);
+});
+
+test("guide index and detail pages are discoverable through sitemap", () => {
+  const source = readFileSync(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+  assert.match(source, /absoluteUrl\("\/guides"\)/);
+  assert.match(source, /SEARCH_DEMAND_GUIDES\.map/);
+  assert.match(source, /\.\.\.guides,/);
+});
+
+// Cross-links need to work in both directions. Guide-only outbound links
+// leave new routes isolated from established editorial entry points.
+test("related rankings can link back to relevant how-to guides", () => {
+  for (const href of [
+    "/best/best-ai-tools-for-research",
+    "/best/best-ai-tools-for-data-analysis",
+    "/best/best-ai-tools-for-seo",
+    "/best/best-ai-tools-for-design",
+    "/best/best-ai-tools-for-social-media",
+  ]) {
+    const guides = getGuidesRelatedToUrl(href);
+    assert.ok(guides.length >= 1, "missing contextual guide for " + href);
+    assert.ok(guides.every((guide) => SEARCH_DEMAND_GUIDES.includes(guide)));
+  }
+  const source = readFileSync(new URL("../app/best/[slug]/page.tsx", import.meta.url), "utf8");
+  assert.match(source, /getGuidesRelatedToUrl/);
+  assert.match(source, /howToGuides\.map/);
+});
+
+test("guide previews opt out of indexing until a production release", () => {
+  for (const path of ["../app/guides/page.tsx", "../app/guides/[slug]/page.tsx"]) {
+    const source = readFileSync(new URL(path, import.meta.url), "utf8");
+    assert.match(source, /VERCEL_ENV/);
+    assert.match(source, /NOINDEX_FOLLOW_ROBOTS/);
   }
 });

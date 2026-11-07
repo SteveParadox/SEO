@@ -12,6 +12,7 @@ import {
 import { JsonLd } from "@/components/json-ld";
 import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { TrackedExternalLink } from "@/components/tracked-external-link";
+import { getGuidesRelatedToUrl } from "@/lib/content/search-demand-guides";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -74,6 +75,7 @@ export default async function BestPage({ params }: PageProps) {
 
   const picks = resolveBestPicks(page);
   const related = getRelatedBestPages(page.id, 6);
+  const howToGuides = getGuidesRelatedToUrl(`/best/${page.slug}`);
   const pageUrl = absoluteUrl(`/best/${page.slug}`);
 
   const itemListSchema = {
@@ -257,6 +259,21 @@ export default async function BestPage({ params }: PageProps) {
             ))}
           </div>
         </div>
+      ) : null}
+
+      {howToGuides.length > 0 ? (
+        <section className="mt-10" aria-labelledby="related-how-to-guides">
+          <h2 id="related-how-to-guides" className="text-xl font-semibold">Learn how to use these tools</h2>
+          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">Follow a practical workflow before choosing or applying a product.</p>
+          <ul className="mt-4 grid gap-4 md:grid-cols-2">
+            {howToGuides.map((guide) => (
+              <li key={guide.id} className="rounded-2xl border p-5">
+                <Link href={`/guides/${guide.slug}`} className="font-semibold hover:underline">{guide.title}</Link>
+                <p className="mt-2 text-sm text-muted-foreground">{guide.description}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
       ) : null}
 
       {related.length ? (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SEARCH_DEMAND_GUIDES, getSearchDemandGuide } from "@/lib/content/search-demand-guides";
-import { INDEXABLE_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, NOINDEX_FOLLOW_ROBOTS, NOINDEX_NOFOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: guide.title,
     description: guide.description,
     alternates: { canonical: url },
-    robots: INDEXABLE_ROBOTS,
+    robots: process.env.VERCEL_ENV === "preview" ? NOINDEX_FOLLOW_ROBOTS : INDEXABLE_ROBOTS,
     openGraph: { title: guide.title + " | Xavkit", description: guide.description, url, type: "article", siteName: "Xavkit" },
     twitter: { card: "summary_large_image", title: guide.title, description: guide.description },
   };
@@ -37,7 +37,9 @@ export default async function GuideDetailPage({ params }: Props) {
     headline: guide.title,
     description: guide.description,
     dateModified: guide.updatedAtISO,
-    datePublished: guide.updatedAtISO,
+    // Publication dates are added only after the first live publication is verified.
+    // An editorial revision date must not be misrepresented as the original publication date.
+    ...(guide.publishedAtISO ? { datePublished: guide.publishedAtISO } : {}),
     mainEntityOfPage: url,
     author: { "@type": "Organization", name: "Xavkit" },
     publisher: { "@type": "Organization", name: "Xavkit" },
@@ -45,14 +47,14 @@ export default async function GuideDetailPage({ params }: Props) {
   // FAQ is presented visibly; do not add FAQPage rich-result markup here:
   // Google's FAQ rich results have restricted eligibility.
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
+    <article className="mx-auto max-w-4xl px-4 py-10">
       <JsonLd data={articleSchema} />
       <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
         <Link href="/guides" className="hover:underline">Guides</Link> / {guide.category}
       </nav>
       <h1 className="mt-5 text-3xl font-semibold leading-tight sm:text-4xl">{guide.title}</h1>
       <p className="mt-4 max-w-3xl text-lg text-muted-foreground">{guide.description}</p>
-      <p className="mt-4 text-sm text-muted-foreground">Editorial review: {guide.updatedAtISO} · {guide.category}</p>
+      <p className="mt-4 text-sm text-muted-foreground">Content version: {guide.updatedAtISO} · {guide.category}</p>
       <section className="mt-9 rounded-2xl border p-6" aria-labelledby="quick-answer">
         <h2 className="text-lg font-semibold" id="quick-answer">Quick answer</h2>
         <p className="mt-3 leading-relaxed">{guide.answer}</p>
@@ -110,7 +112,8 @@ export default async function GuideDetailPage({ params }: Props) {
           ))}
         </ul>
       </section>
+      <p className="mt-10 border-t pt-6 text-sm leading-relaxed text-muted-foreground">Editorial transparency: This guide was prepared with AI assistance. It does not claim independent hands-on testing of every workflow or tool mentioned. Confirm consequential outputs against original documents and current provider information.</p>
       <Link href="/guides" className="mt-8 inline-block text-sm font-medium text-primary hover:underline">Browse all practical guides</Link>
-    </main>
+    </article>
   );
 }

@@ -1,18 +1,18 @@
 # Xavkit search-demand implementation — 2026-11-07
 
-This is a **site-specific editorial action log**, derived from a cross-category search-demand study reviewed on 2026-11-07. It is not a raw Google Trends export, a keyword-volume database, or a claim that Xavkit ranks for these phrases.
+This is a **site-specific editorial hypothesis list** prepared on 2026-11-07 using public category-level demand indicators and a review of the existing Xavkit content inventory. It is **not** a completed keyword-volume study, not the final result of a separate deep-research task, not a raw Google Trends export, and not evidence that Xavkit ranks for these phrases.
 
 ## Scope and decision
 
 Xavkit focuses on AI tools, prompt workflows, model updates and comparisons. Large navigational head terms such as "chatgpt", "youtube", "amazon", "canva" and "gemini" establish ecosystem interest but are poor standalone page targets for this site. Broad medical, financial, sports, news and "near me" queries are **out of scope** and were not added.
 
-The growth opportunity is useful task-led tutorials adjacent to the existing inventory. New guides cover PDF summaries with citations, CSV/Excel validation, evidence-led keyword research and Canva/social-graphics workflows. Each has a distinct question, original examples, links to existing tools/templates, a canonical URL and sitemap coverage.
+The proposed growth opportunity is useful task-led tutorials adjacent to the existing inventory. AI-assisted guide drafts cover PDF summaries with citations, CSV/Excel validation, evidence-led keyword research and Canva/social-graphics workflows. Each has a distinct question, original examples, links to existing tools/templates, a canonical URL and sitemap coverage.
 
 ## Content map
 
 See [opportunities.csv](opportunities.csv) for target queries, destination URLs, intent, priority, action, evidence limitations and publication status. "Not measured" is intentional: **no query-level search volumes, competition scores, current rankings or Xavkit clicks were obtained**. Brand-scale estimates from third parties are not automatically applicable to these long-tail phrases.
 
-P1/P2/P3 are editorial priorities, **not measured keyword difficulty**. Implemented guide URLs require deployment and indexing checks; "implemented in PR" does not mean live.
+P1/P2/P3 are provisional editorial priorities, **not measured keyword difficulty or demonstrated query demand**. Validate each query with dated first-party Search Console data where possible and a market/locale-specific search dataset before treating it as high-demand. Implemented guide URLs require deployment and indexing checks; "implemented in PR" does not mean live.
 
 ## Evidence sources and handling
 
@@ -30,6 +30,13 @@ P1/P2/P3 are editorial priorities, **not measured keyword difficulty**. Implemen
 3. Once deployed, inspect the guides with Search Console URL Inspection; do not claim indexation until Google confirms it.
 4. After a meaningful data window, export query/page/country/device data and update this backlog. Refresh the existing comparison, best and prompt pages before expanding further.
 5. Do not publish made-up usage statistics, AI tool prices, verified test results or synthetic volume numbers; keep editorial dates meaningful.
+
+## Publication and disclosure precautions
+
+- The guide drafts were prepared with AI assistance and have not undergone independent first-hand testing. Do not represent the content-version date as a human editorial review, and do not add a `datePublished` value until a real production publication date is known.
+- The root layout already contains the HTML `main` landmark; page components must not nest another one. The new route regression tests cover this.
+- Confirm external provider documentation, examples and accessibility before publishing. General provider documentation is further reading, not evidence that every procedure was individually tested.
+- No current query-level monthly volumes, SERP competition data, or site Search Console measurements have been obtained. Do not make an SEO outcome claim on the basis of a PR merge.
 
 ## Editorial extension rules
 

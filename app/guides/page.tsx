@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SEARCH_DEMAND_GUIDES } from "@/lib/content/search-demand-guides";
-import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
+import { INDEXABLE_ROBOTS, NOINDEX_FOLLOW_ROBOTS, absoluteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
   title: "Practical AI Tutorials and Guides",
   description: "Step-by-step AI guides for document research, data analysis, search-intent research, and creative work. Examples, checks, and limitations included.",
   alternates: { canonical: absoluteUrl("/guides") },
-  robots: INDEXABLE_ROBOTS,
+  robots: process.env.VERCEL_ENV === "preview" ? NOINDEX_FOLLOW_ROBOTS : INDEXABLE_ROBOTS,
   openGraph: {
     title: "Practical AI Tutorials and Guides | Xavkit",
     description: "Practical AI guides for real work, with verifiable examples and safety checks.",
@@ -35,7 +35,7 @@ export default function GuidesIndexPage() {
     },
   };
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-10">
       <JsonLd data={schema} />
       <p className="text-sm font-medium text-primary">Practical workflows</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold sm:text-4xl">AI guides that help you finish the task</h1>
@@ -58,6 +58,6 @@ export default function GuidesIndexPage() {
         <h2 className="text-xl font-semibold">What these guides do not promise</h2>
         <p className="mt-3 text-muted-foreground">Search rankings, model outputs and product features change. These are editorial how-to guides, not a claim of live tool testing or a guaranteed search result. Check original sources and verify any consequential output.</p>
       </section>
-    </main>
+    </div>
   );
 }
