@@ -3,7 +3,7 @@ import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 import ComparisonsIndexClient from "./comparisons-index-client";
 
 export const metadata: Metadata = {
-  title: "Comparisons — Xavkit",
+  title: "AI Tool Comparisons",
   description:
     "Side-by-side comparisons highlighting strengths, limitations, and ideal use cases.",
   alternates: { canonical: absoluteUrl("/comparisons") },

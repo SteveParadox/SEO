@@ -22,9 +22,16 @@
 | Pages indexed, not indexed, canonical selections | Search Console Pages + URL inspection | Investigate unexpected exclusions |
 | Visitors, referrals, returning visitors | Vercel Analytics / GA4 if independently configured | Establish channel and retention baseline |
 | LCP, INP, CLS | PageSpeed Insights / Chrome UX Report, where available | Meet Google's published Core Web Vitals thresholds |
-| Prompt-copy and outbound link use | Privacy-respecting product event analytics, if implemented | Measure value, not vanity page counts |
+| Prompt copies and outbound tool clicks | Vercel Web Analytics custom events | Measure which content visitors use |
 
 Do not equate tool clicks, locally stored trending events, or developer visits with global unique visitors.
+
+### Measure the existing pages first
+
+1. Open the `xavkit.com` Domain property in Google Search Console. The public DNS verification record is present. Confirm ownership in the property, check that the submitted sitemap status is **Success**, and inspect the guide hub, the four guides, and representative prompt and tool pages for Google-selected canonicals and indexing status.
+2. Export the latest 28 complete days of Search results data (Web), plus the preceding 28 days. Record each priority page’s impressions, clicks, CTR, average position, and top queries. Start with the PDF, CSV, SEO, and Canva guides and the prompt pages they link to. If a page has impressions and weak CTR relative to pages with similar positions and intent, test its title and description. If an important page has no impressions, inspect indexing and links before assuming low demand.
+3. In Vercel Web Analytics, use the Production environment and `xavkit.com` hostname. Check the referring search sources, then review `prompt_copy` and `tool_outbound_click` by page. These count successful copies and outbound clicks respectively. Event totals can include repeat actions, and an outbound click does not establish an affiliate sale. Referrer data can be absent, so report search-attributed events as observed counts. Keep Search Console clicks and Analytics event totals separate.
+4. Custom events require Vercel Pro or Enterprise. Confirm the events appear in the dashboard after deployment on a supported plan. On Hobby, use Search Console and Web Analytics page and referrer reports to establish the traffic baseline.
 
 ## Phase 1: technical access and measurement (days 1–14)
 

@@ -1,11 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { Copy, Check } from "lucide-react";
 
 type CopyButtonProps = {
   text: string;
+  analyticsEvent?: "prompt_copy";
   label?: string;
   className?: string;
   variant?: React.ComponentProps<typeof Button>["variant"];
@@ -14,6 +16,7 @@ type CopyButtonProps = {
 
 export function CopyButton({
   text,
+  analyticsEvent,
   label = "Copy",
   className,
   variant = "outline",
@@ -24,21 +27,25 @@ export function CopyButton({
   async function onCopy() {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1200);
     } catch {
-      // Fallback for older browsers / weird permissions
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1200);
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      try {
+        textarea.select();
+        if (!document.execCommand("copy")) return;
+      } catch {
+        return;
+      } finally {
+        textarea.remove();
+      }
     }
+
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1200);
+    if (analyticsEvent) track(analyticsEvent);
   }
 
   return (

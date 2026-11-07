@@ -15,6 +15,7 @@ import { SaveButton } from "@/components/save-button";
 import { TrackRecent } from "@/components/track-recent";
 import { JsonLd } from "@/components/json-ld";
 import { PROMPT_TOPICS } from "@/lib/prompt-topics";
+import { getGuidesRelatedToUrl } from "@/lib/content/search-demand-guides";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -103,6 +104,7 @@ export default async function PromptPage({ params }: PageProps) {
   const inCollections = findCollectionsContaining({ kind: "prompt", id: prompt.id });
   const placeholders = extractPlaceholders(prompt.prompt);
   const sections = buildSections(prompt);
+  const guides = getGuidesRelatedToUrl(`/prompts/${prompt.slug}`);
   const pageUrl = absoluteUrl(`/prompts/${prompt.slug}`);
   const topics = PROMPT_TOPICS.filter((topic) =>
     prompt.tags.some((tag) => topic.tags.includes(tag.trim().toLowerCase()))
@@ -204,10 +206,21 @@ export default async function PromptPage({ params }: PageProps) {
         <Card className="rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between gap-3">
             <CardTitle>Prompt</CardTitle>
-            <CopyButton text={prompt.prompt} label="Copy prompt" className="rounded-xl" />
+            <CopyButton text={prompt.prompt} analyticsEvent="prompt_copy" label="Copy prompt" className="rounded-xl" />
           </CardHeader>
           <CardContent>
             <pre className="whitespace-pre-wrap rounded-xl border p-4 text-sm">{prompt.prompt}</pre>
+            {guides.length > 0 ? (
+              <ul className="mt-4 space-y-2 text-sm">
+                {guides.map((guide) => (
+                  <li key={guide.id}>
+                    <Link className="text-primary underline underline-offset-4" href={`/guides/${guide.slug}`}>
+                      {guide.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </CardContent>
         </Card>
 
@@ -277,7 +290,7 @@ export default async function PromptPage({ params }: PageProps) {
                 className="flex items-start justify-between gap-3 rounded-xl border p-3"
               >
                 <div className="text-sm">{variation}</div>
-                <CopyButton text={variation} label="Copy" className="rounded-xl" />
+                <CopyButton text={variation} analyticsEvent="prompt_copy" label="Copy" className="rounded-xl" />
               </div>
             ))}
           </CardContent>

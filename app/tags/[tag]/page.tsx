@@ -108,7 +108,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const displayTag = titleCase(tag).trim();
-  const title = `${displayTag} AI Resources - Xavkit`;
+  const title = `${displayTag} AI Resources`;
   const description = buildTagIntro(displayTag, items.length).slice(0, 160);
   const url = absoluteUrl(`/tags/${encodeURIComponent(tag)}`);
   const shouldIndex = items.length >= 2;

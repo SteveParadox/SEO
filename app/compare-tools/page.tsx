@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { INDEXABLE_ROBOTS, absoluteUrl } from "@/lib/seo";
 
-const PAGE_TITLE = "Compare AI Tools Side by Side | Interactive Comparison Builder | XavKit";
+const PAGE_TITLE = "Compare AI Tools Side by Side";
 const PAGE_DESCRIPTION =
   "Compare 2 or 3 AI tools side by side using real site data. Check pricing, ratings, use cases, pros, cons, and get a grounded 'best for me' recommendation.";
 const PAGE_URL = absoluteUrl("/compare-tools");
