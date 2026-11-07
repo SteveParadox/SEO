@@ -3,6 +3,12 @@ import test from "node:test";
 import { SEARCH_DEMAND_GUIDES, getSearchDemandGuide, getGuidesRelatedToUrl } from "../lib/content/search-demand-guides";
 import { DATA } from "../lib/data";
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+/** npm test runs from the package root under tsx (CJS or ESM). */
+function readRepoFile(relativePath: string) {
+  return readFileSync(join(process.cwd(), relativePath), "utf8");
+}
 
 test("search-demand guides are original, complete and have unique URL slugs", () => {
   assert.ok(SEARCH_DEMAND_GUIDES.length >= 4);
@@ -43,15 +49,15 @@ test("search-demand guides are original, complete and have unique URL slugs", ()
 // The root layout already wraps all page content in <main>. Nested main
 // landmarks are invalid HTML and create confusing accessibility navigation.
 test("guide routes never nest a second main landmark", () => {
-  for (const path of ["../app/guides/page.tsx", "../app/guides/[slug]/page.tsx"]) {
-    const source = readFileSync(new URL(path, import.meta.url), "utf8");
+  for (const path of ["app/guides/page.tsx", "app/guides/[slug]/page.tsx"]) {
+    const source = readRepoFile(path);
     assert.doesNotMatch(source, /<main(?:\s|>)/, path + ": nested main landmark");
     assert.match(source, /<h1(?:\s|>)/, path + ": expected visible primary heading");
   }
 });
 
 test("guide articles avoid invented publication dates and retain canonical metadata", () => {
-  const source = readFileSync(new URL("../app/guides/[slug]/page.tsx", import.meta.url), "utf8");
+  const source = readRepoFile("app/guides/[slug]/page.tsx");
   assert.match(source, /guide\.publishedAtISO\s*\?/);
   assert.match(source, /dateModified:\s*guide\.updatedAtISO/);
   assert.doesNotMatch(source, /datePublished:\s*guide\.updatedAtISO/);
@@ -60,7 +66,7 @@ test("guide articles avoid invented publication dates and retain canonical metad
 });
 
 test("guide index and detail pages are discoverable through sitemap", () => {
-  const source = readFileSync(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+  const source = readRepoFile("app/sitemap.ts");
   assert.match(source, /absoluteUrl\("\/guides"\)/);
   assert.match(source, /SEARCH_DEMAND_GUIDES\.map/);
   assert.match(source, /\.\.\.guides,/);
@@ -80,14 +86,14 @@ test("related rankings can link back to relevant how-to guides", () => {
     assert.ok(guides.length >= 1, "missing contextual guide for " + href);
     assert.ok(guides.every((guide) => SEARCH_DEMAND_GUIDES.includes(guide)));
   }
-  const source = readFileSync(new URL("../app/best/[slug]/page.tsx", import.meta.url), "utf8");
+  const source = readRepoFile("app/best/[slug]/page.tsx");
   assert.match(source, /getGuidesRelatedToUrl/);
   assert.match(source, /howToGuides\.map/);
 });
 
 test("guide previews opt out of indexing until a production release", () => {
-  for (const path of ["../app/guides/page.tsx", "../app/guides/[slug]/page.tsx"]) {
-    const source = readFileSync(new URL(path, import.meta.url), "utf8");
+  for (const path of ["app/guides/page.tsx", "app/guides/[slug]/page.tsx"]) {
+    const source = readRepoFile(path);
     assert.match(source, /VERCEL_ENV/);
     assert.match(source, /NOINDEX_FOLLOW_ROBOTS/);
   }
