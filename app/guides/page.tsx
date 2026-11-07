@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: process.env.VERCEL_ENV === "preview" ? NOINDEX_FOLLOW_ROBOTS : INDEXABLE_ROBOTS,
   openGraph: {
     title: "Practical AI Tutorials and Guides | Xavkit",
-    description: "Practical AI guides for real work, with verifiable examples and safety checks.",
+    description: "Practical AI guides with illustrative examples, verification steps and clear limitations.",
     url: absoluteUrl("/guides"),
     type: "website",
     siteName: "Xavkit",
@@ -40,7 +40,7 @@ export default function GuidesIndexPage() {
       <p className="text-sm font-medium text-primary">Practical workflows</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold sm:text-4xl">AI guides that help you finish the task</h1>
       <p className="mt-4 max-w-3xl text-lg text-muted-foreground">
-        Clear instructions for common research, data, SEO and creative tasks. Each guide includes a usable workflow, checks for common mistakes and links to relevant tools or templates.
+        Step-by-step instructions for research, data, SEO and creative tasks. Each guide includes illustrative examples, verification checks and links to relevant tools or templates.
       </p>
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {SEARCH_DEMAND_GUIDES.map((guide) => (

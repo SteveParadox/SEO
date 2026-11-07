@@ -26,8 +26,8 @@ export const SEARCH_DEMAND_GUIDES: readonly SearchDemandGuide[] = [
   {
     "id": "gd-2026-01",
     "slug": "summarize-pdf-with-ai-and-check-citations",
-    "title": "How to Summarize a PDF With AI Without Losing Important Details",
-    "description": "A practical workflow for summarizing long PDFs, verifying page references, and catching omissions or invented citations before relying on an AI summary.",
+    "title": "How to Summarize a PDF With AI and Verify Key Details",
+    "description": "A practical workflow for summarizing PDFs, checking cited page references, and spotting omissions or invented claims before relying on an AI summary.",
     "primaryQuery": "how to summarize a pdf with ai",
     "category": "Research and documents",
     "intent": "informational",

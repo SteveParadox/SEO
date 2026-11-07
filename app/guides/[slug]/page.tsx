@@ -112,7 +112,7 @@ export default async function GuideDetailPage({ params }: Props) {
           ))}
         </ul>
       </section>
-      <p className="mt-10 border-t pt-6 text-sm leading-relaxed text-muted-foreground">Editorial transparency: This guide was prepared with AI assistance. It does not claim independent hands-on testing of every workflow or tool mentioned. Confirm consequential outputs against original documents and current provider information.</p>
+      <p className="mt-10 border-t pt-6 text-sm leading-relaxed text-muted-foreground">Editorial transparency: This guide was prepared with AI assistance. The described workflows were not independently tested for this article. Examples are illustrative, not measured results. Check important outputs against original documents and current provider information.</p>
       <Link href="/guides" className="mt-8 inline-block text-sm font-medium text-primary hover:underline">Browse all practical guides</Link>
     </article>
   );

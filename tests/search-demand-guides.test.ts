@@ -98,3 +98,16 @@ test("guide previews opt out of indexing until a production release", () => {
     assert.match(source, /NOINDEX_FOLLOW_ROBOTS/);
   }
 });
+
+
+test("guide copy must not promise complete fidelity or imply tested results", () => {
+  for (const guide of SEARCH_DEMAND_GUIDES) {
+    assert.doesNotMatch(guide.title, /without losing (?:any|important) details/i);
+    assert.ok(guide.description.length >= 100 && guide.description.length <= 160);
+  }
+  const detail = readRepoFile("app/guides/[slug]/page.tsx");
+  assert.match(detail, /workflows were not independently tested/);
+  assert.match(detail, /Examples are illustrative/);
+  const index = readRepoFile("app/guides/page.tsx");
+  assert.doesNotMatch(index, /with verifiable examples/i);
+});
